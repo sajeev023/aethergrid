@@ -1,0 +1,352 @@
+"use client";
+
+import Image from "next/image";
+import { useState } from "react";
+import Link from "next/link";
+import { ArrowRight, Clock, Mail, MapPin, Phone, Users } from "lucide-react";
+
+import { LeadForm } from "@/components/lead-form";
+import { Reveal } from "@/components/motion/reveal";
+import { SectionHeading } from "@/components/section-heading";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getInstitutionData } from "@/lib/site-data";
+
+interface ContactProps {
+  activeInst?: "root" | "lfs" | "lfjc" | "lfdc";
+  headingLevel?: "h1" | "h2";
+}
+
+export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactProps) {
+  const [activeForm, setActiveForm] = useState<"general" | "inquiry">("general");
+
+  const instData = getInstitutionData(activeInst);
+  const { resources } = instData;
+
+  const getMapQuery = () => {
+    return "Little%20Flower%20Junior%20College%20Uppal%20Hyderabad";
+  };
+
+  const getCounselingText = () => {
+    return "Our resident student counselor is available for academic streaming assistance, counseling support, and personal development reviews.";
+  };
+
+  return (
+    <div id="contact" className="overflow-hidden bg-royal-cream/40 border-b border-stone-texture/50">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 py-12 md:py-16 section-texture">
+        {/* Top Header & Visuals */}
+        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <Reveal>
+            <SectionHeading
+              align="left"
+              as={headingLevel}
+              eyebrow="Contact & Resources"
+              title="Get in Touch"
+              description={`Whether you are a prospective student, parent, alumnus, or campus visitor, the ${instData.shortName} administration office is ready to support you.`}
+            />
+            
+            <div className="mt-5 grid gap-3 font-sans">
+              <a
+                href={`mailto:${instData.email}`}
+                className="group inline-flex items-center gap-3 text-sm md:text-base font-semibold text-montfortian-blue hover:text-montfortian-blue/80 transition-colors"
+              >
+                <div className="flex h-9 w-9 items-center justify-center rounded bg-white border border-stone-texture group-hover:border-montfortian-blue/40 shadow-sm transition-all duration-300">
+                  <Mail className="h-4.5 w-4.5 text-montfortian-blue" aria-hidden="true" />
+                </div>
+                <span className="underline decoration-stone-texture/80 decoration-1 underline-offset-4 group-hover:decoration-montfortian-blue/50 transition-all">
+                  {instData.email}
+                </span>
+              </a>
+              
+              <a
+                href={`tel:${instData.phone.replace(/\s/g, "")}`}
+                className="group inline-flex items-center gap-3 text-sm md:text-base font-semibold text-montfortian-blue hover:text-montfortian-blue/80 transition-colors"
+              >
+                <div className="flex h-9 w-9 items-center justify-center rounded bg-white border border-stone-texture group-hover:border-montfortian-blue/40 shadow-sm transition-all duration-300">
+                  <Phone className="h-4.5 w-4.5 text-montfortian-blue" aria-hidden="true" />
+                </div>
+                <span className="underline decoration-stone-texture/80 decoration-1 underline-offset-4 group-hover:decoration-montfortian-blue/50 transition-all">
+                  {instData.phone}
+                </span>
+              </a>
+              
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${getMapQuery()}`}
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-start gap-3 text-xs md:text-sm text-academic-slate/80 leading-6 font-sans hover:text-montfortian-blue transition-colors"
+              >
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded bg-white border border-stone-texture shadow-sm group-hover:border-montfortian-blue/40 transition-all duration-300">
+                  <MapPin className="h-4.5 w-4.5 text-montfortian-blue" aria-hidden="true" />
+                </div>
+                <span className="pt-1 font-medium underline decoration-stone-texture/80 decoration-1 underline-offset-4 group-hover:decoration-montfortian-blue/50 transition-all">
+                  {instData.addressLine}, Opposite Survey of India, Uppal, Hyderabad, Telangana 500039
+                </span>
+              </a>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div className="relative aspect-[16/10] w-full overflow-hidden border border-stone-texture shadow-[0_15px_35px_rgba(22,29,31,0.08)] rounded-lg group p-1.5 bg-white">
+              <div className="relative h-full w-full overflow-hidden rounded-md">
+                <Image
+                  src="/images/contact-campus.jpg"
+                  alt={`${instData.name} campus facilities`}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 95vw"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
+                />
+                <div className="pointer-events-none absolute bottom-3 left-3 z-10">
+                  <span className="inline-block bg-academic-slate/85 backdrop-blur-sm border border-heritage-gold/30 px-3 py-1.5 font-sans text-[9px] font-bold uppercase tracking-[0.2em] text-heritage-gold-bright rounded-sm shadow-sm">
+                    Golden Jubilee Block
+                  </span>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Detailed Info Grid */}
+        <div className="mt-6 grid min-w-0 gap-4 lg:grid-cols-[1.1fr_0.9fr] items-start">
+
+          {/* Left Column: Hours, Campus Visit & Counseling */}
+          <div className="grid min-w-0 gap-4">
+            {/* Office Hours Grid */}
+            <div className="grid gap-4 md:grid-cols-2">
+              <Reveal>
+                <HoursCard
+                  title="Administrative Hours"
+                  rows={[
+                    ["Monday - Friday", "9:00 AM - 4:00 PM"],
+                    ["Saturday", "8:00 AM - 1:00 PM"],
+                    ["Sunday", "Closed"],
+                  ]}
+                />
+              </Reveal>
+              <Reveal delay={0.06}>
+                <HoursCard
+                  id="admissions-office"
+                  title="Admissions Office"
+                  rows={[
+                    ["Monday - Friday", "10:00 AM - 3:00 PM"],
+                    ["Saturday", "By appointment only"],
+                    ["Sunday", "Closed"],
+                  ]}
+                />
+              </Reveal>
+              <Reveal delay={0.12}>
+                <HoursCard
+                  id="coaching-sections"
+                  title="Coaching Sections"
+                  rows={[
+                    ["Monday - Friday", "8:00 AM - 4:00 PM"],
+                    ["Saturday", "8:00 AM - 1:00 PM"],
+                    ["Sunday", "Closed"],
+                  ]}
+                />
+              </Reveal>
+            </div>
+
+            <Reveal>
+              <Card id="location" className="bg-white border border-stone-texture hover:border-heritage-gold/30 hover:shadow-[0_15px_30px_rgba(15,76,129,0.04)] transition-all duration-300 scroll-mt-28">
+                <CardHeader className="p-4 pb-0 md:p-5 md:pb-0">
+                  <CardTitle className="font-serif text-lg font-bold text-academic-slate">Visit Our Campus</CardTitle>
+                </CardHeader>
+                <CardContent className="p-4 md:p-5 pt-3 md:pt-3 space-y-3">
+                  <div className="border border-stone-texture/80 bg-royal-cream/30 p-3 rounded-md hover:bg-white transition-colors duration-300">
+                    <div className="flex items-center gap-2.5">
+                      <MapPin className="h-4.5 w-4.5 text-montfortian-blue" aria-hidden="true" />
+                      <p className="font-semibold text-xs md:text-sm text-academic-slate font-sans">
+                        Uppal, Hyderabad - 500039
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Touch-locked Map Container */}
+                  <div className="relative aspect-[16/9] w-full rounded-md overflow-hidden border border-stone-texture group">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.126487823906!2d78.5583!3d17.3995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb98a1a3b56a3d%3A0x6b4f74ab7986b6a3!2sLittle%20Flower%20Junior%20College!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="LFJC Google Map Location"
+                      className="w-full h-full"
+                    />
+                  </div>
+
+                  <Button asChild variant="secondary" className="w-full shadow-sm text-xs py-1.5 h-8">
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${getMapQuery()}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Open in Google Maps
+                      <ArrowRight className="ml-1.5 h-3.5 w-3.5" aria-hidden="true" />
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+            </Reveal>
+
+            {/* Counselor Component Card */}
+            <Reveal>
+              <Card className="border-l-4 border-l-heritage-gold bg-white border border-stone-texture hover:shadow-[0_15px_30px_rgba(15,76,129,0.04)] transition-all duration-300">
+                <CardContent className="p-4">
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-royal-cream text-heritage-gold-strong border border-stone-texture/60">
+                      <Users className="h-4.5 w-4.5" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif text-xl font-semibold text-academic-slate">
+                        Counseling &amp; Career Guidance
+                      </h3>
+                      <p className="mt-1 text-xs leading-5 text-academic-slate/75 font-sans">
+                        {getCounselingText()}
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-y-1 gap-x-4 text-[10px] font-semibold uppercase tracking-wider text-montfortian-blue font-sans">
+                        <span className="flex items-center gap-1">
+                          <Clock className="h-3.5 w-3.5" />
+                          Tue &amp; Thu: 10:00 AM - 1:00 PM
+                        </span>
+                        <span className="text-academic-slate/30">|</span>
+                        <span>By prior appointment</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Reveal>
+          </div>
+
+          {/* Right Column: Portal & Form Switching */}
+          <div className="grid min-w-0 gap-5">
+            <Reveal>
+              <Card className="overflow-hidden bg-white border border-stone-texture hover:shadow-[0_20px_50px_rgba(15,76,129,0.04)] transition-all duration-300">
+                <CardHeader className="bg-academic-slate p-4 md:p-5 text-white border-b border-stone-texture/20">
+                  <CardTitle className="text-white font-serif text-xl">Resource Portal</CardTitle>
+                  <p className="text-xs leading-5 text-royal-cream/80 font-sans mt-1">
+                    Quick access to essential campus services and digital databases.
+                  </p>
+                </CardHeader>
+                <CardContent className="grid gap-3 p-4 md:p-5 bg-royal-cream/10">
+                  {resources.map((resource) => {
+                    const Icon = resource.icon;
+
+                    return (
+                      <Link
+                        key={resource.title}
+                        href={resource.href || "#contact"}
+                        className="premium-focus group flex items-center justify-between gap-4 border border-stone-texture/60 bg-white p-3 rounded-md hover:border-heritage-gold hover:shadow-panel transition-all duration-300"
+                      >
+                        <span className="flex items-center gap-3">
+                          <span className="grid h-10 w-10 shrink-0 place-items-center rounded bg-royal-cream text-montfortian-blue border border-stone-texture/40 group-hover:bg-white transition-colors">
+                            <Icon className="h-4.5 w-4.5" aria-hidden="true" />
+                          </span>
+                          <span>
+                            <span className="block font-serif text-base font-semibold text-academic-slate group-hover:text-montfortian-blue transition-colors">
+                              {resource.title}
+                            </span>
+                            <span className="mt-0.5 block text-xs leading-4 text-academic-slate/65 font-sans">
+                              {resource.description}
+                            </span>
+                          </span>
+                        </span>
+                        <ArrowRight className="h-4 w-4 shrink-0 text-academic-slate/30 transition-transform group-hover:translate-x-1 group-hover:text-montfortian-blue" aria-hidden="true" />
+                      </Link>
+                    );
+                  })}
+                </CardContent>
+              </Card>
+            </Reveal>
+
+            {/* Smart Interactive Form Switcher */}
+            <Reveal>
+              <div id="inquiry" className="grid grid-cols-2 scroll-mt-28 gap-1 border border-stone-texture bg-white p-1 rounded-lg shadow-sm">
+                <button
+                  type="button"
+                  onClick={() => setActiveForm("general")}
+                  aria-pressed={activeForm === "general"}
+                  className={`min-w-0 px-2 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.08em] transition-all duration-300 rounded sm:text-sm sm:tracking-wider cursor-pointer ${
+                    activeForm === "general"
+                      ? "bg-montfortian-blue text-white shadow"
+                      : "text-academic-slate/70 hover:text-academic-slate hover:bg-royal-cream/50"
+                  }`}
+                >
+                  Send a Message
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveForm("inquiry")}
+                  aria-pressed={activeForm === "inquiry"}
+                  className={`min-w-0 px-2 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.08em] transition-all duration-300 rounded sm:text-sm sm:tracking-wider cursor-pointer ${
+                    activeForm === "inquiry"
+                      ? "bg-montfortian-blue text-white shadow"
+                      : "text-academic-slate/70 hover:text-academic-slate hover:bg-royal-cream/50"
+                  }`}
+                >
+                  Admission Inquiry
+                </button>
+              </div>
+            </Reveal>
+
+            <Reveal>
+              <div className="transition-all duration-500">
+                {activeForm === "general" ? (
+                  <LeadForm
+                    type="contact"
+                    activeInst={activeInst}
+                    title="Send a Message"
+                    description={`For general administrative questions, transcript requests, and feedback related to ${instData.shortName}.`}
+                    className="border border-stone-texture shadow-[0_20px_50px_rgba(22,29,31,0.05)] bg-white"
+                  />
+                ) : (
+                  <LeadForm
+                    type="inquiry"
+                    activeInst={activeInst}
+                    title="Admission Inquiry"
+                    description="Have stream-specific questions regarding eligibility or course modules? Write to us."
+                    className="border border-stone-texture shadow-[0_20px_50px_rgba(22,29,31,0.05)] bg-white"
+                  />
+                )}
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function HoursCard({
+  title,
+  rows,
+  id,
+}: {
+  title: string;
+  rows: [string, string][];
+  id?: string;
+}) {
+  return (
+    <Card id={id} className="h-full bg-white border border-stone-texture hover:border-heritage-gold/30 transition-all duration-300 scroll-mt-28">
+      <CardContent className="p-4 md:p-5">
+        <div className="flex h-9 w-9 items-center justify-center rounded bg-royal-cream border border-stone-texture/60 text-heritage-gold-strong">
+          <Clock className="h-4.5 w-4.5" aria-hidden="true" />
+        </div>
+        <h3 className="mt-3 font-serif text-base font-semibold text-academic-slate">
+          {title}
+        </h3>
+        <dl className="mt-3 grid gap-2 text-sm font-sans">
+          {rows.map(([day, value]) => (
+            <div key={day} className="flex flex-wrap justify-between gap-x-4 gap-y-1 border-b border-stone-texture/40 pb-2 last:border-b-0 last:pb-0">
+              <dt className="text-academic-slate/65">{day}</dt>
+              <dd className="text-right font-medium text-academic-slate">{value}</dd>
+            </div>
+          ))}
+        </dl>
+      </CardContent>
+    </Card>
+  );
+}

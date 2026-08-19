@@ -1,0 +1,43 @@
+.next/
+node_modules/
+out/
+dist/
+.vercel/
+*.tsbuildinfo
+.env
+.env*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+design-reference/
+verification/
+
+# Large raw asset/media and unrelated folders
+aliumi/
+kingdoms-of-ash/
+lfjc pic/
+lfjc teachers/
+*.log
+
+# Local Claude session/agent state
+.claude/
+
+# Local inspection/build scratch artifacts
+scratch/
+build_output.txt
+inspect*.mjs
+shot.mjs
+campus-desktop.png
+campus-mobile.png
+
+# ─── Runtime data (PII / credentials — NEVER commit) ─────────────────────────
+# JSON-file persistence holds parent/student PII (submissions, alumni uploads)
+# and admin credential hashes. These are runtime artifacts, not source. The
+# app regenerates admins.json on first run via lib/admin/seed.ts.
+data/
+data/.admin-initial-password.txt
+submissions.json
+# Unapproved alumni uploads contain PII (face photos, ID cards) and must not be
+# served publicly before admin review.
+public/images/alumni/uploads/
