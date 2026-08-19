@@ -52,6 +52,7 @@ const NEWS = [
   },
 ];
 
+// Main LFJC College Landing Page Component
 export default function LFJCPage() {
   return (
     <>

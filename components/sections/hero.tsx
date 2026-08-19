@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { ArrowRight, CalendarDays, ShieldCheck } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
@@ -16,6 +17,82 @@ interface HeroProps {
    *  "full"  = multi-institution landing (adds admissions sidebar + proof/flagship band). */
   variant?: "lean" | "full";
 }
+
+interface HeroSlide {
+  id: string;
+  src: string;
+  fallbackSrc: string;
+  alt: string;
+  objectPosition: string;
+  title: string;
+}
+
+const HERO_SLIDES: HeroSlide[] = [
+  {
+    id: "hero-1-building",
+    src: "/images/hero/hero-1-building.webp",
+    fallbackSrc: "/images/hero/hero-1-building.jpg",
+    alt: "Little Flower Junior College Main Campus Building & Architectural Facade",
+    objectPosition: "center 35%",
+    title: "Campus Architecture & Main Building",
+  },
+  {
+    id: "hero-2-campus-quad",
+    src: "/images/hero/hero-2-campus-quad.webp",
+    fallbackSrc: "/images/hero/hero-2-campus-quad.jpg",
+    alt: "Eight-Acre Uppal Heritage Campus Grounds & Quadrangle Lawn",
+    objectPosition: "center center",
+    title: "Eight-Acre Green Campus & Quadrangle",
+  },
+  {
+    id: "hero-3-academic-lab",
+    src: "/images/hero/hero-3-academic-lab.webp",
+    fallbackSrc: "/images/hero/hero-3-academic-lab.jpg",
+    alt: "Hands-on Science & Technological Laboratory Training at LFJC",
+    objectPosition: "center 40%",
+    title: "Advanced Science & Technology Laboratories",
+  },
+  {
+    id: "hero-4-central-library",
+    src: "/images/hero/hero-4-central-library.webp",
+    fallbackSrc: "/images/hero/hero-4-central-library.jpg",
+    alt: "LFJC Central Library & Scholarly Reading Hall",
+    objectPosition: "center 35%",
+    title: "Central Library & Research Reading Hall",
+  },
+  {
+    id: "hero-5-national-celebration",
+    src: "/images/hero/hero-5-national-celebration.webp",
+    fallbackSrc: "/images/hero/hero-5-national-celebration.jpg",
+    alt: "Independence Day Flag Hoisting Ceremony & Institutional Gathering",
+    objectPosition: "center center",
+    title: "Flag Hoisting Ceremony & Campus Gathering",
+  },
+  {
+    id: "hero-6-auditorium",
+    src: "/images/hero/hero-6-auditorium.webp",
+    fallbackSrc: "/images/hero/hero-6-auditorium.jpg",
+    alt: "LFJC College Auditorium Assembly & Cultural Events",
+    objectPosition: "center 30%",
+    title: "College Auditorium & Student Assembly",
+  },
+  {
+    id: "hero-7-sports-day",
+    src: "/images/hero/hero-7-sports-day.webp",
+    fallbackSrc: "/images/hero/hero-7-sports-day.jpg",
+    alt: "Athletic Track & Annual Sports Day Competition at LFJC Grounds",
+    objectPosition: "center center",
+    title: "Athletic Track & Campus Sports Day",
+  },
+  {
+    id: "hero-8-montfortian-heritage",
+    src: "/images/hero/hero-8-montfortian-heritage.webp",
+    fallbackSrc: "/images/hero/hero-8-montfortian-heritage.jpg",
+    alt: "Montfortian Heritage Statue & Five-Decade Educational Legacy",
+    objectPosition: "center 30%",
+    title: "Montfortian Heritage & 50-Year Legacy",
+  },
+];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -48,9 +125,29 @@ const sidebarVariants = {
 
 export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
   const data = getInstitutionData(activeInst);
-  const heroImg = "/images/campus-hero.jpg";
   const isLean = variant === "lean";
   const prefersReducedMotion = useReducedMotion();
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [loadedIndices, setLoadedIndices] = useState<number[]>([0, 1]);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    const timer = setInterval(() => {
+      setActiveSlideIndex((prev) => {
+        const next = (prev + 1) % HERO_SLIDES.length;
+        const upcoming = (next + 1) % HERO_SLIDES.length;
+        setLoadedIndices((current) => {
+          if (current.includes(next) && current.includes(upcoming)) return current;
+          const nextSet = new Set(current);
+          nextSet.add(next);
+          nextSet.add(upcoming);
+          return Array.from(nextSet);
+        });
+        return next;
+      });
+    }, 5500);
+    return () => clearInterval(timer);
+  }, [prefersReducedMotion]);
 
   const renderHeadline = () => {
     return (
@@ -70,26 +167,45 @@ export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
       id="home"
       className="relative min-h-[72svh] lg:min-h-[78svh] flex flex-col justify-center overflow-hidden bg-deep-navy text-white"
     >
-      {/* ─── Background Image with Layered Overlays ─────────────────────── */}
-      <div className="absolute inset-0 z-0">
-        <motion.div
-          initial={prefersReducedMotion ? false : { scale: 1.08, opacity: 0 }}
-          animate={{ scale: 1.01, opacity: 0.5 }}
-          transition={prefersReducedMotion ? { duration: 0 } : { duration: 2.2, ease: MOTION_EASE }}
-          className="w-full h-full relative"
-        >
-          <Image
-            src={heroImg}
-            alt={`${data.name} campus environment`}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover mix-blend-overlay"
-          />
-        </motion.div>
-        {/* Multi-stop gradient for depth — Oxford/Stanford cinematic treatment */}
-        <div className="absolute inset-0 bg-gradient-to-r from-deep-navy via-deep-navy/85 to-deep-navy/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-deep-navy via-transparent to-deep-navy/40" />
+      {/* ─── Vivid Cinematic Background Image Carousel ───────────────────── */}
+      <div className="absolute inset-0 z-0 overflow-hidden bg-deep-navy">
+        {HERO_SLIDES.map((slide, index) => {
+          if (!loadedIndices.includes(index)) return null;
+          const isActive = index === activeSlideIndex;
+          return (
+            <motion.div
+              key={slide.id}
+              initial={false}
+              animate={{
+                opacity: isActive ? 0.90 : 0,
+                scale: isActive ? (prefersReducedMotion ? 1.0 : 1.04) : 1.0,
+              }}
+              transition={{
+                opacity: { duration: 1.3, ease: [0.25, 0.1, 0.25, 1.0] },
+                scale: isActive && !prefersReducedMotion
+                  ? { duration: 6.0, ease: "linear" }
+                  : { duration: 0 },
+              }}
+              className="absolute inset-0 w-full h-full pointer-events-none"
+            >
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                priority={index === 0}
+                sizes="100vw"
+                className="object-cover"
+                style={{ objectPosition: slide.objectPosition }}
+              />
+            </motion.div>
+          );
+        })}
+
+        {/* Directional Vignette: Stronger on the left behind text, lighter on right to showcase real photography */}
+        <div className="absolute inset-0 bg-gradient-to-r from-deep-navy/90 via-deep-navy/65 via-50% to-deep-navy/30 lg:to-deep-navy/15" />
+        {/* Subtle top & bottom edge gradients for smooth blending into nav and stats banner */}
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-deep-navy/80 via-deep-navy/30 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-deep-navy/90 via-deep-navy/40 to-transparent" />
       </div>
 
       {/* ─── Main Grid Content ──────────────────────────────────────────── */}
@@ -101,21 +217,21 @@ export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
           className="max-w-3xl w-full"
         >
           <motion.div variants={itemVariants}>
-            <Badge onDark className="mb-5 text-[11px] py-1.5 px-4 tracking-[0.22em]">
+            <Badge onDark className="mb-5 text-[11px] py-1.5 px-4 tracking-[0.22em] shadow-sm backdrop-blur-md bg-deep-navy/60 border border-white/20">
               Est. {data.established} • Uppal, Hyderabad
             </Badge>
           </motion.div>
 
           <motion.h1
             variants={itemVariants}
-            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.04] text-white tracking-tight"
+            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.04] text-white tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.65)]"
           >
             {renderHeadline()}
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="mt-6 max-w-2xl border-l-[3px] border-heritage-gold pl-5 sm:pl-6 text-sm md:text-base leading-relaxed text-royal-cream/90 font-sans font-medium"
+            className="mt-6 max-w-2xl border-l-[3px] border-heritage-gold pl-5 sm:pl-6 text-sm md:text-base leading-relaxed text-royal-cream font-sans font-medium drop-shadow-[0_1px_8px_rgba(0,0,0,0.55)]"
           >
             {data.name}: Where Knowledge meets Virtue and Service. A premier institution shaping the leaders of tomorrow through discipline and dedicated pedagogy.
           </motion.p>
