@@ -123,16 +123,16 @@ export const navMenu: NavMenuItem[] = [
     blurb: "Mentors who shape intellect and character.",
     children: [
       {
-        label: "Teaching Faculty",
-        href: "/faculty/teaching",
-        description: "Department heads & active subject faculty.",
-        icon: Users,
-      },
-      {
         label: "Former Principals",
         href: "/faculty/principals",
         description: "Official portrait gallery of past leadership.",
         icon: Award,
+      },
+      {
+        label: "Teaching & Support Staff",
+        href: "/faculty/teaching",
+        description: "Department heads & active subject faculty.",
+        icon: Users,
       },
       {
         label: "Retired Faculty",

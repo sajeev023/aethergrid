@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { FacultyRetired } from "@/components/sections/faculty-retired";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "Retired Faculty",
@@ -8,5 +9,12 @@ export const metadata: Metadata = {
 };
 
 export default function FacultyRetiredPage() {
-  return <FacultyRetired activeInst="lfjc" />;
+  return (
+    <div className="bg-white">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 pt-6">
+        <Breadcrumb items={[{ label: "Faculty", href: "/faculty" }, { label: "Retired Faculty" }]} />
+      </div>
+      <FacultyRetired activeInst="lfjc" />
+    </div>
+  );
 }

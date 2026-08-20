@@ -43,7 +43,7 @@ function RetiredFacultyCard({ member, index }: { member: FacultySeedMember; inde
               alt={member.name}
               fill
               sizes="(min-width: 1280px) 15vw, (min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
-              className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+              className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
             />
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-2 sm:p-3 relative">
@@ -134,7 +134,7 @@ export function FacultyRetired({ activeInst = "lfjc" }: FacultyRetiredProps) {
             href="/faculty/teaching"
             className="inline-flex items-center gap-2 border border-montfortian-blue/30 bg-montfortian-blue/5 px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-montfortian-blue hover:bg-montfortian-blue hover:text-white hover:border-montfortian-blue transition-all duration-300 rounded-sm font-sans"
           >
-            Current Faculty
+            Teaching &amp; Support Staff
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </Link>
         </Reveal>

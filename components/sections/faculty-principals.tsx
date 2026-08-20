@@ -179,10 +179,10 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
 
         <Reveal className="mt-5 sm:mt-8 flex flex-wrap justify-center gap-2.5 sm:gap-4">
           <Link
-            href="/faculty"
+            href="/faculty/teaching"
             className="inline-flex items-center gap-2 border border-stone-texture bg-white px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-academic-slate hover:bg-academic-slate hover:text-white hover:border-academic-slate transition-all duration-300 rounded-sm font-sans"
           >
-            Faculty Overview
+            Teaching &amp; Support Staff
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </Link>
           <Link

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { FacultyPrincipals } from "@/components/sections/faculty-principals";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "Former Principals",
@@ -8,5 +9,12 @@ export const metadata: Metadata = {
 };
 
 export default function FacultyPrincipalsPage() {
-  return <FacultyPrincipals activeInst="lfjc" />;
+  return (
+    <div className="bg-white">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 pt-6">
+        <Breadcrumb items={[{ label: "Faculty", href: "/faculty" }, { label: "Former Principals" }]} />
+      </div>
+      <FacultyPrincipals activeInst="lfjc" />
+    </div>
+  );
 }

@@ -294,7 +294,7 @@ export default async function StreamDetailPage({ params }: { params: Promise<{ s
                         alt={teacher.name}
                         fill
                         sizes="80px"
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
                       />
                     </div>
                     <h3 className="mt-2.5 sm:mt-3 font-serif text-xs sm:text-sm font-bold text-academic-slate leading-tight line-clamp-1">
@@ -316,7 +316,7 @@ export default async function StreamDetailPage({ params }: { params: Promise<{ s
                 className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] text-montfortian-blue hover:text-heritage-gold-strong transition-colors font-sans"
               >
                 <Users className="h-3.5 w-3.5" aria-hidden="true" />
-                View full teaching faculty
+                View full teaching &amp; support staff
               </Link>
             </div>
           </div>

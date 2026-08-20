@@ -15,9 +15,17 @@ interface FacultyProps {
 
 const SUB_PAGES = [
   {
+    icon: Award,
+    eyebrow: "Institutional Leadership",
+    title: "Former Principals",
+    desc: "The official portrait gallery of the visionary principals who led Little Flower Junior College across five decades.",
+    href: "/faculty/principals",
+    cta: "View Former Principals",
+  },
+  {
     icon: Users,
     eyebrow: "Academic Staff",
-    title: "Teaching Faculty",
+    title: "Teaching & Support Staff",
     desc: "Meet our board-recognized department heads and subject educators who guide students toward academic excellence.",
     href: "/faculty/teaching",
     cta: "Meet Our Faculty",
@@ -29,14 +37,6 @@ const SUB_PAGES = [
     desc: "Honoring the teachers who built our legacy — 27 distinguished educators whose dedication shaped generations.",
     href: "/faculty/retired",
     cta: "View Retired Faculty",
-  },
-  {
-    icon: Award,
-    eyebrow: "Institutional Leadership",
-    title: "Former Principals",
-    desc: "The official portrait gallery of the visionary principals who led Little Flower Junior College across five decades.",
-    href: "/faculty/principals",
-    cta: "View Former Principals",
   },
 ];
 
@@ -100,8 +100,8 @@ export function Faculty({ activeInst = "lfjc", headingLevel = "h2" }: FacultyPro
       <div className="border-t border-stone-texture/30 pt-6 sm:pt-12">
         <SectionHeading
           eyebrow="Academic Staff Preview"
-          title="Present Faculty"
-          description="A preview of our teaching staff. Visit the full Teaching Faculty page for the complete directory."
+          title="Teaching &amp; Support Staff"
+          description="A preview of our teaching staff. Visit the full Teaching &amp; Support Staff page for the complete directory."
         />
         <div className="mt-5 sm:mt-8">
           <FacultyTeaching activeInst={activeInst} isPreview />
@@ -109,7 +109,7 @@ export function Faculty({ activeInst = "lfjc", headingLevel = "h2" }: FacultyPro
         <Reveal className="mt-5 sm:mt-8 flex justify-center">
           <Button asChild variant="secondary">
             <Link href="/faculty/teaching" className="inline-flex items-center gap-2">
-              View Full Faculty Directory
+              View Full Teaching &amp; Support Staff Directory
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </Button>
