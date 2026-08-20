@@ -41,3 +41,6 @@ submissions.json
 # Unapproved alumni uploads contain PII (face photos, ID cards) and must not be
 # served publicly before admin review.
 public/images/alumni/uploads/
+
+.vercel
+.env*

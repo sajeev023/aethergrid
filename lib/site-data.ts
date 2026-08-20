@@ -224,7 +224,7 @@ export const lfjcData = {
       designation: "Faculty",
       subject: "Mathematics",
       department: "Mathematics Department",
-      image: "/images/faculty/sharanraj.jfif"
+      image: "/images/faculty/sharanraj.jpg"
     },
     // 3. Physics Department
     {
@@ -246,7 +246,7 @@ export const lfjcData = {
       designation: "Faculty",
       subject: "Physics",
       department: "Physics Department",
-      image: "/images/faculty/kishore.jfif"
+      image: "/images/faculty/kishore.jpg"
     },
     {
       name: "Ms. Bhargavi",
@@ -297,7 +297,7 @@ export const lfjcData = {
       designation: "Faculty",
       subject: "Zoology",
       department: "Biology Department",
-      image: "/images/faculty/tbhramara.jfif"
+      image: "/images/faculty/tbhramara.jpg"
     },
     // 6. Humanities Department
     {
@@ -305,7 +305,7 @@ export const lfjcData = {
       designation: "HOD",
       subject: "Civics & Humanities",
       department: "Humanities Department",
-      image: "/images/faculty/vani.jfif"
+      image: "/images/faculty/vani.jpg"
     },
     {
       name: "Ms. Vasavi K",
@@ -363,14 +363,14 @@ export const lfjcData = {
       designation: "Faculty",
       subject: "French",
       department: "Languages Department",
-      image: "/images/faculty/saraswathydevi.jfif"
+      image: "/images/faculty/saraswathydevi.jpg"
     },
     {
       name: "Ms. K H Deepika",
       designation: "HOD",
       subject: "English",
       department: "Languages Department",
-      image: "/images/faculty/deepika.jfif"
+      image: "/images/faculty/deepika.jpg"
     },
     {
       name: "Ms. Rajoulu Esther",
@@ -384,7 +384,7 @@ export const lfjcData = {
       designation: "Faculty",
       subject: "English",
       department: "Languages Department",
-      image: "/images/faculty/hemataneja.jfif"
+      image: "/images/faculty/hemataneja.jpg"
     },
     {
       name: "Mr. Shyam K",
@@ -422,7 +422,7 @@ export const lfjcData = {
       designation: "Office Staff",
       subject: "Office Operations",
       department: "Office Administration",
-      image: "/images/faculty/srilakshmi.jfif"
+      image: "/images/faculty/srilakshmi.jpg"
     },
     {
       name: "Ms. Aditya M",
@@ -436,7 +436,7 @@ export const lfjcData = {
       designation: "Office Staff",
       subject: "Office Operations",
       department: "Office Administration",
-      image: "/images/faculty/ranganayaki.jfif"
+      image: "/images/faculty/ranganayaki.jpg"
     },
     {
       name: "Mr. T. Sivasinu Goud",
@@ -465,7 +465,7 @@ export const lfjcData = {
       designation: "Support Staff",
       subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/gnaresh.jfif"
+      image: "/images/faculty/gnaresh.jpg"
     },
     {
       name: "Mr. Md. Jehangir",
@@ -479,14 +479,14 @@ export const lfjcData = {
       designation: "Support Staff",
       subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/lakshmi.jfif"
+      image: "/images/faculty/lakshmi.jpg"
     },
     {
       name: "Ms. Manjula Vani",
       designation: "Support Staff",
       subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/manjulavani.jfif"
+      image: "/images/faculty/manjulavani.jpg"
     },
     {
       name: "Ms. Mary",
@@ -500,14 +500,14 @@ export const lfjcData = {
       designation: "Support Staff",
       subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/narendar.jfif"
+      image: "/images/faculty/narendar.jpg"
     },
     {
       name: "Mr. Narender Bahadur",
       designation: "Support Staff",
       subject: "Campus Security & Operations",
       department: "Support Staff",
-      image: "/images/faculty/narenderbahadur.jfif"
+      image: "/images/faculty/narenderbahadur.jpg"
     },
     {
       name: "Mr. Ramesh",
@@ -521,28 +521,28 @@ export const lfjcData = {
       designation: "Support Staff",
       subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/ramulu.jfif"
+      image: "/images/faculty/ramulu.jpg"
     },
     {
       name: "Ms. M. Sheeba Rani",
       designation: "Support Staff",
       subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/sheeba_rani.jfif"
+      image: "/images/faculty/sheeba_rani.jpg"
     },
     {
       name: "Ms. Sudha",
       designation: "Support Staff",
       subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/sudha.jfif"
+      image: "/images/faculty/sudha.jpg"
     },
     {
       name: "Mr. Suraj",
       designation: "Support Staff",
       subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/suraj.jfif"
+      image: "/images/faculty/suraj.jpg"
     },
     // 13. Former Principals
     {
