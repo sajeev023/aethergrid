@@ -39,18 +39,18 @@ export function WhatsAppButton() {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-2">
+    <div className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-50 flex flex-col items-end gap-2">
       {/* Tooltip prompt */}
       {mounted && showTooltip && (
-        <div className="relative bg-white border border-stone-texture/60 rounded-lg shadow-panel-hover pl-4 pr-9 py-3 max-w-[220px] animate-fade-in">
+        <div className="relative bg-white border border-stone-texture/60 rounded-lg shadow-panel-hover pl-3 pr-8 py-2 sm:pl-4 sm:pr-9 sm:py-3 max-w-[190px] sm:max-w-[220px] animate-fade-in">
           <button
             onClick={dismiss}
-            className="absolute top-1.5 right-1.5 grid h-9 w-9 place-items-center rounded-full bg-stone-texture/80 text-white hover:bg-academic-slate transition-colors"
+            className="absolute top-1 right-1 sm:top-1.5 sm:right-1.5 grid h-7 w-7 sm:h-9 sm:w-9 place-items-center rounded-full bg-stone-texture/80 text-white hover:bg-academic-slate transition-colors"
             aria-label="Dismiss message"
           >
-            <X className="h-4 w-4" />
+            <X className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </button>
-          <p className="text-xs font-sans text-academic-slate/80 leading-5">
+          <p className="text-[11px] sm:text-xs font-sans text-academic-slate/80 leading-4 sm:leading-5">
             Have a question? <span className="font-bold text-montfortian-blue">Chat with us</span>
           </p>
         </div>
@@ -62,9 +62,9 @@ export function WhatsAppButton() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with Little Flower Junior College on WhatsApp"
-        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-panel-hover hover:shadow-float hover:scale-105 transition-all duration-300"
+        className="group relative flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-panel-hover hover:shadow-float hover:scale-105 transition-all duration-300"
       >
-        <MessageCircle className="relative h-6 w-6" aria-hidden="true" />
+        <MessageCircle className="relative h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
       </a>
     </div>
   );

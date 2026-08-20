@@ -97,31 +97,31 @@ export function GalleryGrid({ images }: { images: GalleryItem[] }) {
 
   return (
     <div>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid gap-2.5 sm:gap-3 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {images.map((img, idx) => (
           <Reveal key={img.id} delay={idx * 0.02}>
             <button
               type="button"
               onClick={() => setLightboxIndex(idx)}
               aria-label={`View ${img.title}`}
-              className="group relative aspect-[4/3] rounded-lg overflow-hidden border border-stone-texture bg-white shadow-sm hover:shadow-panel-hover transition-all duration-300 w-full block"
+              className="group relative aspect-[4/3] rounded-lg overflow-hidden border border-stone-texture bg-white shadow-xs hover:shadow-panel-hover transition-all duration-300 w-full block cursor-pointer"
             >
               <Image
                 src={img.src}
                 alt={img.title}
                 fill
-                sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 90vw"
+                sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 50vw"
                 className="object-cover transition-transform duration-[1.2s] group-hover:scale-[1.035]"
               />
-              <div className="absolute inset-2 border border-white/20 pointer-events-none group-hover:border-heritage-gold/40 transition-colors duration-500" />
+              <div className="absolute inset-1.5 sm:inset-2 border border-white/20 pointer-events-none group-hover:border-heritage-gold/40 transition-colors duration-500" />
               <div className="absolute inset-0 bg-deep-navy/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                <div className="p-2.5 bg-white/95 rounded-full shadow-xl scale-75 group-hover:scale-100 transition-all duration-500">
-                  <Eye className="h-4 w-4 text-montfortian-blue" />
+                <div className="p-2 sm:p-2.5 bg-white/95 rounded-full shadow-xl scale-75 group-hover:scale-100 transition-all duration-500">
+                  <Eye className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-montfortian-blue" />
                 </div>
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-deep-navy via-deep-navy/30 to-transparent opacity-90" />
-              <div className="absolute inset-x-0 bottom-0 p-3">
-                <h3 className="font-serif text-sm font-bold text-white leading-tight line-clamp-2 group-hover:text-heritage-gold-bright transition-colors duration-300">
+              <div className="absolute inset-x-0 bottom-0 p-2 sm:p-3">
+                <h3 className="font-serif text-xs sm:text-sm font-bold text-white leading-tight line-clamp-2 group-hover:text-heritage-gold-bright transition-colors duration-300 text-left">
                   {img.title}
                 </h3>
               </div>
@@ -151,7 +151,7 @@ export function VideoCard({ video }: { video: { title: string; embedUrl: string;
   const posterUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 
   return (
-    <div className="flex flex-col h-full bg-white border border-stone-texture rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+    <div className="flex flex-col h-full bg-white border border-stone-texture rounded-lg overflow-hidden shadow-xs hover:shadow-md transition-all duration-300">
       <div className="relative aspect-video w-full bg-black">
         {isPlaying ? (
           <iframe
@@ -177,16 +177,16 @@ export function VideoCard({ video }: { video: { title: string; embedUrl: string;
             />
             <div className="absolute inset-0 bg-academic-slate/30 group-hover:bg-academic-slate/10 transition-colors" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-12 h-12 rounded-full bg-heritage-gold text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-montfortian-blue transition-all duration-300">
-                <Play className="h-5 w-5 fill-current ml-0.5" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-heritage-gold text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-montfortian-blue transition-all duration-300">
+                <Play className="h-4 w-4 sm:h-5 sm:w-5 fill-current ml-0.5" />
               </div>
             </div>
           </button>
         )}
       </div>
-      <div className="p-4 flex-1 flex flex-col justify-between">
-        <h3 className="font-serif text-sm font-bold text-academic-slate">{video.title}</h3>
-        <div className="mt-3 pt-3 border-t border-stone-texture/40">
+      <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between">
+        <h3 className="font-serif text-xs sm:text-sm font-bold text-academic-slate">{video.title}</h3>
+        <div className="mt-2.5 sm:mt-3 pt-2.5 sm:pt-3 border-t border-stone-texture/40">
           <a
             href={video.watchUrl}
             target="_blank"

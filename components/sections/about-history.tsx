@@ -40,29 +40,29 @@ export function AboutHistory({ activeInst = "lfjc" }: AboutHistoryProps) {
   void activeInst;
 
   return (
-    <section id="history" className="section-texture bg-white py-6 md:py-8 overflow-hidden">
+    <section id="history" className="section-texture bg-white py-4 sm:py-6 md:py-8 overflow-hidden">
       {/* Breadcrumb */}
-      <div className="mx-auto max-w-7xl px-5 md:px-8 pt-4">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 pt-3 sm:pt-4">
         <Breadcrumb items={[{ label: "About", href: "/about" }, { label: "Heritage & History" }]} />
       </div>
 
       {/* Page Hero Header */}
-      <div className="mx-auto max-w-3xl text-center px-5 mb-8">
+      <div className="mx-auto max-w-3xl text-center px-4 sm:px-5 mb-5 sm:mb-8">
         <h1 className="font-serif text-2xl sm:text-3xl font-bold leading-tight text-academic-slate tracking-tight">
           A History of Distinction
         </h1>
-        <p className="mt-2 text-xs leading-relaxed text-academic-slate/75 font-sans max-w-xl mx-auto">
+        <p className="mt-1.5 sm:mt-2 text-xs leading-relaxed text-academic-slate/75 font-sans max-w-xl mx-auto">
           From a humble beginning in Abids to the Golden Jubilee milestone — five decades of Montfortian educational tradition, board excellence, and character formation.
         </p>
-        <span className="gold-rule gold-rule-center mt-3" />
+        <span className="gold-rule gold-rule-center !mt-2 sm:!mt-3" />
       </div>
 
-      <div className="mx-auto max-w-5xl px-5 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 items-start">
           
           {/* Left Column: Campus Drone Image with 50+ Years Badge */}
           <Reveal className="lg:col-span-6">
-            <div className="relative rounded-lg border border-stone-texture/40 bg-white p-1.5 shadow-sm overflow-hidden">
+            <div className="relative rounded-lg border border-stone-texture/40 bg-white p-1.5 shadow-xs overflow-hidden">
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded">
                 <Image
                   src="/images/campus-drone.jpg"
@@ -74,11 +74,11 @@ export function AboutHistory({ activeInst = "lfjc" }: AboutHistoryProps) {
                 />
                 
                 {/* 50+ Years Badge Overlay on Bottom Right */}
-                <div className="absolute bottom-3 right-3 bg-montfortian-blue text-white p-2.5 sm:p-3 shadow-lg border border-heritage-gold/30 rounded-xs flex flex-col justify-center">
-                  <span className="font-serif text-lg sm:text-xl font-bold leading-none mb-0.5 text-white">
+                <div className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 bg-montfortian-blue text-white p-2 sm:p-2.5 sm:p-3 shadow-lg border border-heritage-gold/30 rounded-xs flex flex-col justify-center">
+                  <span className="font-serif text-base sm:text-lg sm:text-xl font-bold leading-none mb-0.5 text-white">
                     50+
                   </span>
-                  <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-royal-cream/90 font-sans">
+                  <span className="text-[7px] sm:text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-royal-cream/90 font-sans">
                     Years of Academic Journey
                   </span>
                 </div>
@@ -88,30 +88,30 @@ export function AboutHistory({ activeInst = "lfjc" }: AboutHistoryProps) {
 
           {/* Right Column: Timeline Chronology */}
           <div className="lg:col-span-6 pt-1">
-            <div className="mb-4">
-              <span className="font-sans text-[10px] font-bold text-heritage-gold-strong uppercase tracking-[0.18em] block mb-0.5">
+            <div className="mb-3 sm:mb-4">
+              <span className="font-sans text-[9px] sm:text-[10px] font-bold text-heritage-gold-strong uppercase tracking-[0.18em] block mb-0.5">
                 Chronology (1974–Present)
               </span>
-              <h2 className="font-serif text-lg font-bold text-academic-slate">
+              <h2 className="font-serif text-base sm:text-lg font-bold text-academic-slate">
                 Milestones That Shaped Us
               </h2>
             </div>
 
-            <div className="relative space-y-3.5 pl-9 before:absolute before:top-3 before:bottom-3 before:left-4 before:-translate-x-px before:w-[1.5px] before:bg-heritage-gold/40">
+            <div className="relative space-y-2.5 sm:space-y-3.5 pl-7 sm:pl-9 before:absolute before:top-3 before:bottom-3 before:left-3.5 sm:before:left-4 before:-translate-x-px before:w-[1.5px] before:bg-heritage-gold/40">
               {HISTORICAL_MILESTONES.map((milestone, idx) => (
                 <Reveal key={milestone.year} delay={idx * 0.04}>
                   <div className="relative group">
                     {/* Node Year Pill on the Line */}
-                    <div className="absolute -left-9 top-3.5 -translate-x-1/2 w-8 h-[20px] rounded-full border border-heritage-gold bg-white text-montfortian-blue text-[9px] font-bold font-sans flex items-center justify-center shadow-2xs group-hover:bg-heritage-gold group-hover:text-white transition-colors duration-200">
+                    <div className="absolute -left-7 sm:-left-9 top-3 sm:top-3.5 -translate-x-1/2 w-7 h-[18px] sm:w-8 sm:h-[20px] rounded-full border border-heritage-gold bg-white text-montfortian-blue text-[8px] sm:text-[9px] font-bold font-sans flex items-center justify-center shadow-2xs group-hover:bg-heritage-gold group-hover:text-white transition-colors duration-200">
                       {milestone.year}
                     </div>
 
                     {/* Timeline Milestone Card */}
-                    <div className="border border-stone-texture/50 bg-royal-cream/15 p-3 rounded-md hover:bg-white hover:border-heritage-gold/50 hover:shadow-xs transition-all duration-200">
-                      <h3 className="font-serif text-xs sm:text-sm font-bold text-montfortian-blue mb-1">
+                    <div className="border border-stone-texture/50 bg-royal-cream/15 p-2.5 sm:p-3 rounded-md hover:bg-white hover:border-heritage-gold/50 hover:shadow-xs transition-all duration-200">
+                      <h3 className="font-serif text-xs sm:text-sm font-bold text-montfortian-blue mb-0.5 sm:mb-1">
                         {milestone.title}
                       </h3>
-                      <p className="font-sans text-[11px] leading-relaxed text-academic-slate/75">
+                      <p className="font-sans text-[10px] sm:text-[11px] leading-relaxed text-academic-slate/75">
                         {milestone.description}
                       </p>
                     </div>
@@ -124,17 +124,17 @@ export function AboutHistory({ activeInst = "lfjc" }: AboutHistoryProps) {
         </div>
 
         {/* Bottom Navigation Buttons */}
-        <Reveal className="mt-8 pt-4 flex flex-wrap justify-center gap-3">
+        <Reveal className="mt-5 sm:mt-8 pt-3 sm:pt-4 flex flex-wrap justify-center gap-2.5 sm:gap-3">
           <Link
             href="/about/mission"
-            className="inline-flex items-center gap-1.5 border border-heritage-gold/50 bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-heritage-gold-strong hover:bg-heritage-gold hover:text-white transition-all duration-200 rounded-xs font-sans shadow-2xs"
+            className="inline-flex items-center gap-1.5 border border-heritage-gold/50 bg-white px-3.5 py-1.5 sm:px-4 sm:py-2 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] text-heritage-gold-strong hover:bg-heritage-gold hover:text-white transition-all duration-200 rounded-xs font-sans shadow-2xs"
           >
             Our Mission &amp; Values
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </Link>
           <Link
             href="/admissions"
-            className="inline-flex items-center gap-1.5 border border-heritage-gold/50 bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-heritage-gold-strong hover:bg-heritage-gold hover:text-white transition-all duration-200 rounded-xs font-sans shadow-2xs"
+            className="inline-flex items-center gap-1.5 border border-heritage-gold/50 bg-white px-3.5 py-1.5 sm:px-4 sm:py-2 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] text-heritage-gold-strong hover:bg-heritage-gold hover:text-white transition-all duration-200 rounded-xs font-sans shadow-2xs"
           >
             Begin Admissions Inquiry
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

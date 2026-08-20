@@ -39,7 +39,7 @@ export default async function StreamToppersPage({ params }: StreamToppersPagePro
   }
 
   return (
-    <div className="bg-slate-50/60 pb-14 pt-6 md:pb-20 min-h-screen">
+    <div className="bg-slate-50/60 pb-10 pt-4 sm:pb-14 sm:pt-6 md:pb-20 min-h-screen">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
         {/* Breadcrumb */}
         <Breadcrumb
@@ -52,11 +52,11 @@ export default async function StreamToppersPage({ params }: StreamToppersPagePro
 
         {/* Page header */}
         <Reveal delay={0.05}>
-          <div className="border-b border-slate-200/80 pb-5">
-            <h1 className="font-serif text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <div className="border-b border-slate-200/80 pb-4 sm:pb-5">
+            <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
               {program.title} ({program.subtitle}) Board Toppers
             </h1>
-            <p className="mt-2 text-sm md:text-base text-slate-600 font-sans max-w-3xl">
+            <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm md:text-base text-slate-600 font-sans max-w-3xl">
               Official 1st Year and 2nd Year Intermediate Examination Topper Posters for Little Flower Junior College.
             </p>
           </div>
@@ -65,7 +65,7 @@ export default async function StreamToppersPage({ params }: StreamToppersPagePro
         {/* ================================================================= */}
         {/* MAIN SECTION 1: 1ST YEAR TOPPERS */}
         {/* ================================================================= */}
-        <div className="mt-10 space-y-16">
+        <div className="mt-6 sm:mt-10 space-y-8 sm:space-y-12 md:space-y-16">
           <Reveal delay={0.05}>
             <TopperPosterSection
               title="1ST YEAR TOPPERS"
@@ -94,7 +94,7 @@ export default async function StreamToppersPage({ params }: StreamToppersPagePro
 
         {/* Footnote */}
         <Reveal delay={0.05}>
-          <p className="mt-14 text-xs font-sans text-slate-500 italic text-center max-w-2xl mx-auto">
+          <p className="mt-8 sm:mt-14 text-[11px] sm:text-xs font-sans text-slate-500 italic text-center max-w-2xl mx-auto">
             Official publication scan of Little Flower Junior College, Uppal, Hyderabad. Board of Intermediate Education, Telangana results.
           </p>
         </Reveal>

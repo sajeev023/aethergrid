@@ -31,16 +31,16 @@ export function TopperPosterSection({
       {/* Section Title Header */}
       <div
         className={cn(
-          "flex flex-col sm:flex-row sm:items-center justify-between border-l-4 pl-4 py-1.5",
+          "flex flex-col sm:flex-row sm:items-center justify-between border-l-4 pl-3 sm:pl-4 py-1 sm:py-1.5",
           isAmber ? "border-amber-500" : "border-blue-600"
         )}
       >
         <div>
-          <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-3">
+          <h2 className="font-serif text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2 sm:gap-3">
             {title}
             <span
               className={cn(
-                "inline-flex items-center text-xs font-extrabold px-3 py-0.5 rounded-full uppercase tracking-wider",
+                "inline-flex items-center text-[10px] sm:text-xs font-extrabold px-2 sm:px-3 py-0.5 rounded-full uppercase tracking-wider",
                 isAmber
                   ? "bg-amber-100 text-amber-800"
                   : "bg-blue-100 text-blue-800"
@@ -50,7 +50,7 @@ export function TopperPosterSection({
             </span>
           </h2>
           {subtitle && (
-            <p className="text-xs md:text-sm text-slate-600 font-sans mt-0.5">
+            <p className="text-[11px] sm:text-xs md:text-sm text-slate-600 font-sans mt-0.5">
               {subtitle}
             </p>
           )}
@@ -60,22 +60,22 @@ export function TopperPosterSection({
         <button
           onClick={() => setIsLightboxOpen(true)}
           className={cn(
-            "mt-2 sm:mt-0 inline-flex items-center gap-2 text-xs font-bold px-3.5 py-2 rounded-lg transition-all cursor-pointer border shadow-xs hover:shadow-sm",
+            "mt-2 sm:mt-0 inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-bold px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-lg transition-all cursor-pointer border shadow-xs hover:shadow-sm self-start sm:self-auto",
             isAmber
               ? "bg-amber-50 text-amber-900 border-amber-200 hover:bg-amber-100"
               : "bg-blue-50 text-blue-900 border-blue-200 hover:bg-blue-100"
           )}
         >
-          <ZoomIn className="h-4 w-4" />
+          <ZoomIn className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           <span>Inspect Full Resolution</span>
         </button>
       </div>
 
       {/* Complete Poster Visual Container */}
-      <div className="relative group overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-2 sm:p-3 md:p-4 shadow-sm hover:shadow-md transition-shadow">
+      <div className="relative group overflow-hidden rounded-xl sm:rounded-2xl border border-slate-200/90 bg-white p-1.5 sm:p-3 md:p-4 shadow-xs hover:shadow-md transition-shadow">
         <div
           onClick={() => setIsLightboxOpen(true)}
-          className="relative w-full overflow-hidden rounded-xl bg-slate-900 cursor-pointer"
+          className="relative w-full overflow-hidden rounded-lg sm:rounded-xl bg-slate-900 cursor-pointer"
         >
           <Image
             src={posterPath}
@@ -97,11 +97,11 @@ export function TopperPosterSection({
         </div>
 
         {/* Poster Descriptor Bar */}
-        <div className="mt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-1 text-xs text-slate-500">
+        <div className="mt-2 sm:mt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-2 px-1 text-[10px] sm:text-xs text-slate-500">
           <span className="font-semibold text-slate-700">
             Little Flower Junior College &middot; IPE {yearLabel} Toppers (2026)
           </span>
-          <span className="italic text-[11px]">
+          <span className="italic text-[10px] sm:text-[11px]">
             Original official publication &middot; High fidelity scan
           </span>
         </div>

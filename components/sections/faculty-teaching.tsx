@@ -65,8 +65,8 @@ function FacultyMemberCard({ member, index }: { member: FacultySeedMember; index
       >
         <div className="relative aspect-[5/6] w-full overflow-hidden bg-royal-cream/50 border-b border-stone-texture/40">
           {isHOD && (
-            <div className="absolute top-2 left-0 z-10 bg-heritage-gold-strong text-white font-sans text-[9px] md:text-[10px] font-bold uppercase tracking-[0.12em] pl-3 pr-2.5 py-1 shadow-[0_2px_8px_rgba(0,0,0,0.15)] border-y border-r border-heritage-gold/30 rounded-r-sm flex items-center gap-1.5">
-              <span>Head of Department</span>
+            <div className="absolute top-1.5 sm:top-2 left-0 z-10 bg-heritage-gold-strong text-white font-sans text-[8px] sm:text-[9px] md:text-[10px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.12em] pl-2 sm:pl-3 pr-1.5 sm:pr-2.5 py-0.5 sm:py-1 shadow-[0_2px_8px_rgba(0,0,0,0.15)] border-y border-r border-heritage-gold/30 rounded-r-sm flex items-center gap-1">
+              <span>Head of Dept</span>
             </div>
           )}
           {member.image ? (
@@ -74,33 +74,33 @@ function FacultyMemberCard({ member, index }: { member: FacultySeedMember; index
               src={member.image}
               alt={member.name}
               fill
-              sizes="(min-width: 1280px) 15vw, (min-width: 1024px) 20vw, (min-width: 640px) 40vw, 90vw"
+              sizes="(min-width: 1280px) 15vw, (min-width: 1024px) 20vw, (min-width: 640px) 40vw, 50vw"
               className="object-cover object-center"
             />
           ) : (
-            <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-3 relative">
+            <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-2 sm:p-3 relative">
               <div className="absolute inset-0 opacity-[0.03] stone-pattern pointer-events-none" />
-              <div className="w-9 h-9 rounded-full border border-heritage-gold/30 flex items-center justify-center bg-white shadow-sm mb-1.5 group-hover:border-heritage-gold/80 transition-colors duration-300">
-                <span className="font-serif text-base font-bold text-montfortian-blue leading-none">{initials}</span>
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-heritage-gold/30 flex items-center justify-center bg-white shadow-sm mb-1 group-hover:border-heritage-gold/80 transition-colors duration-300">
+                <span className="font-serif text-sm sm:text-base font-bold text-montfortian-blue leading-none">{initials}</span>
               </div>
-              <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-heritage-gold-strong/80">
-                Faculty Mentor
+              <span className="text-[9px] sm:text-[10px] font-sans font-bold uppercase tracking-widest text-heritage-gold-strong/80">
+                Mentor
               </span>
             </div>
           )}
         </div>
-        <CardContent className="flex-1 flex flex-col justify-between p-3 bg-white">
-          <div className="space-y-1">
+        <CardContent className="flex-1 flex flex-col justify-between p-2 sm:p-3 bg-white">
+          <div className="space-y-0.5 sm:space-y-1">
             {member.designation && (
-              <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.15em] text-heritage-gold-strong font-sans">
+              <p className="text-[9px] sm:text-[10px] md:text-[11px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.15em] text-heritage-gold-strong font-sans">
                 {member.designation}
               </p>
             )}
-            <h3 className="font-serif text-sm md:text-base font-bold leading-snug text-ink group-hover:text-montfortian-blue transition-colors duration-300">
+            <h3 className="font-serif text-xs sm:text-sm md:text-base font-bold leading-snug text-ink group-hover:text-montfortian-blue transition-colors duration-300 line-clamp-2">
               {member.name}
             </h3>
             {member.subject && (
-              <p className="text-[11px] text-academic-slate/65 font-sans">
+              <p className="text-[10px] sm:text-[11px] text-academic-slate/65 font-sans">
                 {member.subject}
               </p>
             )}
@@ -128,16 +128,16 @@ export function FacultyTeaching({ activeInst = "lfjc", isPreview = false }: Facu
     : presentStaff;
 
   return (
-    <section id="teaching-faculty" className={cn("bg-white overflow-hidden", !isPreview && "py-8 md:py-12")}>
+    <section id="teaching-faculty" className={cn("bg-white overflow-hidden", !isPreview && "py-6 sm:py-8 md:py-12")}>
       {!isPreview && (
-        <div className="mx-auto max-w-3xl text-center px-5 md:px-8 mb-6">
-          <span className="font-sans text-[11px] font-bold text-heritage-gold-strong uppercase tracking-[0.2em] mb-2 block">
+        <div className="mx-auto max-w-3xl text-center px-4 sm:px-6 md:px-8 mb-4 sm:mb-6">
+          <span className="font-sans text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong uppercase tracking-[0.2em] mb-1.5 sm:mb-2 block">
             Academic Staff
           </span>
-          <h1 className="font-serif text-3xl font-bold leading-tight text-academic-slate md:text-4xl tracking-tight">
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold leading-tight text-academic-slate md:text-4xl tracking-tight">
             Teaching Faculty
           </h1>
-          <p className="mt-3 text-sm leading-6 text-academic-slate/75 font-sans max-w-2xl mx-auto">
+          <p className="mt-2 sm:mt-3 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/75 font-sans max-w-2xl mx-auto">
             Our academic departments are led by board-certified educators, HODs, and subject specialists committed to student excellence in every stream.
           </p>
           <span className="gold-rule gold-rule-center" />
@@ -146,37 +146,37 @@ export function FacultyTeaching({ activeInst = "lfjc", isPreview = false }: Facu
 
       {/* Search Input Filter for Full Faculty View */}
       {!isPreview && (
-        <div className="mx-auto max-w-xl px-5 md:px-8 mb-8">
+        <div className="mx-auto max-w-xl px-4 sm:px-6 md:px-8 mb-5 sm:mb-8">
           <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-academic-slate/40" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-academic-slate/40" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search faculty by name, department, or subject..."
-              className="w-full pl-10 pr-10 py-2.5 text-xs rounded-full border border-stone-texture bg-royal-cream/20 text-academic-slate placeholder:text-academic-slate/50 focus:bg-white focus:border-heritage-gold focus:outline-none focus:ring-2 focus:ring-heritage-gold/20 transition-all font-sans"
+              className="w-full pl-9 pr-9 py-2 text-xs rounded-full border border-stone-texture bg-royal-cream/20 text-academic-slate placeholder:text-academic-slate/50 focus:bg-white focus:border-heritage-gold focus:outline-none focus:ring-2 focus:ring-heritage-gold/20 transition-all font-sans"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
                 aria-label="Clear search query"
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-academic-slate/40 hover:text-academic-slate transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-academic-slate/40 hover:text-academic-slate transition-colors"
               >
-                <X className="h-4 w-4" />
+                <X className="h-3.5 w-3.5" />
               </button>
             )}
           </div>
           {searchQuery && (
-            <p className="mt-2 text-center text-[11px] text-academic-slate/70 font-sans">
+            <p className="mt-1.5 text-center text-[10px] sm:text-[11px] text-academic-slate/70 font-sans">
               Showing results for &ldquo;<span className="font-semibold">{searchQuery}</span>&rdquo; ({filteredStaff.length} found)
             </p>
           )}
         </div>
       )}
 
-      <div className={cn("mx-auto max-w-7xl", !isPreview && "px-5 md:px-8")}>
-        <div id="departments" className="space-y-8">
+      <div className={cn("mx-auto max-w-7xl", !isPreview && "px-4 sm:px-6 md:px-8")}>
+        <div id="departments" className="space-y-4 sm:space-y-6 md:space-y-8">
           {departmentOrder.map((deptName) => {
             const deptStaff = filteredStaff.filter((m) => m.department === deptName);
             if (deptStaff.length === 0) return null;
@@ -188,14 +188,14 @@ export function FacultyTeaching({ activeInst = "lfjc", isPreview = false }: Facu
             }
 
             return (
-              <div key={deptName} className="pt-6 first:pt-0 border-t border-stone-texture/20 first:border-t-0">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="w-1.5 h-6 bg-heritage-gold-strong rounded-full" />
-                  <h2 className="font-serif text-xl md:text-2xl font-semibold tracking-tight text-academic-slate">
+              <div key={deptName} className="pt-4 sm:pt-6 first:pt-0 border-t border-stone-texture/20 first:border-t-0">
+                <div className="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-4">
+                  <span className="w-1.5 h-5 sm:h-6 bg-heritage-gold-strong rounded-full" />
+                  <h2 className="font-serif text-lg sm:text-xl md:text-2xl font-semibold tracking-tight text-academic-slate">
                     {deptName}
                   </h2>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5 sm:gap-3.5 md:gap-4">
                   {deptStaff.map((member, index) => (
                     <FacultyMemberCard key={`${member.name}-${index}`} member={member} index={index} />
                   ))}
@@ -207,12 +207,12 @@ export function FacultyTeaching({ activeInst = "lfjc", isPreview = false }: Facu
 
         {/* No search results fallback */}
         {!isPreview && filteredStaff.length === 0 && (
-          <div className="text-center py-12 text-academic-slate/70 font-sans">
-            <p className="text-sm font-semibold">No faculty members found matching &ldquo;{searchQuery}&rdquo;</p>
+          <div className="text-center py-8 sm:py-12 text-academic-slate/70 font-sans">
+            <p className="text-xs sm:text-sm font-semibold">No faculty members found matching &ldquo;{searchQuery}&rdquo;</p>
             <button
               type="button"
               onClick={() => setSearchQuery("")}
-              className="mt-3 inline-flex items-center gap-1.5 text-xs text-montfortian-blue underline font-bold"
+              className="mt-2.5 inline-flex items-center gap-1.5 text-xs text-montfortian-blue underline font-bold"
             >
               Clear Search Filter
             </button>
@@ -222,8 +222,8 @@ export function FacultyTeaching({ activeInst = "lfjc", isPreview = false }: Facu
         {!isPreview && (
           <>
             {/* Bottom Highlight Row */}
-            <Reveal className="mt-8">
-              <div className="grid gap-4 border border-white/10 bg-academic-slate p-4 text-white md:grid-cols-3 rounded-lg shadow-lg">
+            <Reveal className="mt-6 sm:mt-8">
+              <div className="grid gap-3 sm:gap-4 border border-white/10 bg-academic-slate p-3.5 sm:p-4 text-white md:grid-cols-3 rounded-lg shadow-lg">
                 {[
                   ["Mentoring Model", "Department heads support stream selection, academic discipline, and student confidence.", ShieldCheck],
                   ["Learning Culture", "Faculty guidance is framed around clarity, conduct, and board exam readiness.", BookOpen],
@@ -231,22 +231,22 @@ export function FacultyTeaching({ activeInst = "lfjc", isPreview = false }: Facu
                 ].map(([title, copy, Icon]) => {
                   const CurrentIcon = Icon as React.ComponentType<{ className?: string }>;
                   return (
-                    <div key={title as string} className="border-l border-heritage-gold/35 pl-5 py-1">
+                    <div key={title as string} className="border-l border-heritage-gold/35 pl-3 sm:pl-5 py-1">
                       <div className="flex items-center gap-2">
-                        <CurrentIcon className="h-4 w-4 text-heritage-gold-bright shrink-0" />
-                        <h3 className="font-serif text-base font-bold text-white">{title as string}</h3>
+                        <CurrentIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-heritage-gold-bright shrink-0" />
+                        <h3 className="font-serif text-sm sm:text-base font-bold text-white">{title as string}</h3>
                       </div>
-                      <p className="mt-2 text-xs leading-5 text-royal-cream/75 font-sans">{copy as string}</p>
+                      <p className="mt-1 text-[11px] sm:text-xs leading-relaxed sm:leading-5 text-royal-cream/75 font-sans">{copy as string}</p>
                     </div>
                   );
                 })}
               </div>
             </Reveal>
 
-            <Reveal className="mt-8 flex flex-wrap justify-center gap-4">
+            <Reveal className="mt-6 sm:mt-8 flex flex-wrap justify-center gap-2.5 sm:gap-4">
               <Link
                 href="/faculty/retired"
-                className="inline-flex items-center gap-2 border border-stone-texture bg-white px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.16em] text-academic-slate hover:bg-academic-slate hover:text-white hover:border-academic-slate transition-all duration-300 rounded-sm font-sans"
+                className="inline-flex items-center gap-2 border border-stone-texture bg-white px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-academic-slate hover:bg-academic-slate hover:text-white hover:border-academic-slate transition-all duration-300 rounded-sm font-sans"
               >
                 View Retired Faculty
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

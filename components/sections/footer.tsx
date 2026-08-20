@@ -19,20 +19,20 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
 
       {/* ─── Credentials Top Band ──────────────────────────────────────── */}
       <div className="relative z-10 border-b border-white/10 bg-white/[0.02]">
-        <div className="mx-auto max-w-7xl px-5 md:px-8 py-6 md:py-8">
-          <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between">
-            <div className="flex items-center gap-3 text-center md:text-left">
-              <Award className="h-6 w-6 md:h-7 md:w-7 text-heritage-gold-bright shrink-0" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-3.5 sm:py-5 md:py-8">
+          <div className="flex flex-col items-center gap-2.5 sm:gap-4 md:flex-row md:justify-between">
+            <div className="flex items-center gap-2.5 sm:gap-3 text-center md:text-left">
+              <Award className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-heritage-gold-bright shrink-0" />
               <div>
-                <p className="text-[11px] md:text-[12px] font-bold uppercase tracking-[0.16em] text-heritage-gold-bright font-sans">
+                <p className="text-[10px] sm:text-[11px] md:text-[12px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-heritage-gold-bright font-sans">
                   Affiliated to Board of Intermediate Education, Telangana
                 </p>
-                <p className="text-[10px] md:text-[11px] text-royal-cream/50 font-sans mt-0.5">
+                <p className="text-[9px] sm:text-[10px] md:text-[11px] text-royal-cream/50 font-sans mt-0.5">
                   Governed by Brothers of St. Gabriel Educational Society • Est. {instData.established}
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.14em] text-royal-cream/60 font-sans">
+            <div className="flex items-center gap-3 sm:gap-4 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] text-royal-cream/60 font-sans">
               <span className="hidden sm:inline-flex items-center gap-1.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                 Minority Institution
@@ -47,12 +47,12 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
       </div>
 
       {/* ─── Main Footer Grid ──────────────────────────────────────────── */}
-      <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8 py-10 md:py-14">
-        <div className="grid gap-8 lg:gap-10 sm:grid-cols-2 lg:grid-cols-12">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-14">
+        <div className="grid gap-6 sm:gap-8 lg:gap-10 sm:grid-cols-2 lg:grid-cols-12">
           {/* Column 1: Brand (4 cols) */}
-          <div className="lg:col-span-4 flex flex-col items-start gap-4">
-            <Link href="/" className="group flex items-center gap-3.5">
-              <div className="grid h-14 w-14 place-items-center rounded-full border border-heritage-gold/30 overflow-hidden bg-white shadow-lg transition-transform group-hover:scale-105 p-1">
+          <div className="lg:col-span-4 flex flex-col items-start gap-3 sm:gap-4">
+            <Link href="/" className="group flex items-center gap-3">
+              <div className="grid h-11 w-11 sm:h-14 sm:w-14 place-items-center rounded-full border border-heritage-gold/30 overflow-hidden bg-white shadow-lg transition-transform group-hover:scale-105 p-0.5 sm:p-1">
                 <Image
                   src="/images/lfjc-logo.jpg"
                   alt="LFJC Official Logo"
@@ -62,30 +62,30 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-xl font-bold italic tracking-wide text-heritage-gold-bright">
+                <span className="font-serif text-lg sm:text-xl font-bold italic tracking-wide text-heritage-gold-bright">
                   {instData.shortName}
                 </span>
-                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-royal-cream/55 font-sans">
+                <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.18em] text-royal-cream/55 font-sans">
                   Uppal campus • Hyderabad
                 </span>
               </div>
             </Link>
-            <p className="text-sm leading-6 text-royal-cream/65 font-sans max-w-sm">
+            <p className="text-xs sm:text-sm leading-relaxed sm:leading-6 text-royal-cream/65 font-sans max-w-sm">
               A premier Montfortian institution dedicated to Truth, Virtue, and Academic Excellence since {instData.established}. Shaping leaders through discipline and dedicated pedagogy.
             </p>
-            <div className="flex gap-3">
+            <div className="flex gap-2.5 sm:gap-3">
               <a
                 href={instData.siteUrl}
-                className="grid h-9 w-9 place-items-center rounded-full border border-white/15 hover:bg-heritage-gold hover:border-heritage-gold hover:scale-110 transition-all duration-300"
+                className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full border border-white/15 hover:bg-heritage-gold hover:border-heritage-gold hover:scale-110 transition-all duration-300"
                 aria-label="Website"
               >
-                <Globe className="h-4 w-4" />
+                <Globe className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </a>
               <a
                 href="https://www.instagram.com/lfjcuppal/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="grid h-9 w-9 place-items-center rounded-full border border-white/15 hover:bg-heritage-gold hover:border-heritage-gold hover:scale-110 transition-all duration-300"
+                className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full border border-white/15 hover:bg-heritage-gold hover:border-heritage-gold hover:scale-110 transition-all duration-300"
                 aria-label="Instagram"
               >
                 <svg
@@ -98,7 +98,7 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-4 w-4"
+                  className="h-3.5 w-3.5 sm:h-4 sm:w-4"
                   aria-hidden="true"
                 >
                   <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
@@ -108,25 +108,25 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
               </a>
               <a
                 href={`mailto:${instData.email}`}
-                className="grid h-9 w-9 place-items-center rounded-full border border-white/15 hover:bg-heritage-gold hover:border-heritage-gold hover:scale-110 transition-all duration-300"
+                className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full border border-white/15 hover:bg-heritage-gold hover:border-heritage-gold hover:scale-110 transition-all duration-300"
                 aria-label="Email"
               >
-                <Mail className="h-4 w-4" />
+                <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </a>
             </div>
           </div>
 
           {/* Column 2: Quick Links (2 cols) */}
           <div className="lg:col-span-2">
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-heritage-gold-bright mb-5 font-sans">
+            <h4 className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-heritage-gold-bright mb-3 sm:mb-5 font-sans">
               Quick Links
             </h4>
-            <nav className="grid gap-3" aria-label="Quick Links">
+            <nav className="grid gap-2 sm:gap-3" aria-label="Quick Links">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="inline-flex items-center gap-1.5 text-sm text-royal-cream/70 hover:text-white hover:translate-x-1 transition-all duration-300 font-sans"
+                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-royal-cream/70 hover:text-white hover:translate-x-1 transition-all duration-300 font-sans"
                 >
                   <span className="h-1 w-1 rounded-full bg-heritage-gold/40" />
                   {item.label}
@@ -137,13 +137,13 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
 
           {/* Column 3: Institution Links (3 cols) */}
           <div className="lg:col-span-3">
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-heritage-gold-bright mb-5 font-sans">
+            <h4 className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-heritage-gold-bright mb-3 sm:mb-5 font-sans">
               The Montfortian Family
             </h4>
-            <nav className="grid gap-3" aria-label="Institution Links">
+            <nav className="grid gap-2 sm:gap-3" aria-label="Institution Links">
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 text-sm text-royal-cream/70 hover:text-white hover:translate-x-1 transition-all duration-300 font-sans"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm text-royal-cream/70 hover:text-white hover:translate-x-1 transition-all duration-300 font-sans"
               >
                 <span className="h-1 w-1 rounded-full bg-heritage-gold/40" />
                 Little Flower Junior College (LFJC)
@@ -152,7 +152,7 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
                 href="https://lfshyd.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-royal-cream/70 hover:text-white hover:translate-x-1 transition-all duration-300 font-sans"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm text-royal-cream/70 hover:text-white hover:translate-x-1 transition-all duration-300 font-sans"
               >
                 <span className="h-1 w-1 rounded-full bg-heritage-gold/40" />
                 Little Flower School (LFS)
@@ -162,7 +162,7 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
                 href="http://www.lfdc.edu.in"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-royal-cream/70 hover:text-white hover:translate-x-1 transition-all duration-300 font-sans"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm text-royal-cream/70 hover:text-white hover:translate-x-1 transition-all duration-300 font-sans"
               >
                 <span className="h-1 w-1 rounded-full bg-heritage-gold/40" />
                 Little Flower Degree College (LFDC)
@@ -173,18 +173,18 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
 
           {/* Column 4: Contact (3 cols) */}
           <div className="lg:col-span-3">
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-heritage-gold-bright mb-5 font-sans">
+            <h4 className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-heritage-gold-bright mb-3 sm:mb-5 font-sans">
               Contact Office
             </h4>
-            <address className="grid gap-4 not-italic text-sm leading-6 text-royal-cream/65 font-sans">
+            <address className="grid gap-2.5 sm:gap-4 not-italic text-xs sm:text-sm leading-relaxed sm:leading-6 text-royal-cream/65 font-sans">
               <a
-                className="group flex gap-3 hover:text-white transition-colors"
+                className="group flex gap-2.5 sm:gap-3 hover:text-white transition-colors"
                 href="https://www.google.com/maps/search/?api=1&query=Little%20Flower%20Junior%20College%20Uppal%20Hyderabad"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <MapPin
-                  className="mt-1 h-4 w-4 shrink-0 text-heritage-gold-bright group-hover:text-heritage-gold transition-colors"
+                  className="mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 text-heritage-gold-bright group-hover:text-heritage-gold transition-colors"
                   aria-hidden="true"
                 />
                 <span className="underline decoration-royal-cream/20 decoration-1 underline-offset-4 group-hover:decoration-heritage-gold transition-all">
@@ -192,21 +192,21 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
                 </span>
               </a>
               <a
-                className="group flex gap-3 hover:text-white transition-colors"
+                className="group flex gap-2.5 sm:gap-3 hover:text-white transition-colors"
                 href={`tel:${instData.phone.replace(/\s/g, "")}`}
               >
                 <Phone
-                  className="mt-1 h-4 w-4 shrink-0 text-heritage-gold-bright group-hover:text-heritage-gold transition-colors"
+                  className="mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 text-heritage-gold-bright group-hover:text-heritage-gold transition-colors"
                   aria-hidden="true"
                 />
                 {instData.phone}
               </a>
               <a
-                className="group flex gap-3 hover:text-white transition-colors"
+                className="group flex gap-2.5 sm:gap-3 hover:text-white transition-colors"
                 href={`mailto:${instData.email}`}
               >
                 <Mail
-                  className="mt-1 h-4 w-4 shrink-0 text-heritage-gold-bright group-hover:text-heritage-gold transition-colors"
+                  className="mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 text-heritage-gold-bright group-hover:text-heritage-gold transition-colors"
                   aria-hidden="true"
                 />
                 {instData.email}
@@ -218,11 +218,11 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
 
       {/* ─── Sub-footer ────────────────────────────────────────────────── */}
       <div className="relative z-10 border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-5 md:px-8 py-5 flex flex-col md:flex-row justify-between items-center gap-3">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-royal-cream/40 text-center font-sans">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-3.5 sm:py-5 flex flex-col md:flex-row justify-between items-center gap-2 sm:gap-3">
+          <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-royal-cream/40 text-center font-sans">
             &copy; {new Date().getFullYear()} {instData.name} — {instData.tagline}
           </p>
-          <nav aria-label="Legal and compliance" className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5">
+          <nav aria-label="Legal and compliance" className="flex flex-wrap items-center justify-center gap-x-3.5 sm:gap-x-4 gap-y-1 sm:gap-y-1.5">
             {[
               { label: "Anti-Ragging", href: "/legal/anti-ragging" },
               { label: "Privacy", href: "/legal/privacy" },
@@ -233,15 +233,15 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[10px] font-bold uppercase tracking-[0.14em] text-royal-cream/45 hover:text-heritage-gold-bright transition-colors font-sans"
+                className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] text-royal-cream/45 hover:text-heritage-gold-bright transition-colors font-sans"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
         </div>
-        <div className="mx-auto max-w-7xl px-5 md:px-8 pb-5 -mt-2">
-          <p className="text-[10px] text-royal-cream/30 font-sans text-center md:text-right">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 pb-3.5 sm:pb-5 -mt-1 sm:-mt-2">
+          <p className="text-[9px] sm:text-[10px] text-royal-cream/30 font-sans text-center md:text-right">
             Zahid Nagar, Opposite Survey of India, Uppal, Hyderabad 500039
           </p>
         </div>

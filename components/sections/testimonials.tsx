@@ -29,38 +29,38 @@ export function Testimonials({ activeInst = "lfjc" }: TestimonialsProps) {
       />
 
       {hasVerified ? (
-        <div className="mt-10 flex gap-5 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
+        <div className="mt-6 sm:mt-10 flex gap-3.5 sm:gap-5 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-3 sm:pb-4 md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
           {testimonials.map((testimonial, index) => {
             const initials = testimonial.person.slice(0, 2).toUpperCase();
 
             return (
-              <Reveal key={testimonial.person} delay={index * 0.08} className="snap-center shrink-0 w-[82%] sm:w-[48%] md:w-auto md:shrink-0">
+              <Reveal key={testimonial.person} delay={index * 0.08} className="snap-center shrink-0 w-[85%] sm:w-[48%] md:w-auto md:shrink-0">
                 <Card className="relative h-full overflow-hidden bg-white hover:border-heritage-gold/50 hover:shadow-panel-hover transition-all duration-300 rounded-lg flex flex-col justify-between">
-                  <CardContent className="relative flex h-full flex-col p-5">
+                  <CardContent className="relative flex h-full flex-col p-4 sm:p-5">
 
                     {/* Large Quote Mark */}
-                    <span className="absolute -top-2 left-5 select-none font-editorial text-7xl leading-none text-heritage-gold/10 pointer-events-none">
+                    <span className="absolute -top-2 left-4 sm:left-5 select-none font-editorial text-6xl sm:text-7xl leading-none text-heritage-gold/10 pointer-events-none">
                       &ldquo;
                     </span>
 
                     <div className="relative z-10 flex-1">
-                      <Quote className="h-5 w-5 text-heritage-gold-strong/70 mb-3" aria-hidden="true" />
-                      <p className="font-editorial text-xl leading-7 text-academic-slate/90 italic">
+                      <Quote className="h-4 w-4 sm:h-5 sm:w-5 text-heritage-gold-strong/70 mb-2 sm:mb-3" aria-hidden="true" />
+                      <p className="font-editorial text-base sm:text-xl leading-snug sm:leading-7 text-academic-slate/90 italic">
                         &quot;{testimonial.quote}&quot;
                       </p>
                     </div>
 
-                    <div className="relative z-10 mt-5 border-t border-stone-texture/50 pt-4 flex items-center gap-3">
+                    <div className="relative z-10 mt-3.5 sm:mt-5 border-t border-stone-texture/50 pt-3 sm:pt-4 flex items-center gap-2.5 sm:gap-3">
                       {/* Avatar Initials */}
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-montfortian-blue/10 border border-montfortian-blue/20 font-serif text-sm font-bold text-montfortian-blue">
+                      <div className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-montfortian-blue/10 border border-montfortian-blue/20 font-serif text-xs sm:text-sm font-bold text-montfortian-blue">
                         {initials}
                       </div>
 
                       <div>
-                        <p className="font-serif text-base font-bold text-academic-slate">
+                        <p className="font-serif text-sm sm:text-base font-bold text-academic-slate">
                           {testimonial.person}
                         </p>
-                        <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-montfortian-blue">
+                        <p className="mt-0.5 sm:mt-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] text-montfortian-blue">
                           {testimonial.role}
                         </p>
                       </div>
@@ -72,23 +72,23 @@ export function Testimonials({ activeInst = "lfjc" }: TestimonialsProps) {
           })}
         </div>
       ) : (
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <div className="mt-6 sm:mt-10 grid gap-3.5 sm:gap-5 md:grid-cols-3">
           {/* Honest fallback: the Principal's real, data-sourced voice — not a fabricated persona. */}
           <Reveal className="md:col-span-2">
             <Card className="relative h-full overflow-hidden bg-white border-heritage-gold/30 rounded-lg">
-              <CardContent className="relative flex h-full flex-col p-6 md:p-8">
-                <span className="absolute -top-2 left-5 select-none font-editorial text-7xl leading-none text-heritage-gold/10 pointer-events-none">
+              <CardContent className="relative flex h-full flex-col p-4 sm:p-6 md:p-8">
+                <span className="absolute -top-2 left-4 sm:left-5 select-none font-editorial text-6xl sm:text-7xl leading-none text-heritage-gold/10 pointer-events-none">
                   &ldquo;
                 </span>
-                <Quote className="h-5 w-5 text-heritage-gold-strong/70 mb-3" aria-hidden="true" />
-                <p className="relative z-10 font-editorial text-lg md:text-xl leading-7 md:leading-8 text-academic-slate/90 italic">
+                <Quote className="h-4 w-4 sm:h-5 sm:w-5 text-heritage-gold-strong/70 mb-2 sm:mb-3" aria-hidden="true" />
+                <p className="relative z-10 font-editorial text-base sm:text-lg md:text-xl leading-snug sm:leading-7 md:leading-8 text-academic-slate/90 italic">
                   {instData.principalMessage}
                 </p>
-                <div className="relative z-10 mt-6 border-t border-stone-texture/50 pt-4">
-                  <p className="font-serif text-base font-bold text-academic-slate">
+                <div className="relative z-10 mt-4 sm:mt-6 border-t border-stone-texture/50 pt-3 sm:pt-4">
+                  <p className="font-serif text-sm sm:text-base font-bold text-academic-slate">
                     {instData.principalName}
                   </p>
-                  <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-montfortian-blue">
+                  <p className="mt-0.5 sm:mt-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] text-montfortian-blue">
                     {instData.principalRole}
                   </p>
                 </div>
@@ -98,19 +98,19 @@ export function Testimonials({ activeInst = "lfjc" }: TestimonialsProps) {
 
           <Reveal delay={0.1}>
             <Card className="h-full overflow-hidden bg-deep-navy text-royal-cream border-heritage-gold/20 rounded-lg flex flex-col justify-between">
-              <CardContent className="flex h-full flex-col p-6">
-                <h3 className="font-serif text-lg font-bold text-heritage-gold-bright">
+              <CardContent className="flex h-full flex-col p-4 sm:p-6">
+                <h3 className="font-serif text-base sm:text-lg font-bold text-heritage-gold-bright">
                   Are you an LFJC alumnus?
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-royal-cream/75 font-sans">
+                <p className="mt-2 sm:mt-3 text-xs sm:text-sm leading-relaxed sm:leading-6 text-royal-cream/75 font-sans">
                   Share your journey and join the official {instData.shortName} alumni registry. Verified stories from our graduates are published here with consent.
                 </p>
                 <Link
                   href="/alumni#register"
-                  className="mt-6 inline-flex items-center gap-2 self-start rounded-sm bg-heritage-gold px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-deep-navy hover:bg-heritage-gold-bright transition-colors"
+                  className="mt-4 sm:mt-6 inline-flex items-center gap-2 self-start rounded-sm bg-heritage-gold px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-xs font-bold uppercase tracking-[0.14em] text-deep-navy hover:bg-heritage-gold-bright transition-colors"
                 >
                   Submit your story
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden="true" />
                 </Link>
               </CardContent>
             </Card>

@@ -33,12 +33,12 @@ export default function CampusSportsPage() {
   return (
     <>
       {/* Breadcrumb */}
-      <div className="mx-auto max-w-7xl px-5 md:px-8 pt-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 pt-4 sm:pt-6">
         <Breadcrumb items={[{ label: "Campus Life", href: "/campus" }, { label: "Sports & Athletics" }]} />
       </div>
 
       {/* Page Hero */}
-      <section className="relative min-h-[44svh] flex flex-col justify-center overflow-hidden bg-academic-slate text-white">
+      <section className="relative min-h-auto lg:min-h-[44svh] flex flex-col justify-center overflow-hidden bg-academic-slate text-white">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/sports/100m-sprint-action.jpg"
@@ -52,18 +52,18 @@ export default function CampusSportsPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-academic-slate via-transparent to-academic-slate/30" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8 w-full py-10 md:py-14">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 md:px-8 w-full py-8 sm:py-10 md:py-14">
           <Reveal>
-            <span className="font-sans text-[11px] font-bold text-heritage-gold-bright uppercase tracking-[0.24em] mb-3 block">
+            <span className="font-sans text-[10px] sm:text-[11px] font-bold text-heritage-gold-bright uppercase tracking-[0.2em] sm:tracking-[0.24em] mb-2 sm:mb-3 block">
               Athletics Programme
             </span>
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.08] text-white tracking-tight">
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] sm:leading-[1.08] text-white tracking-tight">
               Sports &{" "}
               <span className="text-heritage-gold italic font-editorial font-normal">
                 Athletics
               </span>
             </h1>
-            <p className="mt-4 max-w-2xl border-l-2 border-heritage-gold pl-4 sm:pl-5 text-sm md:text-base leading-relaxed text-royal-cream/90 font-sans font-medium">
+            <p className="mt-3 sm:mt-4 max-w-2xl border-l-2 border-heritage-gold pl-3.5 sm:pl-5 text-xs sm:text-sm md:text-base leading-relaxed text-royal-cream/90 font-sans font-medium">
               LFJC nurtures physical excellence alongside academic achievement — our two-acre sports arena hosts inter-college tournaments, the annual sports meet, and year-round athletic coaching.
             </p>
           </Reveal>
@@ -72,18 +72,18 @@ export default function CampusSportsPage() {
 
       {/* Sports Ethos */}
       <Section variant="default" className="bg-white border-b border-stone-texture/40">
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-3 sm:gap-6 lg:grid-cols-3">
           {[
             { label: "Sports Disciplines", value: "Cricket, Football, Basketball, Volleyball, Athletics" },
             { label: "Facilities", value: "Two-acre arena, athletic track, coaching nets, outdoor courts" },
             { label: "Annual Events", value: "Inter-house sports meet, inter-college tournaments, athletics day" },
           ].map((item) => (
             <Reveal key={item.label}>
-              <div className="bg-royal-cream/20 border border-stone-texture rounded-xl p-5 hover:border-heritage-gold/40 hover:bg-white transition-all duration-300">
-                <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-heritage-gold-strong font-sans mb-1">
+              <div className="bg-royal-cream/20 border border-stone-texture rounded-xl p-3.5 sm:p-5 hover:border-heritage-gold/40 hover:bg-white transition-all duration-300">
+                <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.16em] text-heritage-gold-strong font-sans mb-1">
                   {item.label}
                 </p>
-                <p className="font-serif text-sm font-semibold text-academic-slate leading-snug">
+                <p className="font-serif text-xs sm:text-sm font-semibold text-academic-slate leading-snug">
                   {item.value}
                 </p>
               </div>
@@ -100,20 +100,20 @@ export default function CampusSportsPage() {
           description="Photographs from our sports meets, inter-college tournaments, and year-round athletic coaching sessions."
         />
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mt-5 sm:mt-6 grid gap-2.5 sm:gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {SPORTS_IMAGES.map((img, idx) => (
             <Reveal key={img.title} delay={idx * 0.03}>
-              <div className="group relative aspect-[4/3] rounded-lg overflow-hidden border border-stone-texture shadow-sm hover:shadow-panel-hover transition-all duration-300">
+              <div className="group relative aspect-[4/3] rounded-lg overflow-hidden border border-stone-texture shadow-xs hover:shadow-panel-hover transition-all duration-300">
                 <Image
                   src={img.src}
                   alt={img.title}
                   fill
-                  sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 90vw"
+                  sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 50vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-academic-slate/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute inset-x-0 bottom-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-400">
-                  <h3 className="font-serif text-xs font-bold text-white leading-tight">{img.title}</h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-academic-slate/85 via-academic-slate/25 to-transparent opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-x-0 bottom-0 p-2 sm:p-3 sm:translate-y-full sm:group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 className="font-serif text-[11px] sm:text-xs font-bold text-white leading-tight line-clamp-1">{img.title}</h3>
                 </div>
               </div>
             </Reveal>
@@ -122,18 +122,18 @@ export default function CampusSportsPage() {
       </Section>
 
       {/* CTA */}
-      <Section variant="default" className="bg-white border-t border-stone-texture/40 py-8 md:py-8">
-        <Reveal className="flex flex-wrap justify-center gap-4">
+      <Section variant="default" className="bg-white border-t border-stone-texture/40 py-6 sm:py-8 md:py-8">
+        <Reveal className="flex flex-wrap justify-center gap-2.5 sm:gap-4">
           <Link
             href="/campus/events"
-            className="inline-flex items-center gap-2 border border-montfortian-blue/30 bg-montfortian-blue/5 px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.16em] text-montfortian-blue hover:bg-montfortian-blue hover:text-white hover:border-montfortian-blue transition-all duration-300 rounded-sm font-sans"
+            className="inline-flex items-center gap-2 border border-montfortian-blue/30 bg-montfortian-blue/5 px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-montfortian-blue hover:bg-montfortian-blue hover:text-white hover:border-montfortian-blue transition-all duration-300 rounded-sm font-sans"
           >
             Events & Culture
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </Link>
           <Link
             href="/campus/gallery"
-            className="inline-flex items-center gap-2 border border-heritage-gold/40 bg-heritage-gold/5 px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.16em] text-heritage-gold-strong hover:bg-heritage-gold hover:text-white hover:border-heritage-gold transition-all duration-300 rounded-sm font-sans"
+            className="inline-flex items-center gap-2 border border-heritage-gold/40 bg-heritage-gold/5 px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-heritage-gold-strong hover:bg-heritage-gold hover:text-white hover:border-heritage-gold transition-all duration-300 rounded-sm font-sans"
           >
             Photo Gallery
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

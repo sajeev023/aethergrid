@@ -33,9 +33,9 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
 
   return (
     <div id="contact" className="overflow-hidden bg-royal-cream/40 border-b border-stone-texture/50">
-      <div className="mx-auto max-w-7xl px-5 md:px-8 py-12 md:py-16 section-texture">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-6 sm:py-12 md:py-16 section-texture">
         {/* Top Header & Visuals */}
-        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <Reveal>
             <SectionHeading
               align="left"
@@ -45,25 +45,25 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
               description={`Whether you are a prospective student, parent, alumnus, or campus visitor, the ${instData.shortName} administration office is ready to support you.`}
             />
             
-            <div className="mt-5 grid gap-3 font-sans">
+            <div className="mt-4 sm:mt-5 grid gap-2 sm:gap-3 font-sans">
               <a
                 href={`mailto:${instData.email}`}
-                className="group inline-flex items-center gap-3 text-sm md:text-base font-semibold text-montfortian-blue hover:text-montfortian-blue/80 transition-colors"
+                className="group inline-flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm md:text-base font-semibold text-montfortian-blue hover:text-montfortian-blue/80 transition-colors"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded bg-white border border-stone-texture group-hover:border-montfortian-blue/40 shadow-sm transition-all duration-300">
-                  <Mail className="h-4.5 w-4.5 text-montfortian-blue" aria-hidden="true" />
+                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded bg-white border border-stone-texture group-hover:border-montfortian-blue/40 shadow-xs transition-all duration-300">
+                  <Mail className="h-4 w-4 text-montfortian-blue" aria-hidden="true" />
                 </div>
-                <span className="underline decoration-stone-texture/80 decoration-1 underline-offset-4 group-hover:decoration-montfortian-blue/50 transition-all">
+                <span className="underline decoration-stone-texture/80 decoration-1 underline-offset-4 group-hover:decoration-montfortian-blue/50 transition-all truncate">
                   {instData.email}
                 </span>
               </a>
               
               <a
                 href={`tel:${instData.phone.replace(/\s/g, "")}`}
-                className="group inline-flex items-center gap-3 text-sm md:text-base font-semibold text-montfortian-blue hover:text-montfortian-blue/80 transition-colors"
+                className="group inline-flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm md:text-base font-semibold text-montfortian-blue hover:text-montfortian-blue/80 transition-colors"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded bg-white border border-stone-texture group-hover:border-montfortian-blue/40 shadow-sm transition-all duration-300">
-                  <Phone className="h-4.5 w-4.5 text-montfortian-blue" aria-hidden="true" />
+                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded bg-white border border-stone-texture group-hover:border-montfortian-blue/40 shadow-xs transition-all duration-300">
+                  <Phone className="h-4 w-4 text-montfortian-blue" aria-hidden="true" />
                 </div>
                 <span className="underline decoration-stone-texture/80 decoration-1 underline-offset-4 group-hover:decoration-montfortian-blue/50 transition-all">
                   {instData.phone}
@@ -74,12 +74,12 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
                 href={`https://www.google.com/maps/search/?api=1&query=${getMapQuery()}`}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-start gap-3 text-xs md:text-sm text-academic-slate/80 leading-6 font-sans hover:text-montfortian-blue transition-colors"
+                className="group inline-flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm text-academic-slate/80 leading-relaxed sm:leading-6 font-sans hover:text-montfortian-blue transition-colors"
               >
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded bg-white border border-stone-texture shadow-sm group-hover:border-montfortian-blue/40 transition-all duration-300">
-                  <MapPin className="h-4.5 w-4.5 text-montfortian-blue" aria-hidden="true" />
+                <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded bg-white border border-stone-texture shadow-xs group-hover:border-montfortian-blue/40 transition-all duration-300">
+                  <MapPin className="h-4 w-4 text-montfortian-blue" aria-hidden="true" />
                 </div>
-                <span className="pt-1 font-medium underline decoration-stone-texture/80 decoration-1 underline-offset-4 group-hover:decoration-montfortian-blue/50 transition-all">
+                <span className="pt-0.5 sm:pt-1 font-medium underline decoration-stone-texture/80 decoration-1 underline-offset-4 group-hover:decoration-montfortian-blue/50 transition-all">
                   {instData.addressLine}, Opposite Survey of India, Uppal, Hyderabad, Telangana 500039
                 </span>
               </a>
@@ -96,8 +96,8 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
                   sizes="(min-width: 1024px) 50vw, 95vw"
                   className="object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
                 />
-                <div className="pointer-events-none absolute bottom-3 left-3 z-10">
-                  <span className="inline-block bg-academic-slate/85 backdrop-blur-sm border border-heritage-gold/30 px-3 py-1.5 font-sans text-[9px] font-bold uppercase tracking-[0.2em] text-heritage-gold-bright rounded-sm shadow-sm">
+                <div className="pointer-events-none absolute bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 z-10">
+                  <span className="inline-block bg-academic-slate/85 backdrop-blur-sm border border-heritage-gold/30 px-2.5 py-1 sm:px-3 sm:py-1.5 font-sans text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] text-heritage-gold-bright rounded-sm shadow-xs">
                     Golden Jubilee Block
                   </span>
                 </div>
@@ -107,12 +107,12 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
         </div>
 
         {/* Detailed Info Grid */}
-        <div className="mt-6 grid min-w-0 gap-4 lg:grid-cols-[1.1fr_0.9fr] items-start">
+        <div className="mt-5 sm:mt-6 grid min-w-0 gap-3.5 sm:gap-4 lg:grid-cols-[1.1fr_0.9fr] items-start">
 
           {/* Left Column: Hours, Campus Visit & Counseling */}
-          <div className="grid min-w-0 gap-4">
+          <div className="grid min-w-0 gap-3.5 sm:gap-4">
             {/* Office Hours Grid */}
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-2.5 sm:gap-4 md:grid-cols-2">
               <Reveal>
                 <HoursCard
                   title="Administrative Hours"
@@ -149,13 +149,13 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
 
             <Reveal>
               <Card id="location" className="bg-white border border-stone-texture hover:border-heritage-gold/30 hover:shadow-[0_15px_30px_rgba(15,76,129,0.04)] transition-all duration-300 scroll-mt-28">
-                <CardHeader className="p-4 pb-0 md:p-5 md:pb-0">
-                  <CardTitle className="font-serif text-lg font-bold text-academic-slate">Visit Our Campus</CardTitle>
+                <CardHeader className="p-3.5 pb-0 sm:p-5 sm:pb-0">
+                  <CardTitle className="font-serif text-base sm:text-lg font-bold text-academic-slate">Visit Our Campus</CardTitle>
                 </CardHeader>
-                <CardContent className="p-4 md:p-5 pt-3 md:pt-3 space-y-3">
-                  <div className="border border-stone-texture/80 bg-royal-cream/30 p-3 rounded-md hover:bg-white transition-colors duration-300">
-                    <div className="flex items-center gap-2.5">
-                      <MapPin className="h-4.5 w-4.5 text-montfortian-blue" aria-hidden="true" />
+                <CardContent className="p-3.5 sm:p-5 pt-2.5 sm:pt-3 space-y-2.5 sm:space-y-3">
+                  <div className="border border-stone-texture/80 bg-royal-cream/30 p-2.5 sm:p-3 rounded-md hover:bg-white transition-colors duration-300">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="h-4 w-4 text-montfortian-blue shrink-0" aria-hidden="true" />
                       <p className="font-semibold text-xs md:text-sm text-academic-slate font-sans">
                         Uppal, Hyderabad - 500039
                       </p>
@@ -163,7 +163,7 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
                   </div>
 
                   {/* Touch-locked Map Container */}
-                  <div className="relative aspect-[16/9] w-full rounded-md overflow-hidden border border-stone-texture group">
+                  <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-md overflow-hidden border border-stone-texture group">
                     <iframe
                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.126487823906!2d78.5583!3d17.3995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb98a1a3b56a3d%3A0x6b4f74ab7986b6a3!2sLittle%20Flower%20Junior%20College!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                       width="100%"
@@ -177,7 +177,7 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
                     />
                   </div>
 
-                  <Button asChild variant="secondary" className="w-full shadow-sm text-xs py-1.5 h-8">
+                  <Button asChild variant="secondary" className="w-full shadow-xs text-xs py-1.5 h-8">
                     <a
                       href={`https://www.google.com/maps/search/?api=1&query=${getMapQuery()}`}
                       target="_blank"
@@ -194,21 +194,21 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
             {/* Counselor Component Card */}
             <Reveal>
               <Card className="border-l-4 border-l-heritage-gold bg-white border border-stone-texture hover:shadow-[0_15px_30px_rgba(15,76,129,0.04)] transition-all duration-300">
-                <CardContent className="p-4">
-                  <div className="flex items-start gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-royal-cream text-heritage-gold-strong border border-stone-texture/60">
-                      <Users className="h-4.5 w-4.5" aria-hidden="true" />
+                <CardContent className="p-3.5 sm:p-4">
+                  <div className="flex items-start gap-2.5 sm:gap-3">
+                    <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded bg-royal-cream text-heritage-gold-strong border border-stone-texture/60">
+                      <Users className="h-4 w-4 text-heritage-gold-strong" aria-hidden="true" />
                     </div>
                     <div>
-                      <h3 className="font-serif text-xl font-semibold text-academic-slate">
+                      <h3 className="font-serif text-lg sm:text-xl font-semibold text-academic-slate">
                         Counseling &amp; Career Guidance
                       </h3>
-                      <p className="mt-1 text-xs leading-5 text-academic-slate/75 font-sans">
+                      <p className="mt-1 text-xs leading-relaxed sm:leading-5 text-academic-slate/75 font-sans">
                         {getCounselingText()}
                       </p>
-                      <div className="mt-3 flex flex-wrap gap-y-1 gap-x-4 text-[10px] font-semibold uppercase tracking-wider text-montfortian-blue font-sans">
+                      <div className="mt-2.5 sm:mt-3 flex flex-wrap gap-y-1 gap-x-3 sm:gap-x-4 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-montfortian-blue font-sans">
                         <span className="flex items-center gap-1">
-                          <Clock className="h-3.5 w-3.5" />
+                          <Clock className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                           Tue &amp; Thu: 10:00 AM - 1:00 PM
                         </span>
                         <span className="text-academic-slate/30">|</span>
@@ -222,16 +222,16 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
           </div>
 
           {/* Right Column: Portal & Form Switching */}
-          <div className="grid min-w-0 gap-5">
+          <div className="grid min-w-0 gap-3.5 sm:gap-5">
             <Reveal>
               <Card className="overflow-hidden bg-white border border-stone-texture hover:shadow-[0_20px_50px_rgba(15,76,129,0.04)] transition-all duration-300">
-                <CardHeader className="bg-academic-slate p-4 md:p-5 text-white border-b border-stone-texture/20">
-                  <CardTitle className="text-white font-serif text-xl">Resource Portal</CardTitle>
-                  <p className="text-xs leading-5 text-royal-cream/80 font-sans mt-1">
+                <CardHeader className="bg-academic-slate p-3.5 sm:p-5 text-white border-b border-stone-texture/20">
+                  <CardTitle className="text-white font-serif text-lg sm:text-xl">Resource Portal</CardTitle>
+                  <p className="text-xs leading-relaxed sm:leading-5 text-royal-cream/80 font-sans mt-1">
                     Quick access to essential campus services and digital databases.
                   </p>
                 </CardHeader>
-                <CardContent className="grid gap-3 p-4 md:p-5 bg-royal-cream/10">
+                <CardContent className="grid gap-2.5 sm:gap-3 p-3.5 sm:p-5 bg-royal-cream/10">
                   {resources.map((resource) => {
                     const Icon = resource.icon;
 
@@ -239,22 +239,22 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
                       <Link
                         key={resource.title}
                         href={resource.href || "#contact"}
-                        className="premium-focus group flex items-center justify-between gap-4 border border-stone-texture/60 bg-white p-3 rounded-md hover:border-heritage-gold hover:shadow-panel transition-all duration-300"
+                        className="premium-focus group flex items-center justify-between gap-3 sm:gap-4 border border-stone-texture/60 bg-white p-2.5 sm:p-3 rounded-md hover:border-heritage-gold hover:shadow-panel transition-all duration-300"
                       >
-                        <span className="flex items-center gap-3">
-                          <span className="grid h-10 w-10 shrink-0 place-items-center rounded bg-royal-cream text-montfortian-blue border border-stone-texture/40 group-hover:bg-white transition-colors">
-                            <Icon className="h-4.5 w-4.5" aria-hidden="true" />
+                        <span className="flex items-center gap-2.5 sm:gap-3">
+                          <span className="grid h-8 w-8 sm:h-10 sm:w-10 shrink-0 place-items-center rounded bg-royal-cream text-montfortian-blue border border-stone-texture/40 group-hover:bg-white transition-colors">
+                            <Icon className="h-4 w-4" aria-hidden="true" />
                           </span>
                           <span>
-                            <span className="block font-serif text-base font-semibold text-academic-slate group-hover:text-montfortian-blue transition-colors">
+                            <span className="block font-serif text-sm sm:text-base font-semibold text-academic-slate group-hover:text-montfortian-blue transition-colors">
                               {resource.title}
                             </span>
-                            <span className="mt-0.5 block text-xs leading-4 text-academic-slate/65 font-sans">
+                            <span className="mt-0.5 block text-[11px] sm:text-xs leading-4 text-academic-slate/65 font-sans">
                               {resource.description}
                             </span>
                           </span>
                         </span>
-                        <ArrowRight className="h-4 w-4 shrink-0 text-academic-slate/30 transition-transform group-hover:translate-x-1 group-hover:text-montfortian-blue" aria-hidden="true" />
+                        <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 text-academic-slate/30 transition-transform group-hover:translate-x-1 group-hover:text-montfortian-blue" aria-hidden="true" />
                       </Link>
                     );
                   })}
@@ -264,14 +264,14 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
 
             {/* Smart Interactive Form Switcher */}
             <Reveal>
-              <div id="inquiry" className="grid grid-cols-2 scroll-mt-28 gap-1 border border-stone-texture bg-white p-1 rounded-lg shadow-sm">
+              <div id="inquiry" className="grid grid-cols-2 scroll-mt-28 gap-1 border border-stone-texture bg-white p-1 rounded-lg shadow-xs">
                 <button
                   type="button"
                   onClick={() => setActiveForm("general")}
                   aria-pressed={activeForm === "general"}
-                  className={`min-w-0 px-2 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.08em] transition-all duration-300 rounded sm:text-sm sm:tracking-wider cursor-pointer ${
+                  className={`min-w-0 px-2 py-2 sm:py-3 text-center text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-wider transition-all duration-300 rounded cursor-pointer ${
                     activeForm === "general"
-                      ? "bg-montfortian-blue text-white shadow"
+                      ? "bg-montfortian-blue text-white shadow-xs"
                       : "text-academic-slate/70 hover:text-academic-slate hover:bg-royal-cream/50"
                   }`}
                 >
@@ -281,9 +281,9 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
                   type="button"
                   onClick={() => setActiveForm("inquiry")}
                   aria-pressed={activeForm === "inquiry"}
-                  className={`min-w-0 px-2 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.08em] transition-all duration-300 rounded sm:text-sm sm:tracking-wider cursor-pointer ${
+                  className={`min-w-0 px-2 py-2 sm:py-3 text-center text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-wider transition-all duration-300 rounded cursor-pointer ${
                     activeForm === "inquiry"
-                      ? "bg-montfortian-blue text-white shadow"
+                      ? "bg-montfortian-blue text-white shadow-xs"
                       : "text-academic-slate/70 hover:text-academic-slate hover:bg-royal-cream/50"
                   }`}
                 >
@@ -331,16 +331,16 @@ function HoursCard({
 }) {
   return (
     <Card id={id} className="h-full bg-white border border-stone-texture hover:border-heritage-gold/30 transition-all duration-300 scroll-mt-28">
-      <CardContent className="p-4 md:p-5">
-        <div className="flex h-9 w-9 items-center justify-center rounded bg-royal-cream border border-stone-texture/60 text-heritage-gold-strong">
-          <Clock className="h-4.5 w-4.5" aria-hidden="true" />
+      <CardContent className="p-3.5 sm:p-5">
+        <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded bg-royal-cream border border-stone-texture/60 text-heritage-gold-strong">
+          <Clock className="h-4 w-4 text-heritage-gold-strong" aria-hidden="true" />
         </div>
-        <h3 className="mt-3 font-serif text-base font-semibold text-academic-slate">
+        <h3 className="mt-2.5 sm:mt-3 font-serif text-sm sm:text-base font-semibold text-academic-slate">
           {title}
         </h3>
-        <dl className="mt-3 grid gap-2 text-sm font-sans">
+        <dl className="mt-2.5 sm:mt-3 grid gap-1.5 sm:gap-2 text-xs sm:text-sm font-sans">
           {rows.map(([day, value]) => (
-            <div key={day} className="flex flex-wrap justify-between gap-x-4 gap-y-1 border-b border-stone-texture/40 pb-2 last:border-b-0 last:pb-0">
+            <div key={day} className="flex flex-wrap justify-between gap-x-3 gap-y-1 border-b border-stone-texture/40 pb-1.5 sm:pb-2 last:border-b-0 last:pb-0">
               <dt className="text-academic-slate/65">{day}</dt>
               <dd className="text-right font-medium text-academic-slate">{value}</dd>
             </div>

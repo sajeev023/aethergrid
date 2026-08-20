@@ -342,13 +342,13 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
   return (
     <section className={cn(
       "bg-white border-b border-stone-texture/50",
-      isFullPage ? "pb-8 pt-8 md:pb-12 md:pt-12" : "py-8 md:py-12"
+      isFullPage ? "pb-6 pt-6 sm:pb-8 sm:pt-8 md:pb-12 md:pt-12" : "py-6 sm:py-8 md:py-12"
     )}>
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
 
         {/* Section Heading */}
         <Reveal>
-          <div className="mb-6">
+          <div className="mb-4 sm:mb-6">
             {isFullPage ? (
               <SectionHeading
                 as={headingLevel}
@@ -368,21 +368,21 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
 
         {isFullPage && (
           <Reveal delay={0.02}>
-            <div id="register" className="mb-6 bg-royal-cream/35 border border-stone-texture p-5 md:p-6 rounded-xl shadow-sm relative overflow-hidden flex flex-col md:flex-row md:items-center md:justify-between gap-4 scroll-mt-28">
+            <div id="register" className="mb-4 sm:mb-6 bg-royal-cream/35 border border-stone-texture p-3.5 sm:p-5 md:p-6 rounded-xl shadow-xs relative overflow-hidden flex flex-col md:flex-row md:items-center md:justify-between gap-3 sm:gap-4 scroll-mt-28">
               <div className="absolute top-0 right-0 w-48 h-48 bg-heritage-gold/5 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-montfortian-blue/5 rounded-full blur-2xl pointer-events-none" />
               
               <div className="space-y-1 max-w-2xl text-left">
-                <h2 className="font-serif text-lg md:text-xl font-bold text-academic-slate">
+                <h2 className="font-serif text-base sm:text-lg md:text-xl font-bold text-academic-slate">
                   Join Our Distinguished Alumni Network
                 </h2>
-                <p className="text-xs md:text-sm leading-relaxed text-academic-slate/75 font-sans">
+                <p className="text-xs sm:text-sm leading-relaxed text-academic-slate/75 font-sans">
                   Are you a Little Flower Junior College alumnus? Submit your profile and become part of our official alumni network.
                 </p>
               </div>
               
-              <div className="flex items-center gap-4 shrink-0">
-                <Button onClick={() => setIsFormOpen(true)} size="sm" className="shadow-md cursor-pointer text-xs font-bold uppercase tracking-wider h-10 px-5">
+              <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+                <Button onClick={() => setIsFormOpen(true)} size="sm" className="shadow-md cursor-pointer text-xs font-bold uppercase tracking-wider h-9 sm:h-10 px-4 sm:px-5">
                   Apply for Alumni
                 </Button>
               </div>
@@ -393,29 +393,29 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
         {/* Statistics Banner (Only shown on full directory page) */}
         {isFullPage && (
           <Reveal delay={0.05}>
-            <div id="network" className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 border-t border-b border-stone-texture/45 py-4 bg-royal-cream/15 rounded-lg px-4 md:px-6 scroll-mt-28">
+            <div id="network" className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 mb-4 sm:mb-6 border-t border-b border-stone-texture/45 py-3 sm:py-4 bg-royal-cream/15 rounded-lg px-3 sm:px-6 scroll-mt-28">
               <div className="text-center md:border-r border-stone-texture/40">
-                <span className="font-serif text-2xl md:text-3xl font-bold text-montfortian-blue block mb-1">15,000+</span>
-                <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1.5">
-                  <Users className="h-3.5 w-3.5 text-heritage-gold-strong" /> Global Network
+                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">15,000+</span>
+                <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
+                  <Users className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Global Network
                 </span>
               </div>
               <div className="text-center md:border-r border-stone-texture/40">
-                <span className="font-serif text-2xl md:text-3xl font-bold text-montfortian-blue block mb-1">18+</span>
-                <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1.5">
-                  <Globe className="h-3.5 w-3.5 text-heritage-gold-strong" /> Countries Represented
+                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">18+</span>
+                <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
+                  <Globe className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Countries
                 </span>
               </div>
               <div className="text-center md:border-r border-stone-texture/40">
-                <span className="font-serif text-2xl md:text-3xl font-bold text-montfortian-blue block mb-1">12+</span>
-                <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1.5">
-                  <Building2 className="h-3.5 w-3.5 text-heritage-gold-strong" /> Industries &amp; Sectors
+                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">12+</span>
+                <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
+                  <Building2 className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Sectors
                 </span>
               </div>
               <div className="text-center">
-                <span className="font-serif text-2xl md:text-3xl font-bold text-montfortian-blue block mb-1">50+</span>
-                <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1.5">
-                  <Sparkles className="h-3.5 w-3.5 text-heritage-gold-strong" /> Board Ranks &amp; Medals
+                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">50+</span>
+                <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
+                  <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Board Medals
                 </span>
               </div>
             </div>
@@ -424,17 +424,17 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
 
         {/* Featured Success Stories Section (Only shown on full page) */}
         {isFullPage && (
-          <div id="success-stories" className="mb-6 scroll-mt-28">
+          <div id="success-stories" className="mb-4 sm:mb-6 scroll-mt-28">
             <Reveal>
-              <div className="flex items-center gap-3 mb-3">
-                <span className="w-1.5 h-6 bg-heritage-gold rounded-full" />
-                <h2 className="font-serif text-xl md:text-2xl font-bold text-academic-slate">
+              <div className="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3">
+                <span className="w-1.5 h-5 sm:h-6 bg-heritage-gold rounded-full" />
+                <h2 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-academic-slate">
                   Featured Alumni Success Stories
                 </h2>
               </div>
             </Reveal>
 
-            <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-start">
+            <div className="grid gap-2.5 sm:gap-3 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-start">
               {featuredAlumni.map((featured, idx) => (
                 <Reveal key={featured.name} delay={idx * 0.06} className="h-full">
                   <Card className="group flex flex-col overflow-hidden border-2 border-heritage-gold/25 bg-royal-cream/10 rounded-lg hover:border-heritage-gold/75 hover:shadow-lg transition-all duration-300 h-auto">
@@ -443,36 +443,36 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
                         src={featured.image}
                         alt={featured.name}
                         fill
-                        sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 90vw"
+                        sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 50vw"
                         className={cn(
                           "object-cover group-hover:scale-[1.03] transition-transform duration-500",
                           featured.objectPosition || "object-[center_15%]"
                         )}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/55 via-transparent to-transparent pointer-events-none" />
-                      <div className="absolute top-3 left-3">
-                        <span className="inline-block font-sans text-[8px] font-bold px-2 py-0.5 rounded bg-white/90 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-sm">
+                      <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
+                        <span className="inline-block font-sans text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 rounded bg-white/90 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
                           {featured.category}
                         </span>
                       </div>
                     </div>
-                    <CardContent className="p-3 flex-1 flex flex-col justify-between bg-white">
+                    <CardContent className="p-2 sm:p-3 flex-1 flex flex-col justify-between bg-white">
                       <div>
-                        <div className="flex items-center text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-1">
+                        <div className="flex items-center text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
                           <span className="inline-flex items-center gap-1">
-                            <GraduationCap className="h-3.5 w-3.5 shrink-0" />
+                            <GraduationCap className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" />
                             {featured.batch.replace(/^Batch of\s+/i, "Batch: ")}
                           </span>
                         </div>
-                        <h3 className="font-serif text-base font-bold text-academic-slate mb-1 line-clamp-1">
+                        <h3 className="font-serif text-xs sm:text-base font-bold text-academic-slate mb-0.5 sm:mb-1 line-clamp-1">
                           {featured.name}
                         </h3>
-                        <p className="text-[11px] font-medium text-academic-slate/75 font-sans mb-2.5 line-clamp-1">
+                        <p className="text-[10px] sm:text-[11px] font-medium text-academic-slate/75 font-sans mb-1.5 sm:mb-2.5 line-clamp-1">
                           {featured.role}
                         </p>
-                        <div className="flex items-start gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-2 rounded-sm">
-                          <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
-                          <span className="text-[10px] font-bold text-heritage-gold-strong leading-normal font-sans line-clamp-1">
+                        <div className="flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
+                          <Award className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
+                          <span className="text-[9px] sm:text-[10px] font-bold text-heritage-gold-strong leading-normal font-sans line-clamp-1">
                             {featured.title}
                           </span>
                         </div>
@@ -485,12 +485,9 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
           </div>
         )}
 
-
-
-
         {/* Category filter — full directory page only */}
         {isFullPage && (
-          <div className="mb-8 flex flex-wrap items-center justify-center gap-2">
+          <div className="mb-5 sm:mb-8 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
             {categories.map((cat) => {
               const active = selectedCategory === cat;
               return (
@@ -500,9 +497,9 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
                   onClick={() => setSelectedCategory(cat)}
                   aria-pressed={active}
                   className={cn(
-                    "rounded-full border px-4 py-2 text-[11px] font-bold uppercase tracking-[0.12em] font-sans transition-all duration-300",
+                    "rounded-full border px-3 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.12em] font-sans transition-all duration-300",
                     active
-                      ? "border-montfortian-blue bg-montfortian-blue text-white shadow-sm"
+                      ? "border-montfortian-blue bg-montfortian-blue text-white shadow-xs"
                       : "border-stone-texture/70 bg-white text-academic-slate/75 hover:border-montfortian-blue hover:text-montfortian-blue",
                   )}
                 >
@@ -515,53 +512,53 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
 
         {/* Alumni Cards Grid */}
         {loadingDynamic ? (
-          <div className="flex items-center justify-center py-10">
-            <Loader2 className="h-8 w-8 text-montfortian-blue animate-spin" />
+          <div className="flex items-center justify-center py-8 sm:py-10">
+            <Loader2 className="h-6 w-6 sm:h-8 sm:w-8 text-montfortian-blue animate-spin" />
             <span className="ml-2 text-xs text-academic-slate/70 font-sans">Loading alumni database...</span>
           </div>
         ) : displayedAlumni.length > 0 ? (
           <>
             {isFullPage ? (
-              <div className="space-y-10">
+              <div className="space-y-6 sm:space-y-10">
                 {/* Section 1 — Alumni with Profile Images */}
                 {alumniWithImages.length > 0 && (
-                  <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-start sm:overflow-visible sm:pb-0">
+                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-3 items-start">
                     {alumniWithImages.map((alumnus, index) => (
-                      <Reveal key={alumnus.name} delay={index % 5 * 0.04} className="snap-center shrink-0 w-[75%] sm:w-auto sm:shrink">
+                      <Reveal key={alumnus.name} delay={index % 5 * 0.04}>
                         <Card className="group flex flex-col overflow-hidden border border-stone-texture/70 bg-white hover:border-heritage-gold/55 hover:shadow-[0_15px_30px_rgba(15,76,129,0.08)] hover:shadow-panel-hover transition-all duration-300 rounded-lg h-full">
                           <div className="relative aspect-[3/4] w-full overflow-hidden bg-surface-container-low border-b border-stone-texture/40">
                             <Image
                               src={alumnus.image}
                               alt={alumnus.name}
                               fill
-                              sizes="(min-width: 1280px) 16vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 90vw"
+                              sizes="(min-width: 1280px) 16vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 50vw"
                               className={cn(
                                 "object-cover group-hover:scale-105 transition-transform duration-500",
                                 alumnus.objectPosition || "object-[center_15%]"
                               )}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/35 via-transparent to-transparent pointer-events-none" />
-                            <div className="absolute top-3 left-3">
-                              <span className="inline-block font-sans text-[8px] font-bold px-2 py-0.5 rounded bg-white/90 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-sm">
+                            <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
+                              <span className="inline-block font-sans text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 rounded bg-white/90 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
                                 {alumnus.category}
                               </span>
                             </div>
                           </div>
-                          <CardContent className="flex-1 flex flex-col justify-between p-3 bg-white">
+                          <CardContent className="flex-1 flex flex-col justify-between p-2 sm:p-3 bg-white">
                             <div>
-                              <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-1">
-                                <GraduationCap className="h-3.5 w-3.5 shrink-0" />
+                              <div className="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
+                                <GraduationCap className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" />
                                 <span>{alumnus.year.replace(/^Batch of\s+/i, "Batch: ")}</span>
                               </div>
-                              <h3 className="font-serif text-base font-bold leading-tight text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300">
+                              <h3 className="font-serif text-xs sm:text-base font-bold leading-tight text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300 line-clamp-1">
                                 {alumnus.name}
                               </h3>
-                              <p className="text-[11px] font-medium text-academic-slate/75 font-sans mt-1 line-clamp-1">
+                              <p className="text-[10px] sm:text-[11px] font-medium text-academic-slate/75 font-sans mt-0.5 sm:mt-1 line-clamp-1">
                                 {alumnus.designation}
                               </p>
-                              <div className="mt-2 flex items-start gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-2 rounded-sm">
-                                <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
-                                <p className="text-[10px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
+                              <div className="mt-1.5 sm:mt-2 flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
+                                <Award className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
+                                <p className="text-[9px] sm:text-[10px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
                                   {alumnus.achievement.replace(/https?:\/\/[^\s]+/, "").trim() || "Distinguished Achiever"}
                                 </p>
                               </div>
@@ -575,39 +572,39 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
 
                 {/* Section 2 — Alumni without Profile Images */}
                 {alumniWithoutImages.length > 0 && (
-                  <div className="space-y-6">
+                  <div className="space-y-4 sm:space-y-6">
                     <Reveal>
-                      <div className="flex items-center gap-3">
-                        <span className="w-1.5 h-6 bg-heritage-gold rounded-full" />
-                        <h3 className="font-serif text-lg md:text-xl font-bold text-academic-slate">
+                      <div className="flex items-center gap-2.5 sm:gap-3">
+                        <span className="w-1.5 h-5 sm:h-6 bg-heritage-gold rounded-full" />
+                        <h3 className="font-serif text-base sm:text-lg md:text-xl font-bold text-academic-slate">
                           Other Distinguished Alumni
                         </h3>
                       </div>
                     </Reveal>
-                    <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-start sm:overflow-visible sm:pb-0">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-3 items-start">
                       {alumniWithoutImages.map((alumnus, index) => (
-                        <Reveal key={alumnus.name} delay={index % 5 * 0.04} className="snap-center shrink-0 w-[75%] sm:w-auto sm:shrink">
-                          <Card className="group flex flex-col overflow-hidden border border-stone-texture/70 bg-white hover:border-heritage-gold/55 hover:shadow-[0_15px_30px_rgba(15,76,129,0.08)] hover:shadow-panel-hover transition-all duration-300 rounded-lg h-full min-h-[120px]">
-                            <CardContent className="flex-1 flex flex-col justify-between p-3 bg-white">
-                              <div className="mb-2">
-                                <span className="inline-block font-sans text-[8px] font-bold px-2 py-0.5 rounded border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider bg-royal-cream/30">
+                        <Reveal key={alumnus.name} delay={index % 5 * 0.04}>
+                          <Card className="group flex flex-col overflow-hidden border border-stone-texture/70 bg-white hover:border-heritage-gold/55 hover:shadow-[0_15px_30px_rgba(15,76,129,0.08)] hover:shadow-panel-hover transition-all duration-300 rounded-lg h-full min-h-[110px] sm:min-h-[120px]">
+                            <CardContent className="flex-1 flex flex-col justify-between p-2 sm:p-3 bg-white">
+                              <div className="mb-1.5 sm:mb-2">
+                                <span className="inline-block font-sans text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 rounded border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider bg-royal-cream/30">
                                   {alumnus.category}
                                 </span>
                               </div>
                               <div>
-                                <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-1">
-                                  <GraduationCap className="h-3.5 w-3.5 shrink-0" />
+                                <div className="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
+                                  <GraduationCap className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" />
                                   <span>{alumnus.year.replace(/^Batch of\s+/i, "Batch: ")}</span>
                                 </div>
-                                <h3 className="font-serif text-base font-bold leading-tight text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300">
+                                <h3 className="font-serif text-xs sm:text-base font-bold leading-tight text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300 line-clamp-1">
                                   {alumnus.name}
                                 </h3>
-                                <p className="text-[11px] font-medium text-academic-slate/75 font-sans mt-1 line-clamp-1">
+                                <p className="text-[10px] sm:text-[11px] font-medium text-academic-slate/75 font-sans mt-0.5 sm:mt-1 line-clamp-1">
                                   {alumnus.designation}
                                 </p>
-                                <div className="mt-2 flex items-start gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-2 rounded-sm">
-                                  <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
-                                  <p className="text-[10px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
+                                <div className="mt-1.5 sm:mt-2 flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
+                                  <Award className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
+                                  <p className="text-[9px] sm:text-[10px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
                                     {alumnus.achievement.replace(/https?:\/\/[^\s]+/, "").trim() || "Distinguished Achiever"}
                                   </p>
                                 </div>
@@ -621,12 +618,12 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
                 )}
               </div>
             ) : (
-              /* Homepage Quick Preview (render single grid, sorted with images first) */
-              <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-start sm:overflow-visible sm:pb-0">
+              /* Homepage Quick Preview (render 2-column on mobile, sorted with images first) */
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-3 items-start">
                 {displayedAlumni.map((alumnus, index) => {
                   const hasImage = !!alumnus.image;
                   return (
-                    <Reveal key={alumnus.name} delay={index % 5 * 0.04} className="snap-center shrink-0 w-[75%] sm:w-auto sm:shrink">
+                    <Reveal key={alumnus.name} delay={index % 5 * 0.04}>
                       <Card className="group flex flex-col overflow-hidden border border-stone-texture/70 bg-white hover:border-heritage-gold/55 hover:shadow-[0_15px_30px_rgba(15,76,129,0.08)] hover:shadow-panel-hover transition-all duration-300 rounded-lg h-full">
                         {hasImage && (
                           <div className="relative aspect-[3/4] w-full overflow-hidden bg-surface-container-low border-b border-stone-texture/40">
@@ -634,42 +631,42 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
                               src={alumnus.image}
                               alt={alumnus.name}
                               fill
-                              sizes="(min-width: 1280px) 16vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 90vw"
+                              sizes="(min-width: 1280px) 16vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 50vw"
                               className={cn(
                                 "object-cover group-hover:scale-105 transition-transform duration-500",
                                 alumnus.objectPosition || "object-[center_15%]"
                               )}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/35 via-transparent to-transparent pointer-events-none" />
-                            <div className="absolute top-3 left-3">
-                              <span className="inline-block font-sans text-[8px] font-bold px-2 py-0.5 rounded bg-white/90 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-sm">
+                            <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
+                              <span className="inline-block font-sans text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 rounded bg-white/90 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
                                 {alumnus.category}
                               </span>
                             </div>
                           </div>
                         )}
-                        <CardContent className="flex-1 flex flex-col justify-between p-3 bg-white">
+                        <CardContent className="flex-1 flex flex-col justify-between p-2 sm:p-3 bg-white">
                           {!hasImage && (
-                            <div className="mb-2">
-                              <span className="inline-block font-sans text-[8px] font-bold px-2 py-0.5 rounded border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider bg-royal-cream/30">
+                            <div className="mb-1.5 sm:mb-2">
+                              <span className="inline-block font-sans text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 rounded border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider bg-royal-cream/30">
                                 {alumnus.category}
                               </span>
                             </div>
                           )}
                           <div>
-                            <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-1">
-                              <GraduationCap className="h-3.5 w-3.5 shrink-0" />
+                            <div className="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
+                              <GraduationCap className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" />
                               <span>{alumnus.year.replace(/^Batch of\s+/i, "Batch: ")}</span>
                             </div>
-                            <h3 className="font-serif text-base font-bold leading-tight text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300">
+                            <h3 className="font-serif text-xs sm:text-base font-bold leading-tight text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300 line-clamp-1">
                               {alumnus.name}
                             </h3>
-                            <p className="text-[11px] font-medium text-academic-slate/75 font-sans mt-1 line-clamp-1">
+                            <p className="text-[10px] sm:text-[11px] font-medium text-academic-slate/75 font-sans mt-0.5 sm:mt-1 line-clamp-1">
                               {alumnus.designation}
                             </p>
-                            <div className="mt-2 flex items-start gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-2 rounded-sm">
-                              <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
-                              <p className="text-[10px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
+                            <div className="mt-1.5 sm:mt-2 flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
+                              <Award className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
+                              <p className="text-[9px] sm:text-[10px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
                                 {alumnus.achievement.replace(/https?:\/\/[^\s]+/, "").trim() || "Distinguished Achiever"}
                               </p>
                             </div>
@@ -685,10 +682,10 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
         ) : (
           /* Empty Search/Filter State */
           <Reveal>
-            <div className="text-center py-10 bg-royal-cream/10 border border-dashed border-stone-texture/60 rounded-lg max-w-md mx-auto">
-              <Users className="h-10 w-10 text-academic-slate/30 mx-auto mb-4" />
-              <h3 className="font-serif text-lg font-bold text-academic-slate mb-1">No alumni found</h3>
-              <p className="text-xs text-academic-slate/70 font-sans px-6 text-center">
+            <div className="text-center py-8 sm:py-10 bg-royal-cream/10 border border-dashed border-stone-texture/60 rounded-lg max-w-md mx-auto">
+              <Users className="h-8 w-8 sm:h-10 sm:w-10 text-academic-slate/30 mx-auto mb-3 sm:mb-4" />
+              <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate mb-1">No alumni found</h3>
+              <p className="text-xs text-academic-slate/70 font-sans px-4 sm:px-6 text-center">
                 No alumni found in the selected category. Try selecting another filter.
               </p>
             </div>

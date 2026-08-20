@@ -193,9 +193,16 @@
 .gold-rule {
   display: block;
   height: 1.5px;
-  width: 2.5rem;
+  width: 2.25rem;
   background: var(--color-heritage-gold);
-  margin-top: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .gold-rule {
+    width: 2.5rem;
+    margin-top: 0.875rem;
+  }
 }
 
 .gold-rule-center {

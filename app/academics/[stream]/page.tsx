@@ -153,40 +153,40 @@ export default async function StreamDetailPage({ params }: { params: Promise<{ s
   const teachers = streamFaculty(streamKey);
 
   return (
-    <div className="section-texture bg-white py-8 md:py-12">
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
+    <div className="section-texture bg-white py-6 sm:py-8 md:py-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
 
         {/* Breadcrumb */}
         <Breadcrumb items={[{ label: "Academics", href: "/academics" }, { label: data.title }]} />
 
         {/* Page Header */}
-        <div className="mb-8 text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-heritage-gold-strong mb-2 font-sans">
+        <div className="mb-5 sm:mb-8 text-center max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] sm:tracking-[0.2em] text-heritage-gold-strong mb-1.5 sm:mb-2 font-sans">
             <GraduationCap className="h-3.5 w-3.5" />
             <span>Intermediate Academic Stream</span>
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-academic-slate tracking-tight">
+          <h1 className="font-serif text-2xl sm:text-4xl md:text-5xl font-bold text-academic-slate tracking-tight">
             {data.title}
           </h1>
-          <p className="mt-1 font-editorial text-lg md:text-xl text-heritage-gold-strong italic">
+          <p className="mt-1 font-editorial text-base sm:text-lg md:text-xl text-heritage-gold-strong italic">
             {data.subtitle}
           </p>
-          <p className="mt-4 text-xs md:text-sm leading-6 text-academic-slate/75 font-sans">
+          <p className="mt-2.5 sm:mt-4 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/75 font-sans">
             {data.description}
           </p>
-          <span className="gold-rule gold-rule-center" />
+          <span className="gold-rule gold-rule-center !mt-3 sm:!mt-5" />
         </div>
 
         {/* Overview Banner */}
-        <Reveal className="mb-10 grid gap-6 rounded-xl border border-stone-texture bg-royal-cream/20 p-6 md:grid-cols-2">
+        <Reveal className="mb-6 sm:mb-10 grid gap-4 sm:gap-6 rounded-xl border border-stone-texture bg-royal-cream/20 p-4 sm:p-6 md:grid-cols-2">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-heritage-gold-strong font-sans block mb-1">
+            <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] text-heritage-gold-strong font-sans block mb-1">
               Competitive Entrance Target
             </span>
-            <h2 className="font-serif text-xl font-bold text-academic-slate mb-2">
+            <h2 className="font-serif text-lg sm:text-xl font-bold text-academic-slate mb-1.5 sm:mb-2">
               Competitive Entrance Orientation
             </h2>
-            <p className="text-xs leading-5 text-academic-slate/75 font-sans mb-3">
+            <p className="text-xs leading-relaxed sm:leading-5 text-academic-slate/75 font-sans mb-2.5 sm:mb-3">
               {data.entranceExam}
             </p>
             <div className="flex items-center gap-2 text-xs font-semibold text-montfortian-blue">
@@ -195,11 +195,11 @@ export default async function StreamDetailPage({ params }: { params: Promise<{ s
             </div>
           </div>
 
-          <div className="border-t md:border-t-0 md:border-l border-stone-texture/50 pt-4 md:pt-0 md:pl-6">
-            <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-heritage-gold-strong font-sans block mb-1">
+          <div className="border-t md:border-t-0 md:border-l border-stone-texture/50 pt-3.5 md:pt-0 md:pl-6">
+            <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] text-heritage-gold-strong font-sans block mb-1">
               Stream Highlights
             </span>
-            <ul className="space-y-2">
+            <ul className="space-y-1.5 sm:space-y-2">
               {data.highlights.map((h) => (
                 <li key={h} className="flex items-center gap-2 text-xs text-academic-slate/80 font-sans font-medium">
                   <CheckCircle2 className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0" />
@@ -211,24 +211,24 @@ export default async function StreamDetailPage({ params }: { params: Promise<{ s
         </Reveal>
 
         {/* Subjects Grid */}
-        <div className="mb-12">
+        <div className="mb-6 sm:mb-12">
           <SectionHeading
             eyebrow="Curriculum Structure"
             title="Subjects Covered"
             description="A balanced academic curriculum prescribed by the Board of Intermediate Education, Telangana (BIETS)."
           />
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="mt-5 sm:mt-6 grid gap-3 sm:gap-4 sm:grid-cols-2">
             {data.subjects.map((sub, idx) => (
               <Reveal key={sub.name} delay={idx * 0.05}>
-                <div className="group h-full rounded-lg border border-stone-texture bg-white p-5 hover:border-heritage-gold/50 hover:shadow-md transition-all duration-300">
-                  <div className="flex items-center gap-2 mb-2">
+                <div className="group h-full rounded-lg border border-stone-texture bg-white p-3.5 sm:p-5 hover:border-heritage-gold/50 hover:shadow-md transition-all duration-300">
+                  <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
                     <BookOpen className="h-4 w-4 text-montfortian-blue group-hover:text-heritage-gold-strong transition-colors" />
-                    <h3 className="font-serif text-base font-bold text-academic-slate group-hover:text-montfortian-blue transition-colors">
+                    <h3 className="font-serif text-sm sm:text-base font-bold text-academic-slate group-hover:text-montfortian-blue transition-colors">
                       {sub.name}
                     </h3>
                   </div>
-                  <p className="text-xs leading-5 text-academic-slate/70 font-sans">
+                  <p className="text-xs leading-relaxed sm:leading-5 text-academic-slate/70 font-sans">
                     {sub.desc}
                   </p>
                 </div>
@@ -238,19 +238,19 @@ export default async function StreamDetailPage({ params }: { params: Promise<{ s
         </div>
 
         {/* Careers & Practical Labs */}
-        <div className="grid gap-6 md:grid-cols-2 mb-12">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-2 mb-6 sm:mb-12">
           {/* Career Pathways */}
-          <Reveal className="rounded-xl border border-stone-texture bg-white p-6 shadow-sm">
-            <div className="flex items-center gap-2 mb-4">
-              <GraduationCap className="h-5 w-5 text-heritage-gold-strong" />
-              <h3 className="font-serif text-xl font-bold text-academic-slate">
+          <Reveal className="rounded-xl border border-stone-texture bg-white p-4 sm:p-6 shadow-xs">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
+              <GraduationCap className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-heritage-gold-strong" />
+              <h3 className="font-serif text-lg sm:text-xl font-bold text-academic-slate">
                 Career Pathways
               </h3>
             </div>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2 sm:space-y-2.5">
               {data.careers.map((career) => (
-                <li key={career} className="flex items-center gap-2.5 text-xs text-academic-slate/80 font-sans">
-                  <span className="h-1.5 w-1.5 rounded-full bg-heritage-gold-strong" />
+                <li key={career} className="flex items-center gap-2 sm:gap-2.5 text-xs text-academic-slate/80 font-sans">
+                  <span className="h-1.5 w-1.5 rounded-full bg-heritage-gold-strong shrink-0" />
                   <span>{career}</span>
                 </li>
               ))}
@@ -258,16 +258,16 @@ export default async function StreamDetailPage({ params }: { params: Promise<{ s
           </Reveal>
 
           {/* Practical Labs */}
-          <Reveal delay={0.1} className="rounded-xl border border-stone-texture bg-white p-6 shadow-sm">
-            <div className="flex items-center gap-2 mb-4">
-              <FlaskConical className="h-5 w-5 text-montfortian-blue" />
-              <h3 className="font-serif text-xl font-bold text-academic-slate">
+          <Reveal delay={0.1} className="rounded-xl border border-stone-texture bg-white p-4 sm:p-6 shadow-xs">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
+              <FlaskConical className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-montfortian-blue" />
+              <h3 className="font-serif text-lg sm:text-xl font-bold text-academic-slate">
                 Laboratory & Practical Facilities
               </h3>
             </div>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2 sm:space-y-2.5">
               {data.labs.map((lab) => (
-                <li key={lab} className="flex items-center gap-2.5 text-xs text-academic-slate/80 font-sans">
+                <li key={lab} className="flex items-center gap-2 sm:gap-2.5 text-xs text-academic-slate/80 font-sans">
                   <CheckCircle2 className="h-3.5 w-3.5 text-montfortian-blue shrink-0" />
                   <span>{lab}</span>
                 </li>
@@ -278,17 +278,17 @@ export default async function StreamDetailPage({ params }: { params: Promise<{ s
 
         {/* Stream Faculty — the teachers behind this stream */}
         {teachers.length > 0 && (
-          <div className="mb-12">
+          <div className="mb-6 sm:mb-12">
             <SectionHeading
               eyebrow="Meet Your Mentors"
               title="Faculty for This Stream"
               description="The department heads and subject teachers who lead classroom and laboratory instruction for this programme."
             />
-            <div className="mt-6 grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+            <div className="mt-5 sm:mt-6 grid gap-2.5 sm:gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
               {teachers.map((teacher, idx) => (
                 <Reveal key={`${teacher.name}-${idx}`} delay={(idx % 4) * 0.05}>
-                  <div className="group h-full rounded-lg border border-stone-texture bg-white p-4 text-center hover:border-heritage-gold/50 hover:shadow-md transition-all duration-300">
-                    <div className="relative mx-auto h-20 w-20 overflow-hidden rounded-full border border-stone-texture/60 bg-royal-cream/30">
+                  <div className="group h-full rounded-lg border border-stone-texture bg-white p-3 sm:p-4 text-center hover:border-heritage-gold/50 hover:shadow-md transition-all duration-300">
+                    <div className="relative mx-auto h-16 w-16 sm:h-20 sm:w-20 overflow-hidden rounded-full border border-stone-texture/60 bg-royal-cream/30">
                       <Image
                         src={teacher.image}
                         alt={teacher.name}
@@ -297,23 +297,23 @@ export default async function StreamDetailPage({ params }: { params: Promise<{ s
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     </div>
-                    <h3 className="mt-3 font-serif text-sm font-bold text-academic-slate leading-tight">
+                    <h3 className="mt-2.5 sm:mt-3 font-serif text-xs sm:text-sm font-bold text-academic-slate leading-tight line-clamp-1">
                       {teacher.name}
                     </h3>
-                    <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.1em] text-heritage-gold-strong font-sans">
+                    <p className="mt-0.5 sm:mt-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.1em] text-heritage-gold-strong font-sans line-clamp-1">
                       {teacher.subject}
                     </p>
-                    <p className="mt-0.5 text-[10px] text-academic-slate/60 font-sans">
+                    <p className="mt-0.5 text-[9px] sm:text-[10px] text-academic-slate/60 font-sans line-clamp-1">
                       {teacher.designation}
                     </p>
                   </div>
                 </Reveal>
               ))}
             </div>
-            <div className="mt-5 text-center">
+            <div className="mt-4 sm:mt-5 text-center">
               <Link
                 href="/faculty/teaching"
-                className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-montfortian-blue hover:text-heritage-gold-strong transition-colors font-sans"
+                className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] text-montfortian-blue hover:text-heritage-gold-strong transition-colors font-sans"
               >
                 <Users className="h-3.5 w-3.5" aria-hidden="true" />
                 View full teaching faculty
@@ -323,7 +323,7 @@ export default async function StreamDetailPage({ params }: { params: Promise<{ s
         )}
 
         {/* Bottom Actions */}
-        <Reveal className="border-t border-stone-texture/40 pt-8 flex flex-wrap justify-center gap-4">
+        <Reveal className="border-t border-stone-texture/40 pt-6 sm:pt-8 flex flex-wrap justify-center gap-2.5 sm:gap-4">
           <Button asChild size="lg" className="text-xs uppercase tracking-[0.14em]">
             <Link href={`/academics/${streamKey}/toppers`}>
               <Trophy className="h-4 w-4 mr-2" />

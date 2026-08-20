@@ -34,17 +34,17 @@ export function SectionHeading({
     >
       <Badge onDark={onDark}>{eyebrow}</Badge>
       <Heading className={cn(
-        "mt-4 font-serif text-3xl font-semibold leading-tight tracking-tight md:text-4xl",
+        "mt-2.5 sm:mt-4 font-serif text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight tracking-tight",
         onDark ? "text-white" : "text-academic-slate",
       )}>
         {title}
       </Heading>
       <span
-        className={cn("gold-rule", align === "center" ? "gold-rule-center" : "gold-rule-left")}
+        className={cn("gold-rule !mt-2 sm:!mt-3.5", align === "center" ? "gold-rule-center" : "gold-rule-left")}
       />
       {description ? (
         <p className={cn(
-          "mt-4 text-sm leading-7 md:text-base md:leading-7",
+          "mt-2.5 sm:mt-4 text-xs sm:text-sm md:text-base leading-relaxed sm:leading-7",
           onDark ? "text-royal-cream/75" : "text-academic-slate/70",
         )}>
           {description}

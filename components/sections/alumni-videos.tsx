@@ -28,8 +28,8 @@ export function AlumniVideos() {
   }
 
   return (
-    <section id="alumni-videos" className="bg-white border-b border-stone-texture/50 py-8 md:py-12">
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
+    <section id="alumni-videos" className="bg-white border-b border-stone-texture/50 py-6 sm:py-8 md:py-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
         <SectionHeading
           as="h2"
           eyebrow="Montfortian Legacy"
@@ -37,10 +37,10 @@ export function AlumniVideos() {
           description="Video reflections, reunion recordings, and milestone talks from the Little Flower Junior College alumni network."
         />
 
-        <div className="mt-6 grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="mt-5 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {alumniVideos.map((video, idx) => (
             <Reveal key={video.id} delay={(idx % 3) * 0.05}>
-              <div className="flex flex-col h-full bg-white border border-stone-texture rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="flex flex-col h-full bg-white border border-stone-texture rounded-lg overflow-hidden shadow-xs hover:shadow-md transition-all duration-300">
                 {/* YouTube Embed Video */}
                 <div className="relative aspect-video w-full bg-black">
                   <iframe
@@ -53,17 +53,17 @@ export function AlumniVideos() {
                 </div>
 
                 {/* Video Metadata */}
-                <div className="p-4 flex-1 flex flex-col justify-between">
-                  <h3 className="font-serif text-sm font-bold text-academic-slate line-clamp-2">
+                <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between">
+                  <h3 className="font-serif text-xs sm:text-sm font-bold text-academic-slate line-clamp-2">
                     {video.title}
                   </h3>
                   {video.description ? (
-                    <p className="mt-1.5 text-[11px] leading-5 text-academic-slate/70 font-sans line-clamp-2">
+                    <p className="mt-1 sm:mt-1.5 text-[10px] sm:text-[11px] leading-relaxed sm:leading-5 text-academic-slate/70 font-sans line-clamp-2">
                       {video.description}
                     </p>
                   ) : null}
 
-                  <div className="mt-3 pt-3 border-t border-stone-texture/40 flex items-center justify-between">
+                  <div className="mt-2.5 sm:mt-3 pt-2 sm:pt-3 border-t border-stone-texture/40 flex items-center justify-between">
                     <a
                       href={video.watchUrl}
                       target="_blank"
@@ -81,7 +81,7 @@ export function AlumniVideos() {
           ))}
         </div>
 
-        <Reveal className="mt-6 flex justify-center">
+        <Reveal className="mt-5 sm:mt-6 flex justify-center">
           <Button asChild variant="secondary" size="lg">
             <a
               href="https://www.youtube.com/@lfjc"

@@ -36,24 +36,24 @@ export function LegalDocument({
   return (
     <>
       <div className="border-b border-stone-texture/50 bg-royal-cream/30">
-        <div className="mx-auto max-w-4xl px-5 md:px-8 py-12 md:py-16">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 md:px-8 py-6 sm:py-12 md:py-16">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-academic-slate/60 hover:text-montfortian-blue transition-colors font-sans"
+            className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-academic-slate/60 hover:text-montfortian-blue transition-colors font-sans"
           >
             <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
             Back to {instData.shortName}
           </Link>
-          <p className="mt-5 text-[11px] font-bold uppercase tracking-[0.24em] text-heritage-gold-strong font-sans">
+          <p className="mt-3 sm:mt-5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.24em] text-heritage-gold-strong font-sans">
             {eyebrow}
           </p>
-          <h1 className="mt-3 font-serif text-3xl md:text-4xl font-bold leading-[1.1] text-deep-navy tracking-tight">
+          <h1 className="mt-2 sm:mt-3 font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-[1.1] text-deep-navy tracking-tight">
             {title}
           </h1>
-          <p className="mt-4 max-w-2xl text-sm md:text-base leading-7 text-academic-slate/75 font-sans">
+          <p className="mt-2.5 sm:mt-4 max-w-2xl text-xs sm:text-sm md:text-base leading-relaxed sm:leading-7 text-academic-slate/75 font-sans">
             {description}
           </p>
-          <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.14em] text-academic-slate/45 font-sans">
+          <p className="mt-2.5 sm:mt-4 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] text-academic-slate/45 font-sans">
             Last updated: {lastUpdated}
           </p>
         </div>
@@ -62,11 +62,11 @@ export function LegalDocument({
       <Section variant="feature" className="bg-white">
         <div className="mx-auto max-w-4xl">
           {/* Table of contents */}
-          <nav aria-label="On this page" className="mb-10 rounded-lg border border-stone-texture/60 bg-royal-cream/20 p-5">
-            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-heritage-gold-strong font-sans mb-3">
+          <nav aria-label="On this page" className="mb-6 sm:mb-10 rounded-lg border border-stone-texture/60 bg-royal-cream/20 p-3.5 sm:p-5">
+            <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.16em] text-heritage-gold-strong font-sans mb-2 sm:mb-3">
               On this page
             </p>
-            <ol className="grid gap-1.5 text-sm text-academic-slate/80 font-sans">
+            <ol className="grid gap-1 sm:gap-1.5 text-xs sm:text-sm text-academic-slate/80 font-sans">
               {sections.map((section, i) => (
                 <li key={section.heading}>
                   <a
@@ -80,20 +80,20 @@ export function LegalDocument({
             </ol>
           </nav>
 
-          <div className="grid gap-10">
+          <div className="grid gap-6 sm:gap-10">
             {sections.map((section, i) => (
               <section key={section.heading} id={`section-${i + 1}`} className="scroll-mt-28">
-                <h2 className="font-serif text-xl md:text-2xl font-bold text-deep-navy">
+                <h2 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-deep-navy">
                   {section.heading}
                 </h2>
-                <div className="mt-3 text-sm md:text-base leading-7 text-academic-slate/80 font-sans space-y-3">
+                <div className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base leading-relaxed sm:leading-7 text-academic-slate/80 font-sans space-y-2.5 sm:space-y-3">
                   {section.body}
                 </div>
               </section>
             ))}
           </div>
 
-          <div className="mt-12 rounded-lg border border-stone-texture/60 bg-royal-cream/20 p-5 text-sm leading-6 text-academic-slate/75 font-sans">
+          <div className="mt-6 sm:mt-12 rounded-lg border border-stone-texture/60 bg-royal-cream/20 p-3.5 sm:p-5 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/75 font-sans">
             <p>
               Questions about this document? Contact the {instData.name} office at{" "}
               <a href={`tel:${instData.phone.replace(/\s/g, "")}`} className="font-semibold text-montfortian-blue hover:underline">

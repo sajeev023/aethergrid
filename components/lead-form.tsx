@@ -95,8 +95,8 @@ export function LeadForm({
   return (
     <form
       className={cn(
-        "grid gap-4 rounded-lg border border-stone-texture bg-white p-4 md:p-5 shadow-[0_20px_60px_rgba(22,29,31,0.06)]",
-        compact ? "p-4" : "md:p-5",
+        "grid gap-3 sm:gap-4 rounded-lg border border-stone-texture bg-white p-3.5 sm:p-5 shadow-[0_20px_60px_rgba(22,29,31,0.06)]",
+        compact ? "p-3.5 sm:p-4" : "p-3.5 sm:p-5",
         className,
       )}
       onSubmit={handleSubmit}
@@ -118,11 +118,11 @@ export function LeadForm({
       </div>
       {title ? (
         <div>
-          <h3 className="font-serif text-xl font-semibold text-academic-slate">
+          <h3 className="font-serif text-lg sm:text-xl font-semibold text-academic-slate">
             {title}
           </h3>
           {description ? (
-            <p className="mt-2 text-sm leading-6 text-academic-slate/70">
+            <p className="mt-1 sm:mt-2 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/70">
               {description}
             </p>
           ) : null}
@@ -130,7 +130,7 @@ export function LeadForm({
       ) : null}
 
       {type === "admissions" ? (
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-2.5 sm:gap-4 sm:grid-cols-2">
           <Field id={`${id}-student`} label="Student name">
             <Input id={`${id}-student`} name="studentName" required autoComplete="name" />
           </Field>
@@ -167,7 +167,7 @@ export function LeadForm({
           </Field>
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-2.5 sm:gap-4 sm:grid-cols-2">
           <Field id={`${id}-name`} label="Full name">
             <Input id={`${id}-name`} name="name" required autoComplete="name" />
           </Field>
@@ -252,7 +252,7 @@ export function LeadForm({
       <p
         aria-live="polite"
         className={cn(
-          "min-h-5 text-sm leading-6",
+          "min-h-5 text-xs sm:text-sm leading-relaxed sm:leading-6",
           status.state === "success" && "text-montfortian-blue",
           status.state === "error" && "text-red-700",
           status.state === "idle" && "text-academic-slate/70",
@@ -274,8 +274,8 @@ function Field({
   children: ReactNode;
 }) {
   return (
-    <div className="grid gap-2">
-      <Label htmlFor={id}>{label}</Label>
+    <div className="grid gap-1 sm:gap-2">
+      <Label htmlFor={id} className="text-xs sm:text-sm">{label}</Label>
       {children}
     </div>
   );

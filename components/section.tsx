@@ -18,10 +18,10 @@ type SectionVariant = "default" | "dense" | "feature" | "hero";
  * Container: max-w-7xl px-5 md:px-8.
  */
 const variantPadding: Record<SectionVariant, string> = {
-  default: "py-12 md:py-16",
-  dense: "py-6 md:py-8",
-  feature: "py-14 md:py-20",
-  hero: "py-16 md:py-24",
+  default: "py-8 md:py-16",
+  dense: "py-4 md:py-8",
+  feature: "py-9 md:py-20",
+  hero: "py-10 md:py-24",
 };
 
 type SectionProps = {
@@ -52,7 +52,7 @@ export function Section({
   const Comp = as;
   return (
     <Comp id={id} className={cn(variantPadding[variant], className)}>
-      {fullBleed ? children : <div className="mx-auto max-w-7xl px-5 md:px-8">{children}</div>}
+      {fullBleed ? children : <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">{children}</div>}
     </Comp>
   );
 }
@@ -68,5 +68,5 @@ export function SectionInner({
   children: ReactNode;
   className?: string;
 }) {
-  return <div className={cn("mx-auto max-w-7xl px-5 md:px-8", className)}>{children}</div>;
+  return <div className={cn("mx-auto max-w-7xl px-4 sm:px-6 md:px-8", className)}>{children}</div>;
 }
