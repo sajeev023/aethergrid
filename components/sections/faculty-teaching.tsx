@@ -154,7 +154,7 @@ export function FacultyTeaching({ activeInst = "lfjc", isPreview = false }: Facu
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search faculty by name, department, or subject..."
-              className="w-full pl-10 pr-10 py-2.5 text-xs sm:text-sm rounded-full border border-stone-texture bg-royal-cream/20 text-academic-slate placeholder:text-academic-slate/50 focus:bg-white focus:border-heritage-gold focus:outline-none focus:ring-2 focus:ring-heritage-gold/20 transition-all font-sans min-h-[44px]"
+              className="w-full pl-10 pr-10 py-2.5 text-base sm:text-sm rounded-full border border-stone-texture bg-royal-cream/20 text-academic-slate placeholder:text-academic-slate/50 focus:bg-white focus:border-heritage-gold focus:outline-none focus:ring-2 focus:ring-heritage-gold/20 transition-all font-sans min-h-[44px]"
             />
             {searchQuery && (
               <button

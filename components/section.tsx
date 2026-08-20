@@ -18,10 +18,10 @@ type SectionVariant = "default" | "dense" | "feature" | "hero";
  * Container: max-w-7xl px-5 md:px-8.
  */
 const variantPadding: Record<SectionVariant, string> = {
-  default: "py-8 md:py-16",
-  dense: "py-4 md:py-8",
-  feature: "py-9 md:py-20",
-  hero: "py-10 md:py-24",
+  default: "py-7 sm:py-11 md:py-16",
+  dense: "py-3.5 sm:py-5 md:py-8",
+  feature: "py-8 sm:py-12 md:py-20",
+  hero: "py-8 sm:py-12 md:py-24",
 };
 
 type SectionProps = {

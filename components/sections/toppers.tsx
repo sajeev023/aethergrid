@@ -111,27 +111,27 @@ export function TopperPosterSection({
       {isLightboxOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex flex-col items-center justify-center p-3 md:p-6 animate-in fade-in duration-200">
           {/* Modal Header */}
-          <div className="w-full max-w-6xl flex items-center justify-between text-white mb-3">
-            <h3 className="font-serif text-lg font-bold">
+          <div className="w-full max-w-6xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-white mb-2.5 sm:mb-3">
+            <h3 className="font-serif text-sm sm:text-lg font-bold leading-tight">
               {title} &mdash; Official Poster
             </h3>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0 self-end sm:self-auto">
               <a
                 href={posterPath}
                 download
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-700 transition-colors"
+                className="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-700 transition-colors min-h-[36px]"
               >
                 <Download className="h-3.5 w-3.5" />
                 Download Original
               </a>
               <button
                 onClick={() => setIsLightboxOpen(false)}
-                className="p-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-white transition-colors cursor-pointer"
+                className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-white transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
                 title="Close"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
               </button>
             </div>
           </div>

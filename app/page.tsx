@@ -68,14 +68,14 @@ export default function LFJCPage() {
 
       {/* 2. Quick navigation anchors — utility bar */}
       <div className="bg-white border-b border-stone-texture/40">
-        <div className="mx-auto max-w-7xl px-3 sm:px-6 md:px-8 py-3 sm:py-3.5 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 md:gap-3.5">
+        <div className="mx-auto max-w-7xl px-3 sm:px-6 md:px-8 py-2.5 sm:py-3.5 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 md:gap-3.5">
           {QUICK_LINKS.map((item) => {
             const Icon = item.icon;
             return (
               <Reveal key={item.label}>
                 <Link
                   href={item.href}
-                  className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-stone-texture/70 bg-white px-4 py-2 sm:px-5 sm:py-2.5 text-xs font-bold uppercase tracking-wider text-academic-slate/80 hover:bg-montfortian-blue hover:text-white hover:border-montfortian-blue transition-all duration-300 font-sans shadow-xs hover:shadow-panel"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-stone-texture/70 bg-white px-3.5 py-1.5 sm:px-5 sm:py-2.5 text-xs font-bold uppercase tracking-wider text-academic-slate/80 hover:bg-montfortian-blue hover:text-white hover:border-montfortian-blue transition-all duration-300 font-sans shadow-xs hover:shadow-panel min-h-[36px]"
                 >
                   <Icon className="h-3.5 w-3.5" aria-hidden="true" />
                   {item.label}
@@ -94,27 +94,27 @@ export default function LFJCPage() {
           description="Little Flower Junior College is more than an institution — it is a five-decade community of scholars, mentors, and leaders."
         />
 
-        <div className="mt-6 sm:mt-10 lg:mt-12 grid gap-3.5 sm:gap-5 lg:grid-cols-12">
+        <div className="mt-5 sm:mt-10 lg:mt-12 grid gap-3 sm:gap-5 lg:grid-cols-12">
           {/* Primary Feature Card — Academics (spans 7 cols) */}
           <Reveal className="lg:col-span-7">
             <Link
               href="/academics"
-              className="group relative flex h-full flex-col justify-between overflow-hidden rounded-xl border border-stone-texture/60 bg-white p-5 sm:p-6 md:p-8 shadow-panel hover:shadow-panel-hover hover:border-heritage-gold/40 transition-all duration-300"
+              className="group relative flex h-full flex-col justify-between overflow-hidden rounded-xl border border-stone-texture/60 bg-white p-4 sm:p-6 md:p-8 shadow-panel hover:shadow-panel-hover hover:border-heritage-gold/40 transition-all duration-300"
             >
               <div className="absolute top-0 left-0 h-1 w-full bg-montfortian-blue scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
               <div className="flex items-center gap-2 text-xs font-bold text-heritage-gold-strong uppercase tracking-wider font-sans">
                 <BookOpen className="h-4 w-4" aria-hidden="true" />
                 <span>Academic Pathways</span>
               </div>
-              <div className="mt-4 sm:mt-6">
-                <h2 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-academic-slate leading-tight group-hover:text-montfortian-blue transition-colors duration-300">
+              <div className="mt-3.5 sm:mt-6">
+                <h2 className="font-serif text-lg sm:text-2xl md:text-3xl font-bold text-academic-slate leading-tight group-hover:text-montfortian-blue transition-colors duration-300">
                   Four Streams of Academic Excellence
                 </h2>
-                <p className="mt-2 sm:mt-3 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/70 font-sans max-w-lg">
+                <p className="mt-1.5 sm:mt-3 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/70 font-sans max-w-lg">
                   MPC, BiPC, MEC, and CEC — board-recognized intermediate programmes that launch students into IITs, medical colleges, and premier careers. Structured systematically around your future.
                 </p>
               </div>
-              <div className="mt-4 sm:mt-6 flex items-center gap-2 text-xs sm:text-[13px] font-bold uppercase tracking-wider text-montfortian-blue font-sans">
+              <div className="mt-3.5 sm:mt-6 flex items-center gap-2 text-xs sm:text-[13px] font-bold uppercase tracking-wider text-montfortian-blue font-sans">
                 Explore Academics
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1.5" aria-hidden="true" />
               </div>
@@ -122,26 +122,26 @@ export default function LFJCPage() {
           </Reveal>
 
           {/* Secondary Cards Stack (spans 5 cols) */}
-          <div className="lg:col-span-5 grid gap-3.5 sm:gap-5">
+          <div className="lg:col-span-5 grid gap-3 sm:gap-5">
             {/* Admissions Card */}
             <Reveal delay={0.08}>
               <Link
                 href="/admissions"
-                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-xl border border-heritage-gold/30 bg-royal-cream/40 p-5 sm:p-6 hover:bg-royal-cream hover:border-heritage-gold/60 hover:shadow-panel-hover transition-all duration-300"
+                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-xl border border-heritage-gold/30 bg-royal-cream/40 p-4 sm:p-6 hover:bg-royal-cream hover:border-heritage-gold/60 hover:shadow-panel-hover transition-all duration-300"
               >
                 <div className="flex items-center gap-2 text-xs font-bold text-heritage-gold-strong uppercase tracking-wider font-sans">
                   <GraduationCap className="h-4 w-4" aria-hidden="true" />
                   <span>Admissions 2026–27</span>
                 </div>
-                <div className="mt-3 sm:mt-4">
-                  <h3 className="font-serif text-lg sm:text-xl font-bold text-academic-slate leading-tight group-hover:text-montfortian-blue transition-colors duration-300">
+                <div className="mt-2.5 sm:mt-4">
+                  <h3 className="font-serif text-base sm:text-xl font-bold text-academic-slate leading-tight group-hover:text-montfortian-blue transition-colors duration-300">
                     Begin Your Journey Here
                   </h3>
-                  <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/65 font-sans">
+                  <p className="mt-1 sm:mt-2 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/65 font-sans">
                     A clear, transparent admissions pathway for families seeking academic excellence and disciplined character formation.
                   </p>
                 </div>
-                <div className="mt-3 sm:mt-4 flex items-center gap-2 text-xs sm:text-[13px] font-bold uppercase tracking-wider text-montfortian-blue font-sans">
+                <div className="mt-2.5 sm:mt-4 flex items-center gap-2 text-xs sm:text-[13px] font-bold uppercase tracking-wider text-montfortian-blue font-sans">
                   Start Inquiry
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1.5" aria-hidden="true" />
                 </div>
@@ -152,21 +152,21 @@ export default function LFJCPage() {
             <Reveal delay={0.14}>
               <Link
                 href="/alumni"
-                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-xl border border-stone-texture/60 bg-white p-5 sm:p-6 shadow-panel hover:shadow-panel-hover hover:border-heritage-gold/40 transition-all duration-300"
+                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-xl border border-stone-texture/60 bg-white p-4 sm:p-6 shadow-panel hover:shadow-panel-hover hover:border-heritage-gold/40 transition-all duration-300"
               >
                 <div className="flex items-center gap-2 text-xs font-bold text-heritage-gold-strong uppercase tracking-wider font-sans">
                   <Users className="h-4 w-4" aria-hidden="true" />
                   <span>15,000+ Alumni</span>
                 </div>
-                <div className="mt-3 sm:mt-4">
-                  <h3 className="font-serif text-lg sm:text-xl font-bold text-academic-slate leading-tight group-hover:text-montfortian-blue transition-colors duration-300">
+                <div className="mt-2.5 sm:mt-4">
+                  <h3 className="font-serif text-base sm:text-xl font-bold text-academic-slate leading-tight group-hover:text-montfortian-blue transition-colors duration-300">
                     A Legacy of Achievers
                   </h3>
-                  <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/65 font-sans">
+                  <p className="mt-1 sm:mt-2 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/65 font-sans">
                     From national film icons to IAS officers and IITians — our alumni define the meaning of a Little Flower education.
                   </p>
                 </div>
-                <div className="mt-3 sm:mt-4 flex items-center gap-2 text-xs sm:text-[13px] font-bold uppercase tracking-wider text-montfortian-blue font-sans">
+                <div className="mt-2.5 sm:mt-4 flex items-center gap-2 text-xs sm:text-[13px] font-bold uppercase tracking-wider text-montfortian-blue font-sans">
                   Meet Our Alumni
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1.5" aria-hidden="true" />
                 </div>
@@ -183,28 +183,28 @@ export default function LFJCPage() {
           title="Four Streams. Four Futures."
           description="Board-recognised intermediate pathways, each structured around a distinct career horizon — engineering, medicine, commerce, and law."
         />
-        <div className="mt-6 sm:mt-10 grid gap-3.5 sm:gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-5 sm:mt-10 grid gap-3 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {programs.map((program, index) => {
             const Icon = program.icon;
             return (
               <Reveal key={program.slug} delay={index * 0.06}>
                 <Link
                   href={`/academics/${program.slug}`}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-stone-texture/60 bg-white p-5 sm:p-6 shadow-panel hover:shadow-panel-hover hover:border-heritage-gold/40 transition-all duration-300"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-stone-texture/60 bg-white p-4 sm:p-6 shadow-panel hover:shadow-panel-hover hover:border-heritage-gold/40 transition-all duration-300"
                 >
-                  <div className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-lg bg-royal-cream text-montfortian-blue border border-stone-texture/60 group-hover:bg-montfortian-blue group-hover:text-white transition-colors duration-300">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  <div className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-lg bg-royal-cream text-montfortian-blue border border-stone-texture/60 group-hover:bg-montfortian-blue group-hover:text-white transition-colors duration-300">
+                    <Icon className="h-4.5 w-4.5 sm:h-5 sm:w-5" aria-hidden="true" />
                   </div>
-                  <h3 className="mt-3 sm:mt-4 font-serif text-base sm:text-lg font-bold text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300">
+                  <h3 className="mt-2.5 sm:mt-4 font-serif text-base sm:text-lg font-bold text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300">
                     {program.title}
                   </h3>
-                  <p className="mt-0.5 sm:mt-1 text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                  <p className="mt-0.5 text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
                     {program.subtitle}
                   </p>
-                  <p className="mt-2 sm:mt-3 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/70 font-sans flex-1">
+                  <p className="mt-1.5 sm:mt-3 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/70 font-sans flex-1">
                     {program.description}
                   </p>
-                  <span className="mt-3 sm:mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-montfortian-blue font-sans">
+                  <span className="mt-2.5 sm:mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-montfortian-blue font-sans">
                     Explore Stream
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </span>

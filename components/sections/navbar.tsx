@@ -625,30 +625,30 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
               <span className="inline-block h-screen align-middle" aria-hidden="true">
                 &#8203;
               </span>
-              <div className="inline-block w-full max-w-2xl p-6 my-8 overflow-hidden text-left align-middle bg-white shadow-2xl border border-stone-texture/60 rounded-xl relative z-10">
-                <div className="flex items-center justify-between pb-4 border-b border-stone-texture/30">
-                  <div className="flex items-center gap-2.5 text-montfortian-blue">
-                    <Search className="h-5 w-5 text-heritage-gold-strong" />
-                    <span className="font-serif font-bold text-lg text-academic-slate">Institutional Search</span>
+              <div className="inline-block w-full max-w-2xl p-4 sm:p-6 my-4 sm:my-8 overflow-hidden text-left align-middle bg-white shadow-2xl border border-stone-texture/60 rounded-xl relative z-10">
+                <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-stone-texture/30">
+                  <div className="flex items-center gap-2 sm:gap-2.5 text-montfortian-blue">
+                    <Search className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-heritage-gold-strong" />
+                    <span className="font-serif font-bold text-base sm:text-lg text-academic-slate">Institutional Search</span>
                   </div>
                   <button
                     onClick={() => setIsSearchOpen(false)}
-                    className="grid h-10 w-10 place-items-center rounded-full border border-stone-texture/30 hover:bg-royal-cream text-academic-slate transition-colors cursor-pointer"
+                    className="grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-full border border-stone-texture/30 hover:bg-royal-cream text-academic-slate transition-colors cursor-pointer"
                     aria-label="Close search"
                   >
                     <X className="h-4 w-4" />
                   </button>
                 </div>
-                <div className="mt-4 relative">
+                <div className="mt-3.5 sm:mt-4 relative">
                   <input
                     type="text"
                     autoFocus
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Type to search admissions, streams, campus..."
-                    className="w-full pl-11 pr-4 py-3.5 bg-royal-cream/30 border border-stone-texture/50 rounded-lg text-sm text-academic-slate placeholder-academic-slate/35 focus:outline-none focus:border-heritage-gold/70 focus:ring-2 focus:ring-heritage-gold/10 transition-all font-sans"
+                    className="w-full pl-10 sm:pl-11 pr-4 py-3 sm:py-3.5 bg-royal-cream/30 border border-stone-texture/50 rounded-lg text-base sm:text-sm text-academic-slate placeholder-academic-slate/35 focus:outline-none focus:border-heritage-gold/70 focus:ring-2 focus:ring-heritage-gold/10 transition-all font-sans"
                   />
-                  <Search className="absolute left-4 top-3.5 h-4 w-4 text-academic-slate/35" />
+                  <Search className="absolute left-3.5 sm:left-4 top-3 sm:top-3.5 h-4 w-4 text-academic-slate/35" />
                 </div>
                 <div className="mt-6">
                   {searchQuery ? (

@@ -57,21 +57,21 @@ function Lightbox({
       <button
         onClick={onClose}
         aria-label="Close photo"
-        className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
+        className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2.5 bg-white/15 hover:bg-white/25 rounded-full text-white transition-colors cursor-pointer z-50 min-h-[44px] min-w-[44px] flex items-center justify-center"
       >
         <X className="h-5 w-5" />
       </button>
       <button
         onClick={(e) => { e.stopPropagation(); onPrev(); }}
         aria-label="Previous photo"
-        className="absolute left-4 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 p-2.5 bg-white/15 hover:bg-white/25 rounded-full text-white transition-colors cursor-pointer z-50 min-h-[44px] min-w-[44px] flex items-center justify-center"
       >
         <ChevronLeft className="h-5 w-5" />
       </button>
       <button
         onClick={(e) => { e.stopPropagation(); onNext(); }}
         aria-label="Next photo"
-        className="absolute right-16 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 p-2.5 bg-white/15 hover:bg-white/25 rounded-full text-white transition-colors cursor-pointer z-50 min-h-[44px] min-w-[44px] flex items-center justify-center"
       >
         <ChevronRight className="h-5 w-5" />
       </button>
