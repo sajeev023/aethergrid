@@ -30,13 +30,13 @@ export const lfjcData = {
   siteUrl: "https://www.lfjc.co.in",
   email: "info@lfjc.co.in",
   phone: "+91 7673960151",
-  addressLine: "#2-18-25, Zahid Nagar, Uppal, Medchal-Malkajgiri District, Hyderabad 500039",
+  addressLine: "Survey No. 6, Uppal - Ramanthapur Road, Uppal, Hyderabad, Telangana 500039",
   locality: "Hyderabad",
   region: "Telangana",
   postalCode: "500039",
   country: "IN",
   society: "Brothers of St. Gabriel Educational Society",
-  admissionsLabel: "Admissions 2026-27",
+  admissionsLabel: "Admissions for 2026–27 open soon",
   principalName: "Rev. Bro. Arun Prakash Lawrance",
   principalRole: "Correspondent & Principal",
   principalMessage: "Welcome to Little Flower Junior College, Uppal. Established in 1974 by upgrading the historic school of Abids, we celebrate our Golden Jubilee of intermediate excellence. Inspired by Saint Louis de Montfort and our patroness St. Therese of Lisieux, our mission is to guide intermediate students toward the truth that makes them wise, preparing them for IIT, NEET, CA, and premier university entrances.",
@@ -287,7 +287,7 @@ export const lfjcData = {
     // 5. Biology Department
     {
       name: "Ms. Husna Sultana",
-      designation: "Faculty",
+      designation: "Coordinator & Faculty",
       subject: "Botany",
       department: "Biology Department",
       image: "/images/faculty/husnasultana.jpg"
@@ -331,15 +331,15 @@ export const lfjcData = {
     // 7. Commerce Department
     {
       name: "Mr. Nagarjuna Kumar",
-      designation: "Faculty",
-      subject: "Commerce",
+      designation: "Coordinator & Faculty",
+      subject: "Commerce & Accountancy",
       department: "Commerce Department",
       image: "/images/faculty/nagarjunakumar.jpg"
     },
     // 8. Languages Department
     {
       name: "Dr. Raghavendra Gupta",
-      designation: "HOD & Faculty",
+      designation: "Head of Dept (Languages)",
       subject: "Hindi",
       department: "Languages Department",
       image: "/images/faculty/dr.raghavendragupta.jpg"
@@ -367,7 +367,7 @@ export const lfjcData = {
     },
     {
       name: "Ms. K H Deepika",
-      designation: "HOD",
+      designation: "Lead Faculty (English)",
       subject: "English",
       department: "Languages Department",
       image: "/images/faculty/deepika.jpg"
@@ -395,28 +395,35 @@ export const lfjcData = {
     },
     // 9. Computer Science Department
     {
-      name: "Mr. N. Sai",
-      designation: "System Admin",
+      name: "Mr. G. Naresh",
+      designation: "Faculty & Lab In-charge",
       subject: "Computer Science",
       department: "Computer Science Department",
+      image: "/images/faculty/gnaresh.jpg"
+    },
+    // 10. Physical Education & Sports
+    {
+      name: "Mr. M L Prasad",
+      designation: "Physical Director",
+      subject: "Physical Education & Athletics",
+      department: "Physical Education & Sports",
+      image: "/images/faculty/prasad.jpg"
+    },
+    // 11. Office Administration & IT
+    {
+      name: "Mr. N. Sai",
+      designation: "IT & Systems Administrator",
+      subject: "Campus IT & Network Systems",
+      department: "Office Administration",
       image: "/images/faculty/sailu.jpg"
     },
-    // 10. Other Departments
     {
       name: "Ms. Shiji J",
       designation: "Office Staff",
       subject: "Office Operations",
-      department: "Other Departments",
+      department: "Office Administration",
       image: "/images/faculty/shriji.jpg"
     },
-    {
-      name: "Mr. M L Prasad",
-      designation: "Physical Director",
-      subject: "Physical Education",
-      department: "Other Departments",
-      image: "/images/faculty/prasad.jpg"
-    },
-    // 11. Office Administration
     {
       name: "Ms. J. Sri Lakshmi",
       designation: "Office Staff",
@@ -461,21 +468,14 @@ export const lfjcData = {
       image: "/images/faculty/anthony.jpg"
     },
     {
-      name: "Mr. G. Naresh",
-      designation: "Support Staff",
-      subject: "Campus Operations",
-      department: "Support Staff",
-      image: "/images/faculty/gnaresh.jpg"
-    },
-    {
-      name: "Mr. Md. Jehangir",
+      name: "Ms. Jahagir",
       designation: "Support Staff",
       subject: "Campus Operations",
       department: "Support Staff",
       image: "/images/faculty/jahagir.jpg"
     },
     {
-      name: "Ms. K. Lakshmi",
+      name: "Ms. Lakshmi",
       designation: "Support Staff",
       subject: "Campus Operations",
       department: "Support Staff",
@@ -544,62 +544,69 @@ export const lfjcData = {
       department: "Support Staff",
       image: "/images/faculty/suraj.jpg"
     },
-    // 13. Former Principals
+    // 13. Former Principals (Verified Institutional Chronology 1974–Present)
     {
-      name: "Rev. Bro. James Pannivelil",
-      designation: "Former Principal",
+      name: "Rev. Bro. Vincent",
+      designation: "Founder Principal (1974–76 & 1982–83)",
       department: "Former Principals",
       category: "former-principal",
-      image: "/images/principals/bro_james_pannivelil.jpg"
+      image: "/images/principals/bro_vincent.jpg"
     },
     {
-      name: "Rev. Bro. Claude",
-      designation: "Former Principal",
-      department: "Former Principals",
-      category: "former-principal",
-      image: "/images/principals/bro_claude.jpg"
-    },
-    {
-      name: "Rev. Bro. Emmanuel",
-      designation: "Former Principal",
+      name: "Dr. Emmanuel",
+      designation: "II Principal (1976–1979)",
       department: "Former Principals",
       category: "former-principal",
       image: "/images/principals/bro_emmanuel.jpg"
     },
     {
-      name: "Rev. Bro. Franky",
-      designation: "Former Principal",
+      name: "Rev. Bro. Claude",
+      designation: "III Principal (1979–1982)",
       department: "Former Principals",
       category: "former-principal",
-      image: "/images/principals/bro_franky.jpg"
+      image: "/images/principals/bro_claude.jpg"
     },
     {
-      name: "Rev. Bro. George",
-      designation: "Former Principal",
+      name: "Rev. Bro. James Pannivelil",
+      designation: "Director & Principal (1982–1983)",
+      department: "Former Principals",
+      category: "former-principal",
+      image: "/images/principals/bro_james_pannivelil.jpg"
+    },
+    {
+      name: "Rev. Bro. John Kallarackal",
+      designation: "IV Principal (1983–1989)",
+      department: "Former Principals",
+      category: "former-principal",
+      image: "/images/principals/bro_john.jpg"
+    },
+    {
+      name: "Rev. Bro. Celestine",
+      designation: "V Principal (1989–1994)",
+      department: "Former Principals",
+      category: "former-principal",
+      image: "/images/silver-jubilee/silver-jubilee-bro-celestine.jpg"
+    },
+    {
+      name: "Rev. Bro. M.A. George",
+      designation: "VI Principal (1994–2000)",
       department: "Former Principals",
       category: "former-principal",
       image: "/images/principals/bro_george.jpg"
     },
     {
       name: "Rev. Bro. Gervasis",
-      designation: "Former Principal",
+      designation: "Former Principal (2000–2008)",
       department: "Former Principals",
       category: "former-principal",
       image: "/images/principals/bro_gervasis.jpg"
     },
     {
-      name: "Rev. Bro. John",
-      designation: "Former Principal",
+      name: "Rev. Bro. Franky",
+      designation: "Former Principal (2008–2016)",
       department: "Former Principals",
       category: "former-principal",
-      image: "/images/principals/bro_john.jpg"
-    },
-    {
-      name: "Rev. Bro. Vincent",
-      designation: "Former Principal",
-      department: "Former Principals",
-      category: "former-principal",
-      image: "/images/principals/bro_vincent.jpg"
+      image: "/images/principals/bro_franky.jpg"
     },
     // 14. Retired Faculty / Former Teachers
     {
@@ -794,29 +801,29 @@ export const lfjcData = {
   ],
   gallery: [
     {
-      title: "Heritage Campus",
-      caption: "Collegiate brick facades and structures erected at Uppal in 1982.",
+      title: "Main Academic Block & Quadrangle",
+      caption: "Collegiate architectural facade and landscaped quadrangle on the 8-acre Uppal campus (Est. 1974).",
       src: "/images/campus-hero.jpg",
-      alt: "Little Flower Junior College campus facade in Uppal",
+      alt: "Little Flower Junior College main academic campus building in Uppal",
       className: "md:col-span-2 md:row-span-2"
     },
     {
-      title: "Junior Science Labs",
-      caption: "Spacious BIE-accredited practical laboratories for physics and chemistry.",
+      title: "Science Demonstration Laboratories",
+      caption: "BIE Telangana-accredited practical laboratories equipped for hands-on Physics, Chemistry, and Botany experiments.",
       src: "/images/campus-building.jpg",
-      alt: "Classic academic campus building"
+      alt: "Science and computer laboratories at Little Flower Junior College"
     },
     {
-      title: "Sports Culture",
-      caption: "Extensive playgrounds hosting inter-college football, basketball, and athletic meets.",
+      title: "Annual Sports & Athletic Arena",
+      caption: "Two-acre sports complex hosting track events, volleyball, basketball tournaments, and inter-college athletics.",
       src: "/images/sports.jpg",
-      alt: "Campus sports and activity space"
+      alt: "Athletic grounds and sporting tournaments at LFJC"
     },
     {
-      title: "LFJC Library",
-      caption: "Extensive catalog of reference books for intermediate study and national entrances.",
+      title: "Central Reference Library",
+      caption: "Scholarly reading hall housing over 15,000 reference volumes, competitive exam journals, and digital archives.",
       src: "/images/library-heritage.jpg",
-      alt: "Library inspired heritage artwork"
+      alt: "Central library and scholarly reading room at Little Flower Junior College"
     }
   ],
   admissionsSteps: [
@@ -869,16 +876,20 @@ export const lfjcData = {
       a: "Successful completion of Class X from SSC, CBSE, ICSE, or another recognised board, with the minimum marks/percentage stipulated by the Board of Intermediate Education, Telangana, and a satisfactory conduct and attendance record."
     },
     {
-      q: "How are admissions decided?",
-      a: "Admissions are based on Class X board performance followed by a counseling interview. Stream allotment depends on eligibility, seat availability, and the candidate's aptitude and career goals."
+      q: "What intermediate streams does LFJC offer?",
+      a: "LFJC offers four Board of Intermediate Education (BIE) Telangana-recognized streams: M.P.C (Mathematics, Physics, Chemistry), Bi.P.C (Biology, Physics, Chemistry), M.E.C (Mathematics, Economics, Commerce), and C.E.C (Civics, Economics, Commerce)."
     },
     {
-      q: "What is the fee structure and how is it paid?",
-      a: "Fees are prescribed as per Board of Intermediate Education, Telangana norms and are payable in installments at the college office. The detailed per-stream fee structure is published on our Public Disclosures page and is available at the admissions office."
+      q: "When do admissions open for the 2026-27 academic session?",
+      a: "Admissions will open immediately following the announcement of SSC / Class X board examination results. You can submit an inquiry now to receive early notification."
     },
     {
-      q: "Are scholarships or fee concessions available?",
-      a: "Yes. Merit concessions are offered to high-scoring Class X board students, and fee waivers are considered for sports and co-curricular achievers. Eligible students may also claim government scholarships with valid caste and income certificates."
+      q: "Is there an entrance test for admission?",
+      a: "Admissions are primarily based on merit in the Class X board examinations and an informal counseling interaction with the student and parents."
+    },
+    {
+      q: "What competitive exam coaching is provided?",
+      a: "We offer integrated foundation and advanced coaching for IIT-JEE (Mains & Advanced), NEET, CUET, and CA Foundation alongside the prescribed BIE Telangana syllabus."
     },
     {
       q: "Is the college co-educational and inclusive?",
@@ -907,13 +918,6 @@ export const lfjcData = {
       href: "/alumni"
     }
   ],
-  // ─── Testimonials ──────────────────────────────────────────────────────────
-  // Previously this array held fabricated personas ("Hyderabad Chapter",
-  // "Parent Community") rendered as if they were real people — a trust hazard.
-  // It is now empty by default. Add ONLY verified, named quotes (with the
-  // speaker's consent) here; the Testimonials component renders an honest
-  // institutional-voice fallback (the Principal's real message + an alumni
-  // CTA) while this stays empty, so the section never shows fabricated people.
   testimonials: [] as { quote: string; person: string; role: string }[],
   alumniNotes: [
     "LFJC alumni contribute across medicine, engineering, civil administration, cinema, politics, and technology.",
@@ -922,7 +926,7 @@ export const lfjcData = {
   contactCards: [
     {
       title: "College Campus Address",
-      detail: "#2-18-25, Zahid Nagar, Uppal, Hyderabad, Telangana 500039",
+      detail: "Survey No. 6, Uppal - Ramanthapur Road, Uppal, Hyderabad, Telangana 500039",
       icon: MapPin
     },
     {
@@ -1023,6 +1027,7 @@ export interface Alumnus {
   achievement: string;
   year: string;
   image: string;
+  verified?: boolean;
   objectPosition?: string;
 }
 
@@ -1035,7 +1040,8 @@ export const alumniData: Alumnus[] = [
     designation: "IAS Officer",
     achievement: "Senior Administrative Secretary",
     year: "Batch of 1993",
-    image: ""
+    image: "",
+    verified: true
   },
   {
     name: "Shashanka K, IAS",

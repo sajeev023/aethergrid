@@ -62,8 +62,8 @@ export default function DisclosuresPage() {
           heading: "Faculty & staff",
           body: (
             <p>
-              The college maintains a full complement of qualified faculty across 13 departments. The teaching staff roster,
-              with department heads, is published on the{" "}
+              The college maintains a full complement of qualified faculty across 8 Academic Departments, Physical Education, and Administration. The teaching staff roster,
+              with department heads and coordinators, is published on the{" "}
               <Link href="/faculty/teaching" className="font-semibold text-montfortian-blue hover:underline">Teaching &amp; Support Staff</Link>{" "}
               page. The complete staff list with qualifications is available at the college office on request.
             </p>

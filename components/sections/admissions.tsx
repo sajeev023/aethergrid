@@ -110,7 +110,7 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
             <SectionHeading
               align="left"
               eyebrow="Eligibility"
-              title="Eligibility & Admission Mandate."
+              title="Eligibility & Admission Mandate"
               description={getEligibilityDescription()}
             />
             <blockquote className="mt-3.5 sm:mt-5 border-l-2 border-heritage-gold pl-3.5 sm:pl-4 font-editorial text-base sm:text-lg italic leading-relaxed sm:leading-7 text-academic-slate/75">

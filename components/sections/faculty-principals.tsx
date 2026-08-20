@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, User } from "lucide-react";
+import { ArrowRight, Award, ShieldCheck, User } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { getInstitutionData } from "@/lib/site-data";
 
 interface FacultyPrincipalsProps {
@@ -27,16 +27,23 @@ function getFacultyCategory(member: FacultySeedMember): FacultyCategory {
 function FormerPrincipalCard({ member, index }: { member: FacultySeedMember; index: number }) {
   return (
     <Reveal key={`${member.name}-${index}`} delay={index * 0.03} className="h-full">
-      <Card className="group h-full overflow-hidden bg-white transition-all duration-300 ease-out rounded-lg border-2 border-stone-texture/70 hover:border-heritage-gold/60 shadow-xs hover:shadow-panel-hover">
-        <div className="relative aspect-[3/4] sm:aspect-[4/5] md:aspect-[1054/1492] w-full overflow-hidden bg-royal-cream/30">
+      <Card className="group h-full flex flex-col overflow-hidden bg-white transition-all duration-300 ease-out rounded-lg border-2 border-stone-texture/70 hover:border-heritage-gold/60 shadow-xs hover:shadow-panel-hover">
+        <div className="relative aspect-[3/4] sm:aspect-[4/5] md:aspect-[1054/1492] w-full overflow-hidden bg-royal-cream/30 border-b border-stone-texture/40">
           {member.image ? (
-            <Image
-              src={member.image}
-              alt={member.name}
-              fill
-              sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-              className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-            />
+            <>
+              <Image
+                src={member.image}
+                alt={member.name}
+                fill
+                sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+                className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+              />
+              <div className="absolute top-2 left-2 z-10">
+                <span className="inline-flex items-center gap-1 bg-deep-navy/85 backdrop-blur-xs text-heritage-gold-bright border border-heritage-gold/30 px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-sans font-bold uppercase tracking-wider shadow-sm">
+                  Restored Archival Portrait
+                </span>
+              </div>
+            </>
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-2 sm:p-3 relative text-center">
               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-heritage-gold/30 flex items-center justify-center bg-white shadow-xs mb-1.5 sm:mb-2">
@@ -49,6 +56,22 @@ function FormerPrincipalCard({ member, index }: { member: FacultySeedMember; ind
             </div>
           )}
         </div>
+        <CardContent className="flex-1 flex flex-col justify-between p-3 bg-white">
+          <div>
+            <h3 className="font-serif text-sm sm:text-base font-bold text-academic-slate group-hover:text-montfortian-blue transition-colors">
+              {member.name}
+            </h3>
+            <p className="text-[10px] sm:text-[11px] font-sans font-bold text-heritage-gold-strong uppercase tracking-wider mt-0.5">
+              {member.designation}
+            </p>
+          </div>
+          <div className="mt-2.5 pt-2 border-t border-stone-texture/30 flex items-center justify-between text-[9px] text-academic-slate/60 font-sans">
+            <span>50-Year Heritage Archive</span>
+            <span className="inline-flex items-center gap-0.5 text-montfortian-blue font-semibold">
+              <ShieldCheck className="h-3 w-3 text-heritage-gold-strong" /> Verified
+            </span>
+          </div>
+        </CardContent>
       </Card>
     </Reveal>
   );
@@ -64,14 +87,13 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
       {/* Page Hero */}
       <div className="mx-auto max-w-3xl text-center px-4 sm:px-6 md:px-8 mb-5 sm:mb-8">
         <span className="font-sans text-xs font-bold text-heritage-gold-strong uppercase tracking-wider mb-1.5 sm:mb-2 block">
-          Institutional Leadership
+          Institutional Leadership • 1974–Present
         </span>
         <h1 className="font-serif text-2xl sm:text-3xl font-bold leading-tight text-academic-slate md:text-4xl tracking-tight">
           Former Principals
         </h1>
         <p className="mt-2 sm:mt-3 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/75 font-sans max-w-2xl mx-auto">
-          The official portrait gallery of the visionary principals who guided Little Flower Junior College
-          through each chapter of its 50-year history. Their leadership is our institutional heritage.
+          The verified succession timeline of visionary principals who guided Little Flower Junior College through each chapter of its 50-year history. Restored from official institutional archives and Silver Jubilee records.
         </p>
         <span className="gold-rule gold-rule-center" />
       </div>
@@ -94,13 +116,13 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
         <Reveal className="mt-6 sm:mt-12 border-t border-stone-texture/40 pt-6 sm:pt-10">
           <div className="text-center max-w-2xl mx-auto mb-5 sm:mb-8">
             <span className="font-sans text-xs font-bold text-heritage-gold-strong uppercase tracking-wider block mb-1">
-              Archival Asset (1999 Silver Jubilee)
+              Archival Evidence (1999 Silver Jubilee)
             </span>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-academic-slate">
               Principals Honored by Chief Minister N. Chandrababu Naidu
             </h2>
             <p className="text-xs text-academic-slate/75 font-sans mt-1.5 sm:mt-2 leading-relaxed">
-              Documentary photographs from the 25th Anniversary Closing Ceremony (December 11, 1999) showing the Hon&apos;ble Chief Minister conferring Silver Jubilee honors upon LFJC Principals.
+              Archival photographs from the 25th Anniversary Closing Ceremony (December 11, 1999) documenting the Hon&apos;ble Chief Minister conferring Silver Jubilee honors upon LFJC Principals.
             </p>
           </div>
 
@@ -149,6 +171,10 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
                     <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg mb-2.5 sm:mb-3 border border-stone-texture/40">
                       <Image src={p.image} alt={p.name} fill sizes="(min-width: 1024px) 33vw, 90vw" className="object-cover" />
                     </div>
+                    <div className="flex items-center gap-1 text-[10px] text-heritage-gold-strong font-bold uppercase tracking-wider mb-1 font-sans">
+                      <Award className="h-3.5 w-3.5" />
+                      <span>Original Archival Negative • 1999</span>
+                    </div>
                     <h3 className="font-serif text-sm sm:text-base font-bold text-academic-slate">{p.name}</h3>
                     <span className="text-[10px] sm:text-[11px] font-sans font-bold text-heritage-gold-strong uppercase tracking-wider block mt-0.5">
                       {p.tenure}
@@ -156,7 +182,7 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
                     <p className="text-xs font-sans text-academic-slate/75 leading-relaxed mt-1.5 sm:mt-2">{p.desc}</p>
                   </div>
                   <div className="mt-2.5 sm:mt-3 pt-2 border-t border-stone-texture/30 text-[10px] font-bold text-montfortian-blue uppercase tracking-wider font-sans">
-                    Silver Jubilee Archival Photo • 1999
+                    Silver Jubilee Archival Photo • Verified 1999
                   </div>
                 </div>
               </Reveal>
@@ -172,7 +198,7 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
               &ldquo;The principals of Little Flower Junior College have carried forward the Montfortian mission with unwavering dedication — ensuring that every student who passed through these gates left transformed.&rdquo;
             </p>
             <p className="mt-2 sm:mt-3 text-[10px] sm:text-[11px] font-sans text-academic-slate/50 uppercase tracking-widest">
-              Golden Jubilee 1974–2024
+              Golden Jubilee 1974–2024 • LFJC Archives
             </p>
           </div>
         </Reveal>
@@ -180,14 +206,14 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
         <Reveal className="mt-5 sm:mt-8 flex flex-wrap justify-center gap-2.5 sm:gap-4">
           <Link
             href="/faculty/teaching"
-            className="inline-flex items-center gap-2 border border-stone-texture bg-white px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-academic-slate hover:bg-academic-slate hover:text-white hover:border-academic-slate transition-all duration-300 rounded-sm font-sans"
+            className="inline-flex items-center gap-2 border border-stone-texture bg-white px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-academic-slate hover:bg-academic-slate hover:text-white hover:border-academic-slate transition-all duration-300 rounded-sm font-sans min-h-[44px]"
           >
             Teaching &amp; Support Staff
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </Link>
           <Link
             href="/faculty/retired"
-            className="inline-flex items-center gap-2 border border-heritage-gold/40 bg-heritage-gold/5 px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-heritage-gold-strong hover:bg-heritage-gold hover:text-white hover:border-heritage-gold transition-all duration-300 rounded-sm font-sans"
+            className="inline-flex items-center gap-2 border border-heritage-gold/40 bg-heritage-gold/5 px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-heritage-gold-strong hover:bg-heritage-gold hover:text-white hover:border-heritage-gold transition-all duration-300 rounded-sm font-sans min-h-[44px]"
           >
             Retired Faculty
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

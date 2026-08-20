@@ -101,7 +101,8 @@
   }
 
   :focus-visible {
-    outline-offset: 3px;
+    outline: 2px solid var(--color-heritage-gold-strong, #8a6625);
+    outline-offset: 2px;
   }
 
   /* ─── Heading System ─────────────────────────────────────────────────── */

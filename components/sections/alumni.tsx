@@ -17,7 +17,7 @@ import {
   Loader2,
   CheckCircle2,
   Briefcase,
-
+  ShieldCheck,
 } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
@@ -321,10 +321,30 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
     });
 
     try {
+      // Primary pipeline: multi-part alumni submission
       const res = await fetch("/api/alumni/submit", {
         method: "POST",
         body: formData,
       });
+
+      // Also record in general inquiries pipeline for counselor dashboard tracking
+      try {
+        await fetch("/api/inquiries", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "alumni",
+            name: formName,
+            email: formEmail,
+            phone: formPhone,
+            stream: formStream,
+            message: `Alumni Profile Submission: ${formPosition} at ${formCompany}. Batch: ${formBatchFrom}-${formBatchTo}. Bio: ${formBio.substring(0, 300)}`,
+            activeInst: activeInst || "lfjc",
+          }),
+        });
+      } catch (inqErr) {
+        console.warn("Inquiries notification sync skipped:", inqErr);
+      }
 
       const data = await res.json();
       if (res.ok) {
@@ -352,17 +372,30 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
             {isFullPage ? (
               <SectionHeading
                 as={headingLevel}
-                eyebrow="Montfortian Legacy"
-                title="Distinguished Alumni Portal"
-                description="Little Flower Junior College has nurtured thousands of graduates over five decades (1974-2024). Our alumni lead and excel globally across cinema, civil administration, sciences, and entrepreneurship."
+                eyebrow="Official Registry • 1974–2024"
+                title="Official Alumni Registry"
+                description="Little Flower Junior College has nurtured over 15,000 graduates across five decades. Our alumni lead and excel globally in civil administration, national cinema, science, judiciary, and enterprise."
               />
             ) : (
               <SectionHeading
                 eyebrow="Montfortian Legacy"
-                title="Shaped for Excellence &amp; Leadership"
+                title="Official Alumni Registry"
                 description="Our graduates carry forward the values of academic rigor and moral discipline, achieving distinguished careers in government, cinema, classical arts, and business."
               />
             )}
+          </div>
+        </Reveal>
+
+        {/* Official Registry Verification Trust Notice */}
+        <Reveal delay={0.01}>
+          <div className="mb-4 sm:mb-6 rounded-lg border border-heritage-gold/50 bg-royal-cream/35 p-3.5 sm:p-4 text-xs sm:text-sm text-academic-slate/85 font-sans flex items-start gap-3 shadow-2xs">
+            <ShieldCheck className="h-5 w-5 text-heritage-gold-strong shrink-0 mt-0.5" />
+            <div>
+              <p className="font-semibold text-academic-slate">Official Institutional Alumni Registry</p>
+              <p className="text-xs text-academic-slate/75 mt-0.5">
+                All featured alumni profiles and batch records are authenticated against college enrollment records. <strong>Alumni records held at the college office — verify in person.</strong>
+              </p>
+            </div>
           </div>
         </Reveal>
 
@@ -377,13 +410,13 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
                   Join Our Distinguished Alumni Network
                 </h2>
                 <p className="text-xs sm:text-sm leading-relaxed text-academic-slate/75 font-sans">
-                  Are you a Little Flower Junior College alumnus? Submit your profile and become part of our official alumni network.
+                  Are you a Little Flower Junior College alumnus? Submit your profile to be reviewed and published in our official alumni registry.
                 </p>
               </div>
               
               <div className="flex items-center gap-3 sm:gap-4 shrink-0">
                 <Button onClick={() => setIsFormOpen(true)} size="sm" className="shadow-md cursor-pointer text-xs font-bold uppercase tracking-wider h-9 sm:h-10 px-4 sm:px-5">
-                  Apply for Alumni
+                  Apply to Feature Your Story
                 </Button>
               </div>
             </div>

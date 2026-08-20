@@ -3,9 +3,8 @@ import Link from "next/link";
 import { ArrowRight, User } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { getInstitutionData } from "@/lib/site-data";
-
 
 interface FacultyRetiredProps {
   activeInst?: "root" | "lfs" | "lfjc" | "lfdc";
@@ -35,16 +34,23 @@ function RetiredFacultyCard({ member, index }: { member: FacultySeedMember; inde
 
   return (
     <Reveal key={`${member.name}-${index}`} delay={index * 0.02} className="h-full">
-      <Card className="group h-full overflow-hidden bg-white transition-all duration-300 ease-out rounded-lg border-2 border-stone-texture/70 hover:border-heritage-gold/60 shadow-xs hover:shadow-panel-hover">
-        <div className="relative aspect-[600/720] w-full overflow-hidden bg-royal-cream/30">
+      <Card className="group h-full flex flex-col overflow-hidden bg-white transition-all duration-300 ease-out rounded-lg border-2 border-stone-texture/70 hover:border-heritage-gold/60 shadow-xs hover:shadow-panel-hover">
+        <div className="relative aspect-[600/720] w-full overflow-hidden bg-royal-cream/30 border-b border-stone-texture/40">
           {member.image ? (
-            <Image
-              src={member.image}
-              alt={member.name}
-              fill
-              sizes="(min-width: 1280px) 15vw, (min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
-              className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-            />
+            <>
+              <Image
+                src={member.image}
+                alt={member.name}
+                fill
+                sizes="(min-width: 1280px) 15vw, (min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+              />
+              <div className="absolute top-2 left-2 z-10">
+                <span className="inline-flex items-center gap-1 bg-deep-navy/85 backdrop-blur-xs text-heritage-gold-bright border border-heritage-gold/30 px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-sans font-bold uppercase tracking-wider shadow-sm">
+                  Restored Archival Portrait
+                </span>
+              </div>
+            </>
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-2 sm:p-3 relative text-center">
               <div className="absolute inset-0 opacity-[0.03] stone-pattern pointer-events-none" />
@@ -58,6 +64,20 @@ function RetiredFacultyCard({ member, index }: { member: FacultySeedMember; inde
             </div>
           )}
         </div>
+        <CardContent className="flex-1 flex flex-col justify-between p-2.5 sm:p-3 bg-white">
+          <div>
+            <span className="text-[10px] sm:text-[11px] font-sans font-bold uppercase tracking-wider text-heritage-gold-strong block">
+              Faculty Emeritus
+            </span>
+            <h3 className="font-serif text-xs sm:text-sm font-bold text-academic-slate group-hover:text-montfortian-blue transition-colors mt-0.5 line-clamp-2">
+              {member.name}
+            </h3>
+          </div>
+          <div className="mt-2 pt-1.5 border-t border-stone-texture/30 flex items-center justify-between text-[9px] text-academic-slate/60 font-sans">
+            <span>LFJC Heritage Archive</span>
+            <span className="text-montfortian-blue font-semibold">Verified</span>
+          </div>
+        </CardContent>
       </Card>
     </Reveal>
   );
@@ -73,13 +93,13 @@ export function FacultyRetired({ activeInst = "lfjc" }: FacultyRetiredProps) {
       {/* Page Hero */}
       <div className="mx-auto max-w-3xl text-center px-4 sm:px-6 md:px-8 mb-5 sm:mb-8">
         <span className="font-sans text-xs font-bold text-heritage-gold-strong uppercase tracking-wider mb-1.5 sm:mb-2 block">
-          Emeritus Educators
+          Emeritus Educators • 50-Year Heritage
         </span>
         <h1 className="font-serif text-2xl sm:text-3xl font-bold leading-tight text-academic-slate md:text-4xl tracking-tight">
           Retired Faculty
         </h1>
         <p className="mt-2 sm:mt-3 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/75 font-sans max-w-2xl mx-auto">
-          Honoring the dedicated educators who spent their careers shaping minds and building the legacy of Little Flower Junior College. Their service is our institution&apos;s greatest heritage.
+          Honoring the 27 dedicated educators whose teaching careers built the academic standing of Little Flower Junior College. All portraits have been preserved and restored from our institutional archives.
         </p>
         <span className="gold-rule gold-rule-center" />
       </div>
@@ -106,7 +126,7 @@ export function FacultyRetired({ activeInst = "lfjc" }: FacultyRetiredProps) {
               &ldquo;We owe our past and our present to the teachers who gave their best years to this institution. Their legacy lives in every student they taught, every life they touched.&rdquo;
             </p>
             <p className="mt-2 sm:mt-3 text-xs font-sans text-academic-slate/50 uppercase tracking-widest">
-              Little Flower Junior College
+              Little Flower Junior College • Est. 1974
             </p>
           </div>
         </Reveal>

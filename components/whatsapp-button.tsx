@@ -8,23 +8,19 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 const DISMISS_KEY = "lfjc-whatsapp-dismissed";
 
 /**
- * Floating WhatsApp button — bottom-right, visible on all public pages.
- * A calm, institutional prompt (no pulsing): a one-time tooltip that the
- * visitor can dismiss, and the dismissal is remembered across sessions.
+ * Floating WhatsApp button — bottom-right, non-intrusive on all breakpoints.
+ * Includes safe area padding and a dismissable tooltip.
  */
 export function WhatsAppButton() {
   const [showTooltip, setShowTooltip] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Only show the prompt if the visitor hasn't previously dismissed it.
-  // Reads happen client-side after mount to avoid SSR/CSR markup mismatch.
   useEffect(() => {
     setMounted(true);
     try {
       const dismissed = window.localStorage.getItem(DISMISS_KEY);
       if (!dismissed) setShowTooltip(true);
     } catch {
-      // localStorage may be unavailable (private mode) — default to showing.
       setShowTooltip(true);
     }
   }, []);
@@ -34,24 +30,30 @@ export function WhatsAppButton() {
     try {
       window.localStorage.setItem(DISMISS_KEY, "1");
     } catch {
-      // Ignore write failures (private mode / storage full).
+      // Ignore write failures
     }
   };
 
   return (
-    <div className="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-50 flex flex-col items-end gap-1.5 sm:gap-2">
+    <div
+      className="fixed z-40 flex flex-col items-end gap-1.5 sm:gap-2 pointer-events-none"
+      style={{
+        bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))",
+        right: "calc(1rem + env(safe-area-inset-right, 0px))",
+      }}
+    >
       {/* Tooltip prompt */}
       {mounted && showTooltip && (
-        <div className="relative bg-white border border-stone-texture/60 rounded-lg shadow-panel-hover pl-2.5 pr-7 py-1.5 sm:pl-4 sm:pr-9 sm:py-3 max-w-[170px] sm:max-w-[220px] animate-fade-in">
+        <div className="pointer-events-auto relative bg-white border border-stone-texture/70 rounded-lg shadow-panel-hover pl-3 pr-7 py-2 max-w-[180px] sm:max-w-[210px] animate-fade-in">
           <button
             onClick={dismiss}
-            className="absolute top-1 right-1 sm:top-1.5 sm:right-1.5 grid h-6 w-6 sm:h-7 sm:w-7 place-items-center rounded-full bg-stone-texture/80 text-white hover:bg-academic-slate transition-colors cursor-pointer"
-            aria-label="Dismiss message"
+            className="absolute top-1.5 right-1.5 grid h-5 w-5 place-items-center rounded-full bg-stone-texture/60 hover:bg-academic-slate text-white transition-colors cursor-pointer"
+            aria-label="Dismiss WhatsApp chat suggestion"
           >
-            <X className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+            <X className="h-3 w-3" />
           </button>
-          <p className="text-[10px] sm:text-xs font-sans text-academic-slate/80 leading-3.5 sm:leading-5 pr-1">
-            Have a question? <span className="font-bold text-montfortian-blue">Chat with us</span>
+          <p className="text-[11px] font-sans text-academic-slate leading-tight pr-1">
+            Questions on Admissions? <span className="font-bold text-montfortian-blue block mt-0.5">Chat on WhatsApp</span>
           </p>
         </div>
       )}
@@ -61,10 +63,10 @@ export function WhatsAppButton() {
         href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat with Little Flower Junior College on WhatsApp"
-        className="group relative flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-panel-hover hover:shadow-float hover:scale-105 transition-all duration-300"
+        aria-label="Chat with Little Flower Junior College admissions office on WhatsApp"
+        className="pointer-events-auto group relative flex h-11 w-11 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-panel-hover hover:shadow-float hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2"
       >
-        <MessageCircle className="relative h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
+        <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
       </a>
     </div>
   );

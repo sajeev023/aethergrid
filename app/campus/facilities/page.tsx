@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen, Sparkles } from "lucide-react";
 import type { Metadata } from "next";
 
 import { Reveal } from "@/components/motion/reveal";
@@ -157,45 +157,50 @@ export default function CampusFacilitiesPage() {
         <div className="mt-5 sm:mt-6 grid gap-3.5 sm:gap-5 sm:grid-cols-2">
           {[
             {
-              icon: "📚",
+              icon: BookOpen,
               title: "The LFJC Library",
               desc: "Our well-stocked library houses thousands of reference titles, intermediate board preparation materials, competitive examination guides, and periodicals. Open to all students throughout the academic day.",
               highlight: "Thousands of curated academic titles",
               src: "/images/library-heritage.jpg",
             },
             {
-              icon: "🎭",
+              icon: Sparkles,
               title: "St. Montfort Auditorium",
               desc: "An air-conditioned multi-purpose auditorium for general assemblies, cultural programmes, career counseling seminars, and golden jubilee celebrations.",
               highlight: "Full AV-equipped venue for campus assemblies",
               src: "/images/events/montfort-auditorium-assembly.jpg",
             },
-          ].map((item, idx) => (
-            <Reveal key={item.title} delay={idx * 0.08}>
-              <div className="group bg-royal-cream/15 border border-stone-texture rounded-xl overflow-hidden hover:bg-white hover:border-heritage-gold/50 hover:shadow-panel-hover transition-all duration-300 h-full flex flex-col">
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  <Image
-                    src={item.src}
-                    alt={item.title}
-                    fill
-                    sizes="(min-width: 640px) 50vw, 90vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                  />
-                </div>
-                <div className="p-4 sm:p-6 flex flex-col flex-1">
-                  <div className="text-2xl sm:text-3xl mb-1.5 sm:mb-2">{item.icon}</div>
-                  <h3 className="font-serif text-lg sm:text-xl font-bold text-academic-slate mb-1.5 sm:mb-2 group-hover:text-montfortian-blue transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs leading-relaxed sm:leading-5 text-academic-slate/70 font-sans mb-3 sm:mb-4 flex-1">{item.desc}</p>
-                  <div className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-heritage-gold-strong">
-                    <span className="w-3 h-0.5 bg-heritage-gold" />
-                    {item.highlight}
+          ].map((item, idx) => {
+            const IconComponent = item.icon;
+            return (
+              <Reveal key={item.title} delay={idx * 0.08}>
+                <div className="group bg-royal-cream/15 border border-stone-texture rounded-xl overflow-hidden hover:bg-white hover:border-heritage-gold/50 hover:shadow-panel-hover transition-all duration-300 h-full flex flex-col">
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    <Image
+                      src={item.src}
+                      alt={item.title}
+                      fill
+                      sizes="(min-width: 640px) 50vw, 90vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    />
+                  </div>
+                  <div className="p-4 sm:p-6 flex flex-col flex-1">
+                    <div className="w-10 h-10 rounded-lg bg-royal-cream border border-heritage-gold/30 text-heritage-gold-strong flex items-center justify-center mb-2.5">
+                      <IconComponent className="h-5 w-5 text-heritage-gold-strong" />
+                    </div>
+                    <h3 className="font-serif text-lg sm:text-xl font-bold text-academic-slate mb-1.5 sm:mb-2 group-hover:text-montfortian-blue transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs leading-relaxed sm:leading-5 text-academic-slate/70 font-sans mb-3 sm:mb-4 flex-1">{item.desc}</p>
+                    <div className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-heritage-gold-strong">
+                      <span className="w-3 h-0.5 bg-heritage-gold" />
+                      {item.highlight}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </div>
       </Section>
 

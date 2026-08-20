@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Clock, Mail, MapPin, Phone, Users } from "lucide-react";
@@ -71,7 +70,7 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
               </a>
               
               <a
-                href={`https://www.google.com/maps/search/?api=1&query=${getMapQuery()}`}
+                href="https://maps.google.com/?q=Little+Flower+Junior+College+Uppal+Hyderabad"
                 target="_blank"
                 rel="noreferrer"
                 className="group inline-flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm text-academic-slate/80 leading-relaxed sm:leading-6 font-sans hover:text-montfortian-blue transition-colors"
@@ -80,27 +79,26 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
                   <MapPin className="h-4 w-4 text-montfortian-blue" aria-hidden="true" />
                 </div>
                 <span className="pt-0.5 sm:pt-1 font-medium underline decoration-stone-texture/80 decoration-1 underline-offset-4 group-hover:decoration-montfortian-blue/50 transition-all">
-                  {instData.addressLine}, Opposite Survey of India, Uppal, Hyderabad, Telangana 500039
+                  Survey No. 6, Uppal - Ramanthapur Road, Uppal, Hyderabad, Telangana 500039 (Opposite Survey of India)
                 </span>
               </a>
             </div>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="relative aspect-[16/10] w-full overflow-hidden border border-stone-texture shadow-[0_15px_35px_rgba(22,29,31,0.08)] rounded-lg group p-1.5 bg-white">
+            <div className="relative aspect-[16/10] w-full overflow-hidden border border-stone-texture shadow-[0_15px_35px_rgba(22,29,31,0.08)] rounded-lg group p-1 bg-white">
               <div className="relative h-full w-full overflow-hidden rounded-md">
-                <Image
-                  src="/images/contact-campus.jpg"
-                  alt={`${instData.name} campus facilities`}
-                  fill
-                  sizes="(min-width: 1024px) 50vw, 95vw"
-                  className="object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
+                <iframe
+                  title="Little Flower Junior College Uppal Google Maps Location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.410116817292!2d78.5561113!3d17.4042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9966141a7747%3A0x6338b25eb1d2797e!2sLittle%20Flower%20Junior%20College!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-full rounded"
                 />
-                <div className="pointer-events-none absolute bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 z-10">
-                  <span className="inline-block bg-academic-slate/85 backdrop-blur-sm border border-heritage-gold/30 px-2.5 py-1 sm:px-3 sm:py-1.5 font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-bright rounded-sm shadow-xs">
-                    Golden Jubilee Block
-                  </span>
-                </div>
               </div>
             </div>
           </Reveal>

@@ -10,7 +10,7 @@ type AnimatedCounterProps = {
 
 export function AnimatedCounter({ value, className }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const prefersReducedMotion = useReducedMotion();
 
   // Strip comma-formatting for counting, extract the core numeric value and suffixes
@@ -22,8 +22,9 @@ export function AnimatedCounter({ value, className }: AnimatedCounterProps) {
   const suffix = cleanValue.replace(/^\d+/, "");
   const hasComma = value.includes(",");
 
+  // Initialize with real target value to eliminate any "0" flash on initial SSR & paint
+  const [displayVal, setDisplayVal] = useState(value);
   const count = useMotionValue(0);
-  const [displayVal, setDisplayVal] = useState("0");
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -33,8 +34,11 @@ export function AnimatedCounter({ value, className }: AnimatedCounterProps) {
 
     if (!isInView) return;
 
+    // Reset to initial count only when entering viewport to start smooth climb
+    count.set(0);
+
     const controls = animate(count, numericValue, {
-      duration: 2.2,
+      duration: 1.8,
       ease: [0.16, 1, 0.3, 1], // easeOutExpo
       onUpdate: (latest) => {
         const rounded = Math.round(latest);

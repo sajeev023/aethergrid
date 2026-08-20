@@ -87,6 +87,7 @@ export type SubmissionStatus = "new" | "contacted" | "under_review" | "completed
 
 export interface Submission {
   id: string;
+  refNumber?: string;
   timestamp: string;
   type: string;
   name: string;
@@ -98,6 +99,7 @@ export interface Submission {
   board?: string;
   percentage?: string;
   message: string;
+  consent?: boolean;
   activeInst: string;
   status: SubmissionStatus;
   notes: string;
@@ -125,8 +127,8 @@ export interface AlumniSubmission {
   city: string;
   country: string;
   category?: string;
-  photoUrl?: string;
-  supportingImages?: string[];
+  photoUrl: string;
+  supportingImages: string[];
   studentId?: string;
   verificationDetails?: string;
   status: AlumniSubmissionStatus;
@@ -136,12 +138,30 @@ export interface AlumniSubmission {
 
 // ─── Editable Content ────────────────────────────────────────────────────────
 
+export interface FeeScheduleItem {
+  component: string;
+  applicability: string;
+  amount?: string;
+  basis: string;
+  status?: "approved" | "pending";
+}
+
+export interface AdmissionDateItem {
+  phase: string;
+  date: string;
+  detail: string;
+  status?: "confirmed" | "pending";
+}
+
 export interface EditableContent {
   principalMessage: string;
   aboutText: string;
   mission: string;
   vision: string;
   announcements: AnnouncementItem[];
+  feeSchedule?: FeeScheduleItem[];
+  admissionDates?: AdmissionDateItem[];
+  admissionsBannerStatus?: "open" | "open_soon" | "closed";
   updatedAt: string;
 }
 

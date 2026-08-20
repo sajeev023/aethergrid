@@ -17,8 +17,8 @@ function getJWTSecret(): Uint8Array {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Only protect admin routes
-  const isAdminPage = pathname.startsWith("/admin") && pathname !== "/admin";
+  // Protect all admin page routes and admin API routes
+  const isAdminPage = pathname === "/admin" || pathname.startsWith("/admin/");
   const isAdminAPI = pathname.startsWith("/api/admin") && !pathname.startsWith("/api/admin/auth/login");
 
   if (!isAdminPage && !isAdminAPI) {
@@ -30,16 +30,21 @@ export async function middleware(request: NextRequest) {
 
   if (!token) {
     if (isAdminAPI) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ message: "Unauthorized access" }, { status: 401 });
     }
-    // Redirect to login for page requests
-    const loginUrl = new URL("/admin", request.url);
-    return NextResponse.redirect(loginUrl);
+    // Redirect unauthenticated /admin traffic to home (302) to prevent public enumeration
+    const homeUrl = new URL("/?auth=admin_required", request.url);
+    return NextResponse.redirect(homeUrl);
   }
 
   // Verify JWT
   try {
     const { payload } = await jwtVerify(token, getJWTSecret());
+
+    // If authenticated user hits bare /admin, redirect to dashboard
+    if (pathname === "/admin") {
+      return NextResponse.redirect(new URL("/admin/dashboard", request.url));
+    }
 
     // Attach user info via headers for downstream routes
     const response = NextResponse.next();
@@ -49,21 +54,19 @@ export async function middleware(request: NextRequest) {
     response.headers.set("x-admin-display-name", String(payload.displayName));
     return response;
   } catch {
-    // Invalid or expired token
     if (isAdminAPI) {
       return NextResponse.json(
         { message: "Session expired. Please log in again." },
         { status: 401 }
       );
     }
-    const loginUrl = new URL("/admin", request.url);
-    const response = NextResponse.redirect(loginUrl);
-    // Clear the invalid cookie
+    const homeUrl = new URL("/?auth=session_expired", request.url);
+    const response = NextResponse.redirect(homeUrl);
     response.cookies.delete(COOKIE_NAME);
     return response;
   }
 }
 
 export const config = {
-  matcher: ["/admin/:path+", "/api/admin/:path+"],
+  matcher: ["/admin", "/admin/:path*", "/api/admin/:path*"],
 };

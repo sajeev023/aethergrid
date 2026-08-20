@@ -12,27 +12,27 @@ interface AboutHistoryProps {
   activeInst?: "root" | "lfs" | "lfjc" | "lfdc";
 }
 
-// Authentic LFJC institutional milestones — matching the reference design
+// Authentic LFJC institutional milestones — matching verified succession timeline
 const HISTORICAL_MILESTONES = [
   {
     year: "1974",
-    title: "LFJC Inception",
-    description: "Established as an upgrade to the historic high school of Abids with 200 initial students.",
+    title: "LFJC Inception at Abids",
+    description: "Established by the Montfort Brothers under Founder Principal Rev. Bro. Vincent as an upgrade to the historic high school of Abids with 200 initial students.",
   },
   {
     year: "1982",
-    title: "Move to Uppal",
-    description: "Relocates to the expansive Uppal campus under the direction of Rev. Bro. James Pannivelil to build permanent laboratories.",
+    title: "Relocation to 8-Acre Uppal Campus",
+    description: "Relocates to the expansive Uppal campus under Director & Principal Rev. Bro. James Pannivelil to build permanent laboratories, library, and sporting grounds.",
   },
   {
     year: "1999",
-    title: "Silver Jubilee Celebration",
-    description: "Marks 25 years of intermediate academic excellence, board rank distinctions, and character formation.",
+    title: "Silver Jubilee & Leadership Honors",
+    description: "Marks 25 years of intermediate board distinctions under Rev. Bro. M.A. George, honored by Chief Minister N. Chandrababu Naidu.",
   },
   {
     year: "2024",
-    title: "Golden Jubilee Celebration",
-    description: "Marks 50 years of shaping outstanding board ranks and professional leaders in Hyderabad.",
+    title: "Golden Jubilee (1974–2024)",
+    description: "Celebrates 50 years of shaping outstanding board ranks and professional leaders across cinema, civil services, medicine, and entrepreneurship.",
   },
 ];
 
