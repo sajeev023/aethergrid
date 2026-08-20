@@ -242,43 +242,43 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
         <nav
           className={cn(
             "mx-auto flex max-w-[1440px] items-center justify-between px-3 sm:px-6 md:px-8 lg:px-10 transition-[height] duration-300",
-            isScrolled ? "h-[58px] sm:h-[68px]" : "h-[64px] sm:h-[76px]",
+            isScrolled ? "h-[60px] sm:h-[68px]" : "h-[68px] sm:h-[76px]",
           )}
           aria-label="Primary navigation"
         >
           {/* ─── Brand ──────────────────────────────────────────────────── */}
           <Link
             href="/"
-            className="group flex items-center gap-2 sm:gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-montfortian-blue"
+            className="group flex items-center gap-2.5 sm:gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-montfortian-blue shrink-0 py-1"
             onClick={() => setIsOpen(false)}
           >
             <div
               className={cn(
-                "relative rounded-full border border-heritage-gold/25 overflow-hidden bg-white p-0.5 flex-shrink-0 group-hover:border-heritage-gold/70 transition-all duration-300 shadow-sm group-hover:shadow-md",
-                isScrolled ? "w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 xl:w-12 xl:h-12" : "w-10 h-10 sm:w-11 sm:h-11 md:w-14 md:h-14",
+                "relative rounded-full border border-heritage-gold/30 overflow-hidden bg-white p-0.5 shrink-0 group-hover:border-heritage-gold/70 transition-all duration-300 shadow-xs group-hover:shadow-md",
+                isScrolled ? "w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11" : "w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12",
               )}
             >
               <Image
                 src="/images/lfjc-logo.jpg"
                 alt="LFJC Official Logo"
-                width={56}
-                height={56}
+                width={48}
+                height={48}
                 className="w-full h-full object-contain rounded-full"
                 priority
               />
             </div>
-            <div className="flex flex-col">
-              <span className="font-serif font-bold leading-none text-montfortian-blue text-[15px] sm:text-xl xl:text-2xl transition-colors duration-300 group-hover:text-montfortian-blue/90">
+            <div className="flex flex-col justify-center">
+              <span className="font-serif font-bold leading-tight text-montfortian-blue text-base sm:text-lg md:text-xl xl:text-[22px] transition-colors duration-300 group-hover:text-montfortian-blue/90 whitespace-nowrap">
                 Little Flower
               </span>
-              <span className="font-sans font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-heritage-gold-strong text-[9px] sm:text-[10px] xl:text-[11px] mt-0.5 sm:mt-1.5 transition-colors duration-300">
+              <span className="font-sans font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-heritage-gold-strong text-[9px] sm:text-[10px] xl:text-[10.5px] leading-tight mt-0.5 transition-colors duration-300 whitespace-nowrap">
                 Junior College
               </span>
             </div>
           </Link>
 
           {/* ─── Desktop Navigation with Mega-Panels ─────────────────────── */}
-          <div className="hidden items-center lg:gap-x-3.5 xl:gap-x-5 2xl:gap-x-6 lg:flex">
+          <div className="hidden items-center lg:gap-x-2 xl:gap-x-3.5 2xl:gap-x-5 lg:flex">
             {navMenu.map((item) => {
               const hasChildren = !!item.children?.length;
               const isActive = isTopActive(item.href);
@@ -303,7 +303,7 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
                     onKeyDown={(e) => hasChildren && openMenuOnArrow(e, item.label)}
                     onClick={() => setOpenMenu(null)}
                     className={cn(
-                      "premium-focus relative inline-flex items-center gap-1 shrink-0 whitespace-nowrap px-1.5 py-1 text-[11px] font-bold uppercase tracking-[0.14em] transition-colors group font-sans",
+                      "premium-focus relative inline-flex items-center gap-1 shrink-0 whitespace-nowrap px-1.5 py-1 text-[10px] xl:text-[11px] font-bold uppercase tracking-[0.12em] xl:tracking-[0.14em] transition-colors group font-sans",
                       isActive
                         ? "text-montfortian-blue"
                         : "text-academic-slate/70 hover:text-montfortian-blue",
@@ -330,8 +330,8 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
 
           {/* ─── Desktop CTA Actions ────────────────────────────────────── */}
           <div className="hidden items-center gap-3 lg:flex">
-            <Button asChild size="sm" className="h-9 px-5 rounded-sm text-[10px] tracking-wider">
-              <Link href="/admissions">{instData.admissionsLabel}</Link>
+            <Button asChild size="sm" className="h-9 px-4 xl:px-5 rounded-sm text-[10px] xl:text-[11px] font-bold tracking-wider uppercase shrink-0 shadow-xs">
+              <Link href="/admissions">Admissions 2026–27</Link>
             </Button>
           </div>
 
