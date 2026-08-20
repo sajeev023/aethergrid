@@ -65,7 +65,7 @@ function FacultyMemberCard({ member, index }: { member: FacultySeedMember; index
       >
         <div className="relative aspect-[5/6] w-full overflow-hidden bg-royal-cream/50 border-b border-stone-texture/40">
           {isHOD && (
-            <div className="absolute top-1.5 sm:top-2 left-0 z-10 bg-heritage-gold-strong text-white font-sans text-[8px] sm:text-[9px] md:text-[10px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.12em] pl-2 sm:pl-3 pr-1.5 sm:pr-2.5 py-0.5 sm:py-1 shadow-[0_2px_8px_rgba(0,0,0,0.15)] border-y border-r border-heritage-gold/30 rounded-r-sm flex items-center gap-1">
+            <div className="absolute top-1.5 sm:top-2 left-0 z-10 bg-heritage-gold-strong text-white font-sans text-[9px] sm:text-[10px] md:text-[11px] font-bold uppercase tracking-wider pl-2.5 sm:pl-3 pr-2 sm:pr-2.5 py-0.5 sm:py-1 shadow-[0_2px_8px_rgba(0,0,0,0.15)] border-y border-r border-heritage-gold/30 rounded-r-sm flex items-center gap-1">
               <span>Head of Dept</span>
             </div>
           )}
@@ -83,16 +83,16 @@ function FacultyMemberCard({ member, index }: { member: FacultySeedMember; index
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-heritage-gold/30 flex items-center justify-center bg-white shadow-sm mb-1 group-hover:border-heritage-gold/80 transition-colors duration-300">
                 <span className="font-serif text-sm sm:text-base font-bold text-montfortian-blue leading-none">{initials}</span>
               </div>
-              <span className="text-[9px] sm:text-[10px] font-sans font-bold uppercase tracking-widest text-heritage-gold-strong/80">
+              <span className="text-[10px] sm:text-[11px] font-sans font-bold uppercase tracking-wider text-heritage-gold-strong/90">
                 Mentor
               </span>
             </div>
           )}
         </div>
-        <CardContent className="flex-1 flex flex-col justify-between p-2 sm:p-3 bg-white">
+        <CardContent className="flex-1 flex flex-col justify-between p-2.5 sm:p-3 bg-white">
           <div className="space-y-0.5 sm:space-y-1">
             {member.designation && (
-              <p className="text-[9px] sm:text-[10px] md:text-[11px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.15em] text-heritage-gold-strong font-sans">
+              <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans line-clamp-1">
                 {member.designation}
               </p>
             )}
@@ -100,7 +100,7 @@ function FacultyMemberCard({ member, index }: { member: FacultySeedMember; index
               {member.name}
             </h3>
             {member.subject && (
-              <p className="text-[10px] sm:text-[11px] text-academic-slate/65 font-sans">
+              <p className="text-[11px] sm:text-xs text-academic-slate/75 font-sans line-clamp-1">
                 {member.subject}
               </p>
             )}
@@ -131,7 +131,7 @@ export function FacultyTeaching({ activeInst = "lfjc", isPreview = false }: Facu
     <section id="teaching-faculty" className={cn("bg-white overflow-hidden", !isPreview && "py-6 sm:py-8 md:py-12")}>
       {!isPreview && (
         <div className="mx-auto max-w-3xl text-center px-4 sm:px-6 md:px-8 mb-4 sm:mb-6">
-          <span className="font-sans text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong uppercase tracking-[0.2em] mb-1.5 sm:mb-2 block">
+          <span className="font-sans text-xs font-bold text-heritage-gold-strong uppercase tracking-wider mb-1.5 sm:mb-2 block">
             Academic Staff
           </span>
           <h1 className="font-serif text-2xl sm:text-3xl font-bold leading-tight text-academic-slate md:text-4xl tracking-tight">
@@ -148,27 +148,27 @@ export function FacultyTeaching({ activeInst = "lfjc", isPreview = false }: Facu
       {!isPreview && (
         <div className="mx-auto max-w-xl px-4 sm:px-6 md:px-8 mb-5 sm:mb-8">
           <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-academic-slate/40" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-academic-slate/40" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search faculty by name, department, or subject..."
-              className="w-full pl-9 pr-9 py-2 text-xs rounded-full border border-stone-texture bg-royal-cream/20 text-academic-slate placeholder:text-academic-slate/50 focus:bg-white focus:border-heritage-gold focus:outline-none focus:ring-2 focus:ring-heritage-gold/20 transition-all font-sans"
+              className="w-full pl-10 pr-10 py-2.5 text-xs sm:text-sm rounded-full border border-stone-texture bg-royal-cream/20 text-academic-slate placeholder:text-academic-slate/50 focus:bg-white focus:border-heritage-gold focus:outline-none focus:ring-2 focus:ring-heritage-gold/20 transition-all font-sans min-h-[44px]"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
                 aria-label="Clear search query"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-academic-slate/40 hover:text-academic-slate transition-colors"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-academic-slate/40 hover:text-academic-slate transition-colors p-1"
               >
-                <X className="h-3.5 w-3.5" />
+                <X className="h-4 w-4" />
               </button>
             )}
           </div>
           {searchQuery && (
-            <p className="mt-1.5 text-center text-[10px] sm:text-[11px] text-academic-slate/70 font-sans">
+            <p className="mt-2 text-center text-xs text-academic-slate/70 font-sans">
               Showing results for &ldquo;<span className="font-semibold">{searchQuery}</span>&rdquo; ({filteredStaff.length} found)
             </p>
           )}

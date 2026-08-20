@@ -34,7 +34,7 @@ export function SectionHeading({
     >
       <Badge onDark={onDark}>{eyebrow}</Badge>
       <Heading className={cn(
-        "mt-2.5 sm:mt-4 font-serif text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight tracking-tight",
+        "mt-2.5 sm:mt-4 font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-snug sm:leading-tight tracking-tight",
         onDark ? "text-white" : "text-academic-slate",
       )}>
         {title}
@@ -45,7 +45,7 @@ export function SectionHeading({
       {description ? (
         <p className={cn(
           "mt-2.5 sm:mt-4 text-xs sm:text-sm md:text-base leading-relaxed sm:leading-7",
-          onDark ? "text-royal-cream/75" : "text-academic-slate/70",
+          onDark ? "text-royal-cream/80" : "text-academic-slate/75",
         )}>
           {description}
         </p>

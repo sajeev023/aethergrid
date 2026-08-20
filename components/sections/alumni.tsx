@@ -451,28 +451,28 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/55 via-transparent to-transparent pointer-events-none" />
                       <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
-                        <span className="inline-block font-sans text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 rounded bg-white/90 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
+                        <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded bg-white/95 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
                           {featured.category}
                         </span>
                       </div>
                     </div>
-                    <CardContent className="p-2 sm:p-3 flex-1 flex flex-col justify-between bg-white">
+                    <CardContent className="p-2.5 sm:p-3 flex-1 flex flex-col justify-between bg-white">
                       <div>
-                        <div className="flex items-center text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
+                        <div className="flex items-center text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
                           <span className="inline-flex items-center gap-1">
-                            <GraduationCap className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" />
+                            <GraduationCap className="h-3.5 w-3.5 shrink-0" />
                             {featured.batch.replace(/^Batch of\s+/i, "Batch: ")}
                           </span>
                         </div>
                         <h3 className="font-serif text-xs sm:text-base font-bold text-academic-slate mb-0.5 sm:mb-1 line-clamp-1">
                           {featured.name}
                         </h3>
-                        <p className="text-[10px] sm:text-[11px] font-medium text-academic-slate/75 font-sans mb-1.5 sm:mb-2.5 line-clamp-1">
+                        <p className="text-[11px] sm:text-xs font-medium text-academic-slate/75 font-sans mb-1.5 sm:mb-2.5 line-clamp-1">
                           {featured.role}
                         </p>
                         <div className="flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
-                          <Award className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
-                          <span className="text-[9px] sm:text-[10px] font-bold text-heritage-gold-strong leading-normal font-sans line-clamp-1">
+                          <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
+                          <span className="text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong leading-normal font-sans line-clamp-1">
                             {featured.title}
                           </span>
                         </div>
@@ -497,7 +497,7 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
                   onClick={() => setSelectedCategory(cat)}
                   aria-pressed={active}
                   className={cn(
-                    "rounded-full border px-3 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.12em] font-sans transition-all duration-300",
+                    "rounded-full border px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-bold uppercase tracking-wider font-sans transition-all duration-300 min-h-[38px] cursor-pointer",
                     active
                       ? "border-montfortian-blue bg-montfortian-blue text-white shadow-xs"
                       : "border-stone-texture/70 bg-white text-academic-slate/75 hover:border-montfortian-blue hover:text-montfortian-blue",
@@ -539,26 +539,26 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/35 via-transparent to-transparent pointer-events-none" />
                             <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
-                              <span className="inline-block font-sans text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 rounded bg-white/90 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
+                              <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded bg-white/95 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
                                 {alumnus.category}
                               </span>
                             </div>
                           </div>
-                          <CardContent className="flex-1 flex flex-col justify-between p-2 sm:p-3 bg-white">
+                          <CardContent className="flex-1 flex flex-col justify-between p-2.5 sm:p-3 bg-white">
                             <div>
-                              <div className="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
-                                <GraduationCap className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" />
+                              <div className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
+                                <GraduationCap className="h-3.5 w-3.5 shrink-0" />
                                 <span>{alumnus.year.replace(/^Batch of\s+/i, "Batch: ")}</span>
                               </div>
                               <h3 className="font-serif text-xs sm:text-base font-bold leading-tight text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300 line-clamp-1">
                                 {alumnus.name}
                               </h3>
-                              <p className="text-[10px] sm:text-[11px] font-medium text-academic-slate/75 font-sans mt-0.5 sm:mt-1 line-clamp-1">
+                              <p className="text-[11px] sm:text-xs font-medium text-academic-slate/75 font-sans mt-0.5 sm:mt-1 line-clamp-1">
                                 {alumnus.designation}
                               </p>
                               <div className="mt-1.5 sm:mt-2 flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
-                                <Award className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
-                                <p className="text-[9px] sm:text-[10px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
+                                <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
+                                <p className="text-[10px] sm:text-[11px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
                                   {alumnus.achievement.replace(/https?:\/\/[^\s]+/, "").trim() || "Distinguished Achiever"}
                                 </p>
                               </div>
@@ -585,26 +585,26 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
                       {alumniWithoutImages.map((alumnus, index) => (
                         <Reveal key={alumnus.name} delay={index % 5 * 0.04}>
                           <Card className="group flex flex-col overflow-hidden border border-stone-texture/70 bg-white hover:border-heritage-gold/55 hover:shadow-[0_15px_30px_rgba(15,76,129,0.08)] hover:shadow-panel-hover transition-all duration-300 rounded-lg h-full min-h-[110px] sm:min-h-[120px]">
-                            <CardContent className="flex-1 flex flex-col justify-between p-2 sm:p-3 bg-white">
+                            <CardContent className="flex-1 flex flex-col justify-between p-2.5 sm:p-3 bg-white">
                               <div className="mb-1.5 sm:mb-2">
-                                <span className="inline-block font-sans text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 rounded border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider bg-royal-cream/30">
+                                <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider bg-royal-cream/30">
                                   {alumnus.category}
                                 </span>
                               </div>
                               <div>
-                                <div className="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
-                                  <GraduationCap className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" />
+                                <div className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
+                                  <GraduationCap className="h-3.5 w-3.5 shrink-0" />
                                   <span>{alumnus.year.replace(/^Batch of\s+/i, "Batch: ")}</span>
                                 </div>
                                 <h3 className="font-serif text-xs sm:text-base font-bold leading-tight text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300 line-clamp-1">
                                   {alumnus.name}
                                 </h3>
-                                <p className="text-[10px] sm:text-[11px] font-medium text-academic-slate/75 font-sans mt-0.5 sm:mt-1 line-clamp-1">
+                                <p className="text-[11px] sm:text-xs font-medium text-academic-slate/75 font-sans mt-0.5 sm:mt-1 line-clamp-1">
                                   {alumnus.designation}
                                 </p>
                                 <div className="mt-1.5 sm:mt-2 flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
-                                  <Award className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
-                                  <p className="text-[9px] sm:text-[10px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
+                                  <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
+                                  <p className="text-[10px] sm:text-[11px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
                                     {alumnus.achievement.replace(/https?:\/\/[^\s]+/, "").trim() || "Distinguished Achiever"}
                                   </p>
                                 </div>
@@ -639,34 +639,34 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/35 via-transparent to-transparent pointer-events-none" />
                             <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
-                              <span className="inline-block font-sans text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 rounded bg-white/90 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
+                              <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded bg-white/95 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
                                 {alumnus.category}
                               </span>
                             </div>
                           </div>
                         )}
-                        <CardContent className="flex-1 flex flex-col justify-between p-2 sm:p-3 bg-white">
+                        <CardContent className="flex-1 flex flex-col justify-between p-2.5 sm:p-3 bg-white">
                           {!hasImage && (
                             <div className="mb-1.5 sm:mb-2">
-                              <span className="inline-block font-sans text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 rounded border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider bg-royal-cream/30">
+                              <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider bg-royal-cream/30">
                                 {alumnus.category}
                               </span>
                             </div>
                           )}
                           <div>
-                            <div className="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
-                              <GraduationCap className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" />
+                            <div className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
+                              <GraduationCap className="h-3.5 w-3.5 shrink-0" />
                               <span>{alumnus.year.replace(/^Batch of\s+/i, "Batch: ")}</span>
                             </div>
                             <h3 className="font-serif text-xs sm:text-base font-bold leading-tight text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300 line-clamp-1">
                               {alumnus.name}
                             </h3>
-                            <p className="text-[10px] sm:text-[11px] font-medium text-academic-slate/75 font-sans mt-0.5 sm:mt-1 line-clamp-1">
+                            <p className="text-[11px] sm:text-xs font-medium text-academic-slate/75 font-sans mt-0.5 sm:mt-1 line-clamp-1">
                               {alumnus.designation}
                             </p>
                             <div className="mt-1.5 sm:mt-2 flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
-                              <Award className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
-                              <p className="text-[9px] sm:text-[10px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
+                              <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
+                              <p className="text-[10px] sm:text-[11px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
                                 {alumnus.achievement.replace(/https?:\/\/[^\s]+/, "").trim() || "Distinguished Achiever"}
                               </p>
                             </div>
@@ -1057,16 +1057,16 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
                                 className="hidden"
                               />
                             </label>
-                            <p className="text-[8px] text-gray-400 mt-1">PNG, JPG, WEBP. Max 5MB.</p>
+                            <p className="text-xs text-gray-500 mt-1">PNG, JPG, WEBP. Max 5MB.</p>
                           </div>
                         </div>
                       </div>
 
                       {/* Supporting documents upload */}
                       <div className="border border-stone-texture/60 p-4 rounded bg-stone-50/50 space-y-3">
-                        <label className="font-bold text-academic-slate/70 block">Additional Supporting Images (Optional)</label>
+                        <label className="font-bold text-academic-slate/70 block text-xs sm:text-sm">Additional Supporting Images (Optional)</label>
                         <div>
-                          <label className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-stone-texture text-[10px] font-bold uppercase rounded hover:bg-stone-50 transition-colors shadow-sm cursor-pointer">
+                          <label className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-stone-texture text-xs font-bold uppercase rounded hover:bg-stone-50 transition-colors shadow-sm cursor-pointer min-h-[38px]">
                             <Upload className="h-3.5 w-3.5" /> Choose Files
                             <input
                               type="file"
@@ -1076,12 +1076,12 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
                               className="hidden"
                             />
                           </label>
-                          <p className="text-[8px] text-gray-400 mt-1">Upload ID cards, memos or certificates. Max 3 files.</p>
+                          <p className="text-xs text-gray-500 mt-1">Upload ID cards, memos or certificates. Max 3 files.</p>
                         </div>
                         {supportFiles.length > 0 && (
                           <div className="space-y-1">
-                            <p className="text-[9px] font-bold text-academic-slate/70">Selected files ({supportFiles.length}):</p>
-                            <ul className="list-disc pl-3 text-[9px] text-gray-500 space-y-0.5 font-sans">
+                            <p className="text-xs font-bold text-academic-slate/70">Selected files ({supportFiles.length}):</p>
+                            <ul className="list-disc pl-3 text-xs text-gray-600 space-y-0.5 font-sans">
                               {supportFiles.map((file, i) => (
                                 <li key={i} className="truncate">{file.name}</li>
                               ))}

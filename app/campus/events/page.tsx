@@ -196,9 +196,9 @@ export default function CampusEventsPage() {
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-academic-slate/90 via-academic-slate/30 to-transparent opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute inset-x-0 bottom-0 p-2 sm:p-4 sm:translate-y-full sm:group-hover:translate-y-0 transition-transform duration-300">
+                <div className="absolute inset-x-0 bottom-0 p-2.5 sm:p-4 sm:translate-y-full sm:group-hover:translate-y-0 transition-transform duration-300">
                   <h3 className="font-serif text-xs sm:text-sm font-bold text-white leading-snug line-clamp-1">{img.title}</h3>
-                  <p className="text-[9px] sm:text-xs text-royal-cream/80 font-sans mt-0.5 line-clamp-1 sm:line-clamp-2">{img.desc}</p>
+                  <p className="text-[11px] sm:text-xs text-royal-cream/90 font-sans mt-0.5 line-clamp-1 sm:line-clamp-2">{img.desc}</p>
                 </div>
               </div>
             </Reveal>
@@ -211,14 +211,14 @@ export default function CampusEventsPage() {
         <Reveal className="flex flex-wrap justify-center gap-2.5 sm:gap-4">
           <Link
             href="/campus/gallery"
-            className="inline-flex items-center gap-2 border border-montfortian-blue/30 bg-montfortian-blue/5 px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-montfortian-blue hover:bg-montfortian-blue hover:text-white hover:border-montfortian-blue transition-all duration-300 rounded-sm font-sans"
+            className="inline-flex items-center gap-2 border border-montfortian-blue/30 bg-montfortian-blue/5 px-4 py-2.5 sm:px-5 sm:py-2.5 text-xs font-bold uppercase tracking-wider text-montfortian-blue hover:bg-montfortian-blue hover:text-white hover:border-montfortian-blue transition-all duration-300 rounded-sm font-sans min-h-[44px]"
           >
             View Photo Gallery
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </Link>
           <Link
             href="/admissions"
-            className="inline-flex items-center gap-2 border border-heritage-gold/40 bg-heritage-gold/5 px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-heritage-gold-strong hover:bg-heritage-gold hover:text-white hover:border-heritage-gold transition-all duration-300 rounded-sm font-sans"
+            className="inline-flex items-center gap-2 border border-heritage-gold/40 bg-heritage-gold/5 px-4 py-2.5 sm:px-5 sm:py-2.5 text-xs font-bold uppercase tracking-wider text-heritage-gold-strong hover:bg-heritage-gold hover:text-white hover:border-heritage-gold transition-all duration-300 rounded-sm font-sans min-h-[44px]"
           >
             Begin Admissions Inquiry
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

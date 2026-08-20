@@ -95,8 +95,8 @@ export function LeadForm({
   return (
     <form
       className={cn(
-        "grid gap-3 sm:gap-4 rounded-lg border border-stone-texture bg-white p-3.5 sm:p-5 shadow-[0_20px_60px_rgba(22,29,31,0.06)]",
-        compact ? "p-3.5 sm:p-4" : "p-3.5 sm:p-5",
+        "grid gap-3.5 sm:gap-4 rounded-xl border border-stone-texture bg-white p-4 sm:p-6 shadow-[0_20px_60px_rgba(22,29,31,0.06)]",
+        compact ? "p-3.5 sm:p-4" : "p-4 sm:p-6",
         className,
       )}
       onSubmit={handleSubmit}

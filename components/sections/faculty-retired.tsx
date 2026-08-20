@@ -51,8 +51,8 @@ function RetiredFacultyCard({ member, index }: { member: FacultySeedMember; inde
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-heritage-gold/30 flex items-center justify-center bg-white shadow-xs mb-1">
                 <span className="font-serif text-sm sm:text-base font-bold text-montfortian-blue leading-none">{initials}</span>
               </div>
-              <p className="text-[10px] sm:text-[11px] font-bold text-academic-slate font-serif">{member.name}</p>
-              <span className="text-[8px] sm:text-[9px] font-sans font-bold uppercase tracking-widest text-heritage-gold-strong/80 mt-0.5 sm:mt-1">
+              <p className="text-xs font-bold text-academic-slate font-serif">{member.name}</p>
+              <span className="text-[10px] sm:text-[11px] font-sans font-bold uppercase tracking-wider text-heritage-gold-strong/90 mt-0.5 sm:mt-1">
                 Emeritus
               </span>
             </div>
@@ -72,7 +72,7 @@ export function FacultyRetired({ activeInst = "lfjc" }: FacultyRetiredProps) {
     <section id="retired-faculty" className="bg-white py-6 sm:py-8 md:py-12 overflow-hidden">
       {/* Page Hero */}
       <div className="mx-auto max-w-3xl text-center px-4 sm:px-6 md:px-8 mb-5 sm:mb-8">
-        <span className="font-sans text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong uppercase tracking-[0.2em] mb-1.5 sm:mb-2 block">
+        <span className="font-sans text-xs font-bold text-heritage-gold-strong uppercase tracking-wider mb-1.5 sm:mb-2 block">
           Emeritus Educators
         </span>
         <h1 className="font-serif text-2xl sm:text-3xl font-bold leading-tight text-academic-slate md:text-4xl tracking-tight">
@@ -105,7 +105,7 @@ export function FacultyRetired({ activeInst = "lfjc" }: FacultyRetiredProps) {
             <p className="font-editorial text-sm sm:text-base leading-relaxed text-academic-slate/75 italic mt-3 sm:mt-4">
               &ldquo;We owe our past and our present to the teachers who gave their best years to this institution. Their legacy lives in every student they taught, every life they touched.&rdquo;
             </p>
-            <p className="mt-2 sm:mt-3 text-[10px] sm:text-[11px] font-sans text-academic-slate/50 uppercase tracking-widest">
+            <p className="mt-2 sm:mt-3 text-xs font-sans text-academic-slate/50 uppercase tracking-widest">
               Little Flower Junior College
             </p>
           </div>
@@ -114,14 +114,14 @@ export function FacultyRetired({ activeInst = "lfjc" }: FacultyRetiredProps) {
         <Reveal className="mt-5 sm:mt-8 flex flex-wrap justify-center gap-2.5 sm:gap-4">
           <Link
             href="/faculty/principals"
-            className="inline-flex items-center gap-2 border border-stone-texture bg-white px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-academic-slate hover:bg-academic-slate hover:text-white hover:border-academic-slate transition-all duration-300 rounded-sm font-sans"
+            className="inline-flex items-center gap-2 border border-stone-texture bg-white px-4 py-2.5 sm:px-5 sm:py-2.5 text-xs font-bold uppercase tracking-wider text-academic-slate hover:bg-academic-slate hover:text-white hover:border-academic-slate transition-all duration-300 rounded-sm font-sans min-h-[44px]"
           >
             Former Principals
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </Link>
           <Link
             href="/faculty/teaching"
-            className="inline-flex items-center gap-2 border border-montfortian-blue/30 bg-montfortian-blue/5 px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-montfortian-blue hover:bg-montfortian-blue hover:text-white hover:border-montfortian-blue transition-all duration-300 rounded-sm font-sans"
+            className="inline-flex items-center gap-2 border border-montfortian-blue/30 bg-montfortian-blue/5 px-4 py-2.5 sm:px-5 sm:py-2.5 text-xs font-bold uppercase tracking-wider text-montfortian-blue hover:bg-montfortian-blue hover:text-white hover:border-montfortian-blue transition-all duration-300 rounded-sm font-sans min-h-[44px]"
           >
             Teaching &amp; Support Staff
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

@@ -80,7 +80,7 @@ export function AboutMission({ activeInst = "lfjc" }: AboutMissionProps) {
 
       {/* Page Hero */}
       <div className="mx-auto max-w-3xl text-center px-4 sm:px-6 md:px-8 mb-5 sm:mb-8">
-        <span className="font-sans text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong uppercase tracking-[0.2em] mb-1.5 sm:mb-2 block">
+        <span className="font-sans text-xs font-bold text-heritage-gold-strong uppercase tracking-wider mb-1.5 sm:mb-2 block">
           Philosophical Core
         </span>
         <h1 className="font-serif text-2xl sm:text-3xl font-bold leading-tight text-academic-slate md:text-4xl tracking-tight">
@@ -98,7 +98,7 @@ export function AboutMission({ activeInst = "lfjc" }: AboutMissionProps) {
         {/* Mission Statement */}
         <Reveal>
           <div className="max-w-3xl mx-auto text-center border border-heritage-gold/30 bg-royal-cream/20 rounded-xl p-4 sm:p-6 md:p-8">
-            <span className="text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong uppercase tracking-[0.2em] mb-1.5 sm:mb-2 block font-sans">
+            <span className="text-xs font-bold text-heritage-gold-strong uppercase tracking-wider mb-1.5 sm:mb-2 block font-sans">
               The Montfortian Mission
             </span>
             <h2 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-academic-slate leading-tight mb-2.5 sm:mb-4">
@@ -108,7 +108,7 @@ export function AboutMission({ activeInst = "lfjc" }: AboutMissionProps) {
               &ldquo;Knowledge is Truth. Our mission is not merely to educate minds but to form characters — students who are intellectually sharp, morally grounded, and ready to serve society with compassion and integrity.&rdquo;
             </p>
             <div className="h-px w-12 sm:w-16 bg-heritage-gold/50 my-3 sm:my-4 mx-auto" />
-            <p className="text-[10px] sm:text-[11px] font-sans text-academic-slate/70 tracking-wider uppercase">
+            <p className="text-xs font-sans text-academic-slate/70 tracking-wider uppercase">
               Brothers of St. Gabriel Educational Mandate
             </p>
           </div>
@@ -185,14 +185,14 @@ export function AboutMission({ activeInst = "lfjc" }: AboutMissionProps) {
         <Reveal className="flex flex-wrap justify-center gap-2.5 sm:gap-4">
           <Link
             href="/about/principal"
-            className="inline-flex items-center gap-2 border border-montfortian-blue/30 bg-montfortian-blue/5 px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-montfortian-blue hover:bg-montfortian-blue hover:text-white hover:border-montfortian-blue transition-all duration-300 rounded-sm font-sans"
+            className="inline-flex items-center gap-2 border border-montfortian-blue/30 bg-montfortian-blue/5 px-4 py-2.5 sm:px-5 sm:py-2.5 text-xs font-bold uppercase tracking-wider text-montfortian-blue hover:bg-montfortian-blue hover:text-white hover:border-montfortian-blue transition-all duration-300 rounded-sm font-sans min-h-[44px]"
           >
             Principal&apos;s Message
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </Link>
           <Link
             href="/admissions"
-            className="inline-flex items-center gap-2 border border-heritage-gold/40 bg-heritage-gold/5 px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-heritage-gold-strong hover:bg-heritage-gold hover:text-white hover:border-heritage-gold transition-all duration-300 rounded-sm font-sans"
+            className="inline-flex items-center gap-2 border border-heritage-gold/40 bg-heritage-gold/5 px-4 py-2.5 sm:px-5 sm:py-2.5 text-xs font-bold uppercase tracking-wider text-heritage-gold-strong hover:bg-heritage-gold hover:text-white hover:border-heritage-gold transition-all duration-300 rounded-sm font-sans min-h-[44px]"
           >
             Begin Admissions Inquiry
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

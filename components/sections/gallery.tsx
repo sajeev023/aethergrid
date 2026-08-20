@@ -65,14 +65,14 @@ export function Gallery({ activeInst = "lfjc" }: GalleryProps) {
             <div className="absolute inset-0 bg-gradient-to-t from-academic-slate via-academic-slate/60 to-transparent z-20" />
             
             {/* Content Overlay */}
-            <div className="absolute inset-x-0 bottom-0 p-3.5 sm:p-5 z-30">
-              <span className="inline-block px-2 py-0.5 sm:px-2.5 sm:py-1 mb-1.5 sm:mb-2 bg-white/10 backdrop-blur-md border border-white/10 font-sans text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.16em] text-heritage-gold-bright rounded-sm">
+            <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 z-30">
+              <span className="inline-block px-2.5 py-1 mb-1.5 sm:mb-2 bg-white/15 backdrop-blur-md border border-white/20 font-sans text-xs font-bold uppercase tracking-wider text-heritage-gold-bright rounded-sm">
                 Collegiate Legacy
               </span>
               <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold leading-tight text-white mb-1">
                 {primaryItem.title}
               </h3>
-              <p className="text-[11px] sm:text-xs leading-relaxed text-royal-cream/85 font-sans max-w-lg">
+              <p className="text-xs sm:text-sm leading-relaxed text-royal-cream/90 font-sans max-w-lg">
                 {primaryItem.caption}
               </p>
             </div>
@@ -94,11 +94,11 @@ export function Gallery({ activeInst = "lfjc" }: GalleryProps) {
                 className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-academic-slate via-academic-slate/50 to-transparent z-20" />
-              <div className="absolute inset-x-0 bottom-0 p-2.5 sm:p-4 z-30">
-                <span className="inline-block px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 mb-1 sm:mb-2 bg-white/10 backdrop-blur-sm border border-white/10 font-sans text-[8px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-heritage-gold rounded-sm">
+              <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 z-30">
+                <span className="inline-block px-2 py-0.5 sm:px-2.5 sm:py-0.5 mb-1 sm:mb-2 bg-white/15 backdrop-blur-sm border border-white/20 font-sans text-[10px] sm:text-xs font-bold uppercase tracking-wider text-heritage-gold rounded-sm">
                   Science Labs
                 </span>
-                <h3 className="font-serif text-sm sm:text-lg md:text-xl font-bold leading-tight text-white line-clamp-1">
+                <h3 className="font-serif text-xs sm:text-lg md:text-xl font-bold leading-tight text-white line-clamp-1">
                   {secondItem.title}
                 </h3>
               </div>
@@ -118,11 +118,11 @@ export function Gallery({ activeInst = "lfjc" }: GalleryProps) {
                 className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-academic-slate via-academic-slate/50 to-transparent z-20" />
-              <div className="absolute inset-x-0 bottom-0 p-2.5 sm:p-4 z-30">
-                <span className="inline-block px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 mb-1 sm:mb-2 bg-white/10 backdrop-blur-sm border border-white/10 font-sans text-[8px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-heritage-gold rounded-sm">
+              <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 z-30">
+                <span className="inline-block px-2 py-0.5 sm:px-2.5 sm:py-0.5 mb-1 sm:mb-2 bg-white/15 backdrop-blur-sm border border-white/20 font-sans text-[10px] sm:text-xs font-bold uppercase tracking-wider text-heritage-gold rounded-sm">
                   Sports
                 </span>
-                <h3 className="font-serif text-sm sm:text-lg md:text-xl font-bold leading-tight text-white line-clamp-1">
+                <h3 className="font-serif text-xs sm:text-lg md:text-xl font-bold leading-tight text-white line-clamp-1">
                   {thirdItem.title}
                 </h3>
               </div>
@@ -142,8 +142,8 @@ export function Gallery({ activeInst = "lfjc" }: GalleryProps) {
                 className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-academic-slate via-academic-slate/50 to-transparent z-20" />
-              <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 z-30">
-                <span className="inline-block px-2 py-0.5 sm:px-2.5 sm:py-0.5 mb-1 sm:mb-2 bg-white/10 backdrop-blur-sm border border-white/10 font-sans text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.16em] text-heritage-gold rounded-sm">
+              <div className="absolute inset-x-0 bottom-0 p-3.5 sm:p-4 z-30">
+                <span className="inline-block px-2.5 py-0.5 sm:px-2.5 sm:py-0.5 mb-1 sm:mb-2 bg-white/15 backdrop-blur-sm border border-white/20 font-sans text-xs font-bold uppercase tracking-wider text-heritage-gold rounded-sm">
                   Knowledge Hub
                 </span>
                 <h3 className="font-serif text-base sm:text-xl md:text-2xl font-bold leading-tight text-white">

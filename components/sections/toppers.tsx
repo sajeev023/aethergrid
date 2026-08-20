@@ -60,13 +60,13 @@ export function TopperPosterSection({
         <button
           onClick={() => setIsLightboxOpen(true)}
           className={cn(
-            "mt-2 sm:mt-0 inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-bold px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-lg transition-all cursor-pointer border shadow-xs hover:shadow-sm self-start sm:self-auto",
+            "mt-2 sm:mt-0 inline-flex items-center gap-1.5 sm:gap-2 text-xs font-bold px-3 py-2 sm:px-3.5 sm:py-2 rounded-lg transition-all cursor-pointer border shadow-xs hover:shadow-sm self-start sm:self-auto min-h-[38px]",
             isAmber
               ? "bg-amber-50 text-amber-900 border-amber-200 hover:bg-amber-100"
               : "bg-blue-50 text-blue-900 border-blue-200 hover:bg-blue-100"
           )}
         >
-          <ZoomIn className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+          <ZoomIn className="h-4 w-4" />
           <span>Inspect Full Resolution</span>
         </button>
       </div>

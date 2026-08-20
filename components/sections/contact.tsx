@@ -97,7 +97,7 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
                   className="object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
                 />
                 <div className="pointer-events-none absolute bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 z-10">
-                  <span className="inline-block bg-academic-slate/85 backdrop-blur-sm border border-heritage-gold/30 px-2.5 py-1 sm:px-3 sm:py-1.5 font-sans text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] text-heritage-gold-bright rounded-sm shadow-xs">
+                  <span className="inline-block bg-academic-slate/85 backdrop-blur-sm border border-heritage-gold/30 px-2.5 py-1 sm:px-3 sm:py-1.5 font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-bright rounded-sm shadow-xs">
                     Golden Jubilee Block
                   </span>
                 </div>
@@ -177,7 +177,7 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
                     />
                   </div>
 
-                  <Button asChild variant="secondary" className="w-full shadow-xs text-xs py-1.5 h-8">
+                  <Button asChild variant="secondary" className="w-full shadow-xs text-xs font-bold uppercase tracking-wider py-2.5 min-h-[44px]">
                     <a
                       href={`https://www.google.com/maps/search/?api=1&query=${getMapQuery()}`}
                       target="_blank"
@@ -206,7 +206,7 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
                       <p className="mt-1 text-xs leading-relaxed sm:leading-5 text-academic-slate/75 font-sans">
                         {getCounselingText()}
                       </p>
-                      <div className="mt-2.5 sm:mt-3 flex flex-wrap gap-y-1 gap-x-3 sm:gap-x-4 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-montfortian-blue font-sans">
+                      <div className="mt-2.5 sm:mt-3 flex flex-wrap gap-y-1 gap-x-3 sm:gap-x-4 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-montfortian-blue font-sans">
                         <span className="flex items-center gap-1">
                           <Clock className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                           Tue &amp; Thu: 10:00 AM - 1:00 PM
@@ -264,12 +264,12 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
 
             {/* Smart Interactive Form Switcher */}
             <Reveal>
-              <div id="inquiry" className="grid grid-cols-2 scroll-mt-28 gap-1 border border-stone-texture bg-white p-1 rounded-lg shadow-xs">
+              <div id="inquiry" className="grid grid-cols-2 scroll-mt-28 gap-1 border border-stone-texture bg-white p-1 rounded-xl shadow-xs">
                 <button
                   type="button"
                   onClick={() => setActiveForm("general")}
                   aria-pressed={activeForm === "general"}
-                  className={`min-w-0 px-2 py-2 sm:py-3 text-center text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-wider transition-all duration-300 rounded cursor-pointer ${
+                  className={`min-w-0 px-2 py-2.5 sm:py-3 min-h-[44px] text-center text-xs font-bold uppercase tracking-wider transition-all duration-300 rounded-lg cursor-pointer ${
                     activeForm === "general"
                       ? "bg-montfortian-blue text-white shadow-xs"
                       : "text-academic-slate/70 hover:text-academic-slate hover:bg-royal-cream/50"
@@ -281,7 +281,7 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
                   type="button"
                   onClick={() => setActiveForm("inquiry")}
                   aria-pressed={activeForm === "inquiry"}
-                  className={`min-w-0 px-2 py-2 sm:py-3 text-center text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-wider transition-all duration-300 rounded cursor-pointer ${
+                  className={`min-w-0 px-2 py-2.5 sm:py-3 min-h-[44px] text-center text-xs font-bold uppercase tracking-wider transition-all duration-300 rounded-lg cursor-pointer ${
                     activeForm === "inquiry"
                       ? "bg-montfortian-blue text-white shadow-xs"
                       : "text-academic-slate/70 hover:text-academic-slate hover:bg-royal-cream/50"

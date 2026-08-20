@@ -60,7 +60,7 @@ export function Testimonials({ activeInst = "lfjc" }: TestimonialsProps) {
                         <p className="font-serif text-sm sm:text-base font-bold text-academic-slate">
                           {testimonial.person}
                         </p>
-                        <p className="mt-0.5 sm:mt-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] text-montfortian-blue">
+                        <p className="mt-0.5 sm:mt-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-montfortian-blue">
                           {testimonial.role}
                         </p>
                       </div>
@@ -88,7 +88,7 @@ export function Testimonials({ activeInst = "lfjc" }: TestimonialsProps) {
                   <p className="font-serif text-sm sm:text-base font-bold text-academic-slate">
                     {instData.principalName}
                   </p>
-                  <p className="mt-0.5 sm:mt-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] text-montfortian-blue">
+                  <p className="mt-0.5 sm:mt-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-montfortian-blue">
                     {instData.principalRole}
                   </p>
                 </div>
@@ -107,10 +107,10 @@ export function Testimonials({ activeInst = "lfjc" }: TestimonialsProps) {
                 </p>
                 <Link
                   href="/alumni#register"
-                  className="mt-4 sm:mt-6 inline-flex items-center gap-2 self-start rounded-sm bg-heritage-gold px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-xs font-bold uppercase tracking-[0.14em] text-deep-navy hover:bg-heritage-gold-bright transition-colors"
+                  className="mt-4 sm:mt-6 inline-flex items-center gap-2 self-start rounded-sm bg-heritage-gold px-4 py-2.5 sm:px-5 sm:py-2.5 text-xs font-bold uppercase tracking-wider text-deep-navy hover:bg-heritage-gold-bright transition-colors min-h-[44px]"
                 >
-                  Submit your story
-                  <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden="true" />
+                  Join the Network
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </Link>
               </CardContent>
             </Card>

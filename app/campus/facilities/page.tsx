@@ -102,9 +102,9 @@ export default function CampusFacilitiesPage() {
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-academic-slate/85 via-academic-slate/30 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-2 sm:p-3">
+                <div className="absolute inset-x-0 bottom-0 p-2.5 sm:p-3">
                   <h3 className="font-serif text-xs sm:text-sm font-bold text-white leading-tight mb-0.5 sm:mb-1 line-clamp-1">{item.title}</h3>
-                  <p className="text-[9px] sm:text-[10px] leading-3.5 sm:leading-4 text-royal-cream/80 font-sans line-clamp-2">{item.desc}</p>
+                  <p className="text-[11px] sm:text-xs leading-4 sm:leading-4 text-royal-cream/90 font-sans line-clamp-2">{item.desc}</p>
                 </div>
               </div>
             </Reveal>
@@ -131,7 +131,7 @@ export default function CampusFacilitiesPage() {
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 90vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                   />
-                  <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 bg-heritage-gold text-white text-[8px] sm:text-[9px] font-bold uppercase tracking-widest px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full">
+                  <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 bg-heritage-gold text-white text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 sm:py-1 rounded-full">
                     {lab.badge}
                   </div>
                 </div>

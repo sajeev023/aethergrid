@@ -183,28 +183,28 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
   return (
     <>
       {/* ─── Top Utility Bar ───────────────────────────────────────────── */}
-      <div className="relative z-30 bg-deep-navy text-royal-cream/75 font-sans text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em]">
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10">
+      <div className="relative z-30 bg-deep-navy text-royal-cream/75 font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em]">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-3 sm:px-6 md:px-8 lg:px-10">
           <div className="flex items-center divide-x divide-white/10">
-            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 first:pl-0 py-1.5 sm:py-2.5 text-heritage-gold-bright">
+            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 first:pl-0 py-1.5 sm:py-2 text-heritage-gold-bright">
               Est. {instData.established}
             </span>
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2.5">
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2">
               Montfortian Heritage
             </span>
-            <span className="hidden lg:inline-flex items-center gap-1.5 px-3 py-2.5">
+            <span className="hidden lg:inline-flex items-center gap-1.5 px-3 py-2">
               Brothers of St. Gabriel Educational Society
             </span>
           </div>
           <div className="flex items-center divide-x divide-white/10">
             <Link
               href="/parent-login"
-              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-2.5 hover:text-white transition-colors"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-2 hover:text-white transition-colors"
             >
               Parent Portal
             </Link>
             <a
-              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 first:pl-0 py-1.5 sm:py-2.5 hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 first:pl-0 py-1.5 sm:py-2 hover:text-white transition-colors"
               href={`tel:${instData.phone.replace(/\s/g, "")}`}
               aria-label={`Call ${instData.name}`}
             >
@@ -212,7 +212,7 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
               <span className="hidden md:inline">{instData.phone}</span>
             </a>
             <a
-              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2.5 hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 hover:text-white transition-colors"
               href={`mailto:${instData.email}`}
               aria-label={`Email ${instData.name}`}
             >
@@ -220,7 +220,7 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
               <span className="hidden md:inline">{instData.email}</span>
             </a>
             <button
-              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 last:pr-0 py-1.5 sm:py-2.5 hover:text-white transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 last:pr-0 py-1.5 sm:py-2 hover:text-white transition-colors cursor-pointer"
               aria-label="Search site"
               onClick={() => setIsSearchOpen(true)}
             >
@@ -241,21 +241,21 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
       >
         <nav
           className={cn(
-            "mx-auto flex max-w-[1440px] items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 transition-[height] duration-300",
-            isScrolled ? "h-[56px] sm:h-[68px]" : "h-[62px] sm:h-[76px]",
+            "mx-auto flex max-w-[1440px] items-center justify-between px-3 sm:px-6 md:px-8 lg:px-10 transition-[height] duration-300",
+            isScrolled ? "h-[58px] sm:h-[68px]" : "h-[64px] sm:h-[76px]",
           )}
           aria-label="Primary navigation"
         >
           {/* ─── Brand ──────────────────────────────────────────────────── */}
           <Link
             href="/"
-            className="group flex items-center gap-2.5 sm:gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-montfortian-blue"
+            className="group flex items-center gap-2 sm:gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-montfortian-blue"
             onClick={() => setIsOpen(false)}
           >
             <div
               className={cn(
                 "relative rounded-full border border-heritage-gold/25 overflow-hidden bg-white p-0.5 flex-shrink-0 group-hover:border-heritage-gold/70 transition-all duration-300 shadow-sm group-hover:shadow-md",
-                isScrolled ? "w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 xl:w-12 xl:h-12" : "w-9 h-9 sm:w-11 sm:h-11 md:w-14 md:h-14",
+                isScrolled ? "w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 xl:w-12 xl:h-12" : "w-10 h-10 sm:w-11 sm:h-11 md:w-14 md:h-14",
               )}
             >
               <Image
@@ -268,10 +268,10 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-serif font-bold leading-none text-montfortian-blue text-base sm:text-xl xl:text-2xl transition-colors duration-300 group-hover:text-montfortian-blue/90">
+              <span className="font-serif font-bold leading-none text-montfortian-blue text-[15px] sm:text-xl xl:text-2xl transition-colors duration-300 group-hover:text-montfortian-blue/90">
                 Little Flower
               </span>
-              <span className="font-sans font-bold uppercase tracking-[0.18em] sm:tracking-[0.2em] text-heritage-gold-strong text-[8px] sm:text-[10px] xl:text-[11px] mt-0.5 sm:mt-1.5 transition-colors duration-300">
+              <span className="font-sans font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-heritage-gold-strong text-[9px] sm:text-[10px] xl:text-[11px] mt-0.5 sm:mt-1.5 transition-colors duration-300">
                 Junior College
               </span>
             </div>
@@ -338,13 +338,13 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
           {/* ─── Mobile Menu Button ──────────────────────────────────────── */}
           <button
             type="button"
-            className="premium-focus grid h-9 w-9 sm:h-11 sm:w-11 place-items-center rounded-sm border border-stone-texture/40 text-montfortian-blue transition-colors hover:bg-surface-container-low lg:hidden"
+            className="premium-focus grid h-10 w-10 sm:h-11 sm:w-11 place-items-center rounded-sm border border-stone-texture/40 text-montfortian-blue transition-colors hover:bg-surface-container-low lg:hidden cursor-pointer"
             aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
             onClick={() => setIsOpen((value) => !value)}
           >
-            {isOpen ? <X className="h-4.5 w-4.5" /> : <Menu className="h-4.5 w-4.5" />}
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </nav>
 
@@ -420,16 +420,16 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
             onDragEnd={(_, info) => {
               if (info.offset.x < -120 || info.velocity.x < -600) closeDrawer();
             }}
-            className="fixed top-0 left-0 z-50 flex h-[100dvh] w-[85%] max-w-[380px] flex-col bg-white rounded-r-2xl border-r border-stone-texture/25 shadow-float xl:hidden"
+            className="fixed top-0 left-0 z-50 flex h-[100dvh] w-[88%] max-w-[380px] flex-col bg-white rounded-r-2xl border-r border-stone-texture/25 shadow-float xl:hidden"
           >
             {/* Drawer Header */}
-            <div className="flex shrink-0 items-center justify-between px-5 py-4 border-b border-stone-texture/25">
+            <div className="flex shrink-0 items-center justify-between px-4 py-3.5 sm:px-5 sm:py-4 border-b border-stone-texture/25">
               <Link
                 href="/"
                 onClick={closeDrawer}
-                className="flex items-center gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-montfortian-blue"
+                className="flex items-center gap-2.5 sm:gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-montfortian-blue"
               >
-                <div className="rounded-full border border-heritage-gold/25 overflow-hidden bg-white p-0.5 w-11 h-11 flex-shrink-0">
+                <div className="rounded-full border border-heritage-gold/25 overflow-hidden bg-white p-0.5 w-10 h-10 sm:w-11 sm:h-11 flex-shrink-0">
                   <Image
                     src="/images/lfjc-logo.jpg"
                     alt="LFJC Official Logo"
@@ -439,10 +439,10 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-serif font-bold leading-none text-montfortian-blue text-base">
+                  <span className="font-serif font-bold leading-none text-montfortian-blue text-[15px] sm:text-base">
                     Little Flower
                   </span>
-                  <span className="font-sans font-bold uppercase tracking-[0.18em] text-heritage-gold-strong text-[9px] mt-1">
+                  <span className="font-sans font-bold uppercase tracking-[0.16em] text-heritage-gold-strong text-[9px] sm:text-[10px] mt-1">
                     Junior College
                   </span>
                 </div>
@@ -453,22 +453,22 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
                 onClick={closeDrawer}
                 aria-label="Close navigation menu"
               >
-                <X className="h-4 w-4" />
+                <X className="h-4.5 w-4.5" />
               </button>
             </div>
 
             {/* Scrollable body */}
-            <div className="flex-1 overflow-y-auto overscroll-contain px-4 py-3 sm:px-5 sm:py-4 scrollbar-none">
+            <div className="flex-1 overflow-y-auto overscroll-contain px-3.5 py-3 sm:px-5 sm:py-4 scrollbar-none">
               {/* Admissions Quick Access */}
               <Link
                 href="/admissions"
                 onClick={closeDrawer}
-                className="mb-3 block rounded-lg border border-heritage-gold/30 bg-royal-cream p-3 sm:p-4 hover:border-heritage-gold/60 transition-colors group"
+                className="mb-3 block rounded-xl border border-heritage-gold/30 bg-royal-cream p-3 sm:p-4 hover:border-heritage-gold/60 transition-colors group"
               >
-                <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-heritage-gold-strong font-sans">
+                <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] text-heritage-gold-strong font-sans">
                   Admissions 2026-27
                 </p>
-                <p className="mt-0.5 text-[11px] leading-relaxed text-academic-slate/75 font-sans">
+                <p className="mt-0.5 text-xs leading-relaxed text-academic-slate/80 font-sans">
                   Intermediate programs in MPC, BiPC, MEC, and CEC are open.
                 </p>
               </Link>
@@ -486,7 +486,7 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
                         href={item.href}
                         aria-current={isActive ? "page" : undefined}
                         className={cn(
-                          "flex min-h-[38px] items-center justify-between rounded-md px-3.5 py-2 text-[11px] sm:text-[12px] font-bold uppercase tracking-wider transition-colors font-sans",
+                          "flex min-h-[42px] items-center justify-between rounded-md px-3.5 py-2 text-xs sm:text-[13px] font-bold uppercase tracking-wider transition-colors font-sans",
                           isActive
                             ? "bg-royal-cream text-montfortian-blue border-l-[3px] border-heritage-gold-strong"
                             : "text-academic-slate hover:bg-surface-container-low hover:text-montfortian-blue",
@@ -507,9 +507,9 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
                           href={item.href}
                           aria-current={isActive ? "page" : undefined}
                           className={cn(
-                            "flex min-h-[38px] flex-1 items-center rounded-md px-3.5 py-2 text-[11px] sm:text-[12px] font-bold uppercase tracking-wider transition-colors font-sans",
+                            "flex min-h-[42px] flex-1 items-center rounded-md px-3.5 py-2 text-xs sm:text-[13px] font-bold uppercase tracking-wider transition-colors font-sans",
                             isActive
-                              ? "text-montfortian-blue"
+                              ? "text-montfortian-blue font-bold"
                               : "text-academic-slate hover:text-montfortian-blue",
                           )}
                           onClick={closeDrawer}
@@ -521,13 +521,13 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
                           aria-expanded={expanded}
                           aria-controls={subId}
                           aria-label={`${expanded ? "Collapse" : "Expand"} ${item.label} sections`}
-                          className="grid h-9 w-9 shrink-0 place-items-center rounded-md text-academic-slate/70 hover:bg-surface-container-low hover:text-montfortian-blue transition-colors cursor-pointer"
+                          className="grid h-10 w-10 shrink-0 place-items-center rounded-md text-academic-slate/70 hover:bg-surface-container-low hover:text-montfortian-blue transition-colors cursor-pointer"
                           onClick={() =>
                             setExpandedMobile((prev) => ({ ...prev, [item.label]: !prev[item.label] }))
                           }
                         >
                           <ChevronDown
-                            className={cn("h-3.5 w-3.5 transition-transform duration-200", expanded && "rotate-180")}
+                            className={cn("h-4 w-4 transition-transform duration-200", expanded && "rotate-180")}
                             aria-hidden="true"
                           />
                         </button>
@@ -563,7 +563,7 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
 
             {/* Drawer Footer */}
             <div className="shrink-0 px-4 pt-3 pb-4 sm:px-5 sm:pt-4 sm:pb-5 border-t border-stone-texture/25 bg-royal-cream/40">
-              <Button asChild size="sm" className="w-full h-9 sm:h-11 text-[10px] sm:text-[11px] tracking-wider">
+              <Button asChild size="default" className="w-full h-11 text-xs font-bold uppercase tracking-wider">
                 <Link href="/admissions" onClick={closeDrawer}>
                   Begin Admissions Inquiry
                 </Link>
@@ -571,27 +571,27 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
               <Link
                 href="/parent-login"
                 onClick={closeDrawer}
-                className="mt-2 inline-flex min-h-[38px] w-full items-center justify-center gap-1.5 rounded-sm border border-montfortian-blue/30 px-3 py-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] text-montfortian-blue transition-colors hover:bg-montfortian-blue hover:text-white font-sans"
+                className="mt-2 inline-flex min-h-[40px] w-full items-center justify-center gap-1.5 rounded-sm border border-montfortian-blue/30 px-3 py-2 text-xs font-bold uppercase tracking-[0.14em] text-montfortian-blue transition-colors hover:bg-montfortian-blue hover:text-white font-sans"
               >
-                <Lock className="h-3 w-3" aria-hidden="true" />
+                <Lock className="h-3.5 w-3.5" aria-hidden="true" />
                 Parent Portal
               </Link>
               <div className="mt-3 flex flex-col gap-1.5">
                 <a
                   href={`tel:${instData.phone.replace(/\s/g, "")}`}
-                  className="inline-flex items-center justify-center gap-1.5 text-[10px] sm:text-[11px] font-semibold text-academic-slate/80 hover:text-montfortian-blue transition-colors font-sans"
+                  className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-academic-slate/80 hover:text-montfortian-blue transition-colors font-sans py-0.5"
                 >
-                  <Phone className="h-3 w-3 text-heritage-gold-strong" aria-hidden="true" />
+                  <Phone className="h-3.5 w-3.5 text-heritage-gold-strong" aria-hidden="true" />
                   {instData.phone}
                 </a>
                 <a
                   href={`mailto:${instData.email}`}
-                  className="inline-flex items-center justify-center gap-1.5 text-[10px] sm:text-[11px] font-semibold text-academic-slate/80 hover:text-montfortian-blue transition-colors font-sans"
+                  className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-academic-slate/80 hover:text-montfortian-blue transition-colors font-sans py-0.5"
                 >
-                  <Mail className="h-3 w-3 text-heritage-gold-strong" aria-hidden="true" />
+                  <Mail className="h-3.5 w-3.5 text-heritage-gold-strong" aria-hidden="true" />
                   {instData.email}
                 </a>
-                <p className="mt-0.5 text-center text-[9px] font-bold uppercase tracking-widest text-academic-slate/45 font-sans">
+                <p className="mt-0.5 text-center text-[10px] font-bold uppercase tracking-widest text-academic-slate/50 font-sans">
                   Zahid Nagar, Uppal, Hyderabad
                 </p>
               </div>

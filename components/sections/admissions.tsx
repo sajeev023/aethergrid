@@ -79,7 +79,7 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
             whileInView="visible"
             viewport={{ once: true, margin: "-10% 0px" }}
           >
-            <motion.p variants={itemVariants} className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.24em] text-heritage-gold-strong">
+            <motion.p variants={itemVariants} className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong">
               {instData.admissionsLabel}
             </motion.p>
             <PortalHeading variants={itemVariants} className="mt-2 sm:mt-3 font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] text-deep-navy tracking-tight">
@@ -88,14 +88,14 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
             <motion.p variants={itemVariants} className="mx-auto mt-2 sm:mt-3 max-w-3xl font-editorial text-base sm:text-lg md:text-xl leading-relaxed text-academic-slate/85 italic">
               A clear entry pathway for families seeking academic excellence, moral integrity, and disciplined character formation.
             </motion.p>
-            <motion.div variants={itemVariants} className="mt-3.5 sm:mt-5 flex flex-col justify-center gap-2.5 sm:gap-3 sm:flex-row">
-              <Button asChild size="lg" className="shadow-lg text-xs">
+            <motion.div variants={itemVariants} className="mt-4 sm:mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+              <Button asChild size="lg" className="shadow-lg text-xs sm:text-sm font-bold uppercase tracking-wider min-h-[48px]">
                 <a href="#admissions-form">Begin Admissions Inquiry</a>
               </Button>
-              <Button asChild variant="secondary" size="lg" className="shadow-xs whitespace-normal h-auto py-2 sm:py-2.5 text-center text-xs">
+              <Button asChild variant="secondary" size="lg" className="shadow-xs whitespace-normal min-h-[48px] py-2.5 sm:py-3 text-center text-xs sm:text-sm font-bold uppercase tracking-wider">
                 <a href="#fee-structure">
                   View Fee & Scholarships
-                  <ArrowDown className="ml-2 h-3.5 w-3.5 text-heritage-gold-strong" aria-hidden="true" />
+                  <ArrowDown className="ml-2 h-4 w-4 text-heritage-gold-strong" aria-hidden="true" />
                 </a>
               </Button>
             </motion.div>
@@ -122,19 +122,19 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
         <div className="grid gap-3 sm:gap-4">
           <Reveal>
             <Card className="bg-white hover:shadow-panel-hover hover:border-heritage-gold/40 transition-all duration-300 border border-stone-texture/60">
-              <CardHeader className="p-3.5 pb-0 sm:p-5 sm:pb-0">
+              <CardHeader className="p-4 pb-0 sm:p-5 sm:pb-0">
                 <div className="flex items-center gap-2.5 sm:gap-3">
-                  <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-royal-cream text-heritage-gold-strong border border-stone-texture/60">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-royal-cream text-heritage-gold-strong border border-stone-texture/60">
                     <GraduationCap className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <CardTitle className="text-base sm:text-lg font-serif font-bold text-academic-slate">Academic Requirements</CardTitle>
                 </div>
               </CardHeader>
-              <CardContent className="p-3.5 sm:p-5 pt-2.5 sm:pt-3">
-                <ul className="grid gap-2 sm:gap-3 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/80 font-sans">
+              <CardContent className="p-4 sm:p-5 pt-2.5 sm:pt-3">
+                <ul className="grid gap-2.5 sm:gap-3 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/80 font-sans">
                   {getAcademicRequirements().map((item) => (
                     <li key={item} className="flex gap-2.5 sm:gap-3 items-start">
-                      <CheckCircle2 className="mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 text-montfortian-blue" aria-hidden="true" />
+                      <CheckCircle2 className="mt-0.5 sm:mt-1 h-4 w-4 shrink-0 text-montfortian-blue" aria-hidden="true" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -145,15 +145,15 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
 
           <Reveal delay={0.1}>
             <Card className="bg-white hover:shadow-panel-hover hover:border-heritage-gold/40 transition-all duration-300 border border-stone-texture/60">
-              <CardHeader className="p-3.5 pb-0 sm:p-5 sm:pb-0">
+              <CardHeader className="p-4 pb-0 sm:p-5 sm:pb-0">
                 <div className="flex items-center gap-2.5 sm:gap-3">
-                  <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-royal-cream text-montfortian-blue border border-stone-texture/60">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-royal-cream text-montfortian-blue border border-stone-texture/60">
                     <ShieldCheck className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <CardTitle className="text-base sm:text-lg font-serif font-bold text-academic-slate">The Open-Door Policy</CardTitle>
                 </div>
               </CardHeader>
-              <CardContent className="p-3.5 sm:p-5 pt-2.5 sm:pt-3">
+              <CardContent className="p-4 sm:p-5 pt-2.5 sm:pt-3">
                 <p className="leading-relaxed sm:leading-6 text-xs sm:text-sm text-academic-slate/85 font-sans">
                   As a minority educational institution governed by the Montfortian Brothers of St. Gabriel, {instData.shortName} works to provide quality instruction in a disciplined, inclusive environment, while fully aligning with standard academic regulations and institutional ethical values.
                 </p>
@@ -174,14 +174,14 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
           <div className="mt-5 sm:mt-6 grid gap-2.5 sm:gap-4 grid-cols-2 md:grid-cols-4 relative">
             {instData.admissionsSteps.map((step, index) => (
               <Reveal key={step.title} delay={index * 0.06}>
-                <div className="relative h-full border border-stone-texture/60 bg-royal-cream/35 p-3.5 sm:p-5 hover:bg-white hover:border-heritage-gold/50 hover:shadow-panel-hover transition-all duration-300 rounded-xl group flex flex-col justify-between">
+                <div className="relative h-full border border-stone-texture/60 bg-royal-cream/35 p-4 sm:p-5 hover:bg-white hover:border-heritage-gold/50 hover:shadow-panel-hover transition-all duration-300 rounded-xl group flex flex-col justify-between">
                   <div>
                     {/* Watermarked step index */}
                     <span className="absolute right-3.5 top-3.5 sm:right-5 sm:top-5 font-serif text-3xl sm:text-4xl font-bold italic text-heritage-gold/15 select-none pointer-events-none group-hover:text-heritage-gold/30 group-hover:opacity-100 transition-all duration-500">
                       0{index + 1}
                     </span>
                     
-                    <div className="flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-montfortian-blue text-white text-[11px] sm:text-xs font-bold shadow-md">
+                    <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-montfortian-blue text-white text-xs font-bold shadow-md">
                       {index + 1}
                     </div>
                     
@@ -189,7 +189,7 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
                       {step.title}
                     </h3>
 
-                    <p className="mt-1 sm:mt-1.5 text-[11px] sm:text-xs leading-relaxed sm:leading-5 text-academic-slate/75 font-sans">
+                    <p className="mt-1 sm:mt-1.5 text-xs leading-relaxed sm:leading-5 text-academic-slate/75 font-sans">
                       {step.description}
                     </p>
                   </div>
@@ -211,20 +211,20 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
 
           <div className="mt-5 sm:mt-6 grid gap-4 sm:gap-6 md:grid-cols-2">
             {/* Stream Fee Table Card */}
-            <Reveal className="border border-stone-texture bg-white p-3.5 sm:p-5 rounded-xl shadow-xs">
-              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] text-heritage-gold-strong font-sans block mb-1">
+            <Reveal className="border border-stone-texture bg-white p-4 sm:p-5 rounded-xl shadow-xs">
+              <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans block mb-1">
                 Annual Institutional Fee Overview
               </span>
               <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate mb-2.5 sm:mb-3">
                 Fee Components (2026–27 Session)
               </h3>
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-[11px] sm:text-xs font-sans border-collapse">
+                <table className="w-full text-left text-xs font-sans border-collapse">
                   <thead>
-                    <tr className="border-b border-stone-texture/60 text-heritage-gold-strong font-bold uppercase text-[9px] sm:text-[10px]">
-                      <th className="py-1.5 px-1">Component</th>
-                      <th className="py-1.5 px-1">Applicability</th>
-                      <th className="py-1.5 px-1 text-right">Basis</th>
+                    <tr className="border-b border-stone-texture/60 text-heritage-gold-strong font-bold uppercase text-[10px] sm:text-[11px]">
+                      <th className="py-2 px-1.5">Component</th>
+                      <th className="py-2 px-1.5">Applicability</th>
+                      <th className="py-2 px-1.5 text-right">Basis</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-stone-texture/30 text-academic-slate">
@@ -237,15 +237,15 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
                       { component: "Identity Card & Misc.", applicability: "All streams", basis: "One-time" },
                     ].map((row) => (
                       <tr key={row.component}>
-                        <td className="py-1.5 px-1 font-bold text-montfortian-blue">{row.component}</td>
-                        <td className="py-1.5 px-1">{row.applicability}</td>
-                        <td className="py-1.5 px-1 text-right text-academic-slate/70">{row.basis}</td>
+                        <td className="py-2 px-1.5 font-bold text-montfortian-blue">{row.component}</td>
+                        <td className="py-2 px-1.5">{row.applicability}</td>
+                        <td className="py-2 px-1.5 text-right text-academic-slate/70">{row.basis}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              <p className="mt-2.5 sm:mt-3 text-[10px] sm:text-[11px] leading-relaxed text-academic-slate/70 font-sans italic">
+              <p className="mt-2.5 sm:mt-3 text-xs leading-relaxed text-academic-slate/70 font-sans italic">
                 * Exact per-stream figures are prescribed as per Board of Intermediate Education, Telangana norms and are
                 published on our{" "}
                 <a href="/legal/disclosures" className="font-semibold text-montfortian-blue hover:underline not-italic">Public Disclosures</a>{" "}
@@ -254,36 +254,36 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
             </Reveal>
 
             {/* Scholarships & Merit Policy Card */}
-            <Reveal delay={0.1} className="border border-stone-texture bg-white p-3.5 sm:p-5 rounded-xl shadow-xs flex flex-col justify-between">
+            <Reveal delay={0.1} className="border border-stone-texture bg-white p-4 sm:p-5 rounded-xl shadow-xs flex flex-col justify-between">
               <div>
-                <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] text-heritage-gold-strong font-sans block mb-1">
+                <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans block mb-1">
                   Merit Concessions
                 </span>
                 <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate mb-2.5 sm:mb-3">
                   Scholarships & Excellence Awards
                 </h3>
-                <ul className="space-y-2 text-[11px] sm:text-xs text-academic-slate/80 font-sans">
+                <ul className="space-y-2.5 text-xs sm:text-sm text-academic-slate/80 font-sans">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-heritage-gold-strong shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-heritage-gold-strong shrink-0 mt-0.5" />
                     <span><strong>10/10 GPA / 95%+ Board Scorers:</strong> Special merit fee concessions offered at admission time.</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-heritage-gold-strong shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-heritage-gold-strong shrink-0 mt-0.5" />
                     <span><strong>BIE Board Topper Concession:</strong> Top rankers in Intermediate I year receive full academic honors.</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-heritage-gold-strong shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-heritage-gold-strong shrink-0 mt-0.5" />
                     <span><strong>Sports & Co-curricular Excellence:</strong> National and State level sports achievers are eligible for fee waivers.</span>
                   </li>
                 </ul>
               </div>
-              <div className="mt-3.5 sm:mt-4 pt-2.5 sm:pt-3 border-t border-stone-texture/40">
+              <div className="mt-4 pt-3 border-t border-stone-texture/40">
                 <a
                   href="#admissions-form"
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-montfortian-blue uppercase tracking-wider hover:text-montfortian-blue/80 transition-colors"
                 >
                   Inquire for Merit Scholarship
-                  <ArrowDown className="h-3.5 w-3.5 text-heritage-gold-strong" />
+                  <ArrowDown className="h-4 w-4 text-heritage-gold-strong" />
                 </a>
               </div>
             </Reveal>

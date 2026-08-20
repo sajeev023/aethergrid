@@ -48,7 +48,7 @@ export function About({ activeInst = "lfjc", showPrincipalMessage = true }: Abou
       {/* Page Hero */}
       <div className="mx-auto max-w-3xl text-center px-4 sm:px-6 md:px-8 pt-6 sm:pt-12 md:pt-16 pb-6 sm:pb-10 section-texture">
         <Reveal>
-          <span className="font-sans text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong uppercase tracking-[0.2em] mb-1.5 sm:mb-2 block">
+          <span className="font-sans text-xs font-bold text-heritage-gold-strong uppercase tracking-wider mb-1.5 sm:mb-2 block">
             About our college
           </span>
           <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-academic-slate tracking-tight">
@@ -66,20 +66,20 @@ export function About({ activeInst = "lfjc", showPrincipalMessage = true }: Abou
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-12 items-center">
           <Reveal className="lg:col-span-5">
             <div className="relative max-w-md lg:max-w-full mx-auto lg:mx-0">
-              <div className="absolute -inset-2 sm:-inset-3 bg-stone-texture/25 rounded-lg z-0" />
-              <div className="relative aspect-[4/3] w-full border border-stone-texture/50 bg-white p-1.5 sm:p-2 shadow-elevation z-10 rounded-lg overflow-hidden">
+              <div className="absolute -inset-2 sm:-inset-3 bg-stone-texture/25 rounded-xl z-0" />
+              <div className="relative aspect-[4/3] w-full border border-stone-texture/50 bg-white p-1.5 sm:p-2 shadow-elevation z-10 rounded-xl overflow-hidden">
                 <Image
                   src="/images/campus-drone.jpg"
                   alt="LFJC Campus — Uppal, Hyderabad"
                   fill
                   sizes="(min-width: 1024px) 40vw, 90vw"
-                  className="object-cover rounded-md"
+                  className="object-cover rounded-lg"
                 />
               </div>
               {/* Floating stat badge */}
-              <div className="absolute -bottom-3 -right-1 sm:-bottom-4 sm:-right-2 md:right-3 bg-montfortian-blue text-white p-3 sm:p-4 shadow-float border border-heritage-gold/30 rounded-lg z-20">
+              <div className="absolute -bottom-3 -right-1 sm:-bottom-4 sm:-right-2 md:right-3 bg-montfortian-blue text-white p-3 sm:p-4 shadow-float border border-heritage-gold/30 rounded-xl z-20">
                 <div className="font-serif text-xl sm:text-2xl font-bold leading-none mb-0.5">50+</div>
-                <div className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-royal-cream/85 font-sans">
+                <div className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-royal-cream/90 font-sans">
                   Years of Academic Journey
                 </div>
               </div>
@@ -88,7 +88,7 @@ export function About({ activeInst = "lfjc", showPrincipalMessage = true }: Abou
 
           <div className="lg:col-span-7">
             <Reveal delay={0.1}>
-              <span className="font-sans text-[10px] sm:text-[11px] text-heritage-gold-strong uppercase tracking-[0.2em] mb-1.5 sm:mb-2 block">
+              <span className="font-sans text-xs font-bold text-heritage-gold-strong uppercase tracking-wider mb-1.5 sm:mb-2 block">
                 Who We Are
               </span>
               <h2 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-academic-slate mb-2.5 sm:mb-4 leading-tight">
@@ -127,7 +127,7 @@ export function About({ activeInst = "lfjc", showPrincipalMessage = true }: Abou
                 <div className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-heritage-gold-bright leading-none mb-1 sm:mb-2">
                   {stat.value}
                 </div>
-                <div className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-royal-cream/65 font-sans">
+                <div className="text-xs font-bold uppercase tracking-wider text-royal-cream/75 font-sans">
                   {stat.label}
                 </div>
               </Reveal>
@@ -155,8 +155,8 @@ export function About({ activeInst = "lfjc", showPrincipalMessage = true }: Abou
                 >
                   <div className="absolute top-0 left-0 w-full h-1 bg-heritage-gold scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
                   <div>
-                    <div className="flex items-center gap-2 mb-2 sm:mb-3 text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong uppercase tracking-[0.16em] font-sans">
-                      <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+                    <div className="flex items-center gap-2 mb-2 sm:mb-3 text-xs font-bold text-heritage-gold-strong uppercase tracking-wider font-sans">
+                      <Icon className="h-4 w-4" aria-hidden="true" />
                       <span>{page.eyebrow}</span>
                     </div>
                     <h2 className="font-serif text-lg sm:text-xl font-bold text-academic-slate mb-1.5 sm:mb-2 group-hover:text-montfortian-blue transition-colors duration-300">
@@ -167,10 +167,10 @@ export function About({ activeInst = "lfjc", showPrincipalMessage = true }: Abou
                     </p>
                   </div>
                   <div className="mt-4 sm:mt-5 pt-2.5 sm:pt-3 border-t border-stone-texture/30 flex items-center justify-between">
-                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] text-montfortian-blue font-sans">
+                    <span className="text-xs font-bold uppercase tracking-wider text-montfortian-blue font-sans">
                       {page.cta}
                     </span>
-                    <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-heritage-gold-strong group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
+                    <ArrowRight className="h-4 w-4 text-heritage-gold-strong group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
                   </div>
                 </Link>
               </Reveal>
