@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, User } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { getInstitutionData } from "@/lib/site-data";
 
 
@@ -35,8 +35,8 @@ function RetiredFacultyCard({ member, index }: { member: FacultySeedMember; inde
 
   return (
     <Reveal key={`${member.name}-${index}`} delay={index * 0.02} className="h-full">
-      <Card className="group h-full flex flex-col overflow-hidden bg-white transition-all duration-[400ms] ease-[0.16,1,0.3,1] rounded-lg border-2 border-stone-texture/70 hover:border-heritage-gold/55 hover:shadow-[0_15px_30px_rgba(15,76,129,0.08)]">
-        <div className="relative aspect-[5/6] w-full overflow-hidden bg-royal-cream/50 border-b border-stone-texture/40">
+      <Card className="group h-full overflow-hidden bg-white transition-all duration-300 ease-out rounded-lg border-2 border-stone-texture/70 hover:border-heritage-gold/60 shadow-xs hover:shadow-panel-hover">
+        <div className="relative aspect-[600/720] w-full overflow-hidden bg-royal-cream/30">
           {member.image ? (
             <Image
               src={member.image}
@@ -46,29 +46,18 @@ function RetiredFacultyCard({ member, index }: { member: FacultySeedMember; inde
               className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
             />
           ) : (
-            <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-2 sm:p-3 relative">
+            <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-2 sm:p-3 relative text-center">
               <div className="absolute inset-0 opacity-[0.03] stone-pattern pointer-events-none" />
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-heritage-gold/30 flex items-center justify-center bg-white shadow-xs mb-1">
                 <span className="font-serif text-sm sm:text-base font-bold text-montfortian-blue leading-none">{initials}</span>
               </div>
-              <span className="text-[9px] sm:text-[10px] font-sans font-bold uppercase tracking-widest text-heritage-gold-strong/80">
+              <p className="text-[10px] sm:text-[11px] font-bold text-academic-slate font-serif">{member.name}</p>
+              <span className="text-[8px] sm:text-[9px] font-sans font-bold uppercase tracking-widest text-heritage-gold-strong/80 mt-0.5 sm:mt-1">
                 Emeritus
               </span>
             </div>
           )}
         </div>
-        <CardContent className="flex-1 flex flex-col justify-between p-2 sm:p-3 bg-white">
-          <div className="space-y-0.5 sm:space-y-1">
-            {member.designation && (
-              <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.15em] text-heritage-gold-strong font-sans">
-                {member.designation}
-              </p>
-            )}
-            <h3 className="font-serif text-xs sm:text-sm font-bold leading-snug text-ink group-hover:text-montfortian-blue transition-colors duration-300 line-clamp-2">
-              {member.name}
-            </h3>
-          </div>
-        </CardContent>
       </Card>
     </Reveal>
   );
