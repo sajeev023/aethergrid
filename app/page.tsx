@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -20,6 +21,12 @@ import { Reveal } from "@/components/motion/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { Section } from "@/components/section";
 import { Button } from "@/components/ui/button";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 const QUICK_LINKS = [
   { icon: BookOpen, label: "Academics", href: "/academics" },

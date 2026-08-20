@@ -90,7 +90,7 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h2" }: ContactPro
               <div className="relative h-full w-full overflow-hidden rounded-md">
                 <iframe
                   title="Little Flower Junior College Uppal Google Maps Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.410116817292!2d78.5561113!3d17.4042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9966141a7747%3A0x6338b25eb1d2797e!2sLittle%20Flower%20Junior%20College!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  src="https://maps.google.com/maps?q=Little+Flower+Junior+College+Uppal+Hyderabad&t=&z=15&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

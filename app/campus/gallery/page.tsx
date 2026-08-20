@@ -48,11 +48,47 @@ const SILVER_JUBILEE_IMAGES = [
   { id: 108, src: "/images/silver-jubilee/silver-jubilee-captains-history-1.jpg", title: "1999 Silver Jubilee — Captains of LFJC History", desc: "Historical document commemorating the principals who led LFJC across its first 25 years." },
 ];
 
+const GOLDEN_JUBILEE_TITLES = [
+  "Golden Jubilee Inaugural Ceremony & Stage Assembly",
+  "Dignitaries & Montfortian Leadership on Dais",
+  "Lighting of the Ceremonial Lamp by Distinguished Guests",
+  "Welcome Address & Montfortian Heritage Commemoration",
+  "Golden Jubilee Souvenir Release & Unveiling",
+  "Faculty Honors & Long-Standing Service Recognition",
+  "Distinguished Alumni Felicitation & Keynote",
+  "Montfort Auditorium Student Delegation & Gathering",
+  "Golden Jubilee Commemorative Plaque & Address",
+  "Cultural Invocation & Traditional Classical Dance",
+  "Student Choir Performance — Jubilee Anthem",
+  "Interactive Heritage Exhibition & Archival Showcase",
+  "Chief Guests Addressing Intermediate Students",
+  "Campus Blessing & Golden Jubilee Thanksgiving",
+  "Inter-House Cultural Competitions & Trophies",
+  "Presidential Address by Provincial Superior",
+  "Celebratory Milestone Cake Cutting & Honors",
+  "Science & Humanities Academic Project Display",
+  "Alumni Gathering & Multi-Decade Batch Reunion",
+  "Sports Champions & Athletic Medalists Felicitation",
+  "Parent-Teacher Delegation & Community Assembly",
+  "Montfortian Educational Philosophy Presentation",
+  "Golden Jubilee Memorial Tree Plantation",
+  "Student Council Leadership Investiture & Banner",
+  "Special Musical Performance by LFJC Band",
+  "Distinguished Educator Lifetime Achievement Honors",
+  "Golden Jubilee Campus Illuminations & Evening Fest",
+  "Student Art, Literary & Creative Writing Pavilion",
+  "Montfort Hall Audience & Academic Dignitaries",
+  "Golden Jubilee Valedictory & Vote of Thanks",
+  "National Anthem & Flag Salutation Ceremony",
+  "Faculty & Staff Jubilee Commemorative Portrait",
+  "Golden Jubilee Historical Monument & Campus Grounds",
+];
+
 const GOLDEN_JUBILEE_IMAGES = Array.from({ length: 33 }, (_, i) => ({
   id: 200 + i + 1,
-  title: `Golden Jubilee — Frame ${i + 1}`,
+  title: GOLDEN_JUBILEE_TITLES[i] || `Golden Jubilee Celebration — Uppal Campus`,
   src: `/images/golden-jubilee/golden_jubilee_${i + 1}.jpg`,
-  desc: "Official documentary photograph from the LFJC Golden Jubilee celebrations (1974–2024).",
+  desc: "Official documentary photograph from the LFJC Golden Jubilee celebrations (1974–2024) at Uppal campus.",
 }));
 
 const GOLDEN_JUBILEE_VIDEOS = [

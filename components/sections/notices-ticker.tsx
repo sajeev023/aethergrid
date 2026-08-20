@@ -116,9 +116,9 @@ export function NoticesTicker({ className }: { className?: string }) {
           type="button"
           onClick={handleDismiss}
           aria-label="Dismiss announcement banner"
-          className="shrink-0 text-royal-cream/60 hover:text-white p-1 rounded hover:bg-white/10 transition-colors cursor-pointer"
+          className="shrink-0 text-royal-cream/60 hover:text-white p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded hover:bg-white/10 transition-colors cursor-pointer"
         >
-          <X className="h-3.5 w-3.5" />
+          <X className="h-4 w-4" />
         </button>
       </div>
     </aside>

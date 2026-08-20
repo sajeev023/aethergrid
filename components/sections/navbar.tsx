@@ -591,8 +591,8 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
                   <Mail className="h-3.5 w-3.5 text-heritage-gold-strong" aria-hidden="true" />
                   {instData.email}
                 </a>
-                <p className="mt-0.5 text-center text-[10px] font-bold uppercase tracking-widest text-academic-slate/50 font-sans">
-                  Zahid Nagar, Uppal, Hyderabad
+                <p className="mt-0.5 text-center text-[10px] font-bold uppercase tracking-widest text-academic-slate/60 font-sans">
+                  {instData.addressLine}
                 </p>
               </div>
             </div>

@@ -273,16 +273,16 @@ export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
             type="button"
             onClick={() => setIsAutoPlaying((prev) => !prev)}
             aria-label={isAutoPlaying ? "Pause background slideshow" : "Play background slideshow"}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-deep-navy/80 hover:bg-deep-navy border border-white/20 text-white/90 hover:text-white text-[10px] font-sans font-medium backdrop-blur-xs transition-all cursor-pointer shadow-sm"
+            className="flex items-center justify-center gap-1.5 px-3 py-2 min-h-[44px] min-w-[44px] rounded-full bg-deep-navy/80 hover:bg-deep-navy border border-white/20 text-white/90 hover:text-white text-xs font-sans font-medium backdrop-blur-xs transition-all cursor-pointer shadow-sm"
           >
             {isAutoPlaying ? (
               <>
-                <Pause className="h-3 w-3 text-heritage-gold-bright" />
+                <Pause className="h-3.5 w-3.5 text-heritage-gold-bright" />
                 <span className="hidden sm:inline">Pause</span>
               </>
             ) : (
               <>
-                <Play className="h-3 w-3 text-heritage-gold-bright" />
+                <Play className="h-3.5 w-3.5 text-heritage-gold-bright" />
                 <span className="hidden sm:inline">Play</span>
               </>
             )}

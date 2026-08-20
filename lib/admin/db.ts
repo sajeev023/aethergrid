@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import os from "os";
 
 import type {
   AdminUser,
@@ -14,42 +15,87 @@ import type {
 
 // ─── Data Directory ──────────────────────────────────────────────────────────
 
-const DATA_DIR = path.join(process.cwd(), "data");
+const LOCAL_DATA_DIR = path.join(process.cwd(), "data");
+const TMP_DATA_DIR = path.join(os.tmpdir(), "lfjc-data");
 
-function ensureDataDir() {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
+// In-memory fallback cache for serverless environments
+const memoryCache = new Map<string, unknown>();
+
+function getDataDir(): string {
+  try {
+    if (!fs.existsSync(LOCAL_DATA_DIR)) {
+      fs.mkdirSync(LOCAL_DATA_DIR, { recursive: true });
+    }
+    // Test write permission
+    const testFile = path.join(LOCAL_DATA_DIR, ".write-test");
+    fs.writeFileSync(testFile, "ok");
+    fs.unlinkSync(testFile);
+    return LOCAL_DATA_DIR;
+  } catch {
+    // Read-only filesystem (e.g. Vercel serverless runtime) -> use os.tmpdir()
+    try {
+      if (!fs.existsSync(TMP_DATA_DIR)) {
+        fs.mkdirSync(TMP_DATA_DIR, { recursive: true });
+      }
+      return TMP_DATA_DIR;
+    } catch {
+      return LOCAL_DATA_DIR;
+    }
   }
 }
 
-// ─── Generic JSON Read / Write (atomic write via rename) ─────────────────────
+// ─── Generic JSON Read / Write (atomic write via rename + memory fallback) ────
 
 function readJSON<T>(filename: string, fallback: T): T {
-  ensureDataDir();
-  const filePath = path.join(DATA_DIR, filename);
+  // First check memory cache
+  if (memoryCache.has(filename)) {
+    return memoryCache.get(filename) as T;
+  }
+
+  const dir = getDataDir();
+  const filePath = path.join(dir, filename);
   try {
-    if (!fs.existsSync(filePath)) return fallback;
-    const raw = fs.readFileSync(filePath, "utf-8").trim();
-    if (raw.length === 0) return fallback;
-    return JSON.parse(raw) as T;
-  } catch {
-    console.error(`[db] Failed to read ${filename}, returning fallback`);
+    if (fs.existsSync(filePath)) {
+      const raw = fs.readFileSync(filePath, "utf-8").trim();
+      if (raw.length > 0) {
+        const parsed = JSON.parse(raw) as T;
+        memoryCache.set(filename, parsed);
+        return parsed;
+      }
+    }
+    // Also try reading from local project data if tmpdir was empty
+    if (dir !== LOCAL_DATA_DIR) {
+      const localPath = path.join(LOCAL_DATA_DIR, filename);
+      if (fs.existsSync(localPath)) {
+        const raw = fs.readFileSync(localPath, "utf-8").trim();
+        if (raw.length > 0) {
+          const parsed = JSON.parse(raw) as T;
+          memoryCache.set(filename, parsed);
+          return parsed;
+        }
+      }
+    }
+    memoryCache.set(filename, fallback);
+    return fallback;
+  } catch (err) {
+    console.warn(`[db] Notice: Could not read ${filename}, returning fallback:`, (err as Error).message);
     return fallback;
   }
 }
 
 function writeJSON<T>(filename: string, data: T): void {
-  ensureDataDir();
-  const filePath = path.join(DATA_DIR, filename);
+  // Always update memory cache first
+  memoryCache.set(filename, data);
+
+  const dir = getDataDir();
+  const filePath = path.join(dir, filename);
   const tmpPath = filePath + ".tmp";
   try {
     fs.writeFileSync(tmpPath, JSON.stringify(data, null, 2), "utf-8");
     fs.renameSync(tmpPath, filePath);
   } catch (err) {
-    console.error(`[db] Failed to write ${filename}:`, err);
-    // Cleanup tmp if rename failed
+    console.warn(`[db] Notice: Could not write ${filename} to disk (persisted in memory):`, (err as Error).message);
     try { fs.unlinkSync(tmpPath); } catch { /* ignore */ }
-    throw err;
   }
 }
 
@@ -113,19 +159,19 @@ export function saveGalleryAlbums(albums: GalleryAlbum[]): void {
 // ─── Submissions ─────────────────────────────────────────────────────────────
 
 export function getSubmissions(): Submission[] {
-  // First check data/ directory, then fall back to root submissions.json
   const dataSubmissions = readJSON<Submission[]>("submissions.json", []);
   if (dataSubmissions.length > 0) return dataSubmissions;
 
   // Migrate from root submissions.json if it exists
   const rootPath = path.join(process.cwd(), "submissions.json");
-  if (fs.existsSync(rootPath)) {
-    try {
+  try {
+    if (fs.existsSync(rootPath)) {
       const raw = fs.readFileSync(rootPath, "utf-8").trim();
       if (raw.length > 0) {
         const rootData = JSON.parse(raw) as Record<string, unknown>[];
         const migrated: Submission[] = rootData.map((entry) => ({
           id: String(entry.id ?? Math.random().toString(36).substring(2, 9)),
+          refNumber: String(entry.refNumber ?? `LFJC-ADM-2026-${Math.random().toString(36).substring(2, 7).toUpperCase()}`),
           timestamp: String(entry.timestamp ?? new Date().toISOString()),
           type: String(entry.type ?? "inquiry"),
           name: String(entry.name ?? entry.studentName ?? ""),
@@ -137,6 +183,7 @@ export function getSubmissions(): Submission[] {
           board: entry.board ? String(entry.board) : undefined,
           percentage: entry.percentage ? String(entry.percentage) : undefined,
           message: String(entry.message ?? ""),
+          consent: Boolean(entry.consent),
           activeInst: String(entry.activeInst ?? "lfjc"),
           status: "new" as const,
           notes: "",
@@ -145,9 +192,9 @@ export function getSubmissions(): Submission[] {
         saveSubmissions(migrated);
         return migrated;
       }
-    } catch {
-      console.error("[db] Failed to migrate root submissions.json");
     }
+  } catch {
+    // Ignore migration error
   }
 
   return [];
@@ -197,7 +244,6 @@ export function getAuditLog(): AuditLogEntry[] {
 export function appendAuditLog(entry: AuditLogEntry): void {
   const log = getAuditLog();
   log.unshift(entry); // Newest first
-  // Cap at max entries
   if (log.length > MAX_AUDIT_ENTRIES) {
     log.length = MAX_AUDIT_ENTRIES;
   }

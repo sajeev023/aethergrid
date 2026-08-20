@@ -260,8 +260,8 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
           </nav>
         </div>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 pb-3.5 sm:pb-5 -mt-1 sm:-mt-2">
-          <p className="text-[9px] sm:text-[10px] text-royal-cream/30 font-sans text-center md:text-right">
-            Zahid Nagar, Opposite Survey of India, Uppal, Hyderabad 500039
+          <p className="text-[9px] sm:text-[10px] text-royal-cream/45 font-sans text-center md:text-right">
+            {instData.addressLine}
           </p>
         </div>
       </div>

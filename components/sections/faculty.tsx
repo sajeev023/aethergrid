@@ -41,7 +41,7 @@ const SUB_PAGES = [
 ];
 
 export function Faculty({ activeInst = "lfjc", headingLevel = "h2" }: FacultyProps) {
-  void headingLevel;
+  const Heading = headingLevel;
   const instData = getInstitutionData(activeInst);
 
   return (
@@ -51,9 +51,9 @@ export function Faculty({ activeInst = "lfjc", headingLevel = "h2" }: FacultyPro
           <span className="font-sans text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong uppercase tracking-[0.2em] mb-1.5 sm:mb-2 block">
             Our Mentors
           </span>
-          <h1 className="font-serif text-2xl sm:text-3xl font-bold leading-tight text-academic-slate md:text-4xl tracking-tight">
+          <Heading className="font-serif text-2xl sm:text-3xl font-bold leading-tight text-academic-slate md:text-4xl tracking-tight">
             Faculty Excellence
-          </h1>
+          </Heading>
           <p className="mt-2 sm:mt-4 text-xs sm:text-sm leading-relaxed sm:leading-7 text-academic-slate/75 font-sans max-w-2xl mx-auto">
             {instData.shortName}&apos;s academic departments are staffed by highly qualified educators committed to excellence in academics, languages, sciences, commerce, and human formation.
           </p>

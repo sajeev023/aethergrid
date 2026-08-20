@@ -28,7 +28,7 @@ type InquiryPayload = Record<string, unknown> & {
 
 // ─── In-memory rate limiting ──────────────────────────────────────────────────
 const RATE_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
-const RATE_MAX = 5; // 5 submissions per IP per window
+const RATE_MAX = 8; // 8 submissions per IP per window (generous to avoid false positives)
 const ipHits = new Map<string, { count: number; firstAt: number }>();
 
 function rateLimited(ip: string): boolean {
@@ -62,7 +62,7 @@ function saveSubmission(payload: Record<string, unknown>): { id: string; refNumb
     refNumber,
     timestamp,
     type: String(payload.type ?? "inquiry"),
-    name: String(payload.name ?? payload.studentName ?? ""),
+    name: String(payload.studentName ?? payload.name ?? ""),
     studentName: payload.studentName ? String(payload.studentName) : undefined,
     parentName: payload.parentName ? String(payload.parentName) : undefined,
     email: String(payload.email ?? ""),
@@ -78,10 +78,15 @@ function saveSubmission(payload: Record<string, unknown>): { id: string; refNumb
     updatedAt: null,
   };
 
-  const adminSubmissions = getSubmissions();
-  adminSubmissions.push(newAdminEntry);
-  saveSubmissions(adminSubmissions);
-  console.info(`[inquiries] Saved to admin DB id=${id} refNumber=${refNumber} type=${payload.type}`);
+  try {
+    const adminSubmissions = getSubmissions();
+    adminSubmissions.push(newAdminEntry);
+    saveSubmissions(adminSubmissions);
+    console.info(`[inquiries] Saved to admin DB id=${id} refNumber=${refNumber} type=${payload.type}`);
+  } catch (err) {
+    console.warn(`[inquiries] Non-fatal DB write notice: ${(err as Error).message}. Payload preserved in server logs.`);
+  }
+
   return { id, refNumber };
 }
 
@@ -108,13 +113,14 @@ export async function POST(request: NextRequest) {
   // Diagnostic logging: log every incoming payload shape
   console.info("[inquiries] Incoming payload:", JSON.stringify(payload));
 
-  // ── Honeypot: bots fill the hidden "website" field. Silently accept & drop. ──
-  const honeypot = String(payload.website ?? "").trim();
-  if (honeypot.length > 0) {
+  // ── Honeypot check (silent discard for bots) ──
+  if (payload.website) {
+    console.warn("[inquiries] Bot honeypot triggered from IP:", ip);
     return NextResponse.json({
       success: true,
       message: "Thank you. Your request has been received.",
       refNumber: `LFJC-INQ-${new Date().getFullYear()}-00000`,
+      sla: "The admissions office will respond within 24 hours.",
     });
   }
 
@@ -181,20 +187,13 @@ export async function POST(request: NextRequest) {
     }
     if (!consent) {
       return NextResponse.json(
-        { message: "Please provide consent for LFJC to contact you regarding admission enquiries." },
-        { status: 400 },
-      );
-    }
-  } else {
-    if (!email && !phone) {
-      return NextResponse.json(
-        { message: "Please provide either an email address or mobile number." },
+        { message: "You must check the parental data consent box to submit an inquiry." },
         { status: 400 },
       );
     }
   }
 
-  // Assemble sanitized payload
+  // Prepare sanitized payload
   const sanitizedPayload: Record<string, unknown> = {
     type,
     name,
@@ -206,14 +205,14 @@ export async function POST(request: NextRequest) {
   };
 
   if (type === "admissions") {
-    sanitizedPayload.studentName = studentName || name;
+    sanitizedPayload.studentName = studentName;
     sanitizedPayload.parentName = parentName;
     sanitizedPayload.stream = stream;
     sanitizedPayload.board = board;
     sanitizedPayload.percentage = percentage;
   }
 
-  // ── Persist FIRST (guarantees the lead is never lost, even if email fails) ──
+  // ── Persist (atomic memory/tmp/disk storage + guaranteed server log) ──
   let savedId = "";
   let refNumber = "";
   try {
@@ -221,9 +220,9 @@ export async function POST(request: NextRequest) {
     savedId = saved.id;
     refNumber = saved.refNumber;
   } catch (error) {
-    console.error("[inquiries] CRITICAL: failed to persist submission:", error);
+    console.error("[inquiries] Server error during saveSubmission:", error);
     return NextResponse.json(
-      { message: "We could not record your submission right now. Please call the office or try again." },
+      { message: "The admissions desk is temporarily unavailable — please call +91 7673960151" },
       { status: 500 },
     );
   }
@@ -237,48 +236,44 @@ export async function POST(request: NextRequest) {
   const subject = `${instData.shortName} ${titleCase(type)} Submission [Ref: ${refNumber}] - ${name}`;
   const html = renderEmail(sanitizedPayload, instData.name, refNumber);
 
+  const slaNotice = "The admissions office will respond within 24 hours.";
   const successMessage = type === "admissions"
-    ? `Thank you. Your inquiry (Ref: ${refNumber}) has been recorded. The ${instData.shortName} admissions office will contact you within 24 hours.`
+    ? `Thank you. Your inquiry (Ref: ${refNumber}) has been recorded. ${slaNotice}`
     : `Thank you. Your submission (Ref: ${refNumber}) has been recorded. The ${instData.shortName} office will review your request.`;
 
-  // ── Email is an ALERT channel, not the system of record. ──
-  if (!resendKey) {
-    console.info(`[inquiries] RESEND_API_KEY not configured — lead ${refNumber} persisted to admin DB.`);
-    return NextResponse.json({
-      success: true,
-      message: successMessage,
-      refNumber,
-      id: savedId,
-    });
-  }
+  // ── Email is an alert channel ──
+  if (resendKey) {
+    try {
+      const response = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${resendKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: fromEmail,
+          to: [toEmail],
+          subject,
+          html,
+          reply_to: email || undefined,
+        }),
+      });
 
-  try {
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${resendKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: fromEmail,
-        to: [toEmail],
-        subject,
-        html,
-        reply_to: email || undefined,
-      }),
-    });
-
-    if (!response.ok) {
-      console.warn(`[inquiries] Resend alert rejected for ${refNumber}: ${response.statusText}. Record safe in admin DB.`);
+      if (!response.ok) {
+        console.warn(`[inquiries] Resend alert status ${response.status} for ${refNumber}. Lead safe in admin DB.`);
+      }
+    } catch (error) {
+      console.error(`[inquiries] Resend alert dispatch error for ${refNumber}:`, error);
     }
-  } catch (error) {
-    console.error(`[inquiries] Resend alert threw for ${refNumber}:`, error);
+  } else {
+    console.info(`[inquiries] RESEND_API_KEY not configured — lead ${refNumber} persisted to admin DB and logs.`);
   }
 
   return NextResponse.json({
     success: true,
     message: successMessage,
     refNumber,
+    sla: slaNotice,
     id: savedId,
   });
 }

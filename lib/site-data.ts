@@ -21,16 +21,19 @@ import {
 
 import type { AlumniVideo } from "@/lib/admin/types";
 
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.lfjc.co.in";
+export const CANONICAL_ADDRESS = "Survey No. 6, Uppal - Ramanthapur Road, Uppal, Hyderabad, Telangana 500039";
+
 export const lfjcData = {
   key: "lfjc",
   name: "Little Flower Junior College",
   shortName: "LFJC",
   tagline: "Knowledge is Truth.",
   established: "1974",
-  siteUrl: "https://www.lfjc.co.in",
+  siteUrl: SITE_URL,
   email: "info@lfjc.co.in",
   phone: "+91 7673960151",
-  addressLine: "Survey No. 6, Uppal - Ramanthapur Road, Uppal, Hyderabad, Telangana 500039",
+  addressLine: CANONICAL_ADDRESS,
   locality: "Hyderabad",
   region: "Telangana",
   postalCode: "500039",

@@ -1,8 +1,8 @@
-import { getInstitutionData } from "@/lib/site-data";
+import { getInstitutionData, SITE_URL } from "@/lib/site-data";
 
 export function buildStructuredData(activeInst: "root" | "lfs" | "lfjc" | "lfdc" = "lfjc") {
   const instData = getInstitutionData(activeInst);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : instData.siteUrl);
+  const siteUrl = SITE_URL;
 
   const address = {
     "@type": "PostalAddress",
@@ -60,8 +60,7 @@ export function buildStructuredData(activeInst: "root" | "lfs" | "lfjc" | "lfdc"
 }
 
 export function buildBreadcrumbStructuredData(items: { name: string; item: string }[]) {
-  const rootData = getInstitutionData("lfjc");
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : rootData.siteUrl);
+  const siteUrl = SITE_URL;
 
   return {
     "@context": "https://schema.org",

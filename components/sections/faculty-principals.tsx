@@ -1,6 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Award, ShieldCheck, User } from "lucide-react";
+import { Award, ShieldCheck, User, Eye } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
 import { Card, CardContent } from "@/components/ui/card";
@@ -20,11 +23,42 @@ type FacultySeedMember = {
   category?: FacultyCategory;
 };
 
+const ARCHIVAL_ORIGINALS: Record<string, { src: string; caption: string }> = {
+  "Rev. Bro. Vincent": {
+    src: "/images/silver-jubilee/silver-jubilee-bro-vincent.jpg",
+    caption: "Original 1999 Silver Jubilee Archival Negative",
+  },
+  "Dr. Emmanuel": {
+    src: "/images/silver-jubilee/silver-jubilee-dr-emmanuel.jpg",
+    caption: "Original 1999 Silver Jubilee Archival Negative",
+  },
+  "Rev. Bro. Claude": {
+    src: "/images/silver-jubilee/silver-jubilee-bro-claude.jpg",
+    caption: "Original 1999 Silver Jubilee Archival Negative",
+  },
+  "Rev. Bro. John Kallarackal": {
+    src: "/images/silver-jubilee/silver-jubilee-bro-john-kallarackal.jpg",
+    caption: "Original 1999 Silver Jubilee Archival Negative",
+  },
+  "Rev. Bro. Celestine": {
+    src: "/images/silver-jubilee/silver-jubilee-bro-celestine.jpg",
+    caption: "Original 1999 Silver Jubilee Archival Negative",
+  },
+  "Rev. Bro. M.A. George": {
+    src: "/images/silver-jubilee/silver-jubilee-bro-george.jpg",
+    caption: "Original 1999 Silver Jubilee Archival Negative",
+  },
+};
+
 function getFacultyCategory(member: FacultySeedMember): FacultyCategory {
   return member.category ?? "present";
 }
 
 function FormerPrincipalCard({ member, index }: { member: FacultySeedMember; index: number }) {
+  const original = ARCHIVAL_ORIGINALS[member.name];
+  const hasOriginal = Boolean(original);
+  const [showComparison, setShowComparison] = useState(false);
+
   return (
     <Reveal key={`${member.name}-${index}`} delay={index * 0.03} className="h-full">
       <Card className="group h-full flex flex-col overflow-hidden bg-white transition-all duration-300 ease-out rounded-lg border-2 border-stone-texture/70 hover:border-heritage-gold/60 shadow-xs hover:shadow-panel-hover">
@@ -32,7 +66,7 @@ function FormerPrincipalCard({ member, index }: { member: FacultySeedMember; ind
           {member.image ? (
             <>
               <Image
-                src={member.image}
+                src={showComparison && original ? original.src : member.image}
                 alt={member.name}
                 fill
                 sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
@@ -40,9 +74,23 @@ function FormerPrincipalCard({ member, index }: { member: FacultySeedMember; ind
               />
               <div className="absolute top-2 left-2 z-10">
                 <span className="inline-flex items-center gap-1 bg-deep-navy/85 backdrop-blur-xs text-heritage-gold-bright border border-heritage-gold/30 px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-sans font-bold uppercase tracking-wider shadow-sm">
-                  Restored Archival Portrait
+                  {hasOriginal
+                    ? (showComparison ? "Archival Negative (1999)" : "Restored Archival Portrait")
+                    : "Heritage Portrait Illustration"}
                 </span>
               </div>
+
+              {hasOriginal && (
+                <button
+                  type="button"
+                  onClick={() => setShowComparison((prev) => !prev)}
+                  className="absolute bottom-2 right-2 z-10 inline-flex items-center gap-1 bg-deep-navy/90 hover:bg-montfortian-blue text-white px-2 py-1 rounded text-[9px] font-sans font-bold uppercase tracking-wider shadow-md transition-colors cursor-pointer border border-heritage-gold/30"
+                  aria-label={`Toggle original archival negative comparison for ${member.name}`}
+                >
+                  <Eye className="h-3 w-3 text-heritage-gold-bright" />
+                  <span>{showComparison ? "View Restored" : "Compare Original"}</span>
+                </button>
+              )}
             </>
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-2 sm:p-3 relative text-center">
@@ -64,6 +112,11 @@ function FormerPrincipalCard({ member, index }: { member: FacultySeedMember; ind
             <p className="text-[10px] sm:text-[11px] font-sans font-bold text-heritage-gold-strong uppercase tracking-wider mt-0.5">
               {member.designation}
             </p>
+            {hasOriginal && (
+              <p className="text-[9px] text-academic-slate/65 font-sans mt-1">
+                Restored from the original 1970s/1990s archival photograph (thumbnail)
+              </p>
+            )}
           </div>
           <div className="mt-2.5 pt-2 border-t border-stone-texture/30 flex items-center justify-between text-[9px] text-academic-slate/60 font-sans">
             <span>50-Year Heritage Archive</span>
@@ -179,10 +232,13 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
                     <span className="text-[10px] sm:text-[11px] font-sans font-bold text-heritage-gold-strong uppercase tracking-wider block mt-0.5">
                       {p.tenure}
                     </span>
-                    <p className="text-xs font-sans text-academic-slate/75 leading-relaxed mt-1.5 sm:mt-2">{p.desc}</p>
+                    <p className="text-xs text-academic-slate/75 font-sans mt-1.5 leading-relaxed">
+                      {p.desc}
+                    </p>
                   </div>
-                  <div className="mt-2.5 sm:mt-3 pt-2 border-t border-stone-texture/30 text-[10px] font-bold text-montfortian-blue uppercase tracking-wider font-sans">
-                    Silver Jubilee Archival Photo • Verified 1999
+                  <div className="mt-3 pt-2 border-t border-stone-texture/40 flex items-center justify-between text-[10px] text-academic-slate/60 font-sans">
+                    <span>Restored Archival Negative</span>
+                    <span className="font-semibold text-montfortian-blue">Dec 11, 1999</span>
                   </div>
                 </div>
               </Reveal>
@@ -190,35 +246,15 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
           </div>
         </Reveal>
 
-        {/* Legacy Note */}
-        <Reveal className="mt-6 sm:mt-10 border-t border-stone-texture/30 pt-5 sm:pt-8">
-          <div className="max-w-2xl mx-auto text-center">
-            <span className="gold-rule gold-rule-center" />
-            <p className="font-editorial text-sm sm:text-base leading-relaxed text-academic-slate/75 italic mt-3 sm:mt-4">
-              &ldquo;The principals of Little Flower Junior College have carried forward the Montfortian mission with unwavering dedication — ensuring that every student who passed through these gates left transformed.&rdquo;
-            </p>
-            <p className="mt-2 sm:mt-3 text-[10px] sm:text-[11px] font-sans text-academic-slate/50 uppercase tracking-widest">
-              Golden Jubilee 1974–2024 • LFJC Archives
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal className="mt-5 sm:mt-8 flex flex-wrap justify-center gap-2.5 sm:gap-4">
+        {/* Back Link */}
+        <div className="mt-6 sm:mt-10 text-center">
           <Link
-            href="/faculty/teaching"
-            className="inline-flex items-center gap-2 border border-stone-texture bg-white px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-academic-slate hover:bg-academic-slate hover:text-white hover:border-academic-slate transition-all duration-300 rounded-sm font-sans min-h-[44px]"
+            href="/faculty"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-montfortian-blue hover:text-montfortian-blue-light transition-colors font-sans"
           >
-            Teaching &amp; Support Staff
-            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+            ← Return to All Faculty &amp; Academic Staff
           </Link>
-          <Link
-            href="/faculty/retired"
-            className="inline-flex items-center gap-2 border border-heritage-gold/40 bg-heritage-gold/5 px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-heritage-gold-strong hover:bg-heritage-gold hover:text-white hover:border-heritage-gold transition-all duration-300 rounded-sm font-sans min-h-[44px]"
-          >
-            Retired Faculty
-            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-          </Link>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
