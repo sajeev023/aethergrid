@@ -35,10 +35,10 @@ const departmentOrder = [
   "Chemistry Department",
   "Biology Department",
   "Humanities Department",
-  "Commerce Department",
   "Languages Department",
-  "Computer Science Department",
-  "Other Departments",
+  "Computer & Library Department",
+  "Physical Education & Sports",
+  "Helping Department",
   "Office Administration",
   "Support Staff",
 ];

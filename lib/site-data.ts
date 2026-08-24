@@ -331,15 +331,14 @@ export const lfjcData = {
       department: "Humanities Department",
       image: "/images/faculty/varunreddy.jpg"
     },
-    // 7. Commerce Department
     {
       name: "Mr. Nagarjuna Kumar",
       designation: "Coordinator & Faculty",
       subject: "Commerce & Accountancy",
-      department: "Commerce Department",
+      department: "Humanities Department",
       image: "/images/faculty/nagarjunakumar.jpg"
     },
-    // 8. Languages Department
+    // 7. Languages Department
     {
       name: "Dr. Raghavendra Gupta",
       designation: "Head of Dept (Languages)",
@@ -396,15 +395,15 @@ export const lfjcData = {
       department: "Languages Department",
       image: "/images/faculty/shyamk.jpg"
     },
-    // 9. Computer Science Department
+    // 8. Computer & Library Department
     {
-      name: "Mr. G. Naresh",
-      designation: "Faculty & Lab In-charge",
+      name: "Mr. N. Sai",
+      designation: "Faculty",
       subject: "Computer Science",
-      department: "Computer Science Department",
-      image: "/images/faculty/gnaresh.jpg"
+      department: "Computer & Library Department",
+      image: "/images/faculty/sailu.jpg"
     },
-    // 10. Physical Education & Sports
+    // 9. Physical Education & Sports
     {
       name: "Mr. M L Prasad",
       designation: "Physical Director",
@@ -412,21 +411,22 @@ export const lfjcData = {
       department: "Physical Education & Sports",
       image: "/images/faculty/prasad.jpg"
     },
-    // 11. Office Administration & IT
+    // 10. Helping Department
     {
-      name: "Mr. N. Sai",
-      designation: "IT & Systems Administrator",
-      subject: "Campus IT & Network Systems",
-      department: "Office Administration",
-      image: "/images/faculty/sailu.jpg"
+      name: "Mr. G. Naresh",
+      designation: "Faculty & Lab In-charge",
+      subject: "Computer Science",
+      department: "Helping Department",
+      image: "/images/faculty/gnaresh.jpg"
     },
     {
-      name: "Ms. Shiji J",
+      name: "Ms. Shriji",
       designation: "Office Staff",
       subject: "Office Operations",
-      department: "Office Administration",
+      department: "Helping Department",
       image: "/images/faculty/shriji.jpg"
     },
+    // 11. Office Administration
     {
       name: "Ms. J. Sri Lakshmi",
       designation: "Office Staff",

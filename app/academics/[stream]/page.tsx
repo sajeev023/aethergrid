@@ -119,7 +119,9 @@ const ACADEMIC_DEPARTMENTS = new Set([
   "Biology Department",
   "Humanities Department",
   "Commerce Department",
+  "Languages Department",
   "Computer Science Department",
+  "Computer & Library Department",
 ]);
 
 function streamFaculty(streamKey: string) {
