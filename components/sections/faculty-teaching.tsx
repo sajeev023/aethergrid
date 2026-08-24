@@ -38,7 +38,6 @@ const departmentOrder = [
   "Languages Department",
   "Computer & Library Department",
   "Physical Education & Sports",
-  "Helping Department",
   "Office Administration",
   "Support Staff",
 ];

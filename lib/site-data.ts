@@ -403,6 +403,13 @@ export const lfjcData = {
       department: "Computer & Library Department",
       image: "/images/faculty/sailu.jpg"
     },
+    {
+      name: "Ms. Shriji",
+      designation: "Office Staff",
+      subject: "Office Operations",
+      department: "Computer & Library Department",
+      image: "/images/faculty/shriji.jpg"
+    },
     // 9. Physical Education & Sports
     {
       name: "Mr. M L Prasad",
@@ -411,22 +418,7 @@ export const lfjcData = {
       department: "Physical Education & Sports",
       image: "/images/faculty/prasad.jpg"
     },
-    // 10. Helping Department
-    {
-      name: "Mr. G. Naresh",
-      designation: "Faculty & Lab In-charge",
-      subject: "Computer Science",
-      department: "Helping Department",
-      image: "/images/faculty/gnaresh.jpg"
-    },
-    {
-      name: "Ms. Shriji",
-      designation: "Office Staff",
-      subject: "Office Operations",
-      department: "Helping Department",
-      image: "/images/faculty/shriji.jpg"
-    },
-    // 11. Office Administration
+    // 10. Office Administration
     {
       name: "Ms. J. Sri Lakshmi",
       designation: "Office Staff",
@@ -462,13 +454,20 @@ export const lfjcData = {
       department: "Office Administration",
       image: "/images/faculty/archana.jpg"
     },
-    // 12. Support Staff
+    // 11. Support Staff
     {
       name: "Mr. Anthony",
       designation: "Support Staff",
       subject: "Campus Operations",
       department: "Support Staff",
       image: "/images/faculty/anthony.jpg"
+    },
+    {
+      name: "Mr. G. Naresh",
+      designation: "Faculty & Lab In-charge",
+      subject: "Computer Science",
+      department: "Support Staff",
+      image: "/images/faculty/gnaresh.jpg"
     },
     {
       name: "Ms. Jahagir",
@@ -547,7 +546,7 @@ export const lfjcData = {
       department: "Support Staff",
       image: "/images/faculty/suraj.jpg"
     },
-    // 13. Former Principals (Verified Institutional Chronology 1974–Present)
+    // 12. Former Principals (Verified Institutional Chronology 1974–Present)
     {
       name: "Rev. Bro. Vincent",
       designation: "Founder Principal (1974–76 & 1982–83)",
@@ -611,7 +610,7 @@ export const lfjcData = {
       category: "former-principal",
       image: "/images/principals/bro_franky.jpg"
     },
-    // 14. Retired Faculty / Former Teachers
+    // 13. Retired Faculty / Former Teachers
     {
       name: "Dr. Anitha Lincon",
       designation: "Faculty (Retired)",
