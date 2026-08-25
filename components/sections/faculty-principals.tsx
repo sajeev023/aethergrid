@@ -1,9 +1,6 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Award, ShieldCheck, User, Eye } from "lucide-react";
+import { Award, ShieldCheck, User } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
 import { Card, CardContent } from "@/components/ui/card";
@@ -23,50 +20,19 @@ type FacultySeedMember = {
   category?: FacultyCategory;
 };
 
-const ARCHIVAL_ORIGINALS: Record<string, { src: string; caption: string }> = {
-  "Rev. Bro. Vincent": {
-    src: "/images/silver-jubilee/silver-jubilee-bro-vincent.jpg",
-    caption: "Original 1999 Silver Jubilee Archival Negative",
-  },
-  "Dr. Emmanuel": {
-    src: "/images/silver-jubilee/silver-jubilee-dr-emmanuel.jpg",
-    caption: "Original 1999 Silver Jubilee Archival Negative",
-  },
-  "Rev. Bro. Claude": {
-    src: "/images/silver-jubilee/silver-jubilee-bro-claude.jpg",
-    caption: "Original 1999 Silver Jubilee Archival Negative",
-  },
-  "Rev. Bro. John Kallarackal": {
-    src: "/images/silver-jubilee/silver-jubilee-bro-john-kallarackal.jpg",
-    caption: "Original 1999 Silver Jubilee Archival Negative",
-  },
-  "Rev. Bro. Celestine": {
-    src: "/images/silver-jubilee/silver-jubilee-bro-celestine.jpg",
-    caption: "Original 1999 Silver Jubilee Archival Negative",
-  },
-  "Rev. Bro. M.A. George": {
-    src: "/images/silver-jubilee/silver-jubilee-bro-george.jpg",
-    caption: "Original 1999 Silver Jubilee Archival Negative",
-  },
-};
-
 function getFacultyCategory(member: FacultySeedMember): FacultyCategory {
   return member.category ?? "present";
 }
 
 function FormerPrincipalCard({ member, index }: { member: FacultySeedMember; index: number }) {
-  const original = ARCHIVAL_ORIGINALS[member.name];
-  const hasOriginal = Boolean(original);
-  const [showComparison, setShowComparison] = useState(false);
-
   return (
     <Reveal key={`${member.name}-${index}`} delay={index * 0.03} className="h-full">
       <Card className="group h-full flex flex-col overflow-hidden bg-white transition-all duration-300 ease-out rounded-lg border-2 border-stone-texture/70 hover:border-heritage-gold/60 shadow-xs hover:shadow-panel-hover">
-        <div className="relative aspect-[3/4] sm:aspect-[4/5] md:aspect-[1054/1492] w-full overflow-hidden bg-royal-cream/30 border-b border-stone-texture/40">
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-royal-cream/30 border-b border-stone-texture/40">
           {member.image ? (
             <>
               <Image
-                src={showComparison && original ? original.src : member.image}
+                src={member.image}
                 alt={member.name}
                 fill
                 sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
@@ -74,23 +40,9 @@ function FormerPrincipalCard({ member, index }: { member: FacultySeedMember; ind
               />
               <div className="absolute top-2 left-2 z-10">
                 <span className="inline-flex items-center gap-1 bg-deep-navy/85 backdrop-blur-xs text-heritage-gold-bright border border-heritage-gold/30 px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-sans font-bold uppercase tracking-wider shadow-sm">
-                  {hasOriginal
-                    ? (showComparison ? "Archival Negative (1999)" : "Restored Archival Portrait")
-                    : "Heritage Portrait Illustration"}
+                  Restored Archival Portrait
                 </span>
               </div>
-
-              {hasOriginal && (
-                <button
-                  type="button"
-                  onClick={() => setShowComparison((prev) => !prev)}
-                  className="absolute bottom-2 right-2 z-10 inline-flex items-center gap-1 bg-deep-navy/90 hover:bg-montfortian-blue text-white px-2 py-1 rounded text-[9px] font-sans font-bold uppercase tracking-wider shadow-md transition-colors cursor-pointer border border-heritage-gold/30"
-                  aria-label={`Toggle original archival negative comparison for ${member.name}`}
-                >
-                  <Eye className="h-3 w-3 text-heritage-gold-bright" />
-                  <span>{showComparison ? "View Restored" : "Compare Original"}</span>
-                </button>
-              )}
             </>
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-2 sm:p-3 relative text-center">
@@ -112,11 +64,18 @@ function FormerPrincipalCard({ member, index }: { member: FacultySeedMember; ind
             <p className="text-[10px] sm:text-[11px] font-sans font-bold text-heritage-gold-strong uppercase tracking-wider mt-0.5">
               {member.designation}
             </p>
-            {hasOriginal && (
-              <p className="text-[9px] text-academic-slate/65 font-sans mt-1">
-                Restored from the original 1970s/1990s archival photograph (thumbnail)
-              </p>
-            )}
+          </div>
+          <div className="mt-2.5 pt-2 border-t border-stone-texture/30 flex items-center justify-between text-[9px] text-academic-slate/60 font-sans">
+            <span>50-Year Heritage Archive</span>
+            <span className="inline-flex items-center gap-0.5 text-montfortian-blue font-semibold">
+              <ShieldCheck className="h-3 w-3 text-heritage-gold-strong" /> Verified
+            </span>
+          </div>
+        </CardContent>
+      </Card>
+    </Reveal>
+  );
+}
           </div>
           <div className="mt-2.5 pt-2 border-t border-stone-texture/30 flex items-center justify-between text-[9px] text-academic-slate/60 font-sans">
             <span>50-Year Heritage Archive</span>

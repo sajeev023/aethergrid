@@ -404,6 +404,13 @@ export const lfjcData = {
       image: "/images/faculty/sailu.jpg"
     },
     {
+      name: "Ms. P. Swathi",
+      designation: "Faculty",
+      subject: "Computer Science",
+      department: "Computer & Library Department",
+      image: "/images/faculty/computer_mam.jpg"
+    },
+    {
       name: "Ms. Shriji",
       designation: "Office Staff",
       subject: "Office Operations",
