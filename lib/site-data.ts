@@ -425,6 +425,13 @@ export const lfjcData = {
       department: "Physical Education & Sports",
       image: "/images/faculty/prasad.jpg"
     },
+    {
+      name: "Ms. PET Faculty",
+      designation: "Faculty",
+      subject: "Physical Education & Athletics",
+      department: "Physical Education & Sports",
+      image: "/images/faculty/dsc_4946.jpg"
+    },
     // 10. Office Administration
     {
       name: "Ms. J. Sri Lakshmi",
@@ -552,6 +559,13 @@ export const lfjcData = {
       subject: "Campus Operations",
       department: "Support Staff",
       image: "/images/faculty/suraj.jpg"
+    },
+    {
+      name: "Mr. Prabhu Das",
+      designation: "Support Staff",
+      subject: "Campus Operations",
+      department: "Support Staff",
+      image: "/images/faculty/prabhudas.jpg"
     },
     // 12. Former Principals (Verified Institutional Chronology 1974–Present)
     {
