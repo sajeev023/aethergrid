@@ -229,6 +229,13 @@ export const lfjcData = {
       department: "Mathematics Department",
       image: "/images/faculty/sharanraj.jpg"
     },
+    {
+      name: "Mr. Nellutla Kiran Prasad",
+      designation: "Faculty",
+      subject: "Mathematics",
+      department: "Mathematics Department",
+      image: "/images/faculty/nellutlakiranprasad.jpg"
+    },
     // 3. Physics Department
     {
       name: "Mr. R Srikanth",
