@@ -76,18 +76,6 @@ function FormerPrincipalCard({ member, index }: { member: FacultySeedMember; ind
     </Reveal>
   );
 }
-          </div>
-          <div className="mt-2.5 pt-2 border-t border-stone-texture/30 flex items-center justify-between text-[9px] text-academic-slate/60 font-sans">
-            <span>50-Year Heritage Archive</span>
-            <span className="inline-flex items-center gap-0.5 text-montfortian-blue font-semibold">
-              <ShieldCheck className="h-3 w-3 text-heritage-gold-strong" /> Verified
-            </span>
-          </div>
-        </CardContent>
-      </Card>
-    </Reveal>
-  );
-}
 
 export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProps) {
   const instData = getInstitutionData(activeInst);
