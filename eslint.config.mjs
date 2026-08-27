@@ -18,6 +18,7 @@ const eslintConfig = [
       "node_modules/**",
       "design-reference/**",
       "public/**",
+      "scripts/**",
     ],
   },
 ];

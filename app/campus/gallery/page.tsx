@@ -27,14 +27,36 @@ const CAMPUS_LIFE_IMAGES = [
 ];
 
 const ANNUAL_SPORTS_IMAGES = [
-  { id: 301, src: "/images/sports/100m-sprint-action.jpg", title: "100m Athletic Track Sprint", desc: "Female athletes competing in annual track sprint heat." },
-  { id: 302, src: "/images/sports/sports-winners-1st-year.jpg", title: "1st Year 100m Champions", desc: "1st Year 100m sprint finalists and medalists with Principal Bro. Arun." },
-  { id: 303, src: "/images/sports/sports-winners-2nd-year.jpg", title: "2nd Year 100m Champions", desc: "2nd Year 100m sprint finalists celebrated on sports day." },
-  { id: 304, src: "/images/sports/relay-race-field.jpg", title: "Track & Field Relay Heat", desc: "Male students competing in inter-house baton relay heats." },
-  { id: 305, src: "/images/sports/spectators-campus-steps.jpg", title: "Campus Spectator Gallery", desc: "Student audience cheering house competitors from shaded steps." },
-  { id: 306, src: "/images/sports/sports-ground-assembly.jpg", title: "Sports Ground Assembly", desc: "Athletes and sports faculty assembling on the central sports ground." },
-  { id: 307, src: "/images/sports/sports-arena-gallery-view.jpg", title: "Sports Arena Spectator View", desc: "Spectators watching annual athletic events from shaded stands." },
-  { id: 308, src: "/images/sports/sports-track-heats.jpg", title: "Sprint Finish Line", desc: "Sprint heats approaching finish line in front of main building." },
+  // Volleyball Tournament Action & Teams
+  { id: 301, src: "/images/sports/volleyball-spike-action.jpg", title: "Volleyball Airborne Spike", desc: "Athletic student leaping high for a smash over the net during competitive volleyball tournament play." },
+  { id: 302, src: "/images/sports/volleyball-court-action.jpg", title: "Volleyball Tournament Rally", desc: "High-energy defensive positioning and multi-point rally during inter-house fixtures." },
+  { id: 303, src: "/images/sports/volleyball-service-play.jpg", title: "Volleyball Match Service", desc: "Player setting up service and team formation against the main collegiate building." },
+  { id: 304, src: "/images/sports/volleyball-referee-match.jpg", title: "Volleyball Match Officiating", desc: "Student sports referee officiating at the volleyball net during collegiate sports meet." },
+  { id: 305, src: "/images/sports/volleyball-team-faculty-1.jpg", title: "Volleyball Squad & Faculty Delegation", desc: "Volleyball house finalists assembled with academic faculty and Physical Education directors." },
+  { id: 306, src: "/images/sports/volleyball-team-faculty-2.jpg", title: "Volleyball Inter-House Finalists", desc: "House volleyball finalists assembled with faculty mentors and sports coaches at the net." },
+  { id: 307, src: "/images/sports/volleyball-team-faculty-3.jpg", title: "Volleyball Tournament Competitors", desc: "Student volleyball competitors and faculty celebrating athletic camaraderie." },
+
+  // Basketball Tournament Action, Teams & Coaching
+  { id: 308, src: "/images/sports/basketball-court-match.jpg", title: "Basketball Tournament Match", desc: "Inter-house basketball match underway on the outdoor sports court." },
+  { id: 309, src: "/images/sports/basketball-fastbreak-dribble.jpg", title: "Basketball Fast-Break Drive", desc: "Point guard executing a fast-break dribble past defenders on the outdoor blue court." },
+  { id: 310, src: "/images/sports/basketball-attack-transition.jpg", title: "Basketball Transition Offense", desc: "Fast-paced offensive transition play during collegiate inter-house championship." },
+  { id: 311, src: "/images/sports/basketball-drive-to-hoop.jpg", title: "Basketball Drive to Basket", desc: "Competitor cutting towards the hoop through defensive pressure during tournament play." },
+  { id: 312, src: "/images/sports/basketball-team-squad.jpg", title: "Basketball Championship Squad", desc: "Basketball tournament finalists posing with Physical Education faculty on court." },
+  { id: 313, src: "/images/sports/basketball-finalists-celebration.jpg", title: "Basketball Finalists Celebration", desc: "LFJC basketball squad celebrating sports day achievements on the campus court." },
+  { id: 314, src: "/images/sports/basketball-squad-faculty.jpg", title: "Basketball Team & Faculty Honors", desc: "Official group portrait of LFJC basketball championship squad with department directors." },
+  { id: 315, src: "/images/sports/basketball-coaching-freethrow.jpg", title: "Basketball Coaching & Clinic", desc: "Physical Education instructor demonstrating free-throw shooting form and technique." },
+  { id: 316, src: "/images/sports/basketball-shooting-clinic.jpg", title: "Athletic Coaching Demonstration", desc: "Physical Education director demonstrating basketball shooting technique during clinic." },
+
+  // Athletic Track & Field
+  { id: 317, src: "/images/sports/100m-sprint-action.jpg", title: "100m Athletic Track Sprint", desc: "Female athletes competing in annual track sprint heat." },
+  { id: 318, src: "/images/sports/athletics-sprint-finish.jpg", title: "Athletics Sprint Finish Line", desc: "High-intensity athletic finish line action during annual sports meet." },
+  { id: 319, src: "/images/sports/sports-winners-1st-year.jpg", title: "1st Year 100m Champions", desc: "1st Year 100m sprint finalists and medalists with Principal Bro. Arun." },
+  { id: 320, src: "/images/sports/sports-winners-2nd-year.jpg", title: "2nd Year 100m Champions", desc: "2nd Year 100m sprint finalists celebrated on sports day." },
+  { id: 321, src: "/images/sports/relay-race-field.jpg", title: "Track & Field Relay Heat", desc: "Male students competing in inter-house baton relay heats." },
+  { id: 322, src: "/images/sports/spectators-campus-steps.jpg", title: "Campus Spectator Gallery", desc: "Student audience cheering house competitors from shaded steps." },
+  { id: 323, src: "/images/sports/sports-ground-assembly.jpg", title: "Sports Ground Assembly", desc: "Athletes and sports faculty assembling on the central sports ground." },
+  { id: 324, src: "/images/sports/sports-arena-gallery-view.jpg", title: "Sports Arena Spectator View", desc: "Spectators watching annual athletic events from shaded stands." },
+  { id: 325, src: "/images/sports/sports-track-heats.jpg", title: "Sprint Finish Line", desc: "Sprint heats approaching finish line in front of main building." },
 ];
 
 const SILVER_JUBILEE_IMAGES = [
