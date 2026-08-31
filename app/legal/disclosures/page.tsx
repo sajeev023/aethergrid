@@ -75,7 +75,7 @@ export default function DisclosuresPage() {
             <p>
               The 8-acre Uppal campus houses academic blocks, accredited physics, chemistry, and biology laboratories, a
               library, an auditorium, a two-acre sports arena, and supporting infrastructure. See{" "}
-              <Link href="/campus/facilities" className="font-semibold text-montfortian-blue hover:underline">Facilities &amp; Labs</Link>.
+              <Link href="/campus" className="font-semibold text-montfortian-blue hover:underline">Campus Life &amp; Visual Archives</Link>.
             </p>
           ),
         },

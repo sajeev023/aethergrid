@@ -27,12 +27,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/faculty/teaching", priority: 0.75, changeFrequency: "monthly" },
     { path: "/faculty/retired", priority: 0.7, changeFrequency: "yearly" },
     { path: "/faculty/principals", priority: 0.7, changeFrequency: "yearly" },
-    // Campus
-    { path: "/campus", priority: 0.8, changeFrequency: "monthly" },
-    { path: "/campus/facilities", priority: 0.75, changeFrequency: "yearly" },
-    { path: "/campus/sports", priority: 0.75, changeFrequency: "monthly" },
-    { path: "/campus/gallery", priority: 0.75, changeFrequency: "monthly" },
-    { path: "/campus/events", priority: 0.75, changeFrequency: "monthly" },
+    // Campus & Visual Archive
+    { path: "/campus", priority: 0.85, changeFrequency: "monthly" },
     // Alumni & Contact
     { path: "/alumni", priority: 0.8, changeFrequency: "monthly" },
     { path: "/contact", priority: 0.75, changeFrequency: "yearly" },

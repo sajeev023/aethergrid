@@ -398,10 +398,10 @@ export default function LFJCPage() {
               <Reveal delay={0.12} className="lg:col-span-5">
                 <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5">
                   {[
-                    { label: "Facilities & Labs", href: "/campus/facilities", icon: Building2 },
-                    { label: "Sports & Athletics", href: "/campus/sports", icon: Award },
-                    { label: "Photo Gallery", href: "/campus/gallery", icon: BookOpen },
-                    { label: "Events & Culture", href: "/campus/events", icon: Users },
+                    { label: "Heritage Archives", href: "/campus", icon: Building2 },
+                    { label: "Sports & Athletics", href: "/campus#gallery", icon: Award },
+                    { label: "Visual Gallery", href: "/campus#gallery", icon: BookOpen },
+                    { label: "Auditorium & Events", href: "/campus#gallery", icon: Users },
                   ].map((item) => {
                     const Icon = item.icon;
                     return (

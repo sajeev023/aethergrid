@@ -1,8 +1,6 @@
 import {
   Award,
   BookOpen,
-  Building2,
-  Camera,
   CheckCircle2,
   Clock,
   Crown,
@@ -11,7 +9,6 @@ import {
   Landmark,
   ListChecks,
   MapPin,
-  Mic,
   Network,
   Phone,
   ShieldCheck,
@@ -146,32 +143,6 @@ export const navMenu: NavMenuItem[] = [
     label: "Campus Life",
     href: "/campus",
     blurb: "An eight-acre living heritage of academics, sports, and culture.",
-    children: [
-      {
-        label: "Facilities & Labs",
-        href: "/campus/facilities",
-        description: "Academic blocks, science labs, library & auditorium.",
-        icon: Building2,
-      },
-      {
-        label: "Sports & Athletics",
-        href: "/campus/sports",
-        description: "Two-acre sports arena, tournaments & athletic meets.",
-        icon: Trophy,
-      },
-      {
-        label: "Photo Gallery",
-        href: "/campus/gallery",
-        description: "Golden Jubilee archives & campus life photography.",
-        icon: Camera,
-      },
-      {
-        label: "Events & Culture",
-        href: "/campus/events",
-        description: "Clubs, co-curricular activities & cultural events.",
-        icon: Mic,
-      },
-    ],
   },
   {
     label: "Admissions",
