@@ -68,7 +68,7 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
           className="-z-20 object-cover object-center scale-105"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-royal-cream/85 via-royal-cream/60 to-royal-cream/85" />
-        
+
         {/* Soft Stone Grid Texture */}
         <div className="absolute inset-0 -z-10 opacity-30 stone-pattern" />
 
@@ -180,11 +180,11 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
                     <span className="absolute right-3.5 top-3.5 sm:right-5 sm:top-5 font-serif text-3xl sm:text-4xl font-bold italic text-heritage-gold/15 select-none pointer-events-none group-hover:text-heritage-gold/30 group-hover:opacity-100 transition-all duration-500">
                       0{index + 1}
                     </span>
-                    
+
                     <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-montfortian-blue text-white text-xs font-bold shadow-md">
                       {index + 1}
                     </div>
-                    
+
                     <h3 className="mt-2.5 sm:mt-3 font-serif text-sm sm:text-base font-bold text-academic-slate group-hover:text-montfortian-blue transition-colors">
                       {step.title}
                     </h3>
@@ -388,7 +388,7 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
             />
           </div>
         </Reveal>
-        
+
         <Reveal delay={0.1}>
           <LeadForm
             type="admissions"

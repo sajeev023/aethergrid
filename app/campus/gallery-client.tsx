@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { Eye, X, ChevronLeft, ChevronRight, ExternalLink, Play, Layers, Sparkles, Trophy, Building2, Users } from "lucide-react";
+import { Eye, X, ChevronLeft, ChevronRight, ExternalLink, Play, Sparkles, Award, Clock } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
@@ -11,8 +11,9 @@ export interface GalleryItem {
   src: string;
   title: string;
   desc: string;
-  category: "heritage" | "assemblies" | "sports" | "campus";
-  featured?: boolean;
+  category?: string;
+  badge?: string;
+  year?: string;
 }
 
 export interface VideoItem {
@@ -22,9 +23,9 @@ export interface VideoItem {
   category?: string;
 }
 
-// ─── Lightbox Modal ─────────────────────────────────────────────────────────
+// ─── Fullscreen Archival Lightbox ───────────────────────────────────────────
 
-function Lightbox({
+export function Lightbox({
   images,
   currentIndex,
   onClose,
@@ -64,28 +65,44 @@ function Lightbox({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`Photo: ${img.title}`}
-      className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col items-center justify-between p-3 sm:p-6"
+      aria-label={`Archival Photo: ${img.title}`}
+      className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col items-center justify-between p-3 sm:p-6 select-none"
       onClick={onClose}
     >
-      {/* Top Bar */}
-      <div className="w-full flex items-center justify-between text-white/80 z-50 py-2 px-2 max-w-6xl">
-        <div className="flex items-center gap-2 text-xs uppercase tracking-wider font-sans">
+      {/* Top Header Bar */}
+      <div className="w-full flex items-center justify-between text-white/90 z-50 py-2 px-2 max-w-6xl">
+        <div className="flex items-center gap-2 sm:gap-3 text-xs uppercase tracking-wider font-sans">
           <span className="h-2 w-2 rounded-full bg-heritage-gold animate-pulse" />
-          <span className="text-heritage-gold-bright font-bold">LFJC Visual Archive</span>
-          <span className="text-white/40">•</span>
-          <span className="text-white/70">{currentIndex + 1} of {images.length}</span>
+          <span className="text-heritage-gold-bright font-bold hidden sm:inline">LFJC Visual Archives</span>
+          <span className="text-white/40 hidden sm:inline">•</span>
+          {img.badge && (
+            <>
+              <span className="text-royal-cream/90 bg-white/10 px-2 py-0.5 rounded text-[10px] font-semibold">
+                {img.badge}
+              </span>
+              <span className="text-white/40">•</span>
+            </>
+          )}
+          <span className="text-white/80 font-mono">
+            {currentIndex + 1} / {images.length}
+          </span>
         </div>
-        <button
-          onClick={onClose}
-          aria-label="Close photo preview"
-          className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center border border-white/10"
-        >
-          <X className="h-5 w-5" />
-        </button>
+
+        <div className="flex items-center gap-2">
+          <span className="text-[11px] text-white/50 hidden md:inline font-sans">
+            Use <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-[10px] text-white/80">ESC</kbd> or arrow keys
+          </span>
+          <button
+            onClick={onClose}
+            aria-label="Close photo preview"
+            className="p-2 bg-white/10 hover:bg-white/25 rounded-full text-white transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center border border-white/15"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
       </div>
 
-      {/* Main Image Area with Navigation Buttons */}
+      {/* Main Image Viewport with Nav Arrows */}
       <div className="relative w-full max-w-5xl flex-1 flex items-center justify-center my-2">
         <button
           onClick={(e) => {
@@ -93,7 +110,7 @@ function Lightbox({
             onPrev();
           }}
           aria-label="Previous photo"
-          className="absolute left-1 sm:left-4 top-1/2 -translate-y-1/2 p-3 bg-academic-slate/80 hover:bg-heritage-gold hover:text-deep-navy rounded-full text-white transition-all duration-300 cursor-pointer z-50 min-h-[44px] min-w-[44px] flex items-center justify-center border border-white/20 shadow-xl"
+          className="absolute left-1 sm:left-4 top-1/2 -translate-y-1/2 p-3 bg-academic-slate/85 hover:bg-heritage-gold hover:text-deep-navy rounded-full text-white transition-all duration-300 cursor-pointer z-50 min-h-[44px] min-w-[44px] flex items-center justify-center border border-white/20 shadow-2xl"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
@@ -104,13 +121,13 @@ function Lightbox({
             onNext();
           }}
           aria-label="Next photo"
-          className="absolute right-1 sm:right-4 top-1/2 -translate-y-1/2 p-3 bg-academic-slate/80 hover:bg-heritage-gold hover:text-deep-navy rounded-full text-white transition-all duration-300 cursor-pointer z-50 min-h-[44px] min-w-[44px] flex items-center justify-center border border-white/20 shadow-xl"
+          className="absolute right-1 sm:right-4 top-1/2 -translate-y-1/2 p-3 bg-academic-slate/85 hover:bg-heritage-gold hover:text-deep-navy rounded-full text-white transition-all duration-300 cursor-pointer z-50 min-h-[44px] min-w-[44px] flex items-center justify-center border border-white/20 shadow-2xl"
         >
           <ChevronRight className="h-5 w-5" />
         </button>
 
         <div
-          className="relative w-full h-[60vh] sm:h-[70vh] max-h-[750px]"
+          className="relative w-full h-[60vh] sm:h-[70vh] max-h-[760px]"
           onClick={(e) => e.stopPropagation()}
         >
           <Image
@@ -124,16 +141,16 @@ function Lightbox({
         </div>
       </div>
 
-      {/* Caption & Metadata Footer */}
+      {/* Metadata & Historical Caption Footer */}
       <div
-        className="w-full max-w-3xl text-center bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 backdrop-blur-sm z-50 mb-1"
+        className="w-full max-w-3xl text-center bg-academic-slate/80 border border-white/15 rounded-xl p-3.5 sm:p-4.5 backdrop-blur-md z-50 mb-1 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className="font-serif text-sm sm:text-base md:text-lg font-bold text-white leading-snug">
           {img.title}
         </h3>
         {img.desc && (
-          <p className="text-xs sm:text-sm text-royal-cream/80 font-sans mt-1 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-royal-cream/90 font-sans mt-1.5 max-w-2xl mx-auto leading-relaxed">
             {img.desc}
           </p>
         )}
@@ -142,93 +159,75 @@ function Lightbox({
   );
 }
 
-// ─── Filter Tabs & Unified Gallery Grid ─────────────────────────────────────
+// ─── Section Photo Grid Component ───────────────────────────────────────────
 
-const CATEGORIES = [
-  { id: "all", label: "All Archive", icon: Layers },
-  { id: "heritage", label: "Heritage & Jubilees", icon: Sparkles },
-  { id: "assemblies", label: "Assemblies & Seminars", icon: Users },
-  { id: "sports", label: "Sports & Athletics", icon: Trophy },
-  { id: "campus", label: "Campus & Laboratories", icon: Building2 },
-] as const;
-
-export function UnifiedCampusGallery({ images }: { images: GalleryItem[] }) {
-  const [activeCategory, setActiveCategory] = useState<string>("all");
+export function PhotoGrid({
+  images,
+  onImageClick,
+  columns = "4",
+}: {
+  images: GalleryItem[];
+  onImageClick?: (item: GalleryItem, indexInSection: number) => void;
+  columns?: "2" | "3" | "4";
+}) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  const filteredImages = useMemo(() => {
-    if (activeCategory === "all") return images;
-    return images.filter((img) => img.category === activeCategory);
-  }, [images, activeCategory]);
+  const handleCardClick = (img: GalleryItem, idx: number) => {
+    if (onImageClick) {
+      onImageClick(img, idx);
+    } else {
+      setLightboxIndex(idx);
+    }
+  };
+
+  const gridColsClass = {
+    "2": "grid-cols-1 sm:grid-cols-2",
+    "3": "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+    "4": "grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
+  }[columns];
 
   return (
-    <div id="gallery" className="scroll-mt-24">
-      {/* Filter Category Pills */}
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-6 sm:mb-8">
-        {CATEGORIES.map((cat) => {
-          const Icon = cat.icon;
-          const isActive = activeCategory === cat.id;
-          const count = cat.id === "all" ? images.length : images.filter((m) => m.category === cat.id).length;
-          return (
-            <button
-              key={cat.id}
-              type="button"
-              onClick={() => setActiveCategory(cat.id)}
-              className={cn(
-                "inline-flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 font-sans cursor-pointer shadow-xs",
-                isActive
-                  ? "bg-montfortian-blue text-white shadow-panel border border-montfortian-blue"
-                  : "bg-white text-academic-slate/75 hover:bg-royal-cream/60 hover:text-montfortian-blue border border-stone-texture"
-              )}
-            >
-              <Icon className={cn("h-3.5 w-3.5", isActive ? "text-heritage-gold-bright" : "text-academic-slate/60")} />
-              <span>{cat.label}</span>
-              <span
-                className={cn(
-                  "ml-0.5 px-1.5 py-0.2 text-[10px] rounded-full font-mono",
-                  isActive ? "bg-white/20 text-white" : "bg-stone-texture/40 text-academic-slate/70"
-                )}
-              >
-                {count}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Gallery Grid */}
-      <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {filteredImages.map((img, idx) => (
-          <Reveal key={img.id} delay={Math.min(idx * 0.02, 0.3)}>
+    <div>
+      <div className={cn("grid gap-3 sm:gap-4 md:gap-5", gridColsClass)}>
+        {images.map((img, idx) => (
+          <Reveal key={img.id} delay={Math.min(idx * 0.03, 0.3)}>
             <button
               type="button"
-              onClick={() => setLightboxIndex(idx)}
-              aria-label={`View full image: ${img.title}`}
-              className="group relative aspect-[4/3] rounded-xl overflow-hidden border border-stone-texture bg-white shadow-xs hover:shadow-panel-hover transition-all duration-500 w-full block cursor-pointer text-left"
+              onClick={() => handleCardClick(img, idx)}
+              aria-label={`View photo in high resolution: ${img.title}`}
+              className="group relative aspect-[4/3] rounded-xl overflow-hidden border border-stone-texture/80 bg-white shadow-xs hover:shadow-panel-hover transition-all duration-300 w-full block cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-heritage-gold"
             >
               <Image
                 src={img.src}
                 alt={img.title}
                 fill
-                sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 50vw"
+                sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
 
-              {/* Gold Border Highlight on Hover */}
-              <div className="absolute inset-1.5 sm:inset-2 border border-white/25 pointer-events-none group-hover:border-heritage-gold transition-colors duration-500 rounded-lg" />
+              {/* Gold Framing Accent on Hover */}
+              <div className="absolute inset-1.5 sm:inset-2 border border-white/20 pointer-events-none group-hover:border-heritage-gold transition-colors duration-500 rounded-lg" />
 
-              {/* Eye hover indicator */}
-              <div className="absolute inset-0 bg-academic-slate/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <div className="p-2.5 bg-white rounded-full shadow-2xl scale-75 group-hover:scale-100 transition-transform duration-300">
+              {/* Eye Indicator Hover Overlay */}
+              <div className="absolute inset-0 bg-academic-slate/35 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="p-2.5 bg-white/95 rounded-full shadow-2xl scale-75 group-hover:scale-100 transition-transform duration-300 flex items-center gap-1.5 px-3.5">
                   <Eye className="h-4 w-4 text-montfortian-blue" />
+                  <span className="text-[11px] font-bold text-academic-slate font-sans uppercase tracking-wider hidden sm:inline">
+                    View Archival Photo
+                  </span>
                 </div>
               </div>
 
-              {/* Permanent Gradient Bottom for Legibility */}
-              <div className="absolute inset-0 bg-gradient-to-t from-academic-slate/95 via-academic-slate/35 to-transparent opacity-90 sm:opacity-75 sm:group-hover:opacity-95 transition-opacity duration-300" />
+              {/* Legibility Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-academic-slate/95 via-academic-slate/30 to-transparent opacity-85 sm:opacity-75 group-hover:opacity-95 transition-opacity duration-300" />
 
-              {/* Title & Tag */}
-              <div className="absolute inset-x-0 bottom-0 p-2.5 sm:p-3.5 flex flex-col justify-end">
+              {/* Card Title & Badge */}
+              <div className="absolute inset-x-0 bottom-0 p-3 sm:p-3.5 flex flex-col justify-end">
+                {img.badge && (
+                  <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-heritage-gold-bright font-sans mb-1 line-clamp-1">
+                    {img.badge}
+                  </span>
+                )}
                 <h4 className="font-serif text-xs sm:text-sm font-bold text-white leading-tight line-clamp-2 group-hover:text-heritage-gold-bright transition-colors duration-300">
                   {img.title}
                 </h4>
@@ -238,19 +237,201 @@ export function UnifiedCampusGallery({ images }: { images: GalleryItem[] }) {
         ))}
       </div>
 
-      {/* Active Lightbox */}
       {lightboxIndex !== null && (
         <Lightbox
-          images={filteredImages}
+          images={images}
           currentIndex={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
-          onPrev={() => setLightboxIndex((lightboxIndex - 1 + filteredImages.length) % filteredImages.length)}
-          onNext={() => setLightboxIndex((lightboxIndex + 1) % filteredImages.length)}
+          onPrev={() => setLightboxIndex((lightboxIndex - 1 + images.length) % images.length)}
+          onNext={() => setLightboxIndex((lightboxIndex + 1) % images.length)}
         />
       )}
     </div>
   );
 }
+
+// ─── Master Chronological Archive Client Component ──────────────────────────
+
+export function ChronologicalCampusArchive({
+  silverJubileeImages,
+  goldenJubileeImages,
+  assembliesImages,
+  sportsImages,
+  campusLabsImages,
+  allImages,
+}: {
+  silverJubileeImages: GalleryItem[];
+  goldenJubileeImages: GalleryItem[];
+  assembliesImages: GalleryItem[];
+  sportsImages: GalleryItem[];
+  campusLabsImages: GalleryItem[];
+  allImages: GalleryItem[];
+}) {
+  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
+
+  // Opens lightbox pointing to the master global index of the clicked photo
+  const handleOpenGlobalImage = (targetItem: GalleryItem) => {
+    const globalIdx = allImages.findIndex((m) => m.id === targetItem.id && m.src === targetItem.src);
+    if (globalIdx !== -1) {
+      setActiveImageIndex(globalIdx);
+    } else {
+      setActiveImageIndex(0);
+    }
+  };
+
+  return (
+    <div id="gallery" className="scroll-mt-24">
+      {/* ─── 01: SILVER JUBILEE (FIRST) ─────────────────────────────────── */}
+      <section id="silver-jubilee" className="scroll-mt-28 mb-14 sm:mb-18 md:mb-20">
+        <div className="mb-6 sm:mb-8 border-b border-stone-texture/60 pb-4">
+          <div className="flex items-center gap-2 text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-heritage-gold-strong mb-1.5 font-sans">
+            <Clock className="h-3.5 w-3.5 text-heritage-gold" />
+            <span>01 — Historical Foundation Archive • 1999</span>
+          </div>
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate tracking-tight">
+            Silver Jubilee
+          </h2>
+          <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-academic-slate/80 font-sans max-w-3xl">
+            In 1999, Little Flower Junior College celebrated 25 glorious years of academic eminence at its expansive Uppal campus. 
+            Hon&apos;ble Chief Minister N. Chandrababu Naidu graced the landmark celebrations, honoring founding principals Rev. Bro. Vincent, 
+            Dr. Emmanuel, Rev. Bro. Claude, Rev. Bro. John Kallarackal, Rev. Bro. Celestine, and Rev. Bro. M.A. George alongside state rank-holders.
+          </p>
+          <div className="mt-3 flex items-center gap-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-montfortian-blue bg-royal-cream/60 px-2.5 py-1 rounded border border-stone-texture/60">
+              {silverJubileeImages.length} Archival Records
+            </span>
+          </div>
+        </div>
+
+        <PhotoGrid
+          images={silverJubileeImages}
+          onImageClick={handleOpenGlobalImage}
+          columns="4"
+        />
+      </section>
+
+      {/* ─── 02: GOLDEN JUBILEE (SECOND) ─────────────────────────────────── */}
+      <section id="golden-jubilee" className="scroll-mt-28 mb-14 sm:mb-18 md:mb-20">
+        <div className="mb-6 sm:mb-8 border-b border-stone-texture/60 pb-4">
+          <div className="flex items-center gap-2 text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-heritage-gold-strong mb-1.5 font-sans">
+            <Sparkles className="h-3.5 w-3.5 text-heritage-gold" />
+            <span>02 — Half-Century Milestone • 1974–2024</span>
+          </div>
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate tracking-tight">
+            Golden Jubilee
+          </h2>
+          <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-academic-slate/80 font-sans max-w-3xl">
+            Commemorating five decades of transformative Montfortian education, the Golden Jubilee celebrations united thousands of alumni, 
+            students, faculty, and provincial dignitaries under the official banner of Truth, Virtue, and Wisdom. Highlights included the ceremonial 
+            lamp lighting, commemorative souvenir release, and grand classical dance choreography.
+          </p>
+          <div className="mt-3 flex items-center gap-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-montfortian-blue bg-royal-cream/60 px-2.5 py-1 rounded border border-stone-texture/60">
+              {goldenJubileeImages.length} Milestone Photographs
+            </span>
+          </div>
+        </div>
+
+        <PhotoGrid
+          images={goldenJubileeImages}
+          onImageClick={handleOpenGlobalImage}
+          columns="3"
+        />
+      </section>
+
+      {/* ─── 03: CAMPUS LIFE (THIRD) ────────────────────────────────────── */}
+      <section id="campus-life" className="scroll-mt-28 mb-14 sm:mb-18">
+        <div className="mb-8 sm:mb-10 border-b-2 border-heritage-gold/30 pb-4">
+          <div className="flex items-center gap-2 text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-heritage-gold-strong mb-1.5 font-sans">
+            <Award className="h-3.5 w-3.5 text-heritage-gold" />
+            <span>03 — Living Campus Experience</span>
+          </div>
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate tracking-tight">
+            Campus Life & Student Moments
+          </h2>
+          <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-academic-slate/80 font-sans max-w-3xl">
+            The day-to-day pulse of Little Flower Junior College — from inspirational assemblies in St. Montfort Auditorium and high-stakes 
+            athletic meets to advanced science laboratories and our central reference library.
+          </p>
+        </div>
+
+        {/* 3A. Assemblies & Seminars */}
+        <div id="assemblies" className="scroll-mt-28 mb-10 sm:mb-14">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-4 pb-2 border-b border-stone-texture/50 gap-1">
+            <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-academic-slate">
+              Assemblies & Seminars
+            </h3>
+            <span className="text-xs font-sans text-academic-slate/70">
+              {assembliesImages.length} Photographs • St. Montfort Auditorium & Guest Lectures
+            </span>
+          </div>
+          <p className="text-xs sm:text-sm text-academic-slate/75 font-sans mb-4 max-w-2xl">
+            Full-hall student gatherings, leadership keynotes, interactive stage debates, faculty mentorship, and career guidance seminars for commerce and science streams.
+          </p>
+          <PhotoGrid
+            images={assembliesImages}
+            onImageClick={handleOpenGlobalImage}
+            columns="4"
+          />
+        </div>
+
+        {/* 3B. Sports & Athletics */}
+        <div id="sports" className="scroll-mt-28 mb-10 sm:mb-14">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-4 pb-2 border-b border-stone-texture/50 gap-1">
+            <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-academic-slate">
+              Sports & Athletics
+            </h3>
+            <span className="text-xs font-sans text-academic-slate/70">
+              {sportsImages.length} Photographs • Inter-House Championships & Track Meets
+            </span>
+          </div>
+          <p className="text-xs sm:text-sm text-academic-slate/75 font-sans mb-4 max-w-2xl">
+            Spike rallies on the volleyball court, fast-break basketball tournaments, 100m sprint heats, baton relay finishes, and celebratory medal ceremonies with college directors.
+          </p>
+          <PhotoGrid
+            images={sportsImages}
+            onImageClick={handleOpenGlobalImage}
+            columns="4"
+          />
+        </div>
+
+        {/* 3C. Campus & Laboratories */}
+        <div id="campus-labs" className="scroll-mt-28 mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-4 pb-2 border-b border-stone-texture/50 gap-1">
+            <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-academic-slate">
+              Campus & Laboratories
+            </h3>
+            <span className="text-xs font-sans text-academic-slate/70">
+              {campusLabsImages.length} Photographs • Academic Infrastructure & Laboratories
+            </span>
+          </div>
+          <p className="text-xs sm:text-sm text-academic-slate/75 font-sans mb-4 max-w-2xl">
+            Aerial perspective of our lush eight-acre Uppal estate, collegiate main building, analytical chemistry lab, physics optical benches, networked computing centre, and central library.
+          </p>
+          <PhotoGrid
+            images={campusLabsImages}
+            onImageClick={handleOpenGlobalImage}
+            columns="3"
+          />
+        </div>
+      </section>
+
+      {/* ─── Lightbox Modal across Complete Archive ─────────────────────── */}
+      {activeImageIndex !== null && (
+        <Lightbox
+          images={allImages}
+          currentIndex={activeImageIndex}
+          onClose={() => setActiveImageIndex(null)}
+          onPrev={() => setActiveImageIndex((activeImageIndex - 1 + allImages.length) % allImages.length)}
+          onNext={() => setActiveImageIndex((activeImageIndex + 1) % allImages.length)}
+        />
+      )}
+    </div>
+  );
+}
+
+// ─── Legacy compatibility export ────────────────────────────────────────────
+export const UnifiedCampusGallery = ChronologicalCampusArchive;
 
 // ─── Video Card ─────────────────────────────────────────────────────────────
 
