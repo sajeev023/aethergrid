@@ -163,12 +163,10 @@ export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
   const renderHeadline = () => {
     return (
       <>
-        Fifty Years of{" "}
+        Little Flower{" "}
         <span className="text-heritage-gold italic font-editorial font-normal">
-          Academic Excellence
+          Junior College
         </span>
-        <br className="hidden md:inline" />
-        {" "}&amp; Character.
       </>
     );
   };
@@ -197,12 +195,9 @@ export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
         </div>
       </div>
       <div className="py-2 sm:py-3.5 text-xs sm:text-sm leading-relaxed text-royal-cream/80 font-sans">
-        <p className="mb-1.5 sm:mb-2">
-          Families can compare academic streams, confirm criteria, and submit an inquiry through a clear admissions pathway.
-        </p>
         <p className="flex gap-2 text-royal-cream text-[11px] sm:text-xs">
           <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-heritage-gold-bright" />
-          Montfortian education with strong discipline and moral values.
+          MPC, BiPC, MEC, and CEC streams.
         </p>
       </div>
       <a
@@ -312,9 +307,9 @@ export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
 
             <motion.p
               variants={itemVariants}
-              className="mt-2 sm:mt-4 max-w-2xl border-l-[3px] border-heritage-gold pl-2.5 sm:pl-4 text-xs sm:text-sm md:text-base leading-relaxed text-royal-cream font-sans font-medium drop-shadow-[0_1px_8px_rgba(0,0,0,0.55)] line-clamp-3 sm:line-clamp-none"
+              className="mt-2 sm:mt-4 max-w-xl text-xs sm:text-sm md:text-base leading-relaxed text-royal-cream font-sans font-medium drop-shadow-[0_1px_8px_rgba(0,0,0,0.55)]"
             >
-              {data.name}: Where Knowledge meets Virtue and Service. A premier Montfortian institution shaping leaders through academic discipline and moral formation.
+              Knowledge is Truth. Board-recognised intermediate education in Uppal, Hyderabad.
             </motion.p>
 
             <motion.div
@@ -329,8 +324,8 @@ export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
                 </a>
               </Button>
               <Button asChild variant="inverse" size="lg" className="w-full sm:w-auto min-h-[42px] sm:min-h-[48px] py-2 sm:py-3 text-xs sm:text-sm font-bold uppercase tracking-wider border-white/30 hover:border-white">
-                <a href="/about" className="inline-flex items-center justify-center">
-                  Explore Our Legacy
+                <a href="/contact" className="inline-flex items-center justify-center">
+                  Contact Office
                 </a>
               </Button>
             </motion.div>

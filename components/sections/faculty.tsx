@@ -1,130 +1,159 @@
-import Link from "next/link";
-import { ArrowRight, Award, History, Users } from "lucide-react";
-
+import Image from "next/image";
+import { getInstitutionData } from "@/lib/site-data";
 import { Reveal } from "@/components/motion/reveal";
 import { Section } from "@/components/section";
-import { SectionHeading } from "@/components/section-heading";
-import { Button } from "@/components/ui/button";
-import { getInstitutionData } from "@/lib/site-data";
-import { FacultyTeaching } from "@/components/sections/faculty-teaching";
 
 interface FacultyProps {
   activeInst?: "root" | "lfs" | "lfjc" | "lfdc";
-  headingLevel?: "h1" | "h2";
 }
 
-const SUB_PAGES = [
-  {
-    icon: Award,
-    eyebrow: "Institutional Leadership",
-    title: "Former Principals",
-    desc: "The official portrait gallery of the visionary principals who led Little Flower Junior College across five decades.",
-    href: "/faculty/principals",
-    cta: "View Former Principals",
-  },
-  {
-    icon: Users,
-    eyebrow: "Academic Staff",
-    title: "Teaching & Support Staff",
-    desc: "Meet our board-recognized department heads and subject educators who guide students toward academic excellence.",
-    href: "/faculty/teaching",
-    cta: "Meet Our Faculty",
-  },
-  {
-    icon: History,
-    eyebrow: "Emeritus Educators",
-    title: "Retired Faculty",
-    desc: "Honoring the teachers who built our legacy — 27 distinguished educators whose dedication shaped generations.",
-    href: "/faculty/retired",
-    cta: "View Retired Faculty",
-  },
+type FacultyCategory = "present" | "retired" | "former-principal";
+type FacultyMember = {
+  name: string;
+  designation: string;
+  subject?: string;
+  department: string;
+  image?: string;
+  category?: FacultyCategory;
+};
+
+function getFacultyCategory(member: FacultyMember): FacultyCategory {
+  return member.category ?? "present";
+}
+
+const departmentOrder = [
+  "Mathematics Department",
+  "Physics Department",
+  "Chemistry Department",
+  "Biology Department",
+  "Humanities Department",
+  "Languages Department",
+  "Computer & Library Department",
+  "Physical Education & Sports",
+  "Office Administration",
+  "Support Staff",
 ];
 
-export function Faculty({ activeInst = "lfjc", headingLevel = "h2" }: FacultyProps) {
-  const Heading = headingLevel;
-  const instData = getInstitutionData(activeInst);
+function FacultyCard({ member, index }: { member: FacultyMember; index: number }) {
+  const cleanName = member.name.replace(/^(Bro\.|Ms\.|Mr\.|Dr\.)\s+/i, "");
+  const nameParts = cleanName.split(" ").filter(Boolean);
+  const initials =
+    nameParts.length >= 2
+      ? `${nameParts[0][0]}${nameParts[nameParts.length - 1][0]}`.toUpperCase()
+      : cleanName.slice(0, 2).toUpperCase();
 
   return (
-    <Section id="faculty" variant="default" className="bg-white border-b border-stone-texture/50">
-      <div className="mx-auto max-w-3xl text-center mb-6 sm:mb-10">
-        <Reveal>
-          <span className="font-sans text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong uppercase tracking-[0.2em] mb-1.5 sm:mb-2 block">
-            Our Mentors
-          </span>
-          <Heading className="font-serif text-2xl sm:text-3xl font-bold leading-tight text-academic-slate md:text-4xl tracking-tight">
-            Faculty Excellence
-          </Heading>
-          <p className="mt-2 sm:mt-4 text-xs sm:text-sm leading-relaxed sm:leading-7 text-academic-slate/75 font-sans max-w-2xl mx-auto">
-            {instData.shortName}&apos;s academic departments are staffed by highly qualified educators committed to excellence in academics, languages, sciences, commerce, and human formation.
-          </p>
-          <span className="gold-rule gold-rule-center !mt-3 sm:!mt-5" />
-        </Reveal>
-      </div>
-
-      {/* Sub-Page Gateway Cards */}
-      <div className="grid gap-3.5 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-6 sm:mb-12">
-        {SUB_PAGES.map((page, idx) => {
-          const Icon = page.icon;
-          return (
-            <Reveal key={page.title} delay={idx * 0.07}>
-              <Link
-                href={page.href}
-                className="group flex flex-col justify-between h-full bg-royal-cream/15 border border-stone-texture/60 rounded-xl p-4 sm:p-6 hover:bg-white hover:border-heritage-gold/50 hover:shadow-panel-hover transition-all duration-300 relative overflow-hidden"
-              >
-                <div className="absolute top-0 left-0 w-full h-1 bg-heritage-gold scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
-                <div>
-                  <div className="flex items-center gap-2 mb-2 sm:mb-3 text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong uppercase tracking-[0.16em] font-sans">
-                    <Icon className="h-3.5 w-3.5" aria-hidden="true" />
-                    <span>{page.eyebrow}</span>
-                  </div>
-                  <h3 className="font-serif text-lg sm:text-xl font-bold text-academic-slate mb-1.5 sm:mb-2 group-hover:text-montfortian-blue transition-colors duration-300">
-                    {page.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/70 font-sans">
-                    {page.desc}
-                  </p>
-                </div>
-                <div className="mt-4 sm:mt-5 pt-2.5 sm:pt-3 border-t border-stone-texture/40 flex items-center justify-between">
-                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.16em] text-montfortian-blue font-sans">
-                    {page.cta}
-                  </span>
-                  <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-heritage-gold-strong group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
-                </div>
-              </Link>
-            </Reveal>
-          );
-        })}
-      </div>
-
-      {/* Preview — teaching staff teaser */}
-      <div className="border-t border-stone-texture/30 pt-6 sm:pt-12">
-        <SectionHeading
-          eyebrow="Academic Staff Preview"
-          title="Teaching &amp; Support Staff"
-          description="A preview of our teaching staff. Visit the full Teaching &amp; Support Staff page for the complete directory."
-        />
-        <div className="mt-5 sm:mt-8">
-          <FacultyTeaching activeInst={activeInst} isPreview />
+    <Reveal key={`${member.name}-${index}`} delay={index * 0.02} className="h-full">
+      <div className="group h-full flex flex-col overflow-hidden rounded-lg border border-stone-texture/60 bg-white">
+        <div className="relative aspect-[5/6] w-full overflow-hidden bg-royal-cream/50 border-b border-stone-texture/40">
+          {member.image ? (
+            <Image
+              src={member.image}
+              alt={member.name}
+              fill
+              sizes="(min-width: 1280px) 15vw, (min-width: 1024px) 20vw, (min-width: 640px) 25vw, 50vw"
+              className="object-cover object-top"
+            />
+          ) : (
+            <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate">
+              <div className="w-10 h-10 rounded-full border border-heritage-gold/30 flex items-center justify-center bg-white">
+                <span className="font-serif text-base font-bold text-montfortian-blue">{initials}</span>
+              </div>
+            </div>
+          )}
         </div>
-        <Reveal className="mt-5 sm:mt-8 flex justify-center">
-          <Button asChild variant="secondary">
-            <Link href="/faculty/teaching" className="inline-flex items-center gap-2">
-              View Full Teaching &amp; Support Staff Directory
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-          </Button>
-        </Reveal>
+        <div className="flex-1 flex flex-col justify-between p-2.5 sm:p-3">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans line-clamp-1">{member.designation}</p>
+            <h3 className="font-serif text-xs sm:text-sm font-bold leading-snug text-academic-slate">{member.name}</h3>
+            {member.subject && (
+              <p className="text-[11px] text-academic-slate/70 font-sans line-clamp-1">{member.subject}</p>
+            )}
+          </div>
+        </div>
       </div>
+    </Reveal>
+  );
+}
 
-      {/* Closing CTA */}
-      <Reveal className="mt-6 sm:mt-14 flex justify-center">
-        <Button asChild>
-          <Link href="/admissions" className="inline-flex items-center gap-2">
-            Begin Admissions Inquiry
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
-        </Button>
-      </Reveal>
-    </Section>
+export function Faculty({ activeInst = "lfjc" }: FacultyProps) {
+  const instData = getInstitutionData(activeInst);
+  const allStaff = instData.faculty.slice(1) as FacultyMember[];
+  const principal = instData.faculty[0];
+
+  return (
+    <div id="faculty" className="bg-white">
+      <Section variant="default" className="bg-white">
+        <div className="mx-auto max-w-3xl text-center">
+          <Reveal>
+            <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-academic-slate">Faculty</h1>
+          </Reveal>
+        </div>
+      </Section>
+
+      <Section id="leadership" variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30">
+        <div className="flex items-center gap-2 mb-5">
+          <span className="w-1.5 h-5 bg-heritage-gold-strong rounded-full" />
+          <h2 className="font-serif text-lg sm:text-xl font-bold text-academic-slate">Principal</h2>
+        </div>
+        <div className="grid gap-5 sm:gap-8 lg:grid-cols-12 items-center">
+          <Reveal className="lg:col-span-4">
+            <div className="relative aspect-[3/4] max-w-xs mx-auto lg:mx-0 overflow-hidden rounded-xl border border-stone-texture/50 shadow-elevation">
+              <Image
+                src={principal.image || "/images/lfjc-logo.jpg"}
+                alt={principal.name}
+                fill
+                sizes="(min-width: 1024px) 30vw, 60vw"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
+          <Reveal delay={0.1} className="lg:col-span-8">
+            <div className="rounded-xl border border-stone-texture/60 bg-white p-4 sm:p-6">
+              <h3 className="font-serif text-lg sm:text-xl font-bold text-academic-slate">{principal.name}</h3>
+              <p className="text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">{principal.designation}</p>
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
+      <Section id="departments" variant="default" className="bg-white">
+        <div className="flex items-center gap-2 mb-5">
+          <span className="w-1.5 h-5 bg-heritage-gold-strong rounded-full" />
+          <h2 className="font-serif text-lg sm:text-xl font-bold text-academic-slate">Departments</h2>
+        </div>
+
+        <div className="space-y-6 sm:space-y-8">
+          {departmentOrder.map((deptName) => {
+            const deptStaff = allStaff.filter((m) => getFacultyCategory(m) === "present" && m.department === deptName);
+            if (deptStaff.length === 0) return null;
+            return (
+              <div key={deptName} className="pt-5 sm:pt-6 first:pt-0 border-t border-stone-texture/20 first:border-t-0">
+                <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate mb-3">{deptName}</h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5 sm:gap-3.5">
+                  {deptStaff.map((member, index) => (
+                    <FacultyCard key={`${member.name}-${index}`} member={member} index={index} />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </Section>
+
+      <Section id="principals" variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30">
+        <div className="flex items-center gap-2 mb-5">
+          <span className="w-1.5 h-5 bg-heritage-gold-strong rounded-full" />
+          <h2 className="font-serif text-lg sm:text-xl font-bold text-academic-slate">Former Principals</h2>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 sm:gap-4">
+          {allStaff
+            .filter((m) => getFacultyCategory(m) === "former-principal")
+            .map((member, index) => (
+              <FacultyCard key={`${member.name}-${index}`} member={member} index={index} />
+            ))}
+        </div>
+      </Section>
+    </div>
   );
 }

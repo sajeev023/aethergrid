@@ -17,6 +17,9 @@ const nextConfig: NextConfig = {
     ],
   },
   serverExternalPackages: ["sharp", "bcryptjs"],
+  turbopack: {},
+  // Use webpack explicitly because native Turbopack bindings are unavailable in this environment.
+  // turbopack: {} keeps the config valid if the project later switches back.
   experimental: {
     optimizePackageImports: [
       "lucide-react",

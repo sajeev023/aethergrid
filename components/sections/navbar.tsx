@@ -42,25 +42,19 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
     ? navMenu.find((item) => item.label === openMenu) ?? null
     : null;
 
-  const searchableItems = [
-    { title: "Admissions Desk", href: "/admissions", category: "Portal", description: "Start candidate registration and stream selection inquiry." },
-    { title: "About Legacy & History", href: "/about", category: "Legacy", description: "Discover our 50-year intermediate education story." },
-    { title: "MPC (Mathematics, Physics, Chemistry)", href: "/academics/mpc", category: "Stream", description: "Engineering, technology, and architecture entrance orientation." },
-    { title: "BiPC (Botany, Zoology, Physics, Chemistry)", href: "/academics/bipc", category: "Stream", description: "Medical sciences and NEET entrance preparation." },
-    { title: "MEC (Mathematics, Economics, Commerce)", href: "/academics/mec", category: "Stream", description: "Quantitative finance and CA Foundation guidance." },
-    { title: "CEC (Civics, Economics, Commerce)", href: "/academics/cec", category: "Stream", description: "Business organization, corporate law and management." },
-    { title: "Former Principals Gallery", href: "/faculty/principals", category: "Leadership", description: "Official portrait gallery of former college leadership." },
-    { title: "Teaching & Support Staff", href: "/faculty/teaching", category: "Faculty", description: "Meet our board-recognized department heads and subject experts." },
-    { title: "Retired Faculty (Emeritus)", href: "/faculty/retired", category: "Faculty", description: "Honoring the emeritus educators who built our 50-year legacy." },
-    { title: "Campus Life & Facilities", href: "/campus", category: "Campus", description: "Tour our 8-acre Uppal campus, sports arena, and science labs." },
-    { title: "Alumni Success Directory", href: "/alumni", category: "Network", description: "Connect with our global network of rankers and achievers." },
-    { title: "Contact Desk & Map Address", href: "/contact", category: "Office", description: "Get our telephone helpline, email, and location maps." },
-  ];
+const searchableItems = [
+  { title: "Admissions Desk", href: "/admissions", category: "Portal" },
+  { title: "About LFJC", href: "/about", category: "Legacy" },
+  { title: "Academic Streams", href: "/academics", category: "Academics" },
+  { title: "Faculty Directory", href: "/faculty", category: "Faculty" },
+  { title: "Campus Life", href: "/campus", category: "Campus" },
+  { title: "Alumni Network", href: "/alumni", category: "Network" },
+  { title: "Contact Office", href: "/contact", category: "Office" },
+];
 
   const searchResults = searchQuery
     ? searchableItems.filter(item =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.category.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : [];
@@ -676,9 +670,6 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
                                   {item.category}
                                 </span>
                               </div>
-                              <p className="mt-1 text-xs text-academic-slate/70 font-sans">
-                                {item.description}
-                              </p>
                             </Link>
                           ))}
                         </div>
@@ -781,29 +772,10 @@ function MegaLink({ child, onNavigate }: { child: NavSubItem; onNavigate: () => 
         <span className="block truncate font-sans text-[13px] font-bold leading-tight text-academic-slate transition-colors duration-200 group-hover:text-montfortian-blue">
           {child.label}
         </span>
-        {child.description && (
-          <span className="mt-0.5 block truncate font-sans text-[11px] font-normal leading-snug text-academic-slate/70">
-            {child.description}
-          </span>
-        )}
       </span>
     </>
   );
 
-  if (child.external) {
-    return (
-      <a
-        href={child.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        role="menuitem"
-        className={className}
-        onClick={onNavigate}
-      >
-        {content}
-      </a>
-    );
-  }
   return (
     <Link href={child.href} role="menuitem" className={className} onClick={onNavigate}>
       {content}
@@ -816,20 +788,6 @@ function MobileChildLink({ child, onSelect }: { child: NavSubItem; onSelect: () 
   const className =
     "flex min-h-[44px] items-center gap-2.5 rounded-md px-3 py-2.5 text-[13px] font-medium font-sans text-academic-slate/80 hover:bg-royal-cream/50 hover:text-montfortian-blue transition-colors";
 
-  if (child.external) {
-    return (
-      <a
-        href={child.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={className}
-        onClick={onSelect}
-      >
-        <Icon className="h-3.5 w-3.5 shrink-0 text-heritage-gold-strong" aria-hidden="true" />
-        {child.label}
-      </a>
-    );
-  }
   return (
     <Link href={child.href} className={className} onClick={onSelect}>
       <Icon className="h-3.5 w-3.5 shrink-0 text-heritage-gold-strong" aria-hidden="true" />
