@@ -9,11 +9,9 @@ import {
   Landmark,
   ListChecks,
   MapPin,
-  Network,
   Phone,
   ShieldCheck,
   Trophy,
-  UserPlus,
   Users,
   type LucideIcon,
 } from "lucide-react";
@@ -173,26 +171,6 @@ export const navMenu: NavMenuItem[] = [
     label: "Alumni",
     href: "/alumni",
     blurb: "A global network of 15,000+ graduates.",
-    children: [
-      {
-        label: "Distinguished Alumni",
-        href: "/alumni",
-        description: "Roll of honor & featured success journeys.",
-        icon: Award,
-      },
-      {
-        label: "Global Network",
-        href: "/alumni#network",
-        description: "15,000+ global alumni association.",
-        icon: Network,
-      },
-      {
-        label: "Alumni Registry",
-        href: "/alumni#register",
-        description: "Join the Golden Jubilee association.",
-        icon: UserPlus,
-      },
-    ],
   },
   {
     label: "Contact",

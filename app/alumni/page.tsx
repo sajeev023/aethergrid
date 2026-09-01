@@ -5,9 +5,9 @@ import { Alumni } from "@/components/sections/alumni";
 // import { AlumniVideos } from "@/components/sections/alumni-videos";
 
 export const metadata: Metadata = {
-  title: "Distinguished Alumni",
+  title: "Alumni Association & Directory",
   description:
-    "Discover the notable alumni of Little Flower Junior College, Hyderabad. Our alumni network includes film personalities like Vijay Deverakonda, civil servants (IAS/IPS), judges, and business leaders who represent intermediate excellence and values.",
+    "Little Flower Junior College Alumni Association — explore distinguished alumni, our global network of 15,000+ graduates across 18+ countries, and the official alumni registry.",
 };
 
 export default function LFJCAlumniPage() {

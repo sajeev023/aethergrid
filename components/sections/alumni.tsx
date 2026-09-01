@@ -18,6 +18,8 @@ import {
   CheckCircle2,
   Briefcase,
   ShieldCheck,
+  Landmark,
+  UserPlus,
 } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
@@ -362,7 +364,7 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
   return (
     <section className={cn(
       "bg-white border-b border-stone-texture/50",
-      isFullPage ? "pb-6 pt-6 sm:pb-8 sm:pt-8 md:pb-12 md:pt-12" : "py-6 sm:py-8 md:py-12"
+      isFullPage ? "pb-8 pt-6 sm:pb-12 sm:pt-8 md:pb-16 md:pt-10" : "py-6 sm:py-8 md:py-12"
     )}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
 
@@ -372,8 +374,8 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
             {isFullPage ? (
               <SectionHeading
                 as={headingLevel}
-                eyebrow="Official Registry • 1974–2024"
-                title="Official Alumni Registry"
+                eyebrow="Montfortian Heritage • 1974–2024"
+                title="Alumni Association & Global Network"
                 description="Little Flower Junior College has nurtured over 15,000 graduates across five decades. Our alumni lead and excel globally in civil administration, national cinema, science, judiciary, and enterprise."
               />
             ) : (
@@ -386,244 +388,205 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
           </div>
         </Reveal>
 
-        {/* Official Registry Verification Trust Notice */}
-        <Reveal delay={0.01}>
-          <div className="mb-4 sm:mb-6 rounded-lg border border-heritage-gold/50 bg-royal-cream/35 p-3.5 sm:p-4 text-xs sm:text-sm text-academic-slate/85 font-sans flex items-start gap-3 shadow-2xs">
-            <ShieldCheck className="h-5 w-5 text-heritage-gold-strong shrink-0 mt-0.5" />
-            <div>
-              <p className="font-semibold text-academic-slate">Official Institutional Alumni Registry</p>
-              <p className="text-xs text-academic-slate/75 mt-0.5">
-                All featured alumni profiles and batch records are authenticated against college enrollment records. <strong>Alumni records held at the college office — verify in person.</strong>
-              </p>
-            </div>
-          </div>
-        </Reveal>
-
+        {/* In-Page Quick Jump Bar (Full page only) */}
         {isFullPage && (
-          <Reveal delay={0.02}>
-            <div id="register" className="mb-4 sm:mb-6 bg-royal-cream/35 border border-stone-texture p-3.5 sm:p-5 md:p-6 rounded-xl shadow-xs relative overflow-hidden flex flex-col md:flex-row md:items-center md:justify-between gap-3 sm:gap-4 scroll-mt-28">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-heritage-gold/5 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-montfortian-blue/5 rounded-full blur-2xl pointer-events-none" />
-              
-              <div className="space-y-1 max-w-2xl text-left">
-                <h2 className="font-serif text-base sm:text-lg md:text-xl font-bold text-academic-slate">
-                  Join Our Distinguished Alumni Network
-                </h2>
-                <p className="text-xs sm:text-sm leading-relaxed text-academic-slate/75 font-sans">
-                  Are you a Little Flower Junior College alumnus? Submit your profile to be reviewed and published in our official alumni registry.
+          <Reveal delay={0.01}>
+            <div className="mb-6 sm:mb-8 flex flex-wrap items-center justify-between gap-2.5 sm:gap-3 p-2.5 sm:p-3.5 bg-royal-cream/40 border border-stone-texture/50 rounded-xl shadow-xs">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <a
+                  href="#distinguished-alumni"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-stone-texture/60 text-xs font-bold text-academic-slate hover:text-montfortian-blue hover:border-montfortian-blue transition-colors font-sans shadow-2xs"
+                >
+                  <Award className="h-3.5 w-3.5 text-heritage-gold-strong" />
+                  Distinguished Alumni
+                </a>
+                <a
+                  href="#global-network"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-stone-texture/60 text-xs font-bold text-academic-slate hover:text-montfortian-blue hover:border-montfortian-blue transition-colors font-sans shadow-2xs"
+                >
+                  <Globe className="h-3.5 w-3.5 text-heritage-gold-strong" />
+                  Global Network
+                </a>
+                <a
+                  href="#alumni-registry"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-stone-texture/60 text-xs font-bold text-academic-slate hover:text-montfortian-blue hover:border-montfortian-blue transition-colors font-sans shadow-2xs"
+                >
+                  <UserPlus className="h-3.5 w-3.5 text-heritage-gold-strong" />
+                  Alumni Registry
+                </a>
+              </div>
+              <Button
+                onClick={() => setIsFormOpen(true)}
+                size="sm"
+                className="h-8 sm:h-9 px-3.5 sm:px-4 text-[11px] font-bold uppercase tracking-wider cursor-pointer shadow-xs"
+              >
+                <UserPlus className="h-3.5 w-3.5 mr-1" />
+                Join the Registry
+              </Button>
+            </div>
+          </Reveal>
+        )}
+
+        {/* ─── SECTION 1: DISTINGUISHED ALUMNI ─────────────────────────────── */}
+        <div id="distinguished-alumni" className="scroll-mt-24 space-y-5 sm:space-y-7">
+          {/* Section 1 Header */}
+          {isFullPage && (
+            <Reveal delay={0.02}>
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 border-b border-stone-texture/40 pb-3">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="w-1.5 h-4 sm:h-5 bg-heritage-gold rounded-full" />
+                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                      Roll of Honour
+                    </span>
+                  </div>
+                  <h2 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-academic-slate">
+                    Distinguished Alumni &amp; Roll of Honour
+                  </h2>
+                </div>
+                <p className="text-xs text-academic-slate/70 font-sans max-w-md">
+                  Recognizing LFJC graduates who have earned distinction across civil administration, cinema, sciences, and global enterprise.
                 </p>
               </div>
-              
-              <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-                <Button onClick={() => setIsFormOpen(true)} size="sm" className="shadow-md cursor-pointer text-xs font-bold uppercase tracking-wider h-9 sm:h-10 px-4 sm:px-5">
-                  Apply to Feature Your Story
-                </Button>
-              </div>
-            </div>
-          </Reveal>
-        )}
-
-        {/* Statistics Banner (Only shown on full directory page) */}
-        {isFullPage && (
-          <Reveal delay={0.05}>
-            <div id="network" className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 mb-4 sm:mb-6 border-t border-b border-stone-texture/45 py-3 sm:py-4 bg-royal-cream/15 rounded-lg px-3 sm:px-6 scroll-mt-28">
-              <div className="text-center md:border-r border-stone-texture/40">
-                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">15,000+</span>
-                <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
-                  <Users className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Global Network
-                </span>
-              </div>
-              <div className="text-center md:border-r border-stone-texture/40">
-                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">18+</span>
-                <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
-                  <Globe className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Countries
-                </span>
-              </div>
-              <div className="text-center md:border-r border-stone-texture/40">
-                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">12+</span>
-                <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
-                  <Building2 className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Sectors
-                </span>
-              </div>
-              <div className="text-center">
-                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">50+</span>
-                <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
-                  <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Board Medals
-                </span>
-              </div>
-            </div>
-          </Reveal>
-        )}
-
-        {/* Featured Success Stories Section (Only shown on full page) */}
-        {isFullPage && (
-          <div id="success-stories" className="mb-4 sm:mb-6 scroll-mt-28">
-            <Reveal>
-              <div className="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3">
-                <span className="w-1.5 h-5 sm:h-6 bg-heritage-gold rounded-full" />
-                <h2 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-academic-slate">
-                  Featured Alumni Success Stories
-                </h2>
-              </div>
             </Reveal>
+          )}
 
-            <div className="grid gap-2.5 sm:gap-3 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-start">
-              {featuredAlumni.map((featured, idx) => (
-                <Reveal key={featured.name} delay={idx * 0.06} className="h-full">
-                  <Card className="group flex flex-col overflow-hidden border-2 border-heritage-gold/25 bg-royal-cream/10 rounded-lg hover:border-heritage-gold/75 hover:shadow-lg transition-all duration-300 h-auto">
-                    <div className="relative aspect-[3/4] w-full overflow-hidden bg-surface-container-low">
-                      <Image
-                        src={featured.image}
-                        alt={featured.name}
-                        fill
-                        sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 50vw"
-                        className={cn(
-                          "object-cover group-hover:scale-[1.03] transition-transform duration-500",
-                          featured.objectPosition || "object-[center_15%]"
-                        )}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/55 via-transparent to-transparent pointer-events-none" />
-                      <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
-                        <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded bg-white/95 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
-                          {featured.category}
-                        </span>
-                      </div>
-                    </div>
-                    <CardContent className="p-2.5 sm:p-3 flex-1 flex flex-col justify-between bg-white">
-                      <div>
-                        <div className="flex items-center text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
-                          <span className="inline-flex items-center gap-1">
-                            <GraduationCap className="h-3.5 w-3.5 shrink-0" />
-                            {featured.batch.replace(/^Batch of\s+/i, "Batch: ")}
-                          </span>
-                        </div>
-                        <h3 className="font-serif text-xs sm:text-base font-bold text-academic-slate mb-0.5 sm:mb-1 line-clamp-1">
-                          {featured.name}
-                        </h3>
-                        <p className="text-[11px] sm:text-xs font-medium text-academic-slate/75 font-sans mb-1.5 sm:mb-2.5 line-clamp-1">
-                          {featured.role}
-                        </p>
-                        <div className="flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
-                          <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
-                          <span className="text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong leading-normal font-sans line-clamp-1">
-                            {featured.title}
-                          </span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Reveal>
-              ))}
+          {/* Official Registry Verification Trust Notice */}
+          <Reveal delay={0.02}>
+            <div className="rounded-lg border border-heritage-gold/50 bg-royal-cream/35 p-3.5 sm:p-4 text-xs sm:text-sm text-academic-slate/85 font-sans flex items-start gap-3 shadow-2xs">
+              <ShieldCheck className="h-5 w-5 text-heritage-gold-strong shrink-0 mt-0.5" />
+              <div>
+                <p className="font-semibold text-academic-slate">Official Institutional Alumni Registry</p>
+                <p className="text-xs text-academic-slate/75 mt-0.5">
+                  All featured alumni profiles and batch records are authenticated against college enrollment records. <strong>Alumni records held at the college office in Uppal — verify in person.</strong>
+                </p>
+              </div>
             </div>
-          </div>
-        )}
+          </Reveal>
 
-        {/* Category filter — full directory page only */}
-        {isFullPage && (
-          <div className="mb-5 sm:mb-8 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
-            {categories.map((cat) => {
-              const active = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setSelectedCategory(cat)}
-                  aria-pressed={active}
-                  className={cn(
-                    "rounded-full border px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-bold uppercase tracking-wider font-sans transition-all duration-300 min-h-[38px] cursor-pointer",
-                    active
-                      ? "border-montfortian-blue bg-montfortian-blue text-white shadow-xs"
-                      : "border-stone-texture/70 bg-white text-academic-slate/75 hover:border-montfortian-blue hover:text-montfortian-blue",
-                  )}
-                >
-                  {cat}
-                </button>
-              );
-            })}
-          </div>
-        )}
+          {/* Featured Success Stories Section (Only shown on full page) */}
+          {isFullPage && (
+            <div id="success-stories" className="scroll-mt-28 space-y-3">
+              <Reveal>
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-4 bg-heritage-gold rounded-full" />
+                  <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate">
+                    Featured Alumni Success Stories
+                  </h3>
+                </div>
+              </Reveal>
 
-        {/* Alumni Cards Grid */}
-        {loadingDynamic ? (
-          <div className="flex items-center justify-center py-8 sm:py-10">
-            <Loader2 className="h-6 w-6 sm:h-8 sm:w-8 text-montfortian-blue animate-spin" />
-            <span className="ml-2 text-xs text-academic-slate/70 font-sans">Loading alumni database...</span>
-          </div>
-        ) : displayedAlumni.length > 0 ? (
-          <>
-            {isFullPage ? (
-              <div className="space-y-6 sm:space-y-10">
-                {/* Section 1 — Alumni with Profile Images */}
-                {alumniWithImages.length > 0 && (
-                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-3 items-start">
-                    {alumniWithImages.map((alumnus, index) => (
-                      <Reveal key={alumnus.name} delay={index % 5 * 0.04}>
-                        <Card className="group flex flex-col overflow-hidden border border-stone-texture/70 bg-white hover:border-heritage-gold/55 hover:shadow-[0_15px_30px_rgba(15,76,129,0.08)] hover:shadow-panel-hover transition-all duration-300 rounded-lg h-full">
-                          <div className="relative aspect-[3/4] w-full overflow-hidden bg-surface-container-low border-b border-stone-texture/40">
-                            <Image
-                              src={alumnus.image}
-                              alt={alumnus.name}
-                              fill
-                              sizes="(min-width: 1280px) 16vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 50vw"
-                              className={cn(
-                                "object-cover group-hover:scale-105 transition-transform duration-500",
-                                alumnus.objectPosition || "object-[center_15%]"
-                              )}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/35 via-transparent to-transparent pointer-events-none" />
-                            <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
-                              <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded bg-white/95 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
-                                {alumnus.category}
-                              </span>
-                            </div>
-                          </div>
-                          <CardContent className="flex-1 flex flex-col justify-between p-2.5 sm:p-3 bg-white">
-                            <div>
-                              <div className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
-                                <GraduationCap className="h-3.5 w-3.5 shrink-0" />
-                                <span>{alumnus.year.replace(/^Batch of\s+/i, "Batch: ")}</span>
-                              </div>
-                              <h3 className="font-serif text-xs sm:text-base font-bold leading-tight text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300 line-clamp-1">
-                                {alumnus.name}
-                              </h3>
-                              <p className="text-[11px] sm:text-xs font-medium text-academic-slate/75 font-sans mt-0.5 sm:mt-1 line-clamp-1">
-                                {alumnus.designation}
-                              </p>
-                              <div className="mt-1.5 sm:mt-2 flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
-                                <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
-                                <p className="text-[10px] sm:text-[11px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
-                                  {alumnus.achievement.replace(/https?:\/\/[^\s]+/, "").trim() || "Distinguished Achiever"}
-                                </p>
-                              </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </Reveal>
-                    ))}
-                  </div>
-                )}
-
-                {/* Section 2 — Alumni without Profile Images */}
-                {alumniWithoutImages.length > 0 && (
-                  <div className="space-y-4 sm:space-y-6">
-                    <Reveal>
-                      <div className="flex items-center gap-2.5 sm:gap-3">
-                        <span className="w-1.5 h-5 sm:h-6 bg-heritage-gold rounded-full" />
-                        <h3 className="font-serif text-base sm:text-lg md:text-xl font-bold text-academic-slate">
-                          Other Distinguished Alumni
-                        </h3>
+              <div className="grid gap-2.5 sm:gap-3 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-start">
+                {featuredAlumni.map((featured, idx) => (
+                  <Reveal key={featured.name} delay={idx * 0.06} className="h-full">
+                    <Card className="group flex flex-col overflow-hidden border-2 border-heritage-gold/25 bg-royal-cream/10 rounded-lg hover:border-heritage-gold/75 hover:shadow-lg transition-all duration-300 h-auto">
+                      <div className="relative aspect-[3/4] w-full overflow-hidden bg-surface-container-low">
+                        <Image
+                          src={featured.image}
+                          alt={featured.name}
+                          fill
+                          sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 50vw"
+                          className={cn(
+                            "object-cover group-hover:scale-[1.03] transition-transform duration-500",
+                            featured.objectPosition || "object-[center_15%]"
+                          )}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/55 via-transparent to-transparent pointer-events-none" />
+                        <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
+                          <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded bg-white/95 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
+                            {featured.category}
+                          </span>
+                        </div>
                       </div>
-                    </Reveal>
+                      <CardContent className="p-2.5 sm:p-3 flex-1 flex flex-col justify-between bg-white">
+                        <div>
+                          <div className="flex items-center text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
+                            <span className="inline-flex items-center gap-1">
+                              <GraduationCap className="h-3.5 w-3.5 shrink-0" />
+                              {featured.batch.replace(/^Batch of\s+/i, "Batch: ")}
+                            </span>
+                          </div>
+                          <h3 className="font-serif text-xs sm:text-base font-bold text-academic-slate mb-0.5 sm:mb-1 line-clamp-1">
+                            {featured.name}
+                          </h3>
+                          <p className="text-[11px] sm:text-xs font-medium text-academic-slate/75 font-sans mb-1.5 sm:mb-2.5 line-clamp-1">
+                            {featured.role}
+                          </p>
+                          <div className="flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
+                            <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
+                            <span className="text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong leading-normal font-sans line-clamp-1">
+                              {featured.title}
+                            </span>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Category filter — full directory page only */}
+          {isFullPage && (
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+              {categories.map((cat) => {
+                const active = selectedCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => setSelectedCategory(cat)}
+                    aria-pressed={active}
+                    className={cn(
+                      "rounded-full border px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-bold uppercase tracking-wider font-sans transition-all duration-300 min-h-[38px] cursor-pointer",
+                      active
+                        ? "border-montfortian-blue bg-montfortian-blue text-white shadow-xs"
+                        : "border-stone-texture/70 bg-white text-academic-slate/75 hover:border-montfortian-blue hover:text-montfortian-blue",
+                    )}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Alumni Cards Grid */}
+          {loadingDynamic ? (
+            <div className="flex items-center justify-center py-8 sm:py-10">
+              <Loader2 className="h-6 w-6 sm:h-8 sm:w-8 text-montfortian-blue animate-spin" />
+              <span className="ml-2 text-xs text-academic-slate/70 font-sans">Loading alumni database...</span>
+            </div>
+          ) : displayedAlumni.length > 0 ? (
+            <>
+              {isFullPage ? (
+                <div className="space-y-6 sm:space-y-10">
+                  {/* Section 1 — Alumni with Profile Images */}
+                  {alumniWithImages.length > 0 && (
                     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-3 items-start">
-                      {alumniWithoutImages.map((alumnus, index) => (
+                      {alumniWithImages.map((alumnus, index) => (
                         <Reveal key={alumnus.name} delay={index % 5 * 0.04}>
-                          <Card className="group flex flex-col overflow-hidden border border-stone-texture/70 bg-white hover:border-heritage-gold/55 hover:shadow-[0_15px_30px_rgba(15,76,129,0.08)] hover:shadow-panel-hover transition-all duration-300 rounded-lg h-full min-h-[110px] sm:min-h-[120px]">
-                            <CardContent className="flex-1 flex flex-col justify-between p-2.5 sm:p-3 bg-white">
-                              <div className="mb-1.5 sm:mb-2">
-                                <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider bg-royal-cream/30">
+                          <Card className="group flex flex-col overflow-hidden border border-stone-texture/70 bg-white hover:border-heritage-gold/55 hover:shadow-[0_15px_30px_rgba(15,76,129,0.08)] hover:shadow-panel-hover transition-all duration-300 rounded-lg h-full">
+                            <div className="relative aspect-[3/4] w-full overflow-hidden bg-surface-container-low border-b border-stone-texture/40">
+                              <Image
+                                src={alumnus.image}
+                                alt={alumnus.name}
+                                fill
+                                sizes="(min-width: 1280px) 16vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 50vw"
+                                className={cn(
+                                 "object-cover group-hover:scale-105 transition-transform duration-500",
+                                 alumnus.objectPosition || "object-[center_15%]"
+                                )}
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/35 via-transparent to-transparent pointer-events-none" />
+                              <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
+                                <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded bg-white/95 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
                                   {alumnus.category}
                                 </span>
                               </div>
+                            </div>
+                            <CardContent className="flex-1 flex flex-col justify-between p-2.5 sm:p-3 bg-white">
                               <div>
                                 <div className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
                                   <GraduationCap className="h-3.5 w-3.5 shrink-0" />
@@ -647,96 +610,434 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
                         </Reveal>
                       ))}
                     </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              /* Homepage Quick Preview (render 2-column on mobile, sorted with images first) */
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-3 items-start">
-                {displayedAlumni.map((alumnus, index) => {
-                  const hasImage = !!alumnus.image;
-                  return (
-                    <Reveal key={alumnus.name} delay={index % 5 * 0.04}>
-                      <Card className="group flex flex-col overflow-hidden border border-stone-texture/70 bg-white hover:border-heritage-gold/55 hover:shadow-[0_15px_30px_rgba(15,76,129,0.08)] hover:shadow-panel-hover transition-all duration-300 rounded-lg h-full">
-                        {hasImage && (
-                          <div className="relative aspect-[3/4] w-full overflow-hidden bg-surface-container-low border-b border-stone-texture/40">
-                            <Image
-                              src={alumnus.image}
-                              alt={alumnus.name}
-                              fill
-                              sizes="(min-width: 1280px) 16vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 50vw"
-                              className={cn(
-                                "object-cover group-hover:scale-105 transition-transform duration-500",
-                                alumnus.objectPosition || "object-[center_15%]"
-                              )}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/35 via-transparent to-transparent pointer-events-none" />
-                            <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
-                              <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded bg-white/95 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
-                                {alumnus.category}
-                              </span>
-                            </div>
-                          </div>
-                        )}
-                        <CardContent className="flex-1 flex flex-col justify-between p-2.5 sm:p-3 bg-white">
-                          {!hasImage && (
-                            <div className="mb-1.5 sm:mb-2">
-                              <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider bg-royal-cream/30">
-                                {alumnus.category}
-                              </span>
+                  )}
+
+                  {/* Section 2 — Alumni without Profile Images */}
+                  {alumniWithoutImages.length > 0 && (
+                    <div className="space-y-4 sm:space-y-6">
+                      <Reveal>
+                        <div className="flex items-center gap-2.5 sm:gap-3">
+                          <span className="w-1.5 h-5 sm:h-6 bg-heritage-gold rounded-full" />
+                          <h3 className="font-serif text-base sm:text-lg md:text-xl font-bold text-academic-slate">
+                            Other Distinguished Alumni
+                          </h3>
+                        </div>
+                      </Reveal>
+                      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-3 items-start">
+                        {alumniWithoutImages.map((alumnus, index) => (
+                          <Reveal key={alumnus.name} delay={index % 5 * 0.04}>
+                            <Card className="group flex flex-col overflow-hidden border border-stone-texture/70 bg-white hover:border-heritage-gold/55 hover:shadow-[0_15px_30px_rgba(15,76,129,0.08)] hover:shadow-panel-hover transition-all duration-300 rounded-lg h-full min-h-[110px] sm:min-h-[120px]">
+                              <CardContent className="flex-1 flex flex-col justify-between p-2.5 sm:p-3 bg-white">
+                                <div className="mb-1.5 sm:mb-2">
+                                  <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider bg-royal-cream/30">
+                                    {alumnus.category}
+                                  </span>
+                                </div>
+                                <div>
+                                  <div className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
+                                    <GraduationCap className="h-3.5 w-3.5 shrink-0" />
+                                    <span>{alumnus.year.replace(/^Batch of\s+/i, "Batch: ")}</span>
+                                  </div>
+                                  <h3 className="font-serif text-xs sm:text-base font-bold leading-tight text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300 line-clamp-1">
+                                    {alumnus.name}
+                                  </h3>
+                                  <p className="text-[11px] sm:text-xs font-medium text-academic-slate/75 font-sans mt-0.5 sm:mt-1 line-clamp-1">
+                                    {alumnus.designation}
+                                  </p>
+                                  <div className="mt-1.5 sm:mt-2 flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
+                                    <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
+                                    <p className="text-[10px] sm:text-[11px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
+                                      {alumnus.achievement.replace(/https?:\/\/[^\s]+/, "").trim() || "Distinguished Achiever"}
+                                    </p>
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          </Reveal>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                /* Homepage Quick Preview (render 2-column on mobile, sorted with images first) */
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-3 items-start">
+                  {displayedAlumni.map((alumnus, index) => {
+                    const hasImage = !!alumnus.image;
+                    return (
+                      <Reveal key={alumnus.name} delay={index % 5 * 0.04}>
+                        <Card className="group flex flex-col overflow-hidden border border-stone-texture/70 bg-white hover:border-heritage-gold/55 hover:shadow-[0_15px_30px_rgba(15,76,129,0.08)] hover:shadow-panel-hover transition-all duration-300 rounded-lg h-full">
+                          {hasImage && (
+                            <div className="relative aspect-[3/4] w-full overflow-hidden bg-surface-container-low border-b border-stone-texture/40">
+                              <Image
+                                src={alumnus.image}
+                                alt={alumnus.name}
+                                fill
+                                sizes="(min-width: 1280px) 16vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 50vw"
+                                className={cn(
+                                  "object-cover group-hover:scale-105 transition-transform duration-500",
+                                  alumnus.objectPosition || "object-[center_15%]"
+                                )}
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/35 via-transparent to-transparent pointer-events-none" />
+                              <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
+                                <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded bg-white/95 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
+                                  {alumnus.category}
+                                </span>
+                              </div>
                             </div>
                           )}
-                          <div>
-                            <div className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
-                              <GraduationCap className="h-3.5 w-3.5 shrink-0" />
-                              <span>{alumnus.year.replace(/^Batch of\s+/i, "Batch: ")}</span>
-                            </div>
-                            <h3 className="font-serif text-xs sm:text-base font-bold leading-tight text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300 line-clamp-1">
-                              {alumnus.name}
-                            </h3>
-                            <p className="text-[11px] sm:text-xs font-medium text-academic-slate/75 font-sans mt-0.5 sm:mt-1 line-clamp-1">
-                              {alumnus.designation}
-                            </p>
-                            <div className="mt-1.5 sm:mt-2 flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
-                              <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
-                              <p className="text-[10px] sm:text-[11px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
-                                {alumnus.achievement.replace(/https?:\/\/[^\s]+/, "").trim() || "Distinguished Achiever"}
+                          <CardContent className="flex-1 flex flex-col justify-between p-2.5 sm:p-3 bg-white">
+                            {!hasImage && (
+                              <div className="mb-1.5 sm:mb-2">
+                                <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider bg-royal-cream/30">
+                                  {alumnus.category}
+                                </span>
+                              </div>
+                            )}
+                            <div>
+                              <div className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
+                                <GraduationCap className="h-3.5 w-3.5 shrink-0" />
+                                <span>{alumnus.year.replace(/^Batch of\s+/i, "Batch: ")}</span>
+                              </div>
+                              <h3 className="font-serif text-xs sm:text-base font-bold leading-tight text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300 line-clamp-1">
+                                {alumnus.name}
+                              </h3>
+                              <p className="text-[11px] sm:text-xs font-medium text-academic-slate/75 font-sans mt-0.5 sm:mt-1 line-clamp-1">
+                                {alumnus.designation}
                               </p>
+                              <div className="mt-1.5 sm:mt-2 flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
+                                <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
+                                <p className="text-[10px] sm:text-[11px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
+                                  {alumnus.achievement.replace(/https?:\/\/[^\s]+/, "").trim() || "Distinguished Achiever"}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Reveal>
-                  );
-                })}
+                          </CardContent>
+                        </Card>
+                      </Reveal>
+                    );
+                  })}
+                </div>
+              )}
+            </>
+          ) : (
+            /* Empty Search/Filter State */
+            <Reveal>
+              <div className="text-center py-8 sm:py-10 bg-royal-cream/10 border border-dashed border-stone-texture/60 rounded-lg max-w-md mx-auto">
+                <Users className="h-8 w-8 sm:h-10 sm:w-10 text-academic-slate/30 mx-auto mb-3 sm:mb-4" />
+                <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate mb-1">No alumni found</h3>
+                <p className="text-xs text-academic-slate/70 font-sans px-4 sm:px-6 text-center">
+                  No alumni found in the selected category. Try selecting another filter.
+                </p>
               </div>
-            )}
-          </>
-        ) : (
-          /* Empty Search/Filter State */
-          <Reveal>
-            <div className="text-center py-8 sm:py-10 bg-royal-cream/10 border border-dashed border-stone-texture/60 rounded-lg max-w-md mx-auto">
-              <Users className="h-8 w-8 sm:h-10 sm:w-10 text-academic-slate/30 mx-auto mb-3 sm:mb-4" />
-              <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate mb-1">No alumni found</h3>
-              <p className="text-xs text-academic-slate/70 font-sans px-4 sm:px-6 text-center">
-                No alumni found in the selected category. Try selecting another filter.
-              </p>
+            </Reveal>
+          )}
+
+          {/* View All CTA (Only shown on the homepage preview) */}
+          {!isFullPage && (
+            <Reveal delay={0.1}>
+              <div className="mt-8 flex justify-center">
+                <Button asChild size="lg" className="shadow-md">
+                  <Link href="/alumni" className="inline-flex items-center gap-2">
+                    Explore Full Alumni Directory
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </Reveal>
+          )}
+        </div>
+
+        {/* ─── SECTION 2: GLOBAL ALUMNI NETWORK ───────────────────────────── */}
+        {isFullPage && (
+          <div id="global-network" className="scroll-mt-24 pt-8 sm:pt-12 border-t border-stone-texture/50 space-y-6 sm:space-y-8">
+            <span id="network" className="scroll-mt-24 block -mt-24 h-0" aria-hidden="true" />
+            
+            {/* Section 2 Header */}
+            <Reveal>
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 border-b border-stone-texture/40 pb-3">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="w-1.5 h-4 sm:h-5 bg-heritage-gold rounded-full" />
+                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                      Worldwide Community
+                    </span>
+                  </div>
+                  <h2 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-academic-slate">
+                    Global Alumni Network
+                  </h2>
+                </div>
+                <p className="text-xs text-academic-slate/70 font-sans max-w-md">
+                  A connected fellowship of 15,000+ graduates across 18+ countries fostering lifelong fraternity, career mentorship, and institutional development.
+                </p>
+              </div>
+            </Reveal>
+
+            {/* Statistics Banner */}
+            <Reveal delay={0.03}>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 border border-stone-texture/45 py-4 sm:py-5 bg-royal-cream/20 rounded-xl px-4 sm:px-6 shadow-2xs">
+                <div className="text-center md:border-r border-stone-texture/40">
+                  <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">15,000+</span>
+                  <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
+                    <Users className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Global Network
+                  </span>
+                </div>
+                <div className="text-center md:border-r border-stone-texture/40">
+                  <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">18+</span>
+                  <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
+                    <Globe className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Countries
+                  </span>
+                </div>
+                <div className="text-center md:border-r border-stone-texture/40">
+                  <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">12+</span>
+                  <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
+                    <Building2 className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Sectors
+                  </span>
+                </div>
+                <div className="text-center">
+                  <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">50+</span>
+                  <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
+                    <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Board Medals
+                  </span>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* 4 Global Network Pillar Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-5">
+              {/* 1. Regional Chapters */}
+              <Reveal delay={0.04}>
+                <div className="h-full bg-white border border-stone-texture/60 rounded-xl p-4 sm:p-5 shadow-panel hover:border-heritage-gold/50 hover:shadow-panel-hover transition-all duration-300 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-2.5 mb-3">
+                      <div className="w-9 h-9 rounded-lg bg-royal-cream text-montfortian-blue flex items-center justify-center border border-stone-texture/50">
+                        <Globe className="h-4.5 w-4.5 text-heritage-gold-strong" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate">
+                          Worldwide Chapters &amp; Hubs
+                        </h3>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                          Regional Alumni Networks
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-xs sm:text-sm text-academic-slate/75 leading-relaxed font-sans">
+                      Active alumni communities across Hyderabad Central, Bengaluru, Chennai, Mumbai, North America (San Francisco Bay Area, New York/New Jersey, Texas), UK &amp; Europe, and the UAE / Middle East.
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-stone-texture/30 flex flex-wrap gap-1.5">
+                    {["Hyderabad", "Bengaluru", "USA / Bay Area", "UK & Europe", "UAE / Middle East"].map((loc) => (
+                      <span key={loc} className="px-2 py-0.5 rounded bg-royal-cream/60 text-[10px] font-semibold text-academic-slate border border-stone-texture/40 font-sans">
+                        {loc}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+
+              {/* 2. Mentorship & Career Guidance */}
+              <Reveal delay={0.08}>
+                <div className="h-full bg-white border border-stone-texture/60 rounded-xl p-4 sm:p-5 shadow-panel hover:border-heritage-gold/50 hover:shadow-panel-hover transition-all duration-300 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-2.5 mb-3">
+                      <div className="w-9 h-9 rounded-lg bg-royal-cream text-montfortian-blue flex items-center justify-center border border-stone-texture/50">
+                        <GraduationCap className="h-4.5 w-4.5 text-heritage-gold-strong" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate">
+                          Mentorship &amp; Career Pathways
+                        </h3>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                          Guiding Future Generations
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-xs sm:text-sm text-academic-slate/75 leading-relaxed font-sans">
+                      Senior alumni offer structured guidance for current LFJC students preparing for competitive entrance examinations (UPSC Civil Services, JEE Advanced, NEET, CA Foundation) and higher education choices.
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-stone-texture/30 flex flex-wrap gap-1.5">
+                    {["UPSC Mentorship", "IIT-JEE Guidance", "NEET Guidance", "CA / CS Roadmaps"].map((track) => (
+                      <span key={track} className="px-2 py-0.5 rounded bg-royal-cream/60 text-[10px] font-semibold text-academic-slate border border-stone-texture/40 font-sans">
+                        {track}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+
+              {/* 3. Golden Jubilee Reunions */}
+              <Reveal delay={0.12}>
+                <div className="h-full bg-white border border-stone-texture/60 rounded-xl p-4 sm:p-5 shadow-panel hover:border-heritage-gold/50 hover:shadow-panel-hover transition-all duration-300 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-2.5 mb-3">
+                      <div className="w-9 h-9 rounded-lg bg-royal-cream text-montfortian-blue flex items-center justify-center border border-stone-texture/50">
+                        <Sparkles className="h-4.5 w-4.5 text-heritage-gold-strong" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate">
+                          Golden Jubilee Reunions (1974–2024)
+                        </h3>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                          50-Year Milestone Celebrations
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-xs sm:text-sm text-academic-slate/75 leading-relaxed font-sans">
+                      Annual alumni meets, silver jubilee batch reunions, and fellowship dinners hosted on the 8-acre Uppal campus, celebrating memories and renewing ties with faculty and classmates.
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-stone-texture/30 flex items-center justify-between text-xs font-semibold text-academic-slate/70 font-sans">
+                    <span>Annual Campus Fellowship</span>
+                    <span className="text-montfortian-blue font-bold">1974–2024 Legacy</span>
+                  </div>
+                </div>
+              </Reveal>
+
+              {/* 4. Institutional Endowments */}
+              <Reveal delay={0.16}>
+                <div className="h-full bg-white border border-stone-texture/60 rounded-xl p-4 sm:p-5 shadow-panel hover:border-heritage-gold/50 hover:shadow-panel-hover transition-all duration-300 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-2.5 mb-3">
+                      <div className="w-9 h-9 rounded-lg bg-royal-cream text-montfortian-blue flex items-center justify-center border border-stone-texture/50">
+                        <Landmark className="h-4.5 w-4.5 text-heritage-gold-strong" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate">
+                          Institutional Endowments &amp; Giving
+                        </h3>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                          Building the College of Tomorrow
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-xs sm:text-sm text-academic-slate/75 leading-relaxed font-sans">
+                      Alumni philanthropy supports student merit scholarships for deserving intermediate learners, advanced science laboratory upgrades, and sports infrastructure modernization.
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-stone-texture/30 flex items-center justify-between text-xs font-semibold text-academic-slate/70 font-sans">
+                    <span>Merit Scholarships &amp; Lab Grants</span>
+                    <span className="text-montfortian-blue font-bold">Montfortian Values</span>
+                  </div>
+                </div>
+              </Reveal>
             </div>
-          </Reveal>
+          </div>
         )}
 
-        {/* View All CTA (Only shown on the homepage preview) */}
-        {!isFullPage && (
-          <Reveal delay={0.1}>
-            <div className="mt-8 flex justify-center">
-              <Button asChild size="lg" className="shadow-md">
-                <Link href="/alumni" className="inline-flex items-center gap-2">
-                  Explore Full Alumni Directory
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
+        {/* ─── SECTION 3: ALUMNI REGISTRY & ENROLLMENT ─────────────────────── */}
+        {isFullPage && (
+          <div id="alumni-registry" className="scroll-mt-24 pt-8 sm:pt-12 border-t border-stone-texture/50 space-y-6 sm:space-y-8">
+            <span id="register" className="scroll-mt-24 block -mt-24 h-0" aria-hidden="true" />
+            
+            {/* Section 3 Header */}
+            <Reveal>
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 border-b border-stone-texture/40 pb-3">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="w-1.5 h-4 sm:h-5 bg-heritage-gold rounded-full" />
+                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                      Official Association
+                    </span>
+                  </div>
+                  <h2 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-academic-slate">
+                    Official Alumni Registry &amp; Enrollment
+                  </h2>
+                </div>
+                <p className="text-xs text-academic-slate/70 font-sans max-w-md">
+                  Are you a Little Flower Junior College alumnus? Register your credentials to join our official directory, reconnect with peers, and feature in the institutional roll of honour.
+                </p>
+              </div>
+            </Reveal>
+
+            {/* 3 Registry Value Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+              <Reveal delay={0.02}>
+                <div className="bg-royal-cream/25 border border-stone-texture/60 rounded-xl p-4 sm:p-5 flex flex-col justify-between h-full shadow-2xs">
+                  <div>
+                    <div className="w-8 h-8 rounded-md bg-white border border-stone-texture/60 flex items-center justify-center text-heritage-gold-strong mb-3">
+                      <ShieldCheck className="h-4.5 w-4.5" />
+                    </div>
+                    <h3 className="font-serif text-sm sm:text-base font-bold text-academic-slate mb-1">
+                      Verified Directory Profile
+                    </h3>
+                    <p className="text-xs text-academic-slate/75 leading-relaxed font-sans">
+                      Your profile is authenticated against official LFJC batch records and published in the college directory.
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.06}>
+                <div className="bg-royal-cream/25 border border-stone-texture/60 rounded-xl p-4 sm:p-5 flex flex-col justify-between h-full shadow-2xs">
+                  <div>
+                    <div className="w-8 h-8 rounded-md bg-white border border-stone-texture/60 flex items-center justify-center text-heritage-gold-strong mb-3">
+                      <Users className="h-4.5 w-4.5" />
+                    </div>
+                    <h3 className="font-serif text-sm sm:text-base font-bold text-academic-slate mb-1">
+                      Reunion &amp; Event Invitations
+                    </h3>
+                    <p className="text-xs text-academic-slate/75 leading-relaxed font-sans">
+                      Receive priority invitations to Golden Jubilee gatherings, annual alumni meets, and regional chapter meetups.
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.1}>
+                <div className="bg-royal-cream/25 border border-stone-texture/60 rounded-xl p-4 sm:p-5 flex flex-col justify-between h-full shadow-2xs">
+                  <div>
+                    <div className="w-8 h-8 rounded-md bg-white border border-stone-texture/60 flex items-center justify-center text-heritage-gold-strong mb-3">
+                      <Award className="h-4.5 w-4.5" />
+                    </div>
+                    <h3 className="font-serif text-sm sm:text-base font-bold text-academic-slate mb-1">
+                      Mentorship &amp; Giving Back
+                    </h3>
+                    <p className="text-xs text-academic-slate/75 leading-relaxed font-sans">
+                      Conduct guest lectures on campus, guide upcoming batches, and support institutional initiatives.
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
             </div>
-          </Reveal>
+
+            {/* Primary Registration Callout Card */}
+            <Reveal delay={0.12}>
+              <div className="bg-gradient-to-br from-royal-cream/50 via-white to-royal-cream/30 border-2 border-heritage-gold/35 p-5 sm:p-7 md:p-8 rounded-2xl shadow-panel relative overflow-hidden flex flex-col md:flex-row md:items-center md:justify-between gap-5 sm:gap-6">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-heritage-gold/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-montfortian-blue/5 rounded-full blur-2xl pointer-events-none" />
+                
+                <div className="space-y-2 max-w-2xl text-left relative z-10">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-heritage-gold/15 border border-heritage-gold/30 text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                    <ShieldCheck className="h-3.5 w-3.5" />
+                    Official Institutional Verification
+                  </span>
+                  <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-academic-slate">
+                    Submit Your Profile to the Alumni Registry
+                  </h3>
+                  <p className="text-xs sm:text-sm leading-relaxed text-academic-slate/75 font-sans">
+                    Provide your academic batch details, professional milestones, and photo. Once verified with college enrollment records, your card will be published to the official Little Flower directory.
+                  </p>
+                  <p className="text-[11px] text-academic-slate/60 font-sans pt-1">
+                    Physical records and batch memos from 1974 onwards are preserved at the College Administrative Office, Uppal Campus.
+                  </p>
+                </div>
+                
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 relative z-10">
+                  <Button
+                    onClick={() => setIsFormOpen(true)}
+                    size="lg"
+                    className="shadow-md cursor-pointer text-xs font-bold uppercase tracking-wider h-11 px-6"
+                  >
+                    Apply to Feature Your Story
+                    <ArrowRight className="h-4 w-4 ml-1.5" />
+                  </Button>
+                </div>
+              </div>
+            </Reveal>
+          </div>
         )}
 
       </div>
