@@ -5,6 +5,7 @@ import { Section } from "@/components/section";
 
 interface FacultyProps {
   activeInst?: "root" | "lfs" | "lfjc" | "lfdc";
+  headingLevel?: "h1" | "h2";
 }
 
 type FacultyCategory = "present" | "retired" | "former-principal";

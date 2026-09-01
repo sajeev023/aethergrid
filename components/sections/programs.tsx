@@ -14,13 +14,15 @@ interface ProgramsProps {
 export function Programs({ activeInst = "lfjc", headingLevel = "h2" }: ProgramsProps) {
   const instData = getInstitutionData(activeInst);
 
+  const Heading = headingLevel;
+
   return (
     <Section id="programs" variant="default" className="bg-white">
       <div className="mx-auto max-w-3xl text-center">
         <Reveal>
-          <{headingLevel} className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-academic-slate">
+          <Heading className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-academic-slate">
             Four Intermediate Streams
-          </{headingLevel}>
+          </Heading>
           <p className="mt-3 text-xs sm:text-sm leading-relaxed text-academic-slate/75 font-sans">
             Board-recognised two-year programmes.
           </p>
