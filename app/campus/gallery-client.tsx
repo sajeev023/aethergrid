@@ -65,7 +65,7 @@ export function Lightbox({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`Archival Photo: ${img.title}`}
+      aria-label={`Archival Photograph: ${img.title}`}
       className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col items-center justify-between p-3 sm:p-6 select-none"
       onClick={onClose}
     >
@@ -143,7 +143,7 @@ export function Lightbox({
 
       {/* Metadata & Historical Caption Footer */}
       <div
-        className="w-full max-w-3xl text-center bg-academic-slate/80 border border-white/15 rounded-xl p-3.5 sm:p-4.5 backdrop-blur-md z-50 mb-1 shadow-2xl"
+        className="w-full max-w-3xl text-center bg-academic-slate/85 border border-white/15 rounded-xl p-3.5 sm:p-4.5 backdrop-blur-md z-50 mb-1 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className="font-serif text-sm sm:text-base md:text-lg font-bold text-white leading-snug">
@@ -190,7 +190,7 @@ export function PhotoGrid({
     <div>
       <div className={cn("grid gap-3 sm:gap-4 md:gap-5", gridColsClass)}>
         {images.map((img, idx) => (
-          <Reveal key={img.id} delay={Math.min(idx * 0.03, 0.3)}>
+          <Reveal key={`${img.id}-${img.src}`} delay={Math.min(idx * 0.02, 0.25)}>
             <button
               type="button"
               onClick={() => handleCardClick(img, idx)}
@@ -213,7 +213,7 @@ export function PhotoGrid({
                 <div className="p-2.5 bg-white/95 rounded-full shadow-2xl scale-75 group-hover:scale-100 transition-transform duration-300 flex items-center gap-1.5 px-3.5">
                   <Eye className="h-4 w-4 text-montfortian-blue" />
                   <span className="text-[11px] font-bold text-academic-slate font-sans uppercase tracking-wider hidden sm:inline">
-                    View Archival Photo
+                    View Photo
                   </span>
                 </div>
               </div>
@@ -258,6 +258,7 @@ export function ChronologicalCampusArchive({
   assembliesImages,
   sportsImages,
   campusLabsImages,
+  alumniImages = [],
   allImages,
 }: {
   silverJubileeImages: GalleryItem[];
@@ -265,11 +266,11 @@ export function ChronologicalCampusArchive({
   assembliesImages: GalleryItem[];
   sportsImages: GalleryItem[];
   campusLabsImages: GalleryItem[];
+  alumniImages?: GalleryItem[];
   allImages: GalleryItem[];
 }) {
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
 
-  // Opens lightbox pointing to the master global index of the clicked photo
   const handleOpenGlobalImage = (targetItem: GalleryItem) => {
     const globalIdx = allImages.findIndex((m) => m.id === targetItem.id && m.src === targetItem.src);
     if (globalIdx !== -1) {
@@ -294,11 +295,12 @@ export function ChronologicalCampusArchive({
           <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-academic-slate/80 font-sans max-w-3xl">
             In 1999, Little Flower Junior College celebrated 25 glorious years of academic eminence at its expansive Uppal campus. 
             Hon&apos;ble Chief Minister N. Chandrababu Naidu graced the landmark celebrations, honoring founding principals Rev. Bro. Vincent, 
-            Dr. Emmanuel, Rev. Bro. Claude, Rev. Bro. John Kallarackal, Rev. Bro. Celestine, and Rev. Bro. M.A. George alongside state rank-holders.
+            Dr. Emmanuel, Rev. Bro. Claude, Rev. Bro. John Kallarackal, Rev. Bro. Celestine, and Rev. Bro. M.A. George alongside state rank-holders. 
+            Explore the complete 17-item archival collection including congratulatory letters from state leaders, 25-year toppers ledger, and founding leadership portraits.
           </p>
           <div className="mt-3 flex items-center gap-2">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-montfortian-blue bg-royal-cream/60 px-2.5 py-1 rounded border border-stone-texture/60">
-              {silverJubileeImages.length} Archival Records
+            <span className="text-[11px] font-bold uppercase tracking-wider text-montfortian-blue bg-royal-cream/60 px-2.5 py-1 rounded border border-stone-texture/60 font-sans">
+              {silverJubileeImages.length} Archival Photographs & Documents
             </span>
           </div>
         </div>
@@ -322,12 +324,13 @@ export function ChronologicalCampusArchive({
           </h2>
           <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-academic-slate/80 font-sans max-w-3xl">
             Commemorating five decades of transformative Montfortian education, the Golden Jubilee celebrations united thousands of alumni, 
-            students, faculty, and provincial dignitaries under the official banner of Truth, Virtue, and Wisdom. Highlights included the ceremonial 
-            lamp lighting, commemorative souvenir release, and grand classical dance choreography.
+            students, faculty, and provincial dignitaries under the official banner of Truth, Virtue, and Wisdom. Browse all 33 milestone photographs 
+            capturing the ceremonial lamp lighting, commemorative souvenir unveiling, distinguished alumni felicitations, grand classical dance tableaus, 
+            student choir anthems, and thanksgiving ceremonies.
           </p>
           <div className="mt-3 flex items-center gap-2">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-montfortian-blue bg-royal-cream/60 px-2.5 py-1 rounded border border-stone-texture/60">
-              {goldenJubileeImages.length} Milestone Photographs
+            <span className="text-[11px] font-bold uppercase tracking-wider text-montfortian-blue bg-royal-cream/60 px-2.5 py-1 rounded border border-stone-texture/60 font-sans">
+              {goldenJubileeImages.length} Complete Milestone Photographs
             </span>
           </div>
         </div>
@@ -344,19 +347,19 @@ export function ChronologicalCampusArchive({
         <div className="mb-8 sm:mb-10 border-b-2 border-heritage-gold/30 pb-4">
           <div className="flex items-center gap-2 text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-heritage-gold-strong mb-1.5 font-sans">
             <Award className="h-3.5 w-3.5 text-heritage-gold" />
-            <span>03 — Living Campus Experience</span>
+            <span>03 — Living Campus Experience & Student Moments</span>
           </div>
           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate tracking-tight">
-            Campus Life & Student Moments
+            Campus Life & Events
           </h2>
           <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-academic-slate/80 font-sans max-w-3xl">
             The day-to-day pulse of Little Flower Junior College — from inspirational assemblies in St. Montfort Auditorium and high-stakes 
-            athletic meets to advanced science laboratories and our central reference library.
+            athletic meets to advanced science laboratories, reference libraries, and lifelong alumni fellowship.
           </p>
         </div>
 
         {/* 3A. Assemblies & Seminars */}
-        <div id="assemblies" className="scroll-mt-28 mb-10 sm:mb-14">
+        <div id="assemblies" className="scroll-mt-28 mb-12 sm:mb-16">
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-4 pb-2 border-b border-stone-texture/50 gap-1">
             <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-academic-slate">
               Assemblies & Seminars
@@ -366,7 +369,7 @@ export function ChronologicalCampusArchive({
             </span>
           </div>
           <p className="text-xs sm:text-sm text-academic-slate/75 font-sans mb-4 max-w-2xl">
-            Full-hall student gatherings, leadership keynotes, interactive stage debates, faculty mentorship, and career guidance seminars for commerce and science streams.
+            Full-hall student gatherings, leadership keynotes, interactive stage debates, faculty mentorship, speaker felicitations, and career guidance seminars for commerce and science streams.
           </p>
           <PhotoGrid
             images={assembliesImages}
@@ -376,7 +379,7 @@ export function ChronologicalCampusArchive({
         </div>
 
         {/* 3B. Sports & Athletics */}
-        <div id="sports" className="scroll-mt-28 mb-10 sm:mb-14">
+        <div id="sports" className="scroll-mt-28 mb-12 sm:mb-16">
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-4 pb-2 border-b border-stone-texture/50 gap-1">
             <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-academic-slate">
               Sports & Athletics
@@ -396,7 +399,7 @@ export function ChronologicalCampusArchive({
         </div>
 
         {/* 3C. Campus & Laboratories */}
-        <div id="campus-labs" className="scroll-mt-28 mb-8">
+        <div id="campus-labs" className="scroll-mt-28 mb-12 sm:mb-16">
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-4 pb-2 border-b border-stone-texture/50 gap-1">
             <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-academic-slate">
               Campus & Laboratories
@@ -411,9 +414,31 @@ export function ChronologicalCampusArchive({
           <PhotoGrid
             images={campusLabsImages}
             onImageClick={handleOpenGlobalImage}
-            columns="3"
+            columns="4"
           />
         </div>
+
+        {/* 3D. Alumni & Fellowship (if images exist) */}
+        {alumniImages.length > 0 && (
+          <div id="alumni" className="scroll-mt-28 mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-4 pb-2 border-b border-stone-texture/50 gap-1">
+              <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-academic-slate">
+                Alumni & Fellowship
+              </h3>
+              <span className="text-xs font-sans text-academic-slate/70">
+                {alumniImages.length} Photographs • Alumni Association & Montfortian Brotherhood
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-academic-slate/75 font-sans mb-4 max-w-2xl">
+              Generations of LFJC graduates united across industry, academia, and public service in enduring Montfortian fellowship.
+            </p>
+            <PhotoGrid
+              images={alumniImages}
+              onImageClick={handleOpenGlobalImage}
+              columns="2"
+            />
+          </div>
+        )}
       </section>
 
       {/* ─── Lightbox Modal across Complete Archive ─────────────────────── */}

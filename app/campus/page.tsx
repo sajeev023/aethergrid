@@ -10,6 +10,7 @@ import {
   Users,
   Film,
   Compass,
+  HeartHandshake,
 } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
@@ -26,18 +27,18 @@ import {
 export const metadata: Metadata = {
   title: "Campus Life & Visual Archive",
   description:
-    "Explore the complete chronological visual archive of Little Flower Junior College — from historic Silver & Golden Jubilee milestones to vibrant St. Montfort Auditorium assemblies, athletic championships, and science laboratories across our eight-acre Uppal campus.",
+    "Explore the complete chronological visual archive of Little Flower Junior College across 50 years — from historic Silver & Golden Jubilee milestones to vibrant St. Montfort Auditorium assemblies, athletic championships, and science laboratories.",
 };
 
-// ─── 1. SILVER JUBILEE (1999 • 25 Years of Excellence) ───────────────────────
+// ─── 1. SILVER JUBILEE ARCHIVE (1999 • 25 Years of Educational Excellence) ───
 
 const SILVER_JUBILEE_IMAGES: GalleryItem[] = [
   {
     id: 101,
     src: "/images/silver-jubilee/silver-jubilee-principals-cm-honors.jpg",
     badge: "Founding Leadership • 1999",
-    title: "1999 Silver Jubilee — Chief Minister Honors Founding Principals",
-    desc: "Archival plate commemorating the 25th anniversary with Hon'ble CM N. Chandrababu Naidu honoring LFJC leadership.",
+    title: "1999 Silver Jubilee — Chief Minister Honors LFJC Principals",
+    desc: "Rare archival portrait from the landmark 1999 Silver Jubilee celebrations at Uppal campus. Hon'ble Chief Minister N. Chandrababu Naidu honoring founding principals Rev. Bro. Vincent, Dr. Emmanuel, Rev. Bro. Claude, Rev. Bro. John Kallarackal, Rev. Bro. Celestine, and Rev. Bro. M.A. George.",
     category: "silver-jubilee",
   },
   {
@@ -45,36 +46,140 @@ const SILVER_JUBILEE_IMAGES: GalleryItem[] = [
     src: "/images/silver-jubilee/silver-jubilee-cm-naidu-message.jpg",
     badge: "State Commendation • 1999",
     title: "1999 Silver Jubilee — Chief Minister's Official Commendation",
-    desc: "Congratulatory message from Chief Minister N. Chandrababu Naidu on 25 years of excellence.",
+    desc: "Congratulatory message and commendation from Chief Minister N. Chandrababu Naidu on 25 years of educational distinction.",
+    category: "silver-jubilee",
+  },
+  {
+    id: 103,
+    src: "/images/silver-jubilee/silver-jubilee-governor-message.jpg",
+    badge: "Gubernatorial Message • 1999",
+    title: "1999 Silver Jubilee — State Governor's Official Message",
+    desc: "Official message from the Governor of Andhra Pradesh congratulating Little Flower Junior College on completing 25 years of excellence.",
     category: "silver-jubilee",
   },
   {
     id: 104,
-    src: "/images/silver-jubilee/silver-jubilee-rank-holders.jpg",
-    badge: "Academic Ledger • 1999",
-    title: "1999 Silver Jubilee — All-India IIT & State Rank Holders Record",
-    desc: "Archival ledger of 1st All-India IIT, EAMCET, and BIE Intermediate state toppers.",
+    src: "/images/silver-jubilee/silver-jubilee-devender-goud-message.jpg",
+    badge: "Ministerial Message • 1999",
+    title: "1999 Silver Jubilee — Home Minister T. Devender Goud's Message",
+    desc: "Official felicitation message from Minister for Home Affairs T. Devender Goud praising the Montfortian institution's high academic standards.",
     category: "silver-jubilee",
   },
   {
     id: 105,
+    src: "/images/silver-jubilee/silver-jubilee-rank-holders.jpg",
+    badge: "Toppers Ledger • 1974–1999",
+    title: "1999 Silver Jubilee — All-India IIT & State Rank Holders Record",
+    desc: "Archival ledger documenting 1st All-India IIT, EAMCET, and BIE Intermediate state toppers from Little Flower Junior College.",
+    category: "silver-jubilee",
+  },
+  {
+    id: 106,
     src: "/images/silver-jubilee/silver-jubilee-celebrations-report.jpg",
-    badge: "Jubilee Souvenir • 1999",
+    badge: "Auditorium Report • 1999",
     title: "1999 Silver Jubilee — Celebrations & Auditorium Report",
-    desc: "Official summary of the Jubilee Auditorium inauguration and week-long festivities.",
+    desc: "Official summary of the Jubilee Auditorium inauguration and week-long silver jubilee festivities at Uppal campus.",
+    category: "silver-jubilee",
+  },
+  {
+    id: 107,
+    src: "/images/silver-jubilee/silver-jubilee-captains-history-1.jpg",
+    badge: "Institutional History • 1999",
+    title: "1999 Silver Jubilee — The Captains of LFJC (Part I)",
+    desc: "Archival chronicle detailing the leadership eras of Rev. Bro. Vincent (1974–76), Dr. Emmanuel (1976–78), and Rev. Bro. Claude (1978–83).",
+    category: "silver-jubilee",
+  },
+  {
+    id: 108,
+    src: "/images/silver-jubilee/silver-jubilee-captains-history-2.jpg",
+    badge: "Institutional History • 1999",
+    title: "1999 Silver Jubilee — The Captains of LFJC (Part II)",
+    desc: "Archival chronicle detailing the leadership eras of Rev. Bro. John Kallarackal (1983–90), Rev. Bro. Celestine (1990–96), and Rev. Bro. M.A. George (1996–2002).",
+    category: "silver-jubilee",
+  },
+  {
+    id: 109,
+    src: "/images/silver-jubilee/silver-jubilee-bro-britto-report.jpg",
+    badge: "Provincial Review • 1999",
+    title: "1999 Silver Jubilee — Bro. Britto's Educational Chronicle",
+    desc: "Historical review and institutional perspective written by Provincial Superior Rev. Bro. Britto for the 25th Anniversary.",
+    category: "silver-jubilee",
+  },
+  {
+    id: 110,
+    src: "/images/silver-jubilee/silver-jubilee-bro-george-interview.jpg",
+    badge: "Principal Interview • 1999",
+    title: "1999 Silver Jubilee — Principal Bro. M.A. George Jubilee Interview",
+    desc: "Special 25th anniversary interview with Principal Rev. Bro. M.A. George reflecting on academic milestones, discipline, and vision.",
+    category: "silver-jubilee",
+  },
+  {
+    id: 111,
+    src: "/images/silver-jubilee/silver-jubilee-sakunthala-reflections.jpg",
+    badge: "Faculty Memoir • 1999",
+    title: "1999 Silver Jubilee — Faculty Reflections (1974–1999)",
+    desc: "Memoir and institutional reflection by senior faculty Mrs. P. Sakunthala charting LFJC's growth from its founding at Bashirbagh to the Uppal estate.",
+    category: "silver-jubilee",
+  },
+  {
+    id: 112,
+    src: "/images/silver-jubilee/silver-jubilee-bro-vincent-portrait.jpg",
+    badge: "Founding Principal • 1974",
+    title: "Founding Principal Rev. Bro. Vincent (1974–1976)",
+    desc: "Archival portrait of Rev. Bro. Vincent, founding principal who established Little Flower Junior College in July 1974.",
+    category: "silver-jubilee",
+  },
+  {
+    id: 113,
+    src: "/images/silver-jubilee/silver-jubilee-dr-emmanuel.jpg",
+    badge: "Principal • 1976–1978",
+    title: "Dr. Emmanuel — Principal (1976–1978)",
+    desc: "Archival portrait of Dr. Emmanuel, who oversaw early academic expansion and science laboratories.",
+    category: "silver-jubilee",
+  },
+  {
+    id: 114,
+    src: "/images/silver-jubilee/silver-jubilee-bro-claude.jpg",
+    badge: "Principal • 1978–1983",
+    title: "Rev. Bro. Claude — Principal (1978–1983)",
+    desc: "Archival portrait of Rev. Bro. Claude, who oversaw the transition to the sprawling eight-acre Uppal campus.",
+    category: "silver-jubilee",
+  },
+  {
+    id: 115,
+    src: "/images/silver-jubilee/silver-jubilee-bro-john-kallarackal.jpg",
+    badge: "Principal • 1983–1990",
+    title: "Rev. Bro. John Kallarackal — Principal (1983–1990)",
+    desc: "Archival portrait of Rev. Bro. John Kallarackal, under whose stewardship LFJC secured multiple All-India IIT 1st ranks.",
+    category: "silver-jubilee",
+  },
+  {
+    id: 116,
+    src: "/images/silver-jubilee/silver-jubilee-bro-celestine.jpg",
+    badge: "Principal • 1990–1996",
+    title: "Rev. Bro. Celestine — Principal (1990–1996)",
+    desc: "Archival portrait of Rev. Bro. Celestine, pioneer of student co-curricular forums and sports complex expansion.",
+    category: "silver-jubilee",
+  },
+  {
+    id: 117,
+    src: "/images/silver-jubilee/silver-jubilee-bro-george.jpg",
+    badge: "Principal • 1996–2002",
+    title: "Rev. Bro. M.A. George — Principal (1996–2002)",
+    desc: "Archival portrait of Rev. Bro. M.A. George, who hosted the landmark 1999 Silver Jubilee celebrations.",
     category: "silver-jubilee",
   },
 ];
 
-// ─── 2. GOLDEN JUBILEE (1974–2024 • 50 Years of Truth & Service) ────────────
+// ─── 2. GOLDEN JUBILEE ARCHIVE (1974–2024 • 50 Years of Truth & Service) ────
 
 const GOLDEN_JUBILEE_IMAGES: GalleryItem[] = [
   {
     id: 201,
     src: "/images/golden-jubilee/golden_jubilee_1.jpg",
     badge: "50-Year Milestone • 1974–2024",
-    title: "Golden Jubilee (1974–2024) — 50th Anniversary Grand Stage Celebration",
-    desc: "Inaugural dance choreography and stage assembly celebrating 50 years of educational excellence.",
+    title: "Golden Jubilee — Grand Stage Inauguration & Choreography",
+    desc: "Inaugural dance choreography and stage assembly celebrating 50 years of Montfortian educational excellence.",
     category: "golden-jubilee",
   },
   {
@@ -82,7 +187,7 @@ const GOLDEN_JUBILEE_IMAGES: GalleryItem[] = [
     src: "/images/golden-jubilee/golden_jubilee_2.jpg",
     badge: "Montfortian Dais • 2024",
     title: "Golden Jubilee — Dignitaries & Montfortian Leadership on Dais",
-    desc: "Provincial leadership and guest dignitaries assembled on stage for the 50th year milestone.",
+    desc: "Provincial leadership, Principal Rev. Bro. Arun, and guest dignitaries assembled on stage for the 50th year milestone.",
     category: "golden-jubilee",
   },
   {
@@ -94,11 +199,27 @@ const GOLDEN_JUBILEE_IMAGES: GalleryItem[] = [
     category: "golden-jubilee",
   },
   {
+    id: 204,
+    src: "/images/golden-jubilee/golden_jubilee_4.jpg",
+    badge: "Floral Felicitation • 2024",
+    title: "Golden Jubilee — Dignitary Welcome Address & Felicitation",
+    desc: "Welcome address and floral felicitation during the grand opening session of the Golden Jubilee.",
+    category: "golden-jubilee",
+  },
+  {
     id: 205,
     src: "/images/golden-jubilee/golden_jubilee_5.jpg",
-    badge: "Jubilee Release • 2024",
+    badge: "Jubilee Souvenir • 2024",
     title: "Golden Jubilee — Souvenir Release & Commemorative Unveiling",
-    desc: "Official release of the 50-Year Golden Jubilee commemorative souvenir book.",
+    desc: "Official release and unveiling of the 50-Year Golden Jubilee commemorative souvenir book.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 206,
+    src: "/images/golden-jubilee/golden_jubilee_6.jpg",
+    badge: "Memento Presentation • 2024",
+    title: "Golden Jubilee — Presentation of Commemorative Mementos",
+    desc: "Presentation of Golden Jubilee commemorative mementos to distinguished guest dignitaries.",
     category: "golden-jubilee",
   },
   {
@@ -106,20 +227,220 @@ const GOLDEN_JUBILEE_IMAGES: GalleryItem[] = [
     src: "/images/golden-jubilee/golden_jubilee_7.jpg",
     badge: "Alumni Distinction • 2024",
     title: "Golden Jubilee — Distinguished Alumni Keynote Felicitation",
-    desc: "Honoring eminent alumni who have achieved nationwide distinction in industry and public service.",
+    desc: "Honoring eminent alumni who have achieved nationwide distinction in industry, science, and public service.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 208,
+    src: "/images/golden-jubilee/golden_jubilee_8.jpg",
+    badge: "Keynote Address • 2024",
+    title: "Golden Jubilee — Keynote on Montfortian Legacy",
+    desc: "Distinguished guest speaker delivering an address on five decades of academic ethics and character building.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 209,
+    src: "/images/golden-jubilee/golden_jubilee_9.jpg",
+    badge: "Student Audience • 2024",
+    title: "Golden Jubilee — Student Audience in St. Montfort Hall",
+    desc: "Intermediate students, staff, and visitors assembled in St. Montfort Hall during keynote addresses.",
     category: "golden-jubilee",
   },
   {
     id: 210,
     src: "/images/golden-jubilee/golden_jubilee_10.jpg",
     badge: "Cultural Extravaganza • 2024",
-    title: "Golden Jubilee — Traditional Cultural Dance Performance",
-    desc: "Classical dance invocation by intermediate students celebrating five decades of heritage.",
+    title: "Golden Jubilee — Traditional Classical Dance Invocation",
+    desc: "Classical dance invocation performance by intermediate students celebrating five decades of heritage.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 211,
+    src: "/images/golden-jubilee/golden_jubilee_11.jpg",
+    badge: "Fusion Choreography • 2024",
+    title: "Golden Jubilee — Classical Fusion Stage Performance",
+    desc: "Grand classical fusion dance choreography performed on the main celebratory stage.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 212,
+    src: "/images/golden-jubilee/golden_jubilee_12.jpg",
+    badge: "Thematic Dance • 2024",
+    title: "Golden Jubilee — Thematic Cultural Presentation",
+    desc: "Contemporary thematic cultural dance portraying Truth, Virtue, and Wisdom.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 213,
+    src: "/images/golden-jubilee/golden_jubilee_13.jpg",
+    badge: "Stage Ensemble • 2024",
+    title: "Golden Jubilee — Full Ensemble Cultural Production",
+    desc: "Full student ensemble stage performance featuring vibrant regional costumes.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 214,
+    src: "/images/golden-jubilee/golden_jubilee_14.jpg",
+    badge: "Jubilee Choir • 2024",
+    title: "Golden Jubilee — Student Choir & Orchestra Performance",
+    desc: "LFJC student choir and live musical orchestra performing the official 50th Jubilee Anthem.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 215,
+    src: "/images/golden-jubilee/golden_jubilee_15.jpg",
+    badge: "Historical Tableau • 2024",
+    title: "Golden Jubilee — Stage Tableau of 50-Year Milestones",
+    desc: "Dramatic stage tableau illustrating half a century of institutional growth and accomplishments.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 216,
+    src: "/images/golden-jubilee/golden_jubilee_16.jpg",
+    badge: "Folk Rhythms • 2024",
+    title: "Golden Jubilee — Traditional Folk Dance Sequence",
+    desc: "Student cultural delegation performing celebratory regional folk dance rhythms.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 217,
+    src: "/images/golden-jubilee/golden_jubilee_17.jpg",
+    badge: "Celebratory Dais • 2024",
+    title: "Golden Jubilee — Celebratory Group Dance Presentation",
+    desc: "Dynamic group dance sequence on the main auditorium stage celebrating the milestone anniversary.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 218,
+    src: "/images/golden-jubilee/golden_jubilee_18.jpg",
+    badge: "Montfortian Brothers • 2024",
+    title: "Golden Jubilee — Montfortian Brothers & Faculty Assembly",
+    desc: "Brothers of St. Gabriel and senior academic faculty assembled together on the main dais.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 219,
+    src: "/images/golden-jubilee/golden_jubilee_19.jpg",
+    badge: "Faculty Honors • 2024",
+    title: "Golden Jubilee — Long-Service Faculty Felicitation",
+    desc: "Senior faculty members and department heads felicitated for decades of dedicated pedagogical service.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 220,
+    src: "/images/golden-jubilee/golden_jubilee_20.jpg",
+    badge: "Alumni Awards • 2024",
+    title: "Golden Jubilee — Distinguished Alumni Award Ceremony",
+    desc: "Felicitation ceremony presenting mementos of honor to prominent LFJC alumni.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 221,
+    src: "/images/golden-jubilee/golden_jubilee_21.jpg",
+    badge: "Alumni Address • 2024",
+    title: "Golden Jubilee — Alumni Keynote Address",
+    desc: "Distinguished alumnus addressing intermediate students on career excellence and ethics.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 222,
+    src: "/images/golden-jubilee/golden_jubilee_22.jpg",
+    badge: "Alumni Reunion • 2024",
+    title: "Golden Jubilee — Alumni Batch Representatives Reunion",
+    desc: "Representatives from multiple graduating batches reunited on campus to mark the 50th year.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 223,
+    src: "/images/golden-jubilee/golden_jubilee_23.jpg",
+    badge: "Nostalgic Reflections • 2024",
+    title: "Golden Jubilee — Alumni Nostalgic Reflections",
+    desc: "Former students sharing tributes and memories of their formative years at Little Flower Junior College.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 224,
+    src: "/images/golden-jubilee/golden_jubilee_24.jpg",
+    badge: "Student Leadership • 2024",
+    title: "Golden Jubilee — Student Council Office Bearers Honored",
+    desc: "Former student council leaders and campus captains recognized during the jubilee assembly.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 225,
+    src: "/images/golden-jubilee/golden_jubilee_25.jpg",
+    badge: "Retired Faculty • 2024",
+    title: "Golden Jubilee — Honoring Retired Professors & Mentors",
+    desc: "Special recognition and thanksgiving ceremony honoring retired faculty who shaped LFJC's heritage.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 226,
+    src: "/images/golden-jubilee/golden_jubilee_26.jpg",
+    badge: "Presidential Address • 2024",
+    title: "Golden Jubilee — Provincial Superior's Presidential Address",
+    desc: "Provincial Superior delivering the keynote presidential address on Montfortian educational mission.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 227,
+    src: "/images/golden-jubilee/golden_jubilee_27.jpg",
+    badge: "Institutional Report • 2024",
+    title: "Golden Jubilee — Principal Rev. Bro. Arun's 50-Year Report",
+    desc: "Principal Rev. Bro. Arun presenting the comprehensive 50-year institutional chronicle and academic report.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 228,
+    src: "/images/golden-jubilee/golden_jubilee_28.jpg",
+    badge: "Guest of Honour • 2024",
+    title: "Golden Jubilee — Guest of Honour Inspiring Address",
+    desc: "Guest of Honour delivering an inspiring charge to students on leadership, perseverance, and purpose.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 229,
+    src: "/images/golden-jubilee/golden_jubilee_29.jpg",
+    badge: "Standing Ovation • 2024",
+    title: "Golden Jubilee — Standing Ovation during Jubilee Anthem",
+    desc: "Auditorium standing ovation as the student choir and orchestra perform the Golden Jubilee Anthem.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 230,
+    src: "/images/golden-jubilee/golden_jubilee_30.jpg",
+    badge: "Procession • 2024",
+    title: "Golden Jubilee — Ceremonial Student Council Procession",
+    desc: "Student council delegation leading dignitaries in the ceremonial jubilee procession.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 231,
+    src: "/images/golden-jubilee/golden_jubilee_31.jpg",
+    badge: "Performers Portrait • 2024",
+    title: "Golden Jubilee — Cultural Performers Group Portrait",
+    desc: "Student performers and faculty coordinators gathered for the official Golden Jubilee cultural portrait.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 232,
+    src: "/images/golden-jubilee/golden_jubilee_32.jpg",
+    badge: "Grand Finale • 2024",
+    title: "Golden Jubilee — Grand Finale & Stage Illumination",
+    desc: "Grand finale celebration with stage illumination, confetti, and celebratory assembly.",
+    category: "golden-jubilee",
+  },
+  {
+    id: 233,
+    src: "/images/golden-jubilee/golden_jubilee_33.jpg",
+    badge: "Thanksgiving • 2024",
+    title: "Golden Jubilee — Concluding Thanksgiving & Vote of Thanks",
+    desc: "Closing thanksgiving prayer and formal vote of thanks concluding the 50th Anniversary celebrations.",
     category: "golden-jubilee",
   },
 ];
 
-// ─── 3A. ASSEMBLIES & SEMINARS ──────────────────────────────────────────────
+// ─── 3A. ASSEMBLIES & SEMINARS ARCHIVE (18 Images) ──────────────────────────
 
 const ASSEMBLIES_IMAGES: GalleryItem[] = [
   {
@@ -204,15 +525,71 @@ const ASSEMBLIES_IMAGES: GalleryItem[] = [
   },
   {
     id: 11,
+    src: "/images/events/student-assembly-hall.jpg",
+    badge: "General Assembly",
+    title: "General Student Assembly in Hall",
+    desc: "Intermediate students seated attentively during collegiate morning orientation.",
+    category: "assemblies",
+  },
+  {
+    id: 12,
+    src: "/images/events/principal-felicitation-ceremony.jpg",
+    badge: "Leadership Ceremony",
+    title: "Principal Bro. Arun & Dignitaries Felicitation",
+    desc: "Formal felicitation and shawl presentation ceremony on stage with Principal Rev. Bro. Arun.",
+    category: "assemblies",
+  },
+  {
+    id: 13,
+    src: "/images/events/bro-arun-memento-presentation.jpg",
+    badge: "Memento Honor",
+    title: "Principal Bro. Arun Presenting Felicitation Memento",
+    desc: "Principal Rev. Bro. Arun presenting the commemorative institutional memento to eminent guest dignitaries.",
+    category: "assemblies",
+  },
+  {
+    id: 14,
+    src: "/images/events/faculty-dignitary-felicitation.jpg",
+    badge: "Faculty Felicitation",
+    title: "Senior Faculty Presenting Memento on Stage",
+    desc: "Senior department faculty honoring invited speakers and academic guests.",
+    category: "assemblies",
+  },
+  {
+    id: 15,
+    src: "/images/events/guest-honors-bouquet.jpg",
+    badge: "Guest Welcome",
+    title: "Honoring Chief Guest with Traditional Shawl",
+    desc: "Traditional Montfortian welcome ceremony with shawl and floral bouquet presentation.",
+    category: "assemblies",
+  },
+  {
+    id: 16,
+    src: "/images/events/interactive-seminar-auditorium.jpg",
+    badge: "Interactive Seminar",
+    title: "Interactive Seminar & Audience Q&A",
+    desc: "Students engaged in interactive dialogue and problem-solving workshop in St. Montfort Hall.",
+    category: "assemblies",
+  },
+  {
+    id: 17,
+    src: "/images/events/student-food-fest-stalls.jpg",
+    badge: "Student Food Fest",
+    title: "Student Food Fest & Culinary Exhibition Stalls",
+    desc: "Vibrant campus culinary exhibition and entrepreneurial stalls organized by intermediate students.",
+    category: "assemblies",
+  },
+  {
+    id: 18,
     src: "/images/faculty-mentor.jpg",
     badge: "Faculty Mentorship",
     title: "Interactive Faculty Mentorship",
-    desc: "Department mentors and subject heads providing personalized guidance.",
+    desc: "Department mentors and subject heads providing personalized academic guidance.",
     category: "assemblies",
   },
 ];
 
-// ─── 3B. SPORTS & ATHLETICS ─────────────────────────────────────────────────
+// ─── 3B. SPORTS & ATHLETICS ARCHIVE (23 Images) ─────────────────────────────
 
 const SPORTS_IMAGES: GalleryItem[] = [
   {
@@ -241,10 +618,34 @@ const SPORTS_IMAGES: GalleryItem[] = [
   },
   {
     id: 304,
+    src: "/images/sports/volleyball-referee-match.jpg",
+    badge: "Match Officiating",
+    title: "Volleyball Match Officiating & Play",
+    desc: "Official referee overseeing competitive inter-collegiate volleyball fixtures.",
+    category: "sports",
+  },
+  {
+    id: 305,
     src: "/images/sports/volleyball-team-faculty-1.jpg",
     badge: "Team & Coaches",
     title: "Volleyball Squad & Physical Education Faculty",
     desc: "Tournament finalists assembled with academic faculty and sports directors.",
+    category: "sports",
+  },
+  {
+    id: 306,
+    src: "/images/sports/volleyball-team-faculty-2.jpg",
+    badge: "Volleyball Finalists",
+    title: "Volleyball Finalists Team with PE Staff",
+    desc: "Intermediate volleyball finalists celebrated alongside sports coaching staff.",
+    category: "sports",
+  },
+  {
+    id: 307,
+    src: "/images/sports/volleyball-team-faculty-3.jpg",
+    badge: "Championship Squad",
+    title: "Volleyball Championship Team Group",
+    desc: "Trophy-winning volleyball squad assembled in collegiate sportswear.",
     category: "sports",
   },
   {
@@ -264,7 +665,39 @@ const SPORTS_IMAGES: GalleryItem[] = [
     category: "sports",
   },
   {
+    id: 310,
+    src: "/images/sports/basketball-drive-to-hoop.jpg",
+    badge: "Offensive Drive",
+    title: "Basketball Drive to the Hoop",
+    desc: "Aggressive drive into the paint during tournament match play.",
+    category: "sports",
+  },
+  {
+    id: 311,
+    src: "/images/sports/basketball-attack-transition.jpg",
+    badge: "Transition Attack",
+    title: "Basketball Transition Attack Play",
+    desc: "Fast transition offensive play executed on the collegiate court.",
+    category: "sports",
+  },
+  {
     id: 312,
+    src: "/images/sports/basketball-shooting-clinic.jpg",
+    badge: "Shooting Clinic",
+    title: "Basketball Shooting Clinic & Form",
+    desc: "Student practicing perimeter jump shots under faculty coaching.",
+    category: "sports",
+  },
+  {
+    id: 313,
+    src: "/images/sports/basketball-coaching-freethrow.jpg",
+    badge: "Coaching Clinic",
+    title: "Athletic Coaching & Free-Throw Clinic",
+    desc: "Physical Education director demonstrating proper shooting mechanics.",
+    category: "sports",
+  },
+  {
+    id: 314,
     src: "/images/sports/basketball-team-squad.jpg",
     badge: "Basketball Squad",
     title: "Basketball Championship Squad",
@@ -273,10 +706,18 @@ const SPORTS_IMAGES: GalleryItem[] = [
   },
   {
     id: 315,
-    src: "/images/sports/basketball-coaching-freethrow.jpg",
-    badge: "Shooting Clinic",
-    title: "Athletic Coaching & Free-Throw Clinic",
-    desc: "Physical Education director demonstrating proper shooting mechanics.",
+    src: "/images/sports/basketball-squad-faculty.jpg",
+    badge: "Squad & Mentors",
+    title: "Basketball Squad with Coaching Faculty",
+    desc: "Basketball team posing with Physical Education directors.",
+    category: "sports",
+  },
+  {
+    id: 316,
+    src: "/images/sports/basketball-finalists-celebration.jpg",
+    badge: "Tournament Celebration",
+    title: "Basketball Tournament Finalists Celebration",
+    desc: "Celebratory team group photograph following inter-house basketball championship.",
     category: "sports",
   },
   {
@@ -296,15 +737,23 @@ const SPORTS_IMAGES: GalleryItem[] = [
     category: "sports",
   },
   {
-    id: 321,
-    src: "/images/sports/relay-race-field.jpg",
-    badge: "Baton Relay",
-    title: "Track & Field Relay Heat",
-    desc: "Students competing in inter-house baton relay heats.",
+    id: 319,
+    src: "/images/sports/sports-track-heats.jpg",
+    badge: "Track Heats",
+    title: "Track Sprint Heats on Field",
+    desc: "Student sprinters in starting blocks for inter-house track heats.",
     category: "sports",
   },
   {
-    id: 319,
+    id: 320,
+    src: "/images/sports/relay-race-field.jpg",
+    badge: "Baton Relay",
+    title: "Track & Field Relay Heat",
+    desc: "Students competing in inter-house baton relay heats on the main athletic field.",
+    category: "sports",
+  },
+  {
+    id: 321,
     src: "/images/sports/sports-winners-1st-year.jpg",
     badge: "1st Year Champions",
     title: "1st Year 100m Sprint Champions",
@@ -312,7 +761,7 @@ const SPORTS_IMAGES: GalleryItem[] = [
     category: "sports",
   },
   {
-    id: 320,
+    id: 322,
     src: "/images/sports/sports-winners-2nd-year.jpg",
     badge: "2nd Year Champions",
     title: "2nd Year 100m Sprint Champions",
@@ -320,7 +769,7 @@ const SPORTS_IMAGES: GalleryItem[] = [
     category: "sports",
   },
   {
-    id: 322,
+    id: 323,
     src: "/images/sports/spectators-campus-steps.jpg",
     badge: "Spectator Gallery",
     title: "Campus Spectator Gallery",
@@ -329,7 +778,7 @@ const SPORTS_IMAGES: GalleryItem[] = [
   },
 ];
 
-// ─── 3C. CAMPUS & LABORATORIES ──────────────────────────────────────────────
+// ─── 3C. CAMPUS & LABORATORIES ARCHIVE (8 Images) ───────────────────────────
 
 const CAMPUS_LABS_IMAGES: GalleryItem[] = [
   {
@@ -350,22 +799,30 @@ const CAMPUS_LABS_IMAGES: GalleryItem[] = [
   },
   {
     id: 403,
+    src: "/images/campus-hero.jpg",
+    badge: "Campus Grounds",
+    title: "Lush Campus Walkways & Greenery",
+    desc: "Scenic tree-lined walkways and academic quads surrounding the main institution.",
+    category: "campus",
+  },
+  {
+    id: 404,
     src: "/images/physics-lab.jpg",
-    badge: "Science Lab",
+    badge: "Physics Laboratory",
     title: "Advanced Physics Laboratory",
     desc: "Equipped with precision optical benches, spectrometers, and electrical test rigs.",
     category: "campus",
   },
   {
-    id: 404,
+    id: 405,
     src: "/images/chemistry-lab.jpg",
-    badge: "Science Lab",
+    badge: "Chemistry Laboratory",
     title: "Advanced Chemistry Laboratory",
     desc: "Complete analytical and organic chemistry workstations for MPC & BiPC streams.",
     category: "campus",
   },
   {
-    id: 405,
+    id: 406,
     src: "/images/computer-lab.jpg",
     badge: "Digital Learning",
     title: "Modern Computer Centre",
@@ -373,16 +830,45 @@ const CAMPUS_LABS_IMAGES: GalleryItem[] = [
     category: "campus",
   },
   {
-    id: 406,
+    id: 407,
     src: "/images/library-heritage.jpg",
     badge: "Reference Library",
     title: "Central Reference Library & Reading Hall",
     desc: "Over 12,000 volumes, reference journals, competitive exam archives, and quiet study bays.",
     category: "campus",
   },
+  {
+    id: 408,
+    src: "/images/sports-arena.jpg",
+    badge: "Sports Arena",
+    title: "Outdoor Sports Arena & Multi-Sport Courts",
+    desc: "Dedicated sports complex for basketball, volleyball, athletics, and physical education.",
+    category: "campus",
+  },
 ];
 
-// ─── MASTER ORDERED ARCHIVE (Strict: Silver -> Golden -> Assemblies -> Sports -> Labs) ───
+// ─── 3D. ALUMNI & FELLOWSHIP ARCHIVE (2 Images) ─────────────────────────────
+
+const ALUMNI_IMAGES: GalleryItem[] = [
+  {
+    id: 501,
+    src: "/images/alumni-group.jpg",
+    badge: "Alumni Assembly",
+    title: "LFJC Alumni Delegation & Fellowship",
+    desc: "Little Flower Junior College alumni gathered for institutional fellowship and alumni mentorship.",
+    category: "alumni",
+  },
+  {
+    id: 502,
+    src: "/images/alumni.jpg",
+    badge: "Montfortian Brotherhood",
+    title: "Alumni Network & Community",
+    desc: "Generations of LFJC graduates united across industry, science, and public service.",
+    category: "alumni",
+  },
+];
+
+// ─── MASTER ORDERED ARCHIVE (Strict: Silver -> Golden -> Assemblies -> Sports -> Labs -> Alumni) ───
 
 const ALL_MASTER_IMAGES: GalleryItem[] = [
   ...SILVER_JUBILEE_IMAGES,
@@ -390,6 +876,7 @@ const ALL_MASTER_IMAGES: GalleryItem[] = [
   ...ASSEMBLIES_IMAGES,
   ...SPORTS_IMAGES,
   ...CAMPUS_LABS_IMAGES,
+  ...ALUMNI_IMAGES,
 ];
 
 // ─── GOLDEN JUBILEE VIDEO ARCHIVES ──────────────────────────────────────────
@@ -435,6 +922,7 @@ const CHAPTER_NAV = [
   { label: "Assemblies & Seminars", href: "#assemblies", icon: Users, count: ASSEMBLIES_IMAGES.length },
   { label: "Sports & Athletics", href: "#sports", icon: Trophy, count: SPORTS_IMAGES.length },
   { label: "Campus & Labs", href: "#campus-labs", icon: Building2, count: CAMPUS_LABS_IMAGES.length },
+  { label: "Alumni & Fellowship", href: "#alumni", icon: HeartHandshake, count: ALUMNI_IMAGES.length },
   { label: "Video Footage", href: "#videos", icon: Film, count: GOLDEN_JUBILEE_VIDEOS.length },
 ];
 
@@ -449,9 +937,9 @@ export default function CampusLifePage() {
       {/* ─── Hero & Editorial Prologue ────────────────────────────────────── */}
       <section className="section-texture bg-white py-8 sm:py-12 md:py-14 border-b border-stone-texture/50">
         <div className="mx-auto max-w-4xl text-center px-4 sm:px-6 md:px-8">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-heritage-gold/10 border border-heritage-gold/30 text-heritage-gold-strong text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] mb-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-heritage-gold/10 border border-heritage-gold/30 text-heritage-gold-strong text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] mb-3 font-sans">
             <Sparkles className="h-3 w-3" />
-            <span>Institutional Heritage Archive • 1974–Present</span>
+            <span>Complete Heritage & Visual Archive • 1974–Present</span>
           </div>
 
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-academic-slate tracking-tight">
@@ -462,9 +950,9 @@ export default function CampusLifePage() {
           </h1>
 
           <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base leading-relaxed text-academic-slate/80 font-sans max-w-2xl mx-auto">
-            A chronological visual history of Little Flower Junior College across five decades of Montfortian excellence — 
+            A comprehensive visual history of Little Flower Junior College across five decades of Montfortian excellence — 
             from the historic <strong>Silver Jubilee</strong> and landmark <strong>Golden Jubilee</strong> to our vibrant St. Montfort 
-            Auditorium assemblies, athletic championships, and world-class science laboratories.
+            Auditorium assemblies, championship sports meets, science laboratories, and alumni fellowship.
           </p>
 
           <span className="gold-rule gold-rule-center !mt-4 sm:!mt-5" />
@@ -508,6 +996,7 @@ export default function CampusLifePage() {
           assembliesImages={ASSEMBLIES_IMAGES}
           sportsImages={SPORTS_IMAGES}
           campusLabsImages={CAMPUS_LABS_IMAGES}
+          alumniImages={ALUMNI_IMAGES}
           allImages={ALL_MASTER_IMAGES}
         />
       </Section>
@@ -516,8 +1005,8 @@ export default function CampusLifePage() {
       <section id="videos" className="scroll-mt-28 bg-royal-cream/25 border-t border-stone-texture/50 py-10 sm:py-14 md:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
           <SectionHeading
-            eyebrow="Milestone Footage"
-            title="Golden Jubilee Documentary Archive"
+            eyebrow="Documentary Footage"
+            title="Golden Jubilee Video Archive"
             description="Watch recorded highlights from our 50th Anniversary cultural extravaganza, dignitary invocations, choir anthems, and alumni reunions."
           />
 
