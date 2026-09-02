@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useId, useRef } from "react";
+import React, { useState, useEffect, useId, useRef } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
@@ -23,9 +23,8 @@ import { Reveal } from "@/components/motion/reveal";
 import { Section } from "@/components/section";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { alumniData as seedAlumniData, Alumnus, PORTAL_LINKS } from "@/lib/site-data";
+import { PORTAL_LINKS } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
-import { AlumniSubmission } from "@/lib/admin/types";
 import { useFocusTrap } from "@/lib/use-focus-trap";
 
 interface AlumniProps {
@@ -99,9 +98,6 @@ export function Alumni({ activeInst }: AlumniProps) {
 
   const [isFormOpen, setIsFormOpen] = useState(false);
   useFocusTrap(isFormOpen, drawerRef);
-  const [dynamicAlumni, setDynamicAlumni] = useState<Alumnus[]>([]);
-  const [loadingDynamic, setLoadingDynamic] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   // Form submission states
   const [formName, setFormName] = useState("");
@@ -135,40 +131,6 @@ export function Alumni({ activeInst }: AlumniProps) {
 
   const isFullPage = pathname === "/alumni" || !activeInst;
 
-  // Fetch approved dynamic submissions
-  const loadApprovedDynamicAlumni = useCallback(async () => {
-    try {
-      const res = await fetch("/api/alumni");
-      if (res.ok) {
-        const data = await res.json();
-        if (data && data.approved) {
-          const mapped: Alumnus[] = data.approved.map((s: AlumniSubmission) => ({
-            name: s.name,
-            category: s.category || "Entrepreneurs & Leaders",
-            description: s.bio,
-            designation: `${s.position} at ${s.company}`,
-            achievement: s.achievements,
-            year: `Batch of ${s.batchFrom}-${s.batchTo} (${s.stream})`,
-            image: s.photoUrl || "",
-          }));
-          setDynamicAlumni(mapped);
-        }
-      }
-    } catch (err) {
-      console.error("Failed to load approved alumni submissions", err);
-    } finally {
-      setLoadingDynamic(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isFullPage) {
-      loadApprovedDynamicAlumni();
-    } else {
-      setLoadingDynamic(false);
-    }
-  }, [isFullPage, loadApprovedDynamicAlumni]);
-
   // Close modal on Escape and lock body scroll
   useEffect(() => {
     if (!isFormOpen) return;
@@ -184,35 +146,6 @@ export function Alumni({ activeInst }: AlumniProps) {
       document.body.style.overflow = "";
     };
   }, [isFormOpen, submitting]);
-
-  // Combine seed database with dynamic entries
-  const featuredNames = new Set(featuredAlumni.map((f) => f.name));
-  const combinedAlumni = [...seedAlumniData, ...dynamicAlumni].filter(
-    (alumnus) => !featuredNames.has(alumnus.name)
-  );
-
-  const sortedCombinedAlumni = [...combinedAlumni].sort((a, b) => {
-    const hasA = !!a.image;
-    const hasB = !!b.image;
-    if (hasA && !hasB) return -1;
-    if (!hasA && hasB) return 1;
-    return 0;
-  });
-
-  const categories = [
-    "All",
-    ...Array.from(new Set(combinedAlumni.map((a) => a.category))),
-  ];
-  const categorizedAlumni =
-    selectedCategory === "All"
-      ? sortedCombinedAlumni
-      : sortedCombinedAlumni.filter((a) => a.category === selectedCategory);
-  const displayedAlumni = isFullPage
-    ? categorizedAlumni
-    : sortedCombinedAlumni.slice(0, 4);
-
-  const alumniWithImages = displayedAlumni.filter((alumnus) => !!alumnus.image);
-  const alumniWithoutImages = displayedAlumni.filter((alumnus) => !alumnus.image);
 
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -413,7 +346,7 @@ export function Alumni({ activeInst }: AlumniProps) {
 
         {/* Featured Success Stories Section */}
         {isFullPage && (
-          <div id="success-stories" className="mb-10 sm:mb-14 scroll-mt-28">
+          <div id="success-stories" className="scroll-mt-28">
             <Reveal>
               <div className="flex items-center gap-2.5 sm:gap-3 mb-4 sm:mb-6">
                 <span className="w-1.5 h-5 sm:h-6 bg-heritage-gold rounded-full" />
@@ -472,162 +405,6 @@ export function Alumni({ activeInst }: AlumniProps) {
               ))}
             </div>
           </div>
-        )}
-
-        {/* Category Filter Tabs */}
-        {isFullPage && (
-          <div className="mb-6 sm:mb-8 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
-            {categories.map((cat) => {
-              const active = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setSelectedCategory(cat)}
-                  aria-pressed={active}
-                  className={cn(
-                    "rounded-full border px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-bold uppercase tracking-wider font-sans transition-all duration-300 min-h-[38px] cursor-pointer",
-                    active
-                      ? "border-montfortian-blue bg-montfortian-blue text-white shadow-xs"
-                      : "border-stone-texture/70 bg-white text-academic-slate/75 hover:border-montfortian-blue hover:text-montfortian-blue",
-                  )}
-                >
-                  {cat}
-                </button>
-              );
-            })}
-          </div>
-        )}
-
-        {/* Alumni Cards Directory */}
-        {loadingDynamic ? (
-          <div className="flex items-center justify-center py-10">
-            <Loader2 className="h-6 w-6 sm:h-8 sm:w-8 text-montfortian-blue animate-spin" />
-            <span className="ml-2 text-xs text-academic-slate/70 font-sans">Loading alumni database...</span>
-          </div>
-        ) : displayedAlumni.length > 0 ? (
-          <div className="space-y-8 sm:space-y-12">
-            {/* 1. Alumni with Profile Images */}
-            {alumniWithImages.length > 0 && (
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 items-start">
-                {alumniWithImages.map((alumnus, index) => (
-                  <Reveal key={alumnus.name} delay={(index % 5) * 0.04}>
-                    <Card className="group flex flex-col overflow-hidden border border-stone-texture/70 bg-white hover:border-heritage-gold/55 hover:shadow-panel-hover transition-all duration-300 rounded-lg h-full">
-                      <div className="relative aspect-[3/4] w-full overflow-hidden bg-surface-container-low border-b border-stone-texture/40">
-                        <Image
-                          src={alumnus.image}
-                          alt={alumnus.name}
-                          fill
-                          sizes="(min-width: 1280px) 16vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 50vw"
-                          className={cn(
-                            "object-cover group-hover:scale-105 transition-transform duration-500",
-                            alumnus.objectPosition || "object-[center_15%]"
-                          )}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/35 via-transparent to-transparent pointer-events-none" />
-                        <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
-                          <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded bg-white/95 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
-                            {alumnus.category}
-                          </span>
-                        </div>
-                      </div>
-                      <CardContent className="flex-1 flex flex-col justify-between p-2.5 sm:p-3 bg-white">
-                        <div>
-                          <div className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
-                            <GraduationCap className="h-3.5 w-3.5 shrink-0" />
-                            <span>{alumnus.year.replace(/^Batch of\s+/i, "Batch: ")}</span>
-                          </div>
-                          <h3 className="font-serif text-xs sm:text-base font-bold leading-tight text-academic-slate group-hover:text-montfortian-blue transition-colors duration-300 line-clamp-1">
-                            {alumnus.name}
-                          </h3>
-                          <p className="text-[11px] sm:text-xs font-medium text-academic-slate/75 font-sans mt-0.5 sm:mt-1 line-clamp-1">
-                            {alumnus.designation}
-                          </p>
-                          <div className="mt-1.5 sm:mt-2 flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
-                            <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
-                            <p className="text-[10px] sm:text-[11px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
-                              {alumnus.achievement.replace(/https?:\/\/[^\s]+/, "").trim() || "Distinguished Achiever"}
-                            </p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Reveal>
-                ))}
-              </div>
-            )}
-
-            {/* 2. Text / Archival Alumni Records */}
-            {alumniWithoutImages.length > 0 && (
-              <div>
-                <Reveal>
-                  <div className="flex items-center gap-2.5 mb-3 sm:mb-4 border-t border-stone-texture/30 pt-6">
-                    <span className="w-1 h-4 bg-heritage-gold-strong rounded-full" />
-                    <h3 className="font-serif text-sm sm:text-base font-bold text-academic-slate uppercase tracking-wider">
-                      Distinguished Civil Servants &amp; Institutional Leaders
-                    </h3>
-                  </div>
-                </Reveal>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-3 items-start">
-                  {alumniWithoutImages.map((alumnus, index) => {
-                    const initials = alumnus.name
-                      .replace(/^(Mr\.|Ms\.|Dr\.|Justice|Major Gen\.)\s+/i, "")
-                      .split(" ")
-                      .filter(Boolean)
-                      .slice(0, 2)
-                      .map((n) => n[0])
-                      .join("")
-                      .toUpperCase();
-
-                    return (
-                      <Reveal key={alumnus.name} delay={(index % 4) * 0.03}>
-                        <Card className="group flex flex-col justify-between border border-stone-texture/70 bg-royal-cream/15 hover:border-heritage-gold/55 hover:shadow-xs transition-all duration-300 rounded-lg p-3 sm:p-3.5 h-full">
-                          <CardContent className="p-0 flex flex-col justify-between h-full">
-                            <div>
-                              <div className="flex items-center justify-between gap-2 mb-2">
-                                <div className="w-7 h-7 rounded-full bg-montfortian-blue text-white flex items-center justify-center font-bold text-[10px] font-sans shrink-0">
-                                  {initials || "LF"}
-                                </div>
-                                <span className="inline-block font-sans text-[9px] font-bold px-2 py-0.5 rounded border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider bg-white">
-                                  {alumnus.category}
-                                </span>
-                              </div>
-                              <div className="flex items-center gap-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5">
-                                <GraduationCap className="h-3 w-3 shrink-0" />
-                                <span>{alumnus.year.replace(/^Batch of\s+/i, "Batch: ")}</span>
-                              </div>
-                              <h4 className="font-serif text-xs sm:text-sm font-bold text-academic-slate group-hover:text-montfortian-blue transition-colors line-clamp-1">
-                                {alumnus.name}
-                              </h4>
-                              <p className="text-[11px] font-medium text-academic-slate/75 font-sans mt-0.5 line-clamp-1">
-                                {alumnus.designation}
-                              </p>
-                              <div className="mt-2 flex items-start gap-1 bg-white border border-stone-texture/30 p-1.5 rounded-sm">
-                                <Award className="h-3 w-3 text-heritage-gold-strong shrink-0 mt-0.5" />
-                                <p className="text-[10px] font-bold font-sans text-heritage-gold-strong leading-normal line-clamp-1">
-                                  {alumnus.achievement.replace(/https?:\/\/[^\s]+/, "").trim() || "Distinguished Achiever"}
-                                </p>
-                              </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </Reveal>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
-        ) : (
-          <Reveal>
-            <div className="text-center py-10 bg-royal-cream/10 border border-dashed border-stone-texture/60 rounded-lg max-w-md mx-auto">
-              <Users className="h-8 w-8 sm:h-10 sm:w-10 text-academic-slate/30 mx-auto mb-3" />
-              <h3 className="font-serif text-base font-bold text-academic-slate mb-1">No alumni found</h3>
-              <p className="text-xs text-academic-slate/70 font-sans px-4">
-                No alumni found in the selected category. Try selecting another filter.
-              </p>
-            </div>
-          </Reveal>
         )}
       </div>
 

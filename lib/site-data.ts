@@ -39,18 +39,18 @@ The activities of the Brothers of St. Gabriel in India are as multifarious as th
 };
 
 export const patronessData = {
-  name: "St. ThÃ©rÃ¨se of Lisieux",
-  title: "Patroness â€” The Little Flower of Jesus",
+  name: "St. Thérèse of Lisieux",
+  title: "Patroness — The Little Flower of Jesus",
   birthDate: "2 January 1873",
   deathDate: "30 September 1897",
   canonizationDate: "17 May 1925 by Pope Pius XI",
   image: "/images/official/st_therese.jpg",
   quote: "What matters in life is not great deeds, but great love.",
-  fullText: `St Therese of Lisieux, born Marie FranÃ§oise-ThÃ©rÃ¨se Martin (2 January 1873 â€“ 30 September 1897) was a French Catholic who became a Carmelite nun at an early age. She is popularly known as "The Little Flower of Jesus", or simply "The Little Flower."
+  fullText: `St. Thérèse of Lisieux, born Marie Françoise-Thérèse Martin (2 January 1873 – 30 September 1897) was a French Catholic who became a Carmelite nun at an early age. She is popularly known as "The Little Flower of Jesus", or simply "The Little Flower."
 
-She died in obscurity at the age of 24. However, after her death, her autobiography â€“ Story of a Soul was published and became a best-seller around the world. Her books explained her spiritual path of love and selflessness, and she became one among the three ladies to be considered a Doctor of the Catholic Church.
+She died in obscurity at the age of 24. However, after her death, her autobiography — Story of a Soul was published and became a best-seller around the world. Her books explained her spiritual path of love and selflessness, and she became one among the three ladies to be considered a Doctor of the Catholic Church.
 
-"What matters in life," she wrote, "is not great deeds, but great love." She loved flowers and saw herself as the "Little Flower of Jesus". Because of this beautiful analogy, the title "Little Flower" remained with her. St. Therese was canonized by Pope Pius XI on May 17, 1925.`,
+"What matters in life," she wrote, "is not great deeds, but great love." She loved flowers and saw herself as the "Little Flower of Jesus". Because of this beautiful analogy, the title "Little Flower" remained with her. St. Thérèse was canonized by Pope Pius XI on May 17, 1925.`,
 };
 
 // 2. MANAGEMENT & CHARISM (Verbatim from mgt.php)
@@ -102,7 +102,7 @@ export const annualThemeData = {
 // 5. CAMPUS INFRASTRUCTURE TOUR (Verbatim synthesis from infrastructure.php - 6,162 chars)
 export const campusInfrastructureData = {
   summary:
-    "Situated on Tarnaka-Uppal Road opposite Survey of India, Little Flower Junior College is enclosed within a tall boundary wall lined with large trees. The 8-acre campus houses a grand three-storeyed building (ground plus three floors), expansive playgrounds for football, basketball, and volleyball, Brother's Quarters, and a regal welcoming statue of Patron Saint ThÃ©rÃ¨se.",
+    "Situated on Tarnaka-Uppal Road opposite Survey of India, Little Flower Junior College is enclosed within a tall boundary wall lined with large trees. The 8-acre campus houses a grand three-storeyed building (ground plus three floors), expansive playgrounds for football, basketball, and volleyball, Brother's Quarters, and a regal welcoming statue of Patron Saint Thérèse.",
   floors: [
     {
       level: "Ground Floor",

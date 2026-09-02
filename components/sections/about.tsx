@@ -1,11 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import {
   Heart,
   Cross,
   Sparkles,
   Compass,
+  X,
+  ZoomIn,
 } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
@@ -26,6 +29,8 @@ interface AboutProps {
 
 export function About({ activeInst = "lfjc" }: AboutProps = {}) {
   void activeInst;
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; title: string; subtitle?: string } | null>(null);
+
   return (
     <div id="about" className="bg-white">
       {/* ─── PAGE HEADER ──────────────────────────────────────────────── */}
@@ -109,7 +114,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
               Spiritual & Institutional Roots
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate mt-1">
-              Our Founder & Patroness
+              Our Founder &amp; Patroness
             </h2>
             <p className="text-xs sm:text-sm text-academic-slate/70 max-w-xl mx-auto mt-2 font-sans">
               Little Flower Junior College draws perpetual inspiration from our Founder Saint Louis Marie de Montfort and our Patroness Saint Thérèse of Lisieux.
@@ -121,24 +126,38 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
             <Reveal className="h-full">
               <div className="bg-white rounded-2xl border border-stone-texture/60 p-6 sm:p-7 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-4 mb-5">
-                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 border-heritage-gold/50 shadow-inner shrink-0 bg-royal-cream/40">
+                  <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 mb-5 text-center sm:text-left">
+                    <button
+                      type="button"
+                      onClick={() => setLightboxImage({ src: founderData.image, title: "St. Louis Marie de Montfort", subtitle: "Founder of the Montfortian Society" })}
+                      className="relative w-28 h-36 sm:w-32 sm:h-40 rounded-xl overflow-hidden border-2 border-heritage-gold/50 shadow-md shrink-0 bg-royal-cream/40 cursor-zoom-in group focus:outline-none focus:ring-2 focus:ring-heritage-gold transition-all"
+                      aria-label="Click to enlarge St. Louis Marie de Montfort portrait"
+                    >
                       <Image
                         src={founderData.image}
-                        alt={founderData.name}
+                        alt="St. Louis Marie de Montfort"
                         fill
-                        className="object-cover"
+                        sizes="(min-width: 640px) 128px, 112px"
+                        className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
                       />
-                    </div>
+                      <div className="absolute inset-0 bg-deep-navy/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div className="bg-deep-navy/85 border border-heritage-gold/50 p-2 rounded-full text-white shadow-md">
+                          <ZoomIn className="w-4 h-4 text-heritage-gold-bright" />
+                        </div>
+                      </div>
+                    </button>
                     <div>
                       <span className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
                         Founder
                       </span>
-                      <h3 className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue leading-tight">
-                        {founderData.name}
+                      <h3 className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue leading-tight mt-0.5">
+                        St. Louis Marie de Montfort
                       </h3>
                       <p className="text-xs text-academic-slate/70 font-sans mt-0.5">
                         Born: {founderData.birthDate} • Died: {founderData.deathDate}
+                      </p>
+                      <p className="text-[11px] text-heritage-gold-strong font-semibold font-sans mt-1">
+                        Click portrait to expand view
                       </p>
                     </div>
                   </div>
@@ -164,24 +183,38 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
             <Reveal delay={0.1} className="h-full">
               <div className="bg-white rounded-2xl border border-stone-texture/60 p-6 sm:p-7 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-4 mb-5">
-                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 border-heritage-gold/50 shadow-inner shrink-0 bg-royal-cream/40">
+                  <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 mb-5 text-center sm:text-left">
+                    <button
+                      type="button"
+                      onClick={() => setLightboxImage({ src: patronessData.image, title: "St. Thérèse of Lisieux", subtitle: "Patroness — The Little Flower of Jesus" })}
+                      className="relative w-28 h-36 sm:w-32 sm:h-40 rounded-xl overflow-hidden border-2 border-heritage-gold/50 shadow-md shrink-0 bg-royal-cream/40 cursor-zoom-in group focus:outline-none focus:ring-2 focus:ring-heritage-gold transition-all"
+                      aria-label="Click to enlarge St. Thérèse of Lisieux portrait"
+                    >
                       <Image
                         src={patronessData.image}
-                        alt={patronessData.name}
+                        alt="St. Thérèse of Lisieux"
                         fill
-                        className="object-cover"
+                        sizes="(min-width: 640px) 128px, 112px"
+                        className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
                       />
-                    </div>
+                      <div className="absolute inset-0 bg-deep-navy/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div className="bg-deep-navy/85 border border-heritage-gold/50 p-2 rounded-full text-white shadow-md">
+                          <ZoomIn className="w-4 h-4 text-heritage-gold-bright" />
+                        </div>
+                      </div>
+                    </button>
                     <div>
                       <span className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
                         Patroness
                       </span>
-                      <h3 className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue leading-tight">
-                        {patronessData.name}
+                      <h3 className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue leading-tight mt-0.5">
+                        St. Thérèse of Lisieux
                       </h3>
                       <p className="text-xs text-academic-slate/70 font-sans mt-0.5">
                         &quot;The Little Flower of Jesus&quot; (1873–1897)
+                      </p>
+                      <p className="text-[11px] text-heritage-gold-strong font-semibold font-sans mt-1">
+                        Click portrait to expand view
                       </p>
                     </div>
                   </div>
@@ -375,15 +408,26 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
         <div className="mx-auto max-w-5xl">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
             <Reveal className="lg:col-span-4">
-              <div className="relative aspect-[3/4] max-w-xs mx-auto lg:mx-0 overflow-hidden rounded-2xl border-2 border-heritage-gold/30 shadow-float bg-royal-cream/40">
+              <button
+                type="button"
+                onClick={() => setLightboxImage({ src: lfjcData.principalImg, title: lfjcData.principalName, subtitle: lfjcData.principalRole })}
+                className="relative aspect-[3/4] w-full max-w-xs mx-auto lg:mx-0 overflow-hidden rounded-2xl border-2 border-heritage-gold/30 shadow-float bg-royal-cream/40 cursor-zoom-in group block text-left focus:outline-none focus:ring-2 focus:ring-heritage-gold transition-all"
+                aria-label={`Click to enlarge ${lfjcData.principalName} portrait`}
+              >
                 <Image
                   src={lfjcData.principalImg}
                   alt={lfjcData.principalName}
                   fill
                   sizes="(min-width: 1024px) 30vw, 60vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
-              </div>
+                <div className="absolute inset-0 bg-deep-navy/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <div className="bg-deep-navy/85 border border-heritage-gold/50 px-3.5 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-white text-xs font-sans font-semibold">
+                    <ZoomIn className="w-4 h-4 text-heritage-gold-bright" />
+                    <span>Click to expand</span>
+                  </div>
+                </div>
+              </button>
             </Reveal>
 
             <Reveal delay={0.1} className="lg:col-span-8 space-y-3">
@@ -437,6 +481,51 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
           </div>
         </div>
       </Section>
+
+      {/* ─── FULL RESOLUTION LIGHTBOX MODAL (Founder, Patroness, Principal) ─── */}
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-50 bg-deep-navy/95 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
+          onClick={() => setLightboxImage(null)}
+        >
+          <div className="absolute top-4 right-4 z-10">
+            <button
+              type="button"
+              onClick={() => setLightboxImage(null)}
+              className="p-2 text-white hover:text-heritage-gold-bright transition-colors rounded-full bg-white/10 hover:bg-white/20 cursor-pointer"
+              aria-label="Close image view"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+
+          <div
+            className="relative max-w-3xl max-h-[88vh] w-full flex flex-col items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="relative w-full max-h-[75vh] h-[65vh] sm:h-[75vh]">
+              <Image
+                src={lightboxImage.src}
+                alt={lightboxImage.title}
+                fill
+                className="object-contain"
+                sizes="(min-width: 1024px) 800px, 90vw"
+                priority
+              />
+            </div>
+            <div className="mt-4 text-center text-white">
+              <h3 className="font-serif text-lg sm:text-xl font-bold text-heritage-gold-bright">
+                {lightboxImage.title}
+              </h3>
+              {lightboxImage.subtitle && (
+                <p className="text-xs sm:text-sm text-royal-cream/80 font-sans mt-0.5">
+                  {lightboxImage.subtitle}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

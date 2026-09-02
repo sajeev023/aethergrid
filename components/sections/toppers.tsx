@@ -41,22 +41,27 @@ const TOPPER_POSTERS: TopperPoster[] = [
   },
 ];
 
-export function Toppers() {
+interface ToppersProps {
+  headingLevel?: "h1" | "h2";
+}
+
+export function Toppers({ headingLevel = "h2" }: ToppersProps = {}) {
   const [activePoster, setActivePoster] = useState<TopperPoster | null>(null);
+  const Heading = headingLevel;
 
   return (
     <div id="toppers" className="bg-white">
       {/* ─── SECTION HEADER ─────────────────────────────────────────── */}
-      <Section variant="default" className="bg-royal-cream/20 border-t border-stone-texture/30 py-10 sm:py-14">
+      <Section variant="default" className="bg-royal-cream/20 py-10 sm:py-14">
         <div className="mx-auto max-w-4xl text-center mb-8 sm:mb-12">
           <Reveal>
             <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans mb-2">
               <Award className="w-3.5 h-3.5 text-heritage-gold-strong" />
               State Board Merit List
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate tracking-tight">
+            <Heading className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-academic-slate tracking-tight">
               Intermediate Board Toppers — 2026
-            </h2>
+            </Heading>
             <p className="mt-2.5 text-xs sm:text-sm text-academic-slate/75 font-sans max-w-2xl mx-auto leading-relaxed">
               Official Little Flower Junior College merit announcements, state rankers, and centum scorers published for Intermediate 1st and 2nd Year board examinations.
             </p>

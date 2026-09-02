@@ -41,12 +41,12 @@ export const navMenu: NavMenuItem[] = [
   },
   {
     label: "Campus Life",
-    href: "/campus",
+    href: "/campus/silver-jubilee",
     children: [
-      { label: "Silver Jubilee", href: "/campus#silver-jubilee", icon: Landmark },
-      { label: "Golden Jubilee", href: "/campus#golden-jubilee", icon: Sparkles },
-      { label: "Campus & Labs", href: "/campus#campus", icon: Building2 },
-      { label: "Events & Sports", href: "/campus#events", icon: Compass },
+      { label: "Silver Jubilee", href: "/campus/silver-jubilee", icon: Landmark },
+      { label: "Golden Jubilee", href: "/campus/golden-jubilee", icon: Sparkles },
+      { label: "Campus & Labs", href: "/campus/campus-life#campus", icon: Building2 },
+      { label: "Events & Sports", href: "/campus/campus-life#events", icon: Compass },
     ],
   },
   { label: "Admissions", href: "/admissions" },
