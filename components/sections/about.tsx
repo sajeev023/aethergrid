@@ -1,10 +1,8 @@
 import Image from "next/image";
-import { ArrowRight, BookOpen, ShieldCheck, Award, MapPin } from "lucide-react";
+import { BookOpen, ShieldCheck, Award } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
-import { SectionHeading } from "@/components/section-heading";
 import { Section } from "@/components/section";
-import { Button } from "@/components/ui/button";
 import { getInstitutionData } from "@/lib/site-data";
 
 interface AboutProps {
@@ -22,9 +20,6 @@ export function About({ activeInst = "lfjc" }: AboutProps) {
             <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-academic-slate">
               About LFJC
             </h1>
-            <p className="mt-3 text-xs sm:text-sm leading-relaxed text-academic-slate/75 font-sans max-w-xl mx-auto">
-              Montfortian intermediate college in Uppal, Hyderabad. Established {instData.established}.
-            </p>
           </Reveal>
         </div>
       </Section>
@@ -53,7 +48,7 @@ export function About({ activeInst = "lfjc" }: AboutProps) {
       </Section>
 
       <Section variant="default" className="bg-white">
-        <SectionHeading eyebrow="Leadership" title="Principal" />
+        <h2 className="font-serif text-lg sm:text-xl font-bold text-academic-slate">Principal</h2>
 
         <div className="mt-5 sm:mt-6 grid gap-5 sm:gap-8 lg:grid-cols-12 items-center">
           <Reveal className="lg:col-span-4">
@@ -79,8 +74,7 @@ export function About({ activeInst = "lfjc" }: AboutProps) {
       </Section>
 
       <Section variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30">
-        <SectionHeading eyebrow="Values" title="Truth, Virtue, Service" />
-
+        <h2 className="font-serif text-lg sm:text-xl font-bold text-academic-slate">Values</h2>
         <div className="mt-5 sm:mt-6 grid gap-3 sm:gap-4 sm:grid-cols-3">
           {[
             { icon: BookOpen, title: "Academic Rigor" },
@@ -98,41 +92,6 @@ export function About({ activeInst = "lfjc" }: AboutProps) {
             );
           })}
         </div>
-      </Section>
-
-      <Section variant="default" className="bg-white">
-        <SectionHeading eyebrow="Facts" title="Important Information" />
-
-        <div className="mt-5 sm:mt-6 grid gap-2 sm:gap-3">
-          {[
-            { label: "Affiliation", value: "Board of Intermediate Education, Telangana" },
-            { label: "Governance", value: "Brothers of St. Gabriel Educational Society" },
-            { label: "Streams", value: "MPC, BiPC, MEC, CEC" },
-            { label: "Campus", value: instData.addressLine },
-          ].map((fact) => (
-            <Reveal key={fact.label}>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 rounded-xl border border-stone-texture/50 bg-royal-cream/20 p-3 sm:p-4">
-                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans w-28 shrink-0">{fact.label}</span>
-                <span className="text-xs sm:text-sm text-academic-slate/80 font-sans">{fact.value}</span>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal className="mt-6 flex flex-wrap justify-center gap-3">
-          <Button asChild>
-            <a href="/admissions" className="inline-flex items-center gap-2">
-              Admissions
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </Button>
-          <Button asChild variant="outline">
-            <a href="/contact" className="inline-flex items-center gap-2">
-              <MapPin className="h-4 w-4" />
-              Contact
-            </a>
-          </Button>
-        </Reveal>
       </Section>
     </div>
   );

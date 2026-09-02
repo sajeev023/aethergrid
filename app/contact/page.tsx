@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function LFJCContactPage() {
-  return <Contact activeInst="lfjc" headingLevel="h1" />;
+  return <Contact activeInst="lfjc" />;
 }

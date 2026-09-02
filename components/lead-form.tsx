@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState, type FormEvent, type ReactNode } from "react";
-import { ArrowRight, CheckCircle2, Clock, Copy, Check, FileCheck, Loader2, ShieldCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, Copy, Check, FileCheck, Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -126,13 +126,13 @@ export function LeadForm({
           </div>
           <div>
             <span className="font-sans text-xs font-bold uppercase tracking-wider text-emerald-800">
-              Inquiry Successfully Recorded
+              Inquiry Received
             </span>
             <h3 className="mt-0.5 font-serif text-lg sm:text-xl font-bold text-deep-navy">
-              Thank You for Reaching Out
+              Thank You
             </h3>
             <p className="mt-1 text-xs sm:text-sm text-academic-slate/85 leading-relaxed">
-              Your inquiry has been directly logged into the official {instData.shortName} Admissions System.
+              The {instData.shortName} admissions office will contact you.
             </p>
           </div>
         </div>
@@ -143,7 +143,7 @@ export function LeadForm({
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 font-sans">
-                  Official Reference Number
+                  Reference Number
                 </p>
                 <p className="font-mono text-base sm:text-lg font-bold text-montfortian-blue tracking-wide mt-0.5">
                   {status.refNumber}
@@ -160,24 +160,12 @@ export function LeadForm({
                 {copied ? "Copied" : "Copy Ref"}
               </Button>
             </div>
-
-            <div className="mt-3 grid gap-1.5 border-t border-stone-texture/40 pt-3 text-xs text-academic-slate/80 font-sans">
-              <div className="flex items-center gap-2 text-montfortian-blue font-semibold">
-                <Clock className="h-4 w-4 shrink-0 text-heritage-gold-strong" />
-                <span>Expected Response Time: The admissions office will contact you within 24 hours.</span>
-              </div>
-              <div className="flex items-center gap-2 text-academic-slate/70">
-                <ShieldCheck className="h-4 w-4 shrink-0 text-emerald-600" />
-                <span>A confirmation email notification has been dispatched to our admissions counselors.</span>
-              </div>
-            </div>
           </div>
         )}
 
         {/* Summary of submitted details */}
         {status.submittedData && status.submittedData.name && (
           <div className="rounded-lg border border-stone-texture/60 bg-white/80 p-3.5 text-xs font-sans text-academic-slate/85 space-y-1.5">
-            <p className="font-semibold text-academic-slate mb-1">Summary of Inquiry Details:</p>
             <p><span className="font-medium text-academic-slate/60">Candidate Name:</span> {status.submittedData.name}</p>
             {status.submittedData.parent && (
               <p><span className="font-medium text-academic-slate/60">Parent / Guardian:</span> {status.submittedData.parent}</p>
@@ -431,7 +419,7 @@ export function LeadForm({
         aria-live="polite"
         className="min-h-5 text-center text-[11px] sm:text-xs text-academic-slate/60 font-sans"
       >
-        All inquiries are routed securely to the {instData.shortName} Admissions Desk • 24-hour response SLA.
+        All inquiries are routed to the {instData.shortName} admissions office.
       </p>
     </form>
   );

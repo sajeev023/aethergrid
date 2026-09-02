@@ -3,25 +3,13 @@
 import { useState } from "react";
 import Image from "next/image";
 import {
-  ArrowRight,
-  Award,
-  Building2,
   ChevronLeft,
   ChevronRight,
-  Clock,
-  Compass,
-  HeartHandshake,
-  Landmark,
-  Sparkles,
-  Trophy,
-  Users,
   X,
 } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
 import { Section } from "@/components/section";
-import { SectionHeading } from "@/components/section-heading";
-import { Button } from "@/components/ui/button";
 
 export interface GalleryItem {
   id: number;
@@ -96,14 +84,6 @@ const CAMPUS_LABS_IMAGES: GalleryItem[] = [
   { id: 505, src: "/images/computer-lab.jpg", badge: "Lab", title: "Computer centre", category: "campus" },
   { id: 506, src: "/images/library-heritage.jpg", badge: "Library", title: "Reference library", category: "campus" },
   { id: 507, src: "/images/sports-arena.jpg", badge: "Sports", title: "Sports arena", category: "campus" },
-];
-
-const ALL_IMAGES: GalleryItem[] = [
-  ...CAMPUS_LABS_IMAGES,
-  ...SILVER_JUBILEE_IMAGES,
-  ...GOLDEN_JUBILEE_IMAGES,
-  ...ASSEMBLIES_IMAGES,
-  ...SPORTS_IMAGES,
 ];
 
 const GOLDEN_JUBILEE_VIDEOS: VideoItem[] = [
@@ -189,41 +169,28 @@ export function CampusLife({ activeInst = "lfjc" }: { activeInst?: "root" | "lfs
   void activeInst;
   return (
     <div id="campus" className="bg-white">
-      <Section variant="default" className="bg-white">
-        <div className="mx-auto max-w-3xl text-center">
-          <Reveal>
-            <span className="font-sans text-xs font-bold text-heritage-gold-strong uppercase tracking-wider mb-2 block">
-              Campus Life
-            </span>
-            <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-academic-slate">
-              Campus & Heritage
-            </h1>
-            <p className="mt-3 text-xs sm:text-sm leading-relaxed text-academic-slate/75 font-sans max-w-2xl mx-auto">
-              Visual archive of the LFJC campus, Silver Jubilee, Golden Jubilee, events, and sports.
-            </p>
-          </Reveal>
-        </div>
-      </Section>
       <Section id="campus" variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30">
-        <SectionHeading eyebrow="Campus" title="Campus & Labs" description="Eight-acre campus in Uppal." />
+        <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate">Campus & Labs</h1>
         <div className="mt-5 sm:mt-8">
           <GalleryGrid items={CAMPUS_LABS_IMAGES} />
         </div>
       </Section>
       <Section id="silver-jubilee" variant="default" className="bg-white">
-        <SectionHeading eyebrow="1999" title="Silver Jubilee" description="25 years of LFJC." />
+        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate">Silver Jubilee</h2>
+        <p className="mt-2 text-xs sm:text-sm text-academic-slate/70 font-sans">25th Anniversary — 1999</p>
         <div className="mt-5 sm:mt-8">
           <GalleryGrid items={SILVER_JUBILEE_IMAGES} />
         </div>
       </Section>
       <Section id="golden-jubilee" variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30">
-        <SectionHeading eyebrow="2024" title="Golden Jubilee" description="50 years of LFJC." />
+        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate">Golden Jubilee</h2>
+        <p className="mt-2 text-xs sm:text-sm text-academic-slate/70 font-sans">50th Anniversary — 1974–2024</p>
         <div className="mt-5 sm:mt-8">
           <GalleryGrid items={GOLDEN_JUBILEE_IMAGES} />
         </div>
       </Section>
       <Section id="events" variant="default" className="bg-white">
-        <SectionHeading eyebrow="Activities" title="Events & Sports" description="Assemblies, seminars, tournaments." />
+        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate">Events & Sports</h2>
         <div className="mt-5 sm:mt-8 grid gap-8 sm:gap-10">
           <div>
             <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate mb-3">Events & Seminars</h3>
@@ -236,7 +203,7 @@ export function CampusLife({ activeInst = "lfjc" }: { activeInst?: "root" | "lfs
         </div>
       </Section>
       <Section id="videos" variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30">
-        <SectionHeading eyebrow="Footage" title="Golden Jubilee Videos" description="Recordings from the 50th anniversary." />
+        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate">Golden Jubilee Videos</h2>
         <div className="mt-5 sm:mt-8 grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {GOLDEN_JUBILEE_VIDEOS.map((video, idx) => (
             <Reveal key={video.title} delay={idx * 0.05}>
@@ -257,16 +224,6 @@ export function CampusLife({ activeInst = "lfjc" }: { activeInst?: "root" | "lfs
             </Reveal>
           ))}
         </div>
-      </Section>
-      <Section variant="default" className="bg-white">
-        <Reveal className="text-center">
-          <Button asChild>
-            <a href="/admissions" className="inline-flex items-center gap-2">
-              Begin Admissions Inquiry
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </Button>
-        </Reveal>
       </Section>
     </div>
   );

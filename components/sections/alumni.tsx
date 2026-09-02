@@ -5,7 +5,6 @@ import Image from "next/image";
 import { ArrowRight, Award, Users, X, Loader2, CheckCircle2 } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
-import { SectionHeading } from "@/components/section-heading";
 import { Section } from "@/components/section";
 import { Button } from "@/components/ui/button";
 import { alumniData as seedAlumniData, Alumnus } from "@/lib/site-data";
@@ -14,11 +13,10 @@ import { AlumniSubmission } from "@/lib/admin/types";
 import { useFocusTrap } from "@/lib/use-focus-trap";
 
 interface AlumniProps {
-  activeInst?: "root" | "lfs" | "lfjc" | "lfdc";
-  headingLevel?: "h1" | "h2";
+  children?: never;
 }
 
-export function Alumni({ activeInst = "lfjc", headingLevel = "h1" }: AlumniProps) {
+export function Alumni({}: AlumniProps = {}) {
   const fid = useId();
   const drawerRef = useRef<HTMLDivElement>(null);
 
@@ -178,15 +176,9 @@ export function Alumni({ activeInst = "lfjc", headingLevel = "h1" }: AlumniProps
       <Section variant="default" className="bg-white">
         <div className="mx-auto max-w-3xl text-center">
           <Reveal>
-            <span className="font-sans text-xs font-bold text-heritage-gold-strong uppercase tracking-wider mb-2 block">
-              Alumni
-            </span>
             <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-academic-slate">
-              Alumni Network
+              Alumni
             </h1>
-            <p className="mt-3 text-xs sm:text-sm leading-relaxed text-academic-slate/75 font-sans max-w-2xl mx-auto">
-              LFJC graduates across civil services, cinema, medicine, engineering, business, and the arts.
-            </p>
           </Reveal>
         </div>
       </Section>
@@ -203,7 +195,7 @@ export function Alumni({ activeInst = "lfjc", headingLevel = "h1" }: AlumniProps
         </div>
       </Section>
       <Section variant="default" className="bg-white">
-        <SectionHeading eyebrow="Directory" title="Distinguished Alumni" description="Notable graduates by field." />
+        <h2 className="font-serif text-lg sm:text-xl font-bold text-academic-slate">Distinguished Alumni</h2>
         <div className="mt-5 flex flex-wrap gap-2">
           {categories.map((cat) => (
             <button

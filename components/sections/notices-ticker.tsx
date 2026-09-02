@@ -23,14 +23,6 @@ const DEFAULT_NOTICES: NoticeItem[] = [
     linkText: "Submit Inquiry",
     isUrgent: false,
   },
-  {
-    id: "golden-jubilee",
-    text: "Little Flower Junior College celebrates 50 Years of Montfortian Educational Excellence (1974–2024).",
-    badge: "Golden Jubilee",
-    linkUrl: "/about",
-    linkText: "About LFJC",
-    isUrgent: false,
-  },
 ];
 
 const DISMISS_KEY = "lfjc-ticker-dismissed-id";

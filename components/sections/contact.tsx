@@ -1,22 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, MapPin, Phone, Clock, Users, ArrowRight } from "lucide-react";
+import { Mail, MapPin, Phone, Clock } from "lucide-react";
 
 import { LeadForm } from "@/components/lead-form";
 import { Reveal } from "@/components/motion/reveal";
-import { SectionHeading } from "@/components/section-heading";
 import { Section } from "@/components/section";
-import { Button } from "@/components/ui/button";
 import { getInstitutionData } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 interface ContactProps {
   activeInst?: "root" | "lfs" | "lfjc" | "lfdc";
-  headingLevel?: "h1" | "h2";
 }
 
-export function Contact({ activeInst = "lfjc", headingLevel = "h1" }: ContactProps) {
+export function Contact({ activeInst = "lfjc" }: ContactProps) {
   const [activeForm, setActiveForm] = useState<"contact" | "inquiry">("contact");
   const instData = getInstitutionData(activeInst);
 
@@ -25,15 +22,9 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h1" }: ContactPro
       <Section variant="default" className="bg-white">
         <div className="mx-auto max-w-3xl text-center">
           <Reveal>
-            <span className="font-sans text-xs font-bold text-heritage-gold-strong uppercase tracking-wider mb-2 block">
-              Contact
-            </span>
             <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-academic-slate">
-              Contact Office
+              Contact
             </h1>
-            <p className="mt-3 text-xs sm:text-sm leading-relaxed text-academic-slate/75 font-sans max-w-2xl mx-auto">
-              Reach the LFJC administrative office for admissions, general enquiries, or campus visits.
-            </p>
           </Reveal>
         </div>
       </Section>
@@ -85,7 +76,7 @@ export function Contact({ activeInst = "lfjc", headingLevel = "h1" }: ContactPro
       </Section>
       <Section id="inquiry" variant="default" className="bg-white">
         <div className="mx-auto max-w-3xl">
-          <SectionHeading eyebrow="Enquiry" title="Send a Message" description="Use the form below." />
+          <h2 className="font-serif text-lg sm:text-xl font-bold text-academic-slate">Send a Message</h2>
 
           <div className="mt-5 sm:mt-8 rounded-xl border border-stone-texture/60 bg-white p-4 sm:p-6 shadow-panel">
             <div className="grid grid-cols-2 gap-1 mb-4">

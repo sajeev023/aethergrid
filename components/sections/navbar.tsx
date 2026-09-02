@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
-import { Mail, Menu, Phone, X, Search, ChevronRight, ChevronDown, Lock } from "lucide-react";
+import { Mail, Menu, Phone, X, ChevronDown, Lock } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -20,8 +20,6 @@ interface NavbarProps {
 export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [expandedMobile, setExpandedMobile] = useState<Record<string, boolean>>({});
   const pathname = usePathname() || "";
@@ -29,9 +27,7 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
   const instData = getInstitutionData(activeInst);
 
   const drawerRef = useRef<HTMLDivElement>(null);
-  const searchRef = useRef<HTMLDivElement>(null);
   useFocusTrap(isOpen, drawerRef);
-  useFocusTrap(isSearchOpen, searchRef);
 
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -41,23 +37,6 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
   const activeItem: NavMenuItem | null = openMenu
     ? navMenu.find((item) => item.label === openMenu) ?? null
     : null;
-
-const searchableItems = [
-  { title: "Admissions Desk", href: "/admissions", category: "Portal" },
-  { title: "About LFJC", href: "/about", category: "Legacy" },
-  { title: "Academic Streams", href: "/academics", category: "Academics" },
-  { title: "Faculty Directory", href: "/faculty", category: "Faculty" },
-  { title: "Campus Life", href: "/campus", category: "Campus" },
-  { title: "Alumni Network", href: "/alumni", category: "Network" },
-  { title: "Contact Office", href: "/contact", category: "Office" },
-];
-
-  const searchResults = searchQuery
-    ? searchableItems.filter(item =>
-        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.category.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : [];
 
   const openMenuFn = (label: string) => {
     if (closeTimerRef.current) {
@@ -122,12 +101,8 @@ const searchableItems = [
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        setIsSearchOpen(true);
-      }
       if (e.key === "Escape") {
-        setIsSearchOpen(false);
+        setOpenMenu(null);
         setIsOpen(false);
       }
     }
@@ -153,7 +128,7 @@ const searchableItems = [
   }, []);
 
   useEffect(() => {
-    if (isOpen || isSearchOpen) {
+    if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -161,11 +136,10 @@ const searchableItems = [
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isOpen, isSearchOpen]);
+  }, [isOpen]);
 
   useEffect(() => {
     setIsOpen(false);
-    setIsSearchOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -182,12 +156,6 @@ const searchableItems = [
           <div className="flex items-center divide-x divide-white/10">
             <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 first:pl-0 py-1.5 sm:py-2 text-heritage-gold-bright">
               Est. {instData.established}
-            </span>
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2">
-              Montfortian Heritage
-            </span>
-            <span className="hidden lg:inline-flex items-center gap-1.5 px-3 py-2">
-              Brothers of St. Gabriel Educational Society
             </span>
           </div>
           <div className="flex items-center divide-x divide-white/10">
@@ -213,13 +181,6 @@ const searchableItems = [
               <Mail className="h-3 w-3 text-heritage-gold-bright" aria-hidden="true" />
               <span className="hidden md:inline">{instData.email}</span>
             </a>
-            <button
-              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 last:pr-0 py-1.5 sm:py-2 hover:text-white transition-colors cursor-pointer"
-              aria-label="Search site"
-              onClick={() => setIsSearchOpen(true)}
-            >
-              <Search className="h-3.5 w-3.5 text-heritage-gold-bright" />
-            </button>
           </div>
         </div>
       </div>
@@ -271,7 +232,7 @@ const searchableItems = [
             </div>
           </Link>
 
-          {/* ─── Desktop Navigation with Mega-Panels ─────────────────────── */}
+          {/* ─── Desktop Navigation ─────────────────────────────────────── */}
           <div className="hidden items-center lg:gap-x-2 xl:gap-x-3.5 2xl:gap-x-5 lg:flex">
             {navMenu.map((item) => {
               const hasChildren = !!item.children?.length;
@@ -322,7 +283,7 @@ const searchableItems = [
             })}
           </div>
 
-          {/* ─── Desktop CTA Actions ────────────────────────────────────── */}
+          {/* ─── Desktop CTA ────────────────────────────────────────────── */}
           <div className="hidden items-center gap-3 lg:flex">
             <Button asChild size="sm" className="h-9 px-4 xl:px-5 rounded-sm text-[10px] xl:text-[11px] font-bold tracking-wider uppercase shrink-0 shadow-xs">
               <Link href="/admissions">Admissions 2026–27</Link>
@@ -342,7 +303,7 @@ const searchableItems = [
           </button>
         </nav>
 
-        {/* ─── Desktop Mega-Panel ──────────────────────────────────────── */}
+        {/* ─── Desktop Dropdown Panel ──────────────────────────────────── */}
         <AnimatePresence>
           {activeItem?.children && (
             <motion.div
@@ -453,20 +414,6 @@ const searchableItems = [
 
             {/* Scrollable body */}
             <div className="flex-1 overflow-y-auto overscroll-contain px-3.5 py-3 sm:px-5 sm:py-4 scrollbar-none">
-              {/* Admissions Quick Access */}
-              <Link
-                href="/admissions"
-                onClick={closeDrawer}
-                className="mb-3 block rounded-xl border border-heritage-gold/30 bg-royal-cream p-3 sm:p-4 hover:border-heritage-gold/60 transition-colors group"
-              >
-                <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] text-heritage-gold-strong font-sans">
-                  Admissions 2026-27
-                </p>
-                <p className="mt-0.5 text-xs leading-relaxed text-academic-slate/80 font-sans">
-                  Intermediate programs in MPC, BiPC, MEC, and CEC are open.
-                </p>
-              </Link>
-
               {/* Navigation Links — Accordion */}
               <nav aria-label="Mobile" className="flex flex-col gap-0.5">
                 {navMenu.map((item) => {
@@ -570,152 +517,6 @@ const searchableItems = [
                 <Lock className="h-3.5 w-3.5" aria-hidden="true" />
                 Parent Portal
               </Link>
-              <div className="mt-3 flex flex-col gap-1.5">
-                <a
-                  href={`tel:${instData.phone.replace(/\s/g, "")}`}
-                  className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-academic-slate/80 hover:text-montfortian-blue transition-colors font-sans py-0.5"
-                >
-                  <Phone className="h-3.5 w-3.5 text-heritage-gold-strong" aria-hidden="true" />
-                  {instData.phone}
-                </a>
-                <a
-                  href={`mailto:${instData.email}`}
-                  className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-academic-slate/80 hover:text-montfortian-blue transition-colors font-sans py-0.5"
-                >
-                  <Mail className="h-3.5 w-3.5 text-heritage-gold-strong" aria-hidden="true" />
-                  {instData.email}
-                </a>
-                <p className="mt-0.5 text-center text-[10px] font-bold uppercase tracking-widest text-academic-slate/60 font-sans">
-                  {instData.addressLine}
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* ─── SEARCH OVERLAY ──────────────────────────────────────────────── */}
-      <AnimatePresence>
-        {isSearchOpen && (
-          <motion.div
-            key="search-overlay"
-            ref={searchRef}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Site search"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed inset-0 z-50 overflow-y-auto"
-            onKeyDown={(e) => { if (e.key === "Escape") setIsSearchOpen(false); }}
-          >
-            <div className="min-h-screen px-4 text-center" role="presentation">
-              <div
-                className="fixed inset-0 bg-deep-navy/60 backdrop-blur-md"
-                onClick={() => setIsSearchOpen(false)}
-                aria-hidden="true"
-              />
-              <span className="inline-block h-screen align-middle" aria-hidden="true">
-                &#8203;
-              </span>
-              <div className="inline-block w-full max-w-2xl p-4 sm:p-6 my-4 sm:my-8 overflow-hidden text-left align-middle bg-white shadow-2xl border border-stone-texture/60 rounded-xl relative z-10">
-                <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-stone-texture/30">
-                  <div className="flex items-center gap-2 sm:gap-2.5 text-montfortian-blue">
-                    <Search className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-heritage-gold-strong" />
-                    <span className="font-serif font-bold text-base sm:text-lg text-academic-slate">Institutional Search</span>
-                  </div>
-                  <button
-                    onClick={() => setIsSearchOpen(false)}
-                    className="grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-full border border-stone-texture/30 hover:bg-royal-cream text-academic-slate transition-colors cursor-pointer"
-                    aria-label="Close search"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </div>
-                <div className="mt-3.5 sm:mt-4 relative">
-                  <input
-                    type="text"
-                    autoFocus
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Type to search admissions, streams, campus..."
-                    className="w-full pl-10 sm:pl-11 pr-4 py-3 sm:py-3.5 bg-royal-cream/30 border border-stone-texture/50 rounded-lg text-base sm:text-sm text-academic-slate placeholder-academic-slate/35 focus:outline-none focus:border-heritage-gold/70 focus:ring-2 focus:ring-heritage-gold/10 transition-all font-sans"
-                  />
-                  <Search className="absolute left-3.5 sm:left-4 top-3 sm:top-3.5 h-4 w-4 text-academic-slate/35" />
-                </div>
-                <div className="mt-6">
-                  {searchQuery ? (
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-3 font-sans">
-                        Search Results ({searchResults.length})
-                      </p>
-                      {searchResults.length > 0 ? (
-                        <div className="space-y-3 max-h-[320px] overflow-y-auto pr-1">
-                          {searchResults.map((item) => (
-                            <Link
-                              key={item.title}
-                              href={item.href}
-                              onClick={() => {
-                                setIsSearchOpen(false);
-                                setSearchQuery("");
-                              }}
-                              className="block p-3 rounded-lg border border-stone-texture/15 bg-royal-cream/10 hover:border-heritage-gold/40 hover:bg-royal-cream/25 transition-all group"
-                            >
-                              <div className="flex items-center justify-between">
-                                <span className="font-serif text-sm font-semibold text-academic-slate group-hover:text-montfortian-blue transition-colors">
-                                  {item.title}
-                                </span>
-                                <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-royal-cream text-heritage-gold-strong border border-stone-texture/30 font-sans">
-                                  {item.category}
-                                </span>
-                              </div>
-                            </Link>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="text-center py-8">
-                          <p className="text-xs text-academic-slate/70 font-sans">
-                            No results found for &quot;{searchQuery}&quot;. Try checking spelling.
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-3 font-sans">
-                        Popular Search Targets
-                      </p>
-                      <div className="grid gap-2 sm:grid-cols-2">
-                        {searchableItems.slice(0, 6).map((item) => (
-                          <Link
-                            key={item.title}
-                            href={item.href}
-                            onClick={() => {
-                              setIsSearchOpen(false);
-                            }}
-                            className="flex items-center justify-between p-3 rounded-lg border border-stone-texture/25 bg-white hover:border-heritage-gold/40 hover:bg-royal-cream/15 transition-all group"
-                          >
-                            <div className="flex flex-col">
-                              <span className="font-serif text-xs font-semibold text-academic-slate group-hover:text-montfortian-blue transition-colors">
-                                {item.title}
-                              </span>
-                              <span className="text-[8px] font-bold uppercase tracking-wider text-academic-slate/35 mt-0.5 font-sans">
-                                {item.category}
-                              </span>
-                            </div>
-                            <ChevronRight className="h-3.5 w-3.5 text-academic-slate/25 group-hover:text-montfortian-blue transition-transform group-hover:translate-x-0.5" />
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <div className="mt-6 pt-3 border-t border-stone-texture/30 flex justify-between items-center text-[9px] text-academic-slate/35 font-sans">
-                  <span>Tip: Press <kbd className="px-1.5 py-0.5 bg-royal-cream border border-stone-texture/60 rounded font-mono font-bold text-[8px] uppercase">ESC</kbd> to close</span>
-                  <span>Press <kbd className="px-1.5 py-0.5 bg-royal-cream border border-stone-texture/60 rounded font-mono font-bold text-[8px] uppercase">Ctrl + K</kbd> to search</span>
-                </div>
-              </div>
             </div>
           </motion.div>
         )}
@@ -724,7 +525,7 @@ const searchableItems = [
   );
 }
 
-/* ─── Mega-Panel Content ──────────────────────────────────────────────── */
+/* ─── Dropdown Panel Content ─────────────────────────────────────────── */
 function MegaPanelContent({ item, onNavigate }: { item: NavMenuItem; onNavigate: () => void }) {
   return (
     <div>
@@ -735,18 +536,6 @@ function MegaPanelContent({ item, onNavigate }: { item: NavMenuItem; onNavigate:
             {item.label}
           </span>
         </div>
-        <Link
-          href={item.href}
-          onClick={onNavigate}
-          role="menuitem"
-          className="premium-focus group inline-flex items-center gap-1 font-sans text-[10px] font-bold uppercase tracking-[0.14em] text-heritage-gold-strong hover:text-montfortian-blue transition-colors duration-200"
-        >
-          Explore Page
-          <ChevronRight
-            className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5"
-            aria-hidden="true"
-          />
-        </Link>
       </div>
       <div className="flex flex-col gap-0.5 p-2">
         {item.children!.map((child) => (
@@ -761,8 +550,9 @@ function MegaLink({ child, onNavigate }: { child: NavSubItem; onNavigate: () => 
   const Icon = child.icon;
   const className =
     "group flex items-center gap-3 rounded-md px-3 py-2 text-left transition-colors duration-200 hover:bg-royal-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-montfortian-blue/40 focus-visible:ring-offset-1 focus-visible:ring-offset-white";
-  const content = (
-    <>
+
+  return (
+    <Link href={child.href} role="menuitem" className={className} onClick={onNavigate}>
       <Icon
         className="h-4 w-4 shrink-0 text-montfortian-blue/60 transition-colors duration-200 group-hover:text-heritage-gold-strong"
         strokeWidth={1.75}
@@ -773,12 +563,6 @@ function MegaLink({ child, onNavigate }: { child: NavSubItem; onNavigate: () => 
           {child.label}
         </span>
       </span>
-    </>
-  );
-
-  return (
-    <Link href={child.href} role="menuitem" className={className} onClick={onNavigate}>
-      {content}
     </Link>
   );
 }

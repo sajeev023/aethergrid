@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 
 import { Programs } from "@/components/sections/programs";
+import { Toppers } from "@/components/sections/toppers";
 
 export const metadata: Metadata = {
   title: "Academics",
   description:
-    "Explore LFJC's intermediate academic streams — MPC, BiPC, MEC, and CEC — designed for engineering, medical, commerce, and humanities career pathways.",
+    "Intermediate streams MPC, BiPC, MEC, and CEC at Little Flower Junior College, with board exam toppers.",
 };
 
 export default function LFJCAcademicsPage() {
-  return <Programs activeInst="lfjc" headingLevel="h1" />;
+  return (
+    <>
+      <Programs activeInst="lfjc" headingLevel="h1" />
+      <Toppers />
+    </>
+  );
 }

@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     template: `%s | ${institution.shortName}`,
   },
   description:
-    "Little Flower Junior College, Uppal, Hyderabad offers M.P.C, Bi.P.C, M.E.C, and C.E.C intermediate programs with Montfortian values and academic discipline.",
+    "Little Flower Junior College, Uppal, Hyderabad. Intermediate streams: MPC, BiPC, MEC, CEC.",
   applicationName: institution.name,
   authors: [{ name: institution.name }],
   // NOTE: No root-level canonical is set here. A root `canonical: "/"` would
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${institution.name} | Knowledge is Truth`,
     description:
-      "Little Flower Junior College, Uppal, Hyderabad — intermediate education grounded in Montfortian values, academic discipline, and character formation since 1974.",
+      "Little Flower Junior College, Uppal, Hyderabad — intermediate education since 1974.",
     url: siteUrl,
     siteName: institution.name,
     locale: "en_IN",
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${institution.name} | Knowledge is Truth`,
     description:
-      "Little Flower Junior College, Uppal, Hyderabad — intermediate education grounded in Montfortian values, academic discipline, and character formation since 1974.",
+      "Little Flower Junior College, Uppal, Hyderabad — intermediate education since 1974.",
     images: ["/images/campus-hero.jpg"],
   },
 };

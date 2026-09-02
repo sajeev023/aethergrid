@@ -1,25 +1,9 @@
 import {
   Atom,
-  BookOpen,
   BriefcaseBusiness,
-  Building2,
-  CheckCircle2,
-  FlaskConical,
   Landmark,
-  LibraryBig,
-  MapPin,
-  Microscope,
-  Network,
-  School,
-  ShieldCheck,
-  Sparkles,
-  UsersRound,
-  Star,
-  Sprout,
-  Trophy
+  Microscope
 } from "lucide-react";
-
-import type { AlumniVideo } from "@/lib/admin/types";
 
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.lfjc.co.in";
 export const CANONICAL_ADDRESS = "Survey No. 6, Uppal - Ramanthapur Road, Uppal, Hyderabad, Telangana 500039";
@@ -60,41 +44,6 @@ export const lfjcData = {
     {
       value: "4",
       label: "Board-recognized Streams"
-    }
-  ],
-  institutionalProof: [
-    {
-      label: "Affiliation",
-      value: "Board of Intermediate Education, Telangana"
-    },
-    {
-      label: "Governance",
-      value: "Brothers of St. Gabriel Educational Society"
-    },
-    {
-      label: "Original Builder",
-      value: "Rev. Bro. James Pannivelil (relocated to Uppal in 1982)"
-    },
-    {
-      label: "Core Patroness",
-      value: "St. Therese of Lisieux - The Little Flower"
-    }
-  ],
-  flagshipLinks: [
-    {
-      title: "MPC & BiPC Streams",
-      description: "Rigorous science learning with elite physics, chemistry, botany, and zoology lab spaces.",
-      href: "/academics"
-    },
-    {
-      title: "MEC & CEC Streams",
-      description: "Quantitative business commerce, accountancy, and economics syllabus paths.",
-      href: "/academics"
-    },
-    {
-      title: "Golden Jubilee Year",
-      description: "Celebrating 50 years (1974-2024) of board exam ranks and character formation.",
-      href: "/about"
     }
   ],
   programs: [
@@ -145,29 +94,6 @@ export const lfjcData = {
         "Business organization practice"
       ],
       icon: Landmark
-    }
-  ],
-  // ─── Alumni Videos ─────────────────────────────────────────────────────────
-  // Empty slot — populate (or wire to the admin DB) to publish the
-  // Alumni Videos section. The `AlumniVideos` component renders nothing
-  // while this array remains empty, so the alumni page stays unchanged
-  // until content is ready.
-  alumniVideos: [] as AlumniVideo[],
-  values: [
-    {
-      title: "Academic Rigor",
-      description: "Disciplined study, comprehensive testing, and deep-rooted intermediate conceptual mastery.",
-      icon: BookOpen
-    },
-    {
-      title: "Moral Integrity",
-      description: "Formation grounded in ethical values, personal integrity, and honesty in all actions.",
-      icon: ShieldCheck
-    },
-    {
-      title: "Social Conscience",
-      description: "An active call to serve the local community with humility and empathy.",
-      icon: UsersRound
     }
   ],
   faculty: [
@@ -637,223 +563,6 @@ export const lfjcData = {
       department: "Former Principals",
       category: "former-principal",
       image: "/images/principals/bro_franky.jpg"
-    },
-    // 13. Retired Faculty / Former Teachers
-    {
-      name: "Dr. Anitha Lincon",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/dr_anitha_lincon.jpg"
-    },
-    {
-      name: "Dr. Riyaz Ul Ansari",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/dr_riyaz_ui_ansari.jpg"
-    },
-    {
-      name: "Dr. T. Rajeswara Reddy",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/dr_t_rajeswara_reddy.jpg"
-    },
-    {
-      name: "Mr. B. Paul Raju",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/mr_b_paul_raju.jpg"
-    },
-    {
-      name: "Mr. Bheeshma Chary",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/mr_bheeshma_chary.jpg"
-    },
-    {
-      name: "Mr. David Joseph",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/mr_david_joseph.jpg"
-    },
-    {
-      name: "Mr. E. V. Subbarao",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/mr_e_v_subbarao.jpg"
-    },
-    {
-      name: "Mr. Jayatheerth Katti",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/mr_jayatheerth_katti.jpg"
-    },
-    {
-      name: "Mr. K. Srinivadev",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/mr_k_srinivadev.jpg"
-    },
-    {
-      name: "Mr. M. Amarnath",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/mr_m_amarnath.jpg"
-    },
-    {
-      name: "Mr. S. Balaiah",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/mr_s_balaiah.jpg"
-    },
-    {
-      name: "Mr. T. D. Babu",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/mr_t_d_baaabu.jpg"
-    },
-    {
-      name: "Mr. A. R. Narasimharao",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/mr_a_r_narasimharao.jpg"
-    },
-    {
-      name: "Mr. K. Jothi Ram",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/mr_k_jothi_ram.jpg"
-    },
-    {
-      name: "Mr. Nagaraja Kumar",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/mr_nagaraja_kumar.jpg"
-    },
-    {
-      name: "Mr. P. Kesavacharaya",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/mr_p_kesavacharaya.jpg"
-    },
-    {
-      name: "Ms. B. M. D. Sakunthala",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/ms_bmd_sakunthala.jpg"
-    },
-    {
-      name: "Ms. Raachel Oommen",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/ms_raachel_oommen.jpg"
-    },
-    {
-      name: "Ms. Saghana Srivastava",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/ms_saghana_srivastava.jpg"
-    },
-    {
-      name: "Ms. Savithri Narayanan",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/ms_savithri_narayanan.jpg"
-    },
-    {
-      name: "Ms. Sudheshna Chattopadhyay",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/ms_sudheshna_chattopadhyay.jpg"
-    },
-    {
-      name: "Ms. J. Meenakshi",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/ms_j_menakshi.jpg"
-    },
-    {
-      name: "Ms. K. Susheela",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/ms_k_susheela.jpg"
-    },
-    {
-      name: "Ms. P. Usha",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/ms_p_usha.jpg"
-    },
-    {
-      name: "Ms. Sabiha Fathima",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/ms_sabiha_fathima.jpg"
-    },
-    {
-      name: "Ms. V. Saraswathi",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/ms_v_saraswathi.jpg"
-    },
-    {
-      name: "Mr. Shaik Lateef",
-      designation: "Faculty (Retired)",
-      department: "Retired Faculty",
-      category: "retired",
-      image: "/images/faculty/retired/shaik_lateef.jpg"
-    }
-  ],
-  gallery: [
-    {
-      title: "Main Academic Block & Quadrangle",
-      caption: "Collegiate architectural facade and landscaped quadrangle on the 8-acre Uppal campus (Est. 1974).",
-      src: "/images/campus-hero.jpg",
-      alt: "Little Flower Junior College main academic campus building in Uppal",
-      className: "md:col-span-2 md:row-span-2"
-    },
-    {
-      title: "Science Demonstration Laboratories",
-      caption: "BIE Telangana-accredited practical laboratories equipped for hands-on Physics, Chemistry, and Botany experiments.",
-      src: "/images/campus-building.jpg",
-      alt: "Science and computer laboratories at Little Flower Junior College"
-    },
-    {
-      title: "Annual Sports & Athletic Arena",
-      caption: "Two-acre sports complex hosting track events, volleyball, basketball tournaments, and inter-college athletics.",
-      src: "/images/sports.jpg",
-      alt: "Athletic grounds and sporting tournaments at LFJC"
-    },
-    {
-      title: "Central Reference Library",
-      caption: "Scholarly reading hall housing over 15,000 reference volumes, competitive exam journals, and digital archives.",
-      src: "/images/library-heritage.jpg",
-      alt: "Central library and scholarly reading room at Little Flower Junior College"
     }
   ],
   admissionsSteps: [
@@ -874,17 +583,6 @@ export const lfjcData = {
       description: "Complete admission dues, attend family orientation, and begin classes."
     }
   ],
-  // ─── Admissions Calendar ───────────────────────────────────────────────────
-  // Dates are placeholders (TBD) — replace with the confirmed BIE / college
-  // schedule for the 2026–27 session before publishing.
-  admissionsCalendar: [
-    { phase: "Issue of Application", date: "To be announced", detail: "Applications open online and at the college office." },
-    { phase: "Last Date to Apply", date: "To be announced", detail: "Closing date for submission of completed inquiry forms." },
-    { phase: "Counseling & Document Verification", date: "To be announced", detail: "Stream counseling and verification of Class X records." },
-    { phase: "First List & Fee Payment", date: "To be announced", detail: "Provisional admission list released; first installment payable." },
-    { phase: "Commencement of Classes", date: "To be announced", detail: "Intermediate I Year classes begin." },
-  ],
-  // ─── Documents Required at Admission ────────────────────────────────────────
   admissionsDocuments: [
     "Class X Board Memorandum of Marks (SSC / CBSE / ICSE) — original + photocopy",
     "Transfer Certificate (TC) from the previous school — original",
@@ -894,129 +592,6 @@ export const lfjcData = {
     "Aadhaar Card photocopy of the student and parent/guardian",
     "Six recent passport-size photographs of the student",
     "Migration Certificate (for students from boards other than BIE Telangana, if applicable)",
-  ],
-  // ─── Admissions FAQ ─────────────────────────────────────────────────────────
-  admissionsFaq: [
-    {
-      q: "Which streams does LFJC offer for intermediate?",
-      a: "Four Board-recognised streams: M.P.C (Maths, Physics, Chemistry), Bi.P.C (Botany, Zoology, Physics, Chemistry), M.E.C (Maths, Economics, Commerce), and C.E.C (Civics, Economics, Commerce)."
-    },
-    {
-      q: "What is the eligibility for admission?",
-      a: "Successful completion of Class X from SSC, CBSE, ICSE, or another recognised board, with the minimum marks/percentage stipulated by the Board of Intermediate Education, Telangana, and a satisfactory conduct and attendance record."
-    },
-    {
-      q: "What intermediate streams does LFJC offer?",
-      a: "LFJC offers four Board of Intermediate Education (BIE) Telangana-recognized streams: M.P.C (Mathematics, Physics, Chemistry), Bi.P.C (Biology, Physics, Chemistry), M.E.C (Mathematics, Economics, Commerce), and C.E.C (Civics, Economics, Commerce)."
-    },
-    {
-      q: "When do admissions open for the 2026-27 academic session?",
-      a: "Admissions will open immediately following the announcement of SSC / Class X board examination results. You can submit an inquiry now to receive early notification."
-    },
-    {
-      q: "Is there an entrance test for admission?",
-      a: "Admissions are primarily based on merit in the Class X board examinations and an informal counseling interaction with the student and parents."
-    },
-    {
-      q: "What competitive exam coaching is provided?",
-      a: "We offer integrated foundation and advanced coaching for IIT-JEE (Mains & Advanced), NEET, CUET, and CA Foundation alongside the prescribed BIE Telangana syllabus."
-    },
-    {
-      q: "Is the college co-educational and inclusive?",
-      a: "Yes. LFJC is a co-educational, minority (Catholic, Montfortian) institution governed by the Brothers of St. Gabriel Educational Society, admitting students without discrimination on grounds of religion, caste, or gender, subject to its minority status."
-    },
-    {
-      q: "Does LFJC have an anti-ragging policy?",
-      a: "Yes. LFJC enforces a strict zero-tolerance anti-ragging policy with a dedicated committee and helpline, in compliance with UGC regulations. See our Anti-Ragging page for details and reporting contacts."
-    },
-    {
-      q: "How will I know my application status?",
-      a: "After you submit the admissions inquiry, our administrative office contacts you with further instructions. You may also call the office or visit in person for an update."
-    },
-  ],
-  resources: [
-    {
-      title: "Parent Login",
-      description: "Review term records, fee payments, and board notices.",
-      icon: UsersRound,
-      href: "/parent-login"
-    },
-    {
-      title: "Alumni Registration",
-      description: "Join the LFJC Golden Jubilee network and connect with seniors.",
-      icon: Network,
-      href: "/alumni"
-    }
-  ],
-  testimonials: [] as { quote: string; person: string; role: string }[],
-  alumniNotes: [
-    "LFJC alumni contribute across medicine, engineering, civil administration, cinema, politics, and technology.",
-    "The Golden Jubilee alumni network connects past students with the institution's future initiatives."
-  ],
-  contactCards: [
-    {
-      title: "College Campus Address",
-      detail: "Survey No. 6, Uppal - Ramanthapur Road, Uppal, Hyderabad, Telangana 500039",
-      icon: MapPin
-    },
-    {
-      title: "Administrative Desk",
-      detail: "+91 7673960151",
-      icon: School
-    },
-    {
-      title: "College Email",
-      detail: "info@lfjc.co.in",
-      icon: Sparkles
-    }
-  ],
-  quickFacts: [
-    {
-      label: "Board Affiliation",
-      value: "Board of Intermediate Education, Telangana"
-    },
-    {
-      label: "Academic Patron",
-      value: "St. Therese of Lisieux"
-    },
-    {
-      label: "History Milestone",
-      value: "Golden Jubilee (1974 - 2024)"
-    }
-  ],
-  timeline: [
-    {
-      year: "1974",
-      title: "LFJC Inception",
-      description: "Established as an upgrade to the historic high school of Abids with 200 initial students."
-    },
-    {
-      year: "1982",
-      title: "Move to Uppal",
-      description: "Relocates to the expansive Uppal campus under the direction of Rev. Bro. James Pannivelil to build permanent laboratories."
-    },
-    {
-      year: "2024",
-      title: "Golden Jubilee Celebration",
-      description: "Marks 50 years of shaping outstanding board ranks and professional leaders in Hyderabad."
-    }
-  ],
-  crestSymbols: [
-    {
-      title: "The Star",
-      description: "Represents the guide of intermediate knowledge and the aspiration to reach high careers.",
-      icon: Star
-    },
-    {
-      title: "The Flower",
-      description: "Represents St. Therese (the Little Flower), representing moral beauty and virtuous growth.",
-      icon: Sprout
-    },
-    {
-      title: "The Book & Lamp",
-      description: "Truth and learning dispelling intermediate ignorance.",
-      icon: BookOpen
-    }
   ]
 };
 
@@ -1272,27 +847,7 @@ export const alumniData: Alumnus[] = [
 ];
 
 export const stats = lfjcData.stats;
-export const institutionalProof = lfjcData.institutionalProof;
-export const flagshipLinks = lfjcData.flagshipLinks;
 export const programs = lfjcData.programs;
-export const values = lfjcData.values;
 export const faculty = lfjcData.faculty;
-export const gallery = lfjcData.gallery;
 export const admissionsSteps = lfjcData.admissionsSteps;
-export const admissionsCalendar = lfjcData.admissionsCalendar;
 export const admissionsDocuments = lfjcData.admissionsDocuments;
-export const admissionsFaq = lfjcData.admissionsFaq;
-export const resources = lfjcData.resources;
-export const testimonials = lfjcData.testimonials;
-export const alumniNotes = lfjcData.alumniNotes;
-export const contactCards = lfjcData.contactCards;
-export const quickFacts = lfjcData.quickFacts;
-export const alumniVideos = lfjcData.alumniVideos;
-
-export const iconSet = {
-  CheckCircle2,
-  Building2,
-  FlaskConical,
-  LibraryBig,
-  Trophy
-};

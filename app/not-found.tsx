@@ -26,8 +26,7 @@ export default function NotFound() {
         <span className="gold-rule gold-rule-center mb-6" />
 
         <p className="text-sm md:text-base leading-7 text-academic-slate/70 font-sans max-w-md mx-auto">
-          The page you are looking for has moved, been removed, or does not exist.
-          Let&apos;s get you back to the Little Flower Junior College website.
+          The page you are looking for does not exist.
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
@@ -46,10 +45,6 @@ export default function NotFound() {
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
-
-        <p className="mt-10 text-[11px] font-bold uppercase tracking-[0.16em] text-academic-slate/40 font-sans">
-          Error Code 404 — Little Flower Junior College
-        </p>
       </div>
     </div>
   );

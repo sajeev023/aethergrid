@@ -5,7 +5,7 @@ import { Admissions } from "@/components/sections/admissions";
 export const metadata: Metadata = {
   title: "Admissions",
   description:
-    "Apply to Little Flower Junior College for the 2026-27 academic year. Explore eligibility, admission process, and submit your inquiry for MPC, BiPC, MEC, or CEC streams.",
+    "Eligibility, process, documents, and inquiry form for LFJC admissions 2026–27 (MPC, BiPC, MEC, CEC).",
 };
 
 export default function LFJCAdmissionsPage() {

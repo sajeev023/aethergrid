@@ -5,7 +5,7 @@ import { About } from "@/components/sections/about";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Learn about Little Flower Junior College's 50-year legacy of academic excellence, Montfortian values, and character formation in Uppal, Hyderabad.",
+    "History, leadership, and values of Little Flower Junior College, Uppal, Hyderabad.",
 };
 
 export default function LFJCAboutPage() {

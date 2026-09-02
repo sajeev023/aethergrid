@@ -1,9 +1,5 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-
 import { Reveal } from "@/components/motion/reveal";
 import { Section } from "@/components/section";
-import { Button } from "@/components/ui/button";
 import { getInstitutionData } from "@/lib/site-data";
 
 interface ProgramsProps {
@@ -23,9 +19,6 @@ export function Programs({ activeInst = "lfjc", headingLevel = "h2" }: ProgramsP
           <Heading className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-academic-slate">
             Four Intermediate Streams
           </Heading>
-          <p className="mt-3 text-xs sm:text-sm leading-relaxed text-academic-slate/75 font-sans">
-            Board-recognised two-year programmes.
-          </p>
         </Reveal>
       </div>
 
@@ -46,15 +39,6 @@ export function Programs({ activeInst = "lfjc", headingLevel = "h2" }: ProgramsP
           );
         })}
       </div>
-
-      <Reveal className="mt-8 sm:mt-10 flex flex-wrap justify-center gap-3">
-        <Button asChild>
-          <Link href="/admissions" className="inline-flex items-center gap-2">
-            Begin Admissions Inquiry
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
-        </Button>
-      </Reveal>
     </Section>
   );
 }

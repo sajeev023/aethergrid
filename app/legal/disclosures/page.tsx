@@ -50,9 +50,7 @@ export default function DisclosuresPage() {
           heading: "Fee structure",
           body: (
             <p>
-              The annual fee structure for each stream is published on the{" "}
-              <Link href="/admissions#fee-structure" className="font-semibold text-montfortian-blue hover:underline">Admissions</Link>{" "}
-              page and is also available at the college office. Fees are charged in accordance with norms prescribed by the
+              The annual fee structure for each stream is available at the college office. Fees are charged in accordance with norms prescribed by the
               Board of Intermediate Education, Telangana. Merit concessions and scholarships are offered as per the
               college&apos;s scholarship policy.
             </p>

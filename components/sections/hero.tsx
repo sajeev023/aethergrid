@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { ArrowRight, CalendarDays, ShieldCheck, Play, Pause } from "lucide-react";
+import { ArrowRight, Play, Pause } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
@@ -14,9 +14,6 @@ import { cn } from "@/lib/utils";
 
 interface HeroProps {
   activeInst?: "root" | "lfs" | "lfjc" | "lfdc";
-  /** "lean" = homepage (headline + CTAs + stat strip only).
-   *  "full"  = multi-institution landing (adds admissions sidebar + proof/flagship band). */
-  variant?: "lean" | "full";
 }
 
 interface HeroSlide {
@@ -124,18 +121,8 @@ const itemVariants = {
   },
 };
 
-const sidebarVariants = {
-  hidden: { opacity: 0, x: 20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.6, delay: 0.25, ease: MOTION_EASE },
-  },
-};
-
-export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
+export function Hero({ activeInst = "lfjc" }: HeroProps) {
   const data = getInstitutionData(activeInst);
-  const isLean = variant === "lean";
   const prefersReducedMotion = useReducedMotion();
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -160,65 +147,14 @@ export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
     return () => clearInterval(timer);
   }, [prefersReducedMotion, isAutoPlaying]);
 
-  const renderHeadline = () => {
-    return (
-      <>
-        Little Flower{" "}
-        <span className="text-heritage-gold italic font-editorial font-normal">
-          Junior College
-        </span>
-      </>
-    );
-  };
-
-  const renderAdmissionsCard = (isMobile = false) => (
-    <motion.aside
-      variants={sidebarVariants}
-      initial={prefersReducedMotion ? "visible" : "hidden"}
-      animate="visible"
-      className={cn(
-        "border border-white/15 bg-deep-navy/95 p-3.5 sm:p-5 lg:p-6 shadow-2xl backdrop-blur-xl rounded-xl w-full",
-        isMobile ? "max-w-xl mx-auto" : "lg:max-w-[340px]"
-      )}
-    >
-      <div className="flex items-center gap-2.5 sm:gap-3 border-b border-white/10 pb-2 sm:pb-3.5">
-        <span className="grid h-8 w-8 sm:h-10 sm:w-10 place-items-center bg-heritage-gold/15 text-heritage-gold-bright ring-1 ring-heritage-gold/25 rounded-md shrink-0">
-          <CalendarDays className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
-        </span>
-        <div>
-          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-heritage-gold-bright font-sans">
-            Admissions Desk
-          </p>
-          <p className="mt-0.5 font-serif text-xs sm:text-sm lg:text-base font-bold text-white leading-tight">
-            {data.admissionsLabel}
-          </p>
-        </div>
-      </div>
-      <div className="py-2 sm:py-3.5 text-xs sm:text-sm leading-relaxed text-royal-cream/80 font-sans">
-        <p className="flex gap-2 text-royal-cream text-[11px] sm:text-xs">
-          <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-heritage-gold-bright" />
-          MPC, BiPC, MEC, and CEC streams.
-        </p>
-      </div>
-      <a
-        href="/admissions"
-        className="premium-focus inline-flex w-full items-center justify-between border border-white/20 px-3 py-2 sm:px-4 sm:py-2.5 min-h-[40px] sm:min-h-[44px] text-xs font-bold uppercase tracking-wider text-royal-cream hover:bg-white hover:text-deep-navy transition-colors duration-300 rounded-sm font-sans"
-      >
-        Begin Admissions Inquiry
-        <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-      </a>
-    </motion.aside>
-  );
-
   return (
     <div id="home-wrapper" className="relative w-full">
-      {/* ─── 1. Deliberate Hero Banner (Contains Campus Photo ONLY) ─────── */}
       <section
         id="home"
         aria-label="Little Flower Junior College Hero"
         className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[76svh] flex flex-col justify-center overflow-hidden bg-deep-navy text-white"
       >
-        {/* Vivid Cinematic Background Image Carousel (Hero only) */}
+        {/* Cinematic Background Image Carousel */}
         <div className="absolute inset-0 z-0 overflow-hidden bg-deep-navy">
           {HERO_SLIDES.map((slide, index) => {
             if (!loadedIndices.includes(index)) return null;
@@ -255,9 +191,8 @@ export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
             );
           })}
 
-          {/* Directional Vignette: Strong on mobile to ensure 100% text contrast over photography */}
+          {/* Directional Vignette */}
           <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/90 via-deep-navy/75 to-deep-navy/95 lg:bg-gradient-to-r lg:from-deep-navy/90 lg:via-deep-navy/65 lg:via-50% lg:to-deep-navy/15" />
-          {/* Subtle top & bottom edge gradients for smooth blending into nav and lower sections */}
           <div className="absolute inset-x-0 top-0 h-12 sm:h-20 bg-gradient-to-b from-deep-navy/80 via-deep-navy/30 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 h-12 sm:h-24 bg-gradient-to-t from-deep-navy/95 via-deep-navy/40 to-transparent" />
         </div>
@@ -284,8 +219,8 @@ export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
           </button>
         </div>
 
-        {/* Main Grid Content */}
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 md:px-8 w-full py-5 sm:py-8 md:py-12 lg:py-16 lg:grid lg:grid-cols-[1fr_340px] lg:items-center lg:gap-10 flex-grow flex flex-col justify-center">
+        {/* Main Content */}
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 md:px-8 w-full py-5 sm:py-8 md:py-12 lg:py-16 flex-grow flex flex-col justify-center">
           <motion.div
             variants={containerVariants}
             initial={prefersReducedMotion ? false : "hidden"}
@@ -302,14 +237,17 @@ export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
               variants={itemVariants}
               className="font-serif text-[1.65rem] sm:text-4xl md:text-5.5xl lg:text-6.5xl font-bold leading-[1.12] sm:leading-[1.06] text-white tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.65)]"
             >
-              {renderHeadline()}
+              Little Flower{" "}
+              <span className="text-heritage-gold italic font-editorial font-normal">
+                Junior College
+              </span>
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
               className="mt-2 sm:mt-4 max-w-xl text-xs sm:text-sm md:text-base leading-relaxed text-royal-cream font-sans font-medium drop-shadow-[0_1px_8px_rgba(0,0,0,0.55)]"
             >
-              Knowledge is Truth. Board-recognised intermediate education in Uppal, Hyderabad.
+              Knowledge is Truth. Board-recognised intermediate education in MPC, BiPC, MEC, and CEC.
             </motion.p>
 
             <motion.div
@@ -330,27 +268,10 @@ export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
               </Button>
             </motion.div>
           </motion.div>
-
-          {/* Desktop Admissions Sidebar (visible only on lg screens) */}
-          {!isLean && (
-            <div className="hidden lg:block">
-              {renderAdmissionsCard(false)}
-            </div>
-          )}
         </div>
       </section>
 
-      {/* ─── 2. Dedicated Mobile Admissions Section (Full variant, mobile only) ── */}
-      {!isLean && (
-        <section
-          aria-label="Admissions Desk"
-          className="lg:hidden bg-deep-navy border-t border-b border-white/10 px-4 py-4 sm:px-6 sm:py-6"
-        >
-          {renderAdmissionsCard(true)}
-        </section>
-      )}
-
-      {/* ─── 3. Dedicated Statistics Section ───────────────────────────── */}
+      {/* Statistics Strip */}
       <section
         aria-label="Institutional Statistics"
         className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-5 lg:py-0 lg:-mt-7"
@@ -375,42 +296,6 @@ export function Hero({ activeInst = "lfjc", variant = "full" }: HeroProps) {
           ))}
         </div>
       </section>
-
-      {/* ─── 4. Institutional Proof / Flagship Links Band ───────────────── */}
-      {!isLean && (
-        <section
-          aria-label="Institutional Highlights and Quick Links"
-          className="border-t border-white/10 bg-deep-navy/95 pt-4 pb-4 sm:pt-6 sm:pb-6 lg:pt-10 lg:pb-8 mt-3 sm:mt-6 lg:mt-8"
-        >
-          <div className="mx-auto grid max-w-7xl gap-3 sm:gap-6 lg:gap-8 px-4 sm:px-6 md:px-8 lg:grid-cols-[0.95fr_1.05fr]">
-            <div className="grid gap-y-2 sm:gap-y-3 gap-x-3 sm:gap-x-6 text-xs sm:text-sm text-white/80 grid-cols-1 sm:grid-cols-2 font-sans leading-relaxed">
-              {data.institutionalProof.map((fact) => (
-                <div key={fact.label}>
-                  <span className="mb-0.5 block font-bold text-heritage-gold-bright tracking-wider uppercase text-[10px] sm:text-xs">{fact.label}</span>
-                  <span className="text-royal-cream/90 text-xs sm:text-sm">{fact.value}</span>
-                </div>
-              ))}
-            </div>
-            <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-3">
-              {data.flagshipLinks.map((link) => (
-                <a
-                  key={link.title}
-                  href={link.href}
-                  className="premium-focus group border border-white/15 bg-white/[0.05] p-3 sm:p-4 transition-colors hover:bg-white hover:text-deep-navy rounded-lg"
-                >
-                  <span className="flex items-center justify-between gap-2 sm:gap-3 font-serif text-xs sm:text-sm font-semibold text-white group-hover:text-montfortian-blue">
-                    {link.title}
-                    <ArrowRight className="h-3.5 w-3.5 shrink-0 text-heritage-gold group-hover:text-montfortian-blue transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                  </span>
-                  <span className="mt-1 block text-[11px] sm:text-xs leading-4 sm:leading-5 text-white/70 group-hover:text-academic-slate/75 font-sans">
-                    {link.description}
-                  </span>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
     </div>
   );
 }

@@ -31,8 +31,7 @@ export default function Error({
         <span className="gold-rule gold-rule-center mt-5 mb-6" />
 
         <p className="text-sm md:text-base leading-7 text-academic-slate/70 font-sans max-w-md mx-auto">
-          We encountered an unexpected issue. Please try again, or return to
-          the homepage. If the problem persists, contact the college office.
+          Something went wrong. Please try again.
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">

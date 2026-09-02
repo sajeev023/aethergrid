@@ -1,17 +1,10 @@
 import {
   Award,
-  BookOpen,
   Building2,
-  Clock,
   Compass,
-  HeartHandshake,
   History,
   Landmark,
-  MapPin,
-  Phone,
-  ShieldCheck,
   Sparkles,
-  Trophy,
   Users,
   type LucideIcon,
 } from "lucide-react";
@@ -44,7 +37,6 @@ export const navMenu: NavMenuItem[] = [
       { label: "Leadership", href: "/faculty#leadership", icon: Award },
       { label: "Departments", href: "/faculty#departments", icon: Users },
       { label: "Former Principals", href: "/faculty#principals", icon: History },
-      { label: "Retired Faculty", href: "/faculty#retired", icon: Clock },
     ],
   },
   {
