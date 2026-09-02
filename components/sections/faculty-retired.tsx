@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, User } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { getInstitutionData } from "@/lib/site-data";
 
 interface FacultyRetiredProps {
@@ -35,22 +35,15 @@ function RetiredFacultyCard({ member, index }: { member: FacultySeedMember; inde
   return (
     <Reveal key={`${member.name}-${index}`} delay={index * 0.02} className="h-full">
       <Card className="group h-full flex flex-col overflow-hidden bg-white transition-all duration-300 ease-out rounded-lg border-2 border-stone-texture/70 hover:border-heritage-gold/60 shadow-xs hover:shadow-panel-hover">
-        <div className="relative aspect-[600/720] w-full overflow-hidden bg-royal-cream/30 border-b border-stone-texture/40">
+        <div className="relative aspect-[600/720] w-full overflow-hidden bg-royal-cream/30">
           {member.image ? (
-            <>
-              <Image
-                src={member.image}
-                alt={member.name}
-                fill
-                sizes="(min-width: 1280px) 15vw, (min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
-                className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-              />
-              <div className="absolute top-2 left-2 z-10">
-                <span className="inline-flex items-center gap-1 bg-deep-navy/85 backdrop-blur-xs text-heritage-gold-bright border border-heritage-gold/30 px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-sans font-bold uppercase tracking-wider shadow-sm">
-                  Restored Archival Portrait
-                </span>
-              </div>
-            </>
+            <Image
+              src={member.image}
+              alt={member.name}
+              fill
+              sizes="(min-width: 1280px) 15vw, (min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+              className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+            />
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-2 sm:p-3 relative text-center">
               <div className="absolute inset-0 opacity-[0.03] stone-pattern pointer-events-none" />
@@ -64,20 +57,6 @@ function RetiredFacultyCard({ member, index }: { member: FacultySeedMember; inde
             </div>
           )}
         </div>
-        <CardContent className="flex-1 flex flex-col justify-between p-2.5 sm:p-3 bg-white">
-          <div>
-            <span className="text-[10px] sm:text-[11px] font-sans font-bold uppercase tracking-wider text-heritage-gold-strong block">
-              Faculty Emeritus
-            </span>
-            <h3 className="font-serif text-xs sm:text-sm font-bold text-academic-slate group-hover:text-montfortian-blue transition-colors mt-0.5 line-clamp-2">
-              {member.name}
-            </h3>
-          </div>
-          <div className="mt-2 pt-1.5 border-t border-stone-texture/30 flex items-center justify-between text-[9px] text-academic-slate/60 font-sans">
-            <span>LFJC Heritage Archive</span>
-            <span className="text-montfortian-blue font-semibold">Verified</span>
-          </div>
-        </CardContent>
       </Card>
     </Reveal>
   );
