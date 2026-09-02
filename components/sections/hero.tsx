@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { ArrowRight, Play, Pause } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,7 @@ interface HeroSlide {
   isPoster?: boolean;
 }
 
+// Exactly 4 Hero Slides: College Photo, College Top Angle, 1st Year Toppers 2026, 2nd Year Toppers 2026
 const HERO_SLIDES: HeroSlide[] = [
   {
     id: "hero-1-building",
@@ -35,7 +36,7 @@ const HERO_SLIDES: HeroSlide[] = [
     alt: "Little Flower Junior College Main Campus Building & Architectural Facade",
     objectPosition: "center 35%",
     mobileObjectPosition: "center 20%",
-    title: "Campus Architecture & Main Building",
+    title: "College Photo",
   },
   {
     id: "hero-2-campus-quad",
@@ -44,64 +45,10 @@ const HERO_SLIDES: HeroSlide[] = [
     alt: "Spacious 8-Acre Uppal Heritage Campus Grounds & Quadrangle Lawn",
     objectPosition: "center center",
     mobileObjectPosition: "center 35%",
-    title: "Spacious 8-Acre Green Campus & Quadrangle",
+    title: "College Top-Angle Photo",
   },
   {
-    id: "hero-3-academic-lab",
-    src: "/images/hero/hero-3-academic-lab.webp",
-    fallbackSrc: "/images/hero/hero-3-academic-lab.jpg",
-    alt: "Hands-on Science & Technological Laboratory Training at LFJC",
-    objectPosition: "center 40%",
-    mobileObjectPosition: "center 30%",
-    title: "Advanced Science & Technology Laboratories",
-  },
-  {
-    id: "hero-4-central-library",
-    src: "/images/hero/hero-4-central-library.webp",
-    fallbackSrc: "/images/hero/hero-4-central-library.jpg",
-    alt: "LFJC Central Library & Scholarly Reading Hall",
-    objectPosition: "center 35%",
-    mobileObjectPosition: "center 25%",
-    title: "Central Library & Research Reading Hall",
-  },
-  {
-    id: "hero-5-national-celebration",
-    src: "/images/hero/hero-5-national-celebration.webp",
-    fallbackSrc: "/images/hero/hero-5-national-celebration.jpg",
-    alt: "Independence Day Flag Hoisting Ceremony & Institutional Gathering",
-    objectPosition: "center center",
-    mobileObjectPosition: "center 30%",
-    title: "Flag Hoisting Ceremony & Campus Gathering",
-  },
-  {
-    id: "hero-6-auditorium",
-    src: "/images/hero/hero-6-auditorium.webp",
-    fallbackSrc: "/images/hero/hero-6-auditorium.jpg",
-    alt: "LFJC College Auditorium Assembly & Cultural Events",
-    objectPosition: "center 30%",
-    mobileObjectPosition: "center 30%",
-    title: "College Auditorium & Student Assembly",
-  },
-  {
-    id: "hero-7-sports-day",
-    src: "/images/hero/hero-7-sports-day.webp",
-    fallbackSrc: "/images/hero/hero-7-sports-day.jpg",
-    alt: "Athletic Track & Annual Sports Day Competition at LFJC Grounds",
-    objectPosition: "center center",
-    mobileObjectPosition: "center 35%",
-    title: "Athletic Track & Campus Sports Day",
-  },
-  {
-    id: "hero-8-montfortian-heritage",
-    src: "/images/hero/hero-8-montfortian-heritage.webp",
-    fallbackSrc: "/images/hero/hero-8-montfortian-heritage.jpg",
-    alt: "Montfortian Heritage Statue & Five-Decade Educational Legacy",
-    objectPosition: "center 30%",
-    mobileObjectPosition: "center 25%",
-    title: "Montfortian Heritage & 50-Year Legacy",
-  },
-  {
-    id: "hero-9-toppers-1st-year-2026",
+    id: "hero-toppers-1st-year-2026",
     src: "/images/hero/1st-year-toppers-2026.avif",
     fallbackSrc: "/images/hero/1st-year-toppers-2026.avif",
     alt: "Little Flower Junior College 1st Year Toppers 2026 Official State Board Merit List",
@@ -111,7 +58,7 @@ const HERO_SLIDES: HeroSlide[] = [
     isPoster: true,
   },
   {
-    id: "hero-10-toppers-2nd-year-2026",
+    id: "hero-toppers-2nd-year-2026",
     src: "/images/hero/2nd-year-toppers-2026.avif",
     fallbackSrc: "/images/hero/2nd-year-toppers-2026.avif",
     alt: "Little Flower Junior College 2nd Year Toppers 2026 Official State Board Merit List",
@@ -146,29 +93,17 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
   const data = getInstitutionData(activeInst);
   const prefersReducedMotion = useReducedMotion();
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [loadedIndices, setLoadedIndices] = useState<number[]>([0, 1]);
 
   const isPosterActive = Boolean(HERO_SLIDES[activeSlideIndex]?.isPoster);
 
+  // Automatic rotation approximately every 4 seconds
   useEffect(() => {
-    if (prefersReducedMotion || !isAutoPlaying) return;
+    if (prefersReducedMotion) return;
     const timer = setInterval(() => {
-      setActiveSlideIndex((prev) => {
-        const next = (prev + 1) % HERO_SLIDES.length;
-        const upcoming = (next + 1) % HERO_SLIDES.length;
-        setLoadedIndices((current) => {
-          if (current.includes(next) && current.includes(upcoming)) return current;
-          const nextSet = new Set(current);
-          nextSet.add(next);
-          nextSet.add(upcoming);
-          return Array.from(nextSet);
-        });
-        return next;
-      });
+      setActiveSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
     }, 4000);
     return () => clearInterval(timer);
-  }, [prefersReducedMotion, isAutoPlaying]);
+  }, [prefersReducedMotion]);
 
   return (
     <div id="home-wrapper" className="relative w-full">
@@ -180,7 +115,6 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
         {/* Cinematic Background Image Carousel */}
         <div className="absolute inset-0 z-0 overflow-hidden bg-deep-navy">
           {HERO_SLIDES.map((slide, index) => {
-            if (!loadedIndices.includes(index)) return null;
             const isActive = index === activeSlideIndex;
             return (
               <motion.div
@@ -198,26 +132,47 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
                 }}
                 className="absolute inset-0 w-full h-full pointer-events-none"
               >
-                <Image
-                  src={slide.src}
-                  alt={slide.alt}
-                  fill
-                  priority={index === 0}
-                  sizes="(min-width: 1024px) 100vw, 100vw"
-                  className={cn(
-                    slide.isPoster
-                      ? "object-contain p-2 sm:p-4 md:p-6 drop-shadow-2xl"
-                      : "object-cover [object-position:var(--mobile-pos)] lg:[object-position:var(--desktop-pos)]"
-                  )}
-                  style={
-                    slide.isPoster
-                      ? undefined
-                      : {
-                          ["--mobile-pos" as string]: slide.mobileObjectPosition || slide.objectPosition,
-                          ["--desktop-pos" as string]: slide.objectPosition,
-                        }
-                  }
-                />
+                {slide.isPoster ? (
+                  <div className="absolute inset-0 w-full h-full flex items-center justify-center p-3 sm:p-5 md:p-7 lg:p-8">
+                    {/* Soft ambient lighting for depth and focus */}
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background:
+                          "radial-gradient(ellipse 70% 65% at 50% 50%, rgba(197, 160, 89, 0.12) 0%, rgba(15, 76, 129, 0.18) 40%, rgba(16, 31, 44, 0.85) 80%, rgba(16, 31, 44, 0.98) 100%)",
+                      }}
+                    />
+
+                    {/* Polished Architectural Achievement Frame */}
+                    <div className="relative z-10 w-full max-w-[92vw] sm:max-w-[85vw] lg:max-w-5xl max-h-[52vh] sm:max-h-[60vh] lg:max-h-[66vh] aspect-[16/10] flex items-center justify-center">
+                      <div className="relative w-full h-full p-1.5 sm:p-2 md:p-2.5 rounded-xl sm:rounded-2xl bg-gradient-to-b from-heritage-gold/45 via-white/20 to-heritage-gold/30 shadow-[0_24px_60px_-10px_rgba(0,0,0,0.85),0_0_35px_rgba(197,160,89,0.2)]">
+                        <div className="relative w-full h-full rounded-lg sm:rounded-xl overflow-hidden bg-deep-navy border border-white/15 p-1 sm:p-1.5">
+                          <Image
+                            src={slide.src}
+                            alt={slide.alt}
+                            fill
+                            sizes="(min-width: 1024px) 80vw, 95vw"
+                            className="object-contain"
+                            priority
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <Image
+                    src={slide.src}
+                    alt={slide.alt}
+                    fill
+                    priority={index === 0}
+                    sizes="(min-width: 1024px) 100vw, 100vw"
+                    className="object-cover [object-position:var(--mobile-pos)] lg:[object-position:var(--desktop-pos)]"
+                    style={{
+                      ["--mobile-pos" as string]: slide.mobileObjectPosition || slide.objectPosition,
+                      ["--desktop-pos" as string]: slide.objectPosition,
+                    }}
+                  />
+                )}
               </motion.div>
             );
           })}
@@ -241,49 +196,6 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
               isPosterActive ? "opacity-0 pointer-events-none" : "opacity-100"
             )}
           />
-        </div>
-
-        {/* Carousel Play/Pause Accessibility & Slide Selection Control */}
-        <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 flex items-center gap-2">
-          {/* Subtle slide indicators */}
-          <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-deep-navy/80 border border-white/20 backdrop-blur-xs shadow-sm">
-            {HERO_SLIDES.map((s, idx) => (
-              <button
-                key={s.id}
-                type="button"
-                onClick={() => {
-                  setActiveSlideIndex(idx);
-                  setLoadedIndices((current) => Array.from(new Set([...current, idx, (idx + 1) % HERO_SLIDES.length])));
-                }}
-                aria-label={`Go to slide ${idx + 1}: ${s.title}`}
-                className={cn(
-                  "h-1.5 rounded-full transition-all cursor-pointer",
-                  idx === activeSlideIndex
-                    ? "w-4 bg-heritage-gold-bright"
-                    : "w-1.5 bg-white/40 hover:bg-white/80"
-                )}
-              />
-            ))}
-          </div>
-
-          <button
-            type="button"
-            onClick={() => setIsAutoPlaying((prev) => !prev)}
-            aria-label={isAutoPlaying ? "Pause background slideshow" : "Play background slideshow"}
-            className="flex items-center justify-center gap-1.5 px-3 py-2 min-h-[44px] min-w-[44px] rounded-full bg-deep-navy/80 hover:bg-deep-navy border border-white/20 text-white/90 hover:text-white text-xs font-sans font-medium backdrop-blur-xs transition-all cursor-pointer shadow-sm"
-          >
-            {isAutoPlaying ? (
-              <>
-                <Pause className="h-3.5 w-3.5 text-heritage-gold-bright" />
-                <span className="hidden sm:inline">Pause</span>
-              </>
-            ) : (
-              <>
-                <Play className="h-3.5 w-3.5 text-heritage-gold-bright" />
-                <span className="hidden sm:inline">Play</span>
-              </>
-            )}
-          </button>
         </div>
 
         {/* Main Content (fades out on poster slides so student photos and poster text remain 100% visible) */}
