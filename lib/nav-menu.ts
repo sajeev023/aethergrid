@@ -43,9 +43,9 @@ export const navMenu: NavMenuItem[] = [
     label: "Campus Life",
     href: "/campus",
     children: [
-      { label: "Campus & Labs", href: "/campus#campus", icon: Building2 },
       { label: "Silver Jubilee", href: "/campus#silver-jubilee", icon: Landmark },
       { label: "Golden Jubilee", href: "/campus#golden-jubilee", icon: Sparkles },
+      { label: "Campus & Labs", href: "/campus#campus", icon: Building2 },
       { label: "Events & Sports", href: "/campus#events", icon: Compass },
     ],
   },

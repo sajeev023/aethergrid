@@ -2,198 +2,179 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { X, ZoomIn } from "lucide-react";
+import { ZoomIn, X, Award, Sparkles } from "lucide-react";
 
 import { Section } from "@/components/section";
 import { Reveal } from "@/components/motion/reveal";
-import { firstYearToppers, firstYearSubjectStats } from "@/lib/toppers-data";
+
+interface TopperPoster {
+  id: string;
+  year: string;
+  title: string;
+  subtitle: string;
+  badge: string;
+  src: string;
+  width: number;
+  height: number;
+}
+
+const TOPPER_POSTERS: TopperPoster[] = [
+  {
+    id: "first-year",
+    year: "2026",
+    title: "1st Year Toppers — 2026",
+    subtitle: "Official Telangana State Intermediate Board 1st Year Merit List & Centum Distinction Roster",
+    badge: "TSBIE 1st Year Merit",
+    src: "/images/toppers/1st-year-toppers-2026.jpg",
+    width: 2882,
+    height: 1802,
+  },
+  {
+    id: "second-year",
+    year: "2026",
+    title: "2nd Year Toppers — 2026",
+    subtitle: "Official Telangana State Intermediate Board 2nd Year Merit List & State Ranks",
+    badge: "TSBIE 2nd Year Merit",
+    src: "/images/toppers/2nd-year-toppers-2026.jpg",
+    width: 1024,
+    height: 640,
+  },
+];
 
 export function Toppers() {
-  const [activePoster, setActivePoster] = useState<string | null>(null);
-  const [selectedGroup, setSelectedGroup] = useState<string>("All");
-
-  const filteredToppers =
-    selectedGroup === "All"
-      ? firstYearToppers
-      : firstYearToppers.filter((t) => t.group === selectedGroup);
+  const [activePoster, setActivePoster] = useState<TopperPoster | null>(null);
 
   return (
     <div id="toppers" className="bg-white">
-      {/* ─── OFFICIAL RESULTS POSTER SHOWCASE ────────────────────────── */}
-      <Section variant="default" className="bg-royal-cream/20 border-t border-stone-texture/30 py-12 sm:py-16">
-        <div className="mx-auto max-w-5xl text-center mb-8">
+      {/* ─── SECTION HEADER ─────────────────────────────────────────── */}
+      <Section variant="default" className="bg-royal-cream/20 border-t border-stone-texture/30 py-10 sm:py-14">
+        <div className="mx-auto max-w-4xl text-center mb-8 sm:mb-12">
           <Reveal>
-            <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-              Telangana State Board Results
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans mb-2">
+              <Award className="w-3.5 h-3.5 text-heritage-gold-strong" />
+              State Board Merit List
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-academic-slate mt-1">
-              Intermediate 1st Year Toppers 2024
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate tracking-tight">
+              Intermediate Board Toppers — 2026
             </h2>
-            <p className="text-xs sm:text-sm text-academic-slate/75 max-w-2xl mx-auto mt-2 font-sans">
-              Official Little Flower Junior College IPE 1st Year Merit List and Subject-wise Centum achievements.
+            <p className="mt-2.5 text-xs sm:text-sm text-academic-slate/75 font-sans max-w-2xl mx-auto leading-relaxed">
+              Official Little Flower Junior College merit announcements, state rankers, and centum scorers published for Intermediate 1st and 2nd Year board examinations.
             </p>
+            <span className="gold-rule gold-rule-center !mt-3 sm:!mt-4" />
           </Reveal>
         </div>
 
-        <div className="mx-auto max-w-4xl">
-          <Reveal>
-            <div className="relative group rounded-2xl overflow-hidden border-2 border-heritage-gold/40 shadow-float bg-white">
-              <button
-                type="button"
-                onClick={() => setActivePoster("/images/official/top3.jpeg")}
-                className="w-full block relative cursor-zoom-in"
-                aria-label="View official LFJC 2024 IPE Toppers poster in high resolution"
-              >
-                <div className="relative aspect-[16/9] w-full bg-deep-navy">
-                  <Image
-                    src="/images/official/top3.jpeg"
-                    alt="Official Little Flower Junior College 2024 IPE 1st Year Toppers Poster"
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-                <div className="absolute inset-0 bg-deep-navy/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-sans text-sm font-bold">
-                  <ZoomIn className="w-5 h-5" />
-                  <span>Click to view Full-Resolution Official Poster</span>
-                </div>
-              </button>
-              <div className="p-3 bg-white border-t border-stone-texture/30 flex items-center justify-between text-xs font-sans text-academic-slate/75">
-                <span className="font-semibold text-montfortian-blue">
-                  Official Publication: LFJC Intermediate 1st Year Merit List 2024
-                </span>
-                <span className="text-[11px] bg-royal-cream px-2.5 py-0.5 rounded border border-stone-texture/40 font-bold">
-                  BIE Telangana Ground Truth
-                </span>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </Section>
-
-      {/* ─── SUBJECT-WISE CENTUM & HIGH-SCORE COUNTS ─────────────────── */}
-      <Section variant="default" className="bg-white py-12 sm:py-16">
-        <div className="mx-auto max-w-5xl">
-          <div className="text-center mb-8">
-            <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-              Academic Centum Record
-            </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1">
-              Subject-Wise Highest Scores & Student Counts
-            </h2>
-            <p className="text-xs sm:text-sm text-academic-slate/70 font-sans mt-1">
-              Number of LFJC students attaining maximum centum and top scores across board subjects:
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {firstYearSubjectStats.map((stat, idx) => (
-              <Reveal key={stat.subject} delay={idx * 0.02}>
-                <div className="bg-royal-cream/30 p-3.5 rounded-xl border border-stone-texture/40 text-center hover:border-heritage-gold transition-colors">
-                  <div className="font-serif text-2xl sm:text-3xl font-extrabold text-montfortian-blue leading-none">
-                    {stat.count}
-                  </div>
-                  <div className="text-[11px] font-bold text-heritage-gold-strong font-sans uppercase tracking-wider mt-1">
-                    {stat.subject}
-                  </div>
-                  <div className="text-[10px] text-academic-slate/70 font-sans font-medium mt-0.5">
-                    Highest: {stat.highest}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* ─── VERIFIED NAMED TOPPERS ROSTER ───────────────────────────── */}
-      <Section variant="default" className="bg-royal-cream/20 border-t border-stone-texture/30 py-12 sm:py-16">
-        <div className="mx-auto max-w-5xl">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-                Merit Roll
-              </span>
-              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1">
-                Stream-Wise First Year Rankers
-              </h2>
-            </div>
-
-            {/* Filter Tabs */}
-            <div className="flex flex-wrap gap-1.5 bg-white p-1 rounded-lg border border-stone-texture/50 self-start sm:self-auto">
-              {["All", "MPC", "BiPC", "MEC", "CEC"].map((grp) => (
-                <button
-                  key={grp}
-                  onClick={() => setSelectedGroup(grp)}
-                  className={`px-3 py-1 rounded-md text-xs font-bold font-sans transition-colors ${
-                    selectedGroup === grp
-                      ? "bg-montfortian-blue text-white shadow-xs"
-                      : "text-academic-slate/70 hover:text-academic-slate hover:bg-royal-cream/50"
-                  }`}
-                >
-                  {grp}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-            {filteredToppers.map((topper, idx) => (
-              <Reveal key={`${topper.name}-${topper.group}`} delay={idx * 0.02}>
-                <div className="bg-white p-4 rounded-xl border border-stone-texture/50 shadow-xs flex items-center justify-between hover:border-heritage-gold/50 transition-colors">
+        {/* ─── COMPLETE OFFICIAL POSTERS DISPLAY ───────────────────────── */}
+        <div className="mx-auto max-w-6xl space-y-12 sm:space-y-16">
+          {TOPPER_POSTERS.map((poster, index) => (
+            <Reveal key={poster.id} delay={index * 0.1}>
+              <div className="rounded-2xl border-2 border-heritage-gold/35 bg-white p-4 sm:p-6 md:p-8 shadow-panel">
+                {/* Poster Header */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-4 sm:mb-6 border-b border-stone-texture/40">
                   <div>
-                    <div className="flex items-center gap-1.5 mb-1">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold font-sans bg-heritage-gold/20 text-montfortian-blue border border-heritage-gold/30">
-                        {topper.group}
-                      </span>
-                      <span className="text-[10px] font-bold text-academic-slate/50 font-sans">
-                        Rank {topper.rank}
-                      </span>
-                    </div>
-                    <h3 className="font-sans font-bold text-xs sm:text-sm text-academic-slate">
-                      {topper.name}
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold font-sans bg-heritage-gold/15 text-montfortian-blue border border-heritage-gold/30 mb-1">
+                      <Sparkles className="w-3 h-3 text-heritage-gold-strong" />
+                      {poster.badge}
+                    </span>
+                    <h3 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-academic-slate">
+                      {poster.title}
                     </h3>
+                    <p className="text-xs sm:text-sm text-academic-slate/70 font-sans mt-0.5">
+                      {poster.subtitle}
+                    </p>
                   </div>
-
-                  <div className="text-right shrink-0">
-                    <div className="font-serif text-lg sm:text-xl font-bold text-montfortian-blue leading-none">
-                      {topper.marks}
-                    </div>
-                    <div className="text-[10px] text-academic-slate/50 font-sans">
-                      out of {topper.maxMarks}
-                    </div>
+                  <div className="shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setActivePoster(poster)}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold font-sans bg-academic-slate hover:bg-montfortian-blue text-white transition-colors cursor-pointer"
+                      aria-label={`View full resolution poster for ${poster.title}`}
+                    >
+                      <ZoomIn className="w-3.5 h-3.5" />
+                      <span>Full Screen</span>
+                    </button>
                   </div>
                 </div>
-              </Reveal>
-            ))}
-          </div>
+
+                {/* Complete Uncropped Poster Image Container */}
+                <div className="relative group rounded-xl overflow-hidden border border-stone-texture/50 bg-stone-50">
+                  <button
+                    type="button"
+                    onClick={() => setActivePoster(poster)}
+                    className="w-full block relative cursor-zoom-in text-left focus:outline-none focus:ring-2 focus:ring-heritage-gold"
+                    aria-label={`Click to expand full resolution ${poster.title} poster`}
+                  >
+                    <div className="relative w-full overflow-hidden flex items-center justify-center bg-royal-cream/10">
+                      <Image
+                        src={poster.src}
+                        alt={`Official Little Flower Junior College ${poster.title} Merit List Poster`}
+                        width={poster.width}
+                        height={poster.height}
+                        sizes="(min-width: 1280px) 1150px, (min-width: 768px) 90vw, 100vw"
+                        className="w-full h-auto object-contain block transition-transform duration-300 group-hover:scale-[1.005]"
+                        priority={index === 0}
+                      />
+                    </div>
+                    {/* Hover Overlay Hint */}
+                    <div className="absolute inset-0 bg-deep-navy/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-sans text-xs sm:text-sm font-bold backdrop-blur-[1px] pointer-events-none">
+                      <div className="bg-deep-navy/90 border border-heritage-gold/50 px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+                        <ZoomIn className="w-4 h-4 text-heritage-gold-bright" />
+                        <span>Click to view Full-Resolution High-Quality Poster</span>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+
+                {/* Poster Footer Note */}
+                <div className="mt-3 pt-3 flex flex-wrap items-center justify-between gap-2 text-[11px] font-sans text-academic-slate/70">
+                  <span className="font-semibold text-montfortian-blue">
+                    Little Flower Junior College • Telangana Board Ground Truth
+                  </span>
+                  <span className="italic">
+                    Click poster image to zoom and read individual ranks &amp; marks
+                  </span>
+                </div>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </Section>
 
-      {/* ─── LIGHTBOX MODAL ──────────────────────────────────────────── */}
+      {/* ─── FULL RESOLUTION LIGHTBOX MODAL ──────────────────────────── */}
       {activePoster && (
         <div
-          className="fixed inset-0 z-50 bg-deep-navy/95 flex items-center justify-center p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-50 bg-deep-navy/95 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6"
           onClick={() => setActivePoster(null)}
         >
-          <button
-            type="button"
-            onClick={() => setActivePoster(null)}
-            className="absolute top-4 right-4 p-2 text-white hover:text-heritage-gold-bright transition-colors rounded-full bg-white/10 hover:bg-white/20"
-            aria-label="Close poster view"
-          >
-            <X className="h-6 w-6" />
-          </button>
+          {/* Close & Header Bar */}
+          <div className="absolute top-3 left-4 right-4 sm:top-4 sm:left-6 sm:right-6 flex items-center justify-between text-white z-10 pointer-events-none">
+            <div className="pointer-events-auto bg-deep-navy/80 px-3 py-1.5 rounded-lg border border-white/20">
+              <span className="font-serif text-sm sm:text-base font-bold text-heritage-gold-bright">
+                {activePoster.title}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setActivePoster(null)}
+              className="pointer-events-auto p-2 text-white hover:text-heritage-gold-bright transition-colors rounded-full bg-white/15 hover:bg-white/30 cursor-pointer"
+              aria-label="Close full-screen poster view"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+
+          {/* Modal Image Wrapper with complete visibility */}
           <div
-            className="relative w-full max-w-5xl max-h-[90vh] overflow-auto bg-black rounded-xl p-2"
+            className="relative w-full max-w-7xl max-h-[88vh] overflow-auto bg-black/60 rounded-xl p-1 sm:p-2 border border-white/20 shadow-2xl mt-10 sm:mt-12"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
-              src={activePoster}
-              alt="Official LFJC Toppers Poster"
-              width={1600}
-              height={1000}
-              className="w-full h-auto object-contain rounded"
+              src={activePoster.src}
+              alt={activePoster.title}
+              width={activePoster.width}
+              height={activePoster.height}
+              className="w-full h-auto object-contain max-h-[82vh] mx-auto rounded"
+              quality={100}
             />
           </div>
         </div>

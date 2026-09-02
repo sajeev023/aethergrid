@@ -5,7 +5,6 @@ import { ArrowRight, ExternalLink, Calendar, ShieldCheck } from "lucide-react";
 
 import { buildStructuredData } from "@/lib/structured-data";
 import { programs, PORTAL_LINKS } from "@/lib/site-data";
-import { firstYearSubjectStats, firstYearToppers } from "@/lib/toppers-data";
 import { Hero } from "@/components/sections/hero";
 import { Section } from "@/components/section";
 import { Button } from "@/components/ui/button";
@@ -16,7 +15,6 @@ export const metadata: Metadata = {
 };
 
 export default function LFJCPage() {
-  const topThree = firstYearToppers.slice(0, 4);
 
   return (
     <>
@@ -59,64 +57,28 @@ export default function LFJCPage() {
         </div>
       </section>
 
-      {/* ─── 2024 IPE BOARD RESULTS HIGHLIGHTS ────────────────────────── */}
-      <Section variant="default" className="bg-white py-12 sm:py-14">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
-          <div>
+      {/* ─── OFFICIAL 2026 TOPPERS SHOWCASE TEASER ─────────────────────── */}
+      <Section variant="default" className="bg-white py-10 sm:py-12 border-b border-stone-texture/30">
+        <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center md:text-left">
             <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
               State Board Excellence
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1">
-              Intermediate 1st Year Toppers 2024
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate">
+              Intermediate Board Toppers — 2026
             </h2>
+            <p className="text-xs sm:text-sm text-academic-slate/75 font-sans max-w-xl">
+              Celebrating our 1st Year &amp; 2nd Year state rankers, centum scorers, and merit list achievers across all four intermediate streams.
+            </p>
           </div>
-          <Link
-            href="/academics#toppers"
-            className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-montfortian-blue hover:text-heritage-gold-strong transition-colors font-sans"
-          >
-            View Full Merit List & Centum Record
-            <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
-        </div>
-
-        {/* Centum Badges Row */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-6">
-          {firstYearSubjectStats.slice(0, 5).map((stat) => (
-            <div key={stat.subject} className="bg-royal-cream/30 p-3 rounded-xl border border-stone-texture/40 text-center">
-              <div className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue leading-none">
-                {stat.count}
-              </div>
-              <div className="text-[10px] font-bold text-heritage-gold-strong font-sans uppercase tracking-wider mt-1">
-                {stat.subject} (Max {stat.highest})
-              </div>
-              <div className="text-[9px] text-academic-slate/60 font-sans">Scored Maximum</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Top 4 Rankers */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {topThree.map((topper) => (
-            <div
-              key={`${topper.name}-${topper.group}`}
-              className="bg-white p-3.5 rounded-xl border border-stone-texture/50 shadow-xs flex items-center justify-between"
-            >
-              <div>
-                <span className="px-2 py-0.5 rounded text-[9px] font-bold font-sans bg-heritage-gold/20 text-montfortian-blue border border-heritage-gold/30">
-                  {topper.group} • Rank {topper.rank}
-                </span>
-                <h3 className="font-sans font-bold text-xs sm:text-sm text-academic-slate mt-1">
-                  {topper.name}
-                </h3>
-              </div>
-              <div className="text-right shrink-0">
-                <div className="font-serif text-lg font-bold text-montfortian-blue leading-none">
-                  {topper.marks}
-                </div>
-                <div className="text-[9px] text-academic-slate/50 font-sans">/{topper.maxMarks}</div>
-              </div>
-            </div>
-          ))}
+          <div className="shrink-0">
+            <Button asChild variant="gold" size="lg">
+              <Link href="/academics#toppers" className="inline-flex items-center gap-2">
+                <span>View Official 2026 Toppers Posters</span>
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </Section>
 
