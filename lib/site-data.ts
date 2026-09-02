@@ -102,7 +102,7 @@ export const annualThemeData = {
 // 5. CAMPUS INFRASTRUCTURE TOUR (Verbatim synthesis from infrastructure.php - 6,162 chars)
 export const campusInfrastructureData = {
   summary:
-    "Situated on Tarnaka-Uppal Road opposite Survey of India, Little Flower Junior College is enclosed within a tall boundary wall lined with large trees. The 2-acre campus houses a grand three-storeyed building (ground plus three floors), expansive playgrounds for football, basketball, and volleyball, Brother's Quarters, and a regal welcoming statue of Patron Saint ThÃ©rÃ¨se.",
+    "Situated on Tarnaka-Uppal Road opposite Survey of India, Little Flower Junior College is enclosed within a tall boundary wall lined with large trees. The 8-acre campus houses a grand three-storeyed building (ground plus three floors), expansive playgrounds for football, basketball, and volleyball, Brother's Quarters, and a regal welcoming statue of Patron Saint ThÃ©rÃ¨se.",
   floors: [
     {
       level: "Ground Floor",
@@ -625,7 +625,7 @@ export const lfjcData = {
   stats: [
     { value: "50+", label: "Years of Academic Legacy (1974â€“2024)" },
     { value: "1,600+", label: "Current Enrolled Students" },
-    { value: "2", label: "Acres Campus Opposite Survey of India" },
+    { value: "8", label: "Acres Campus Opposite Survey of India" },
     { value: "4", label: "Board-Recognized Intermediate Streams" },
   ],
   programs: [

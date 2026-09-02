@@ -63,6 +63,16 @@ const GOLDEN_JUBILEE_IMAGES: GalleryItem[] = [
   { id: 215, src: "/images/golden-jubilee/golden_jubilee_33.jpg", badge: "2024", title: "Concluding thanksgiving", category: "golden-jubilee" },
 ];
 
+const CAMPUS_LABS_IMAGES: GalleryItem[] = [
+  { id: 501, src: "/images/campus-drone.jpg", badge: "Campus", title: "Aerial view of 8-acre campus", category: "campus" },
+  { id: 502, src: "/images/campus-building.jpg", badge: "Campus", title: "Main 3-storeyed academic block", category: "campus" },
+  { id: 503, src: "/images/physics-lab.jpg", badge: "Lab", title: "Physics laboratory & competitive coaching", category: "campus" },
+  { id: 504, src: "/images/chemistry-lab.jpg", badge: "Lab", title: "Chemistry laboratory", category: "campus" },
+  { id: 505, src: "/images/computer-lab.jpg", badge: "Lab", title: "Computer centre & Humanities diploma", category: "campus" },
+  { id: 506, src: "/images/library-heritage.jpg", badge: "Library", title: "Central reference library", category: "campus" },
+  { id: 507, src: "/images/sports-arena.jpg", badge: "Sports", title: "Sports arena & playgrounds", category: "campus" },
+];
+
 const ASSEMBLIES_IMAGES: GalleryItem[] = [
   { id: 301, src: "/images/events/montfort-auditorium-assembly.jpg", badge: "Assembly", title: "St. Montfort Auditorium", category: "events" },
   { id: 302, src: "/images/events/motivational-talk-session.jpg", badge: "Seminar", title: "Motivational talk", category: "events" },
@@ -81,16 +91,6 @@ const SPORTS_IMAGES: GalleryItem[] = [
   { id: 406, src: "/images/sports/relay-race-field.jpg", badge: "Track", title: "Relay race", category: "sports" },
   { id: 407, src: "/images/sports/sports-winners-1st-year.jpg", badge: "Winners", title: "1st Year champions", category: "sports" },
   { id: 408, src: "/images/sports/spectators-campus-steps.jpg", badge: "Spectators", title: "Campus spectators", category: "sports" },
-];
-
-const CAMPUS_LABS_IMAGES: GalleryItem[] = [
-  { id: 501, src: "/images/campus-drone.jpg", badge: "Campus", title: "Aerial view of 2-acre campus", category: "campus" },
-  { id: 502, src: "/images/campus-building.jpg", badge: "Campus", title: "Main 3-storeyed academic block", category: "campus" },
-  { id: 503, src: "/images/physics-lab.jpg", badge: "Lab", title: "Physics laboratory & competitive coaching", category: "campus" },
-  { id: 504, src: "/images/chemistry-lab.jpg", badge: "Lab", title: "Chemistry laboratory", category: "campus" },
-  { id: 505, src: "/images/computer-lab.jpg", badge: "Lab", title: "Computer centre & Humanities diploma", category: "campus" },
-  { id: 506, src: "/images/library-heritage.jpg", badge: "Library", title: "Central reference library", category: "campus" },
-  { id: 507, src: "/images/sports-arena.jpg", badge: "Sports", title: "Sports arena & playgrounds", category: "campus" },
 ];
 
 const GOLDEN_JUBILEE_VIDEOS: VideoItem[] = [
@@ -179,7 +179,7 @@ function GalleryGrid({ items }: { items: GalleryItem[] }) {
 export function CampusLife({ activeInst = "lfjc" }: { activeInst?: "root" | "lfs" | "lfjc" | "lfdc" }) {
   void activeInst;
   return (
-    <div id="campus" className="bg-white">
+    <div className="bg-white">
       {/* ─── PAGE HEADER ──────────────────────────────────────────────── */}
       <Section variant="default" className="bg-gradient-to-b from-deep-navy to-montfortian-blue text-white py-12 sm:py-16">
         <div className="mx-auto max-w-4xl text-center">
@@ -191,15 +191,105 @@ export function CampusLife({ activeInst = "lfjc" }: { activeInst?: "root" | "lfs
               Campus Life & Heritage
             </h1>
             <p className="mt-2 text-sm sm:text-base text-royal-cream/80 max-w-2xl mx-auto font-sans leading-relaxed">
-              Experience the 2-acre historic Uppal campus with modern science laboratories, expansive sports grounds, and five decades of student achievements.
+              Experience the 8-acre historic Uppal campus with modern science laboratories, expansive sports grounds, and five decades of student achievements.
             </p>
           </Reveal>
         </div>
       </Section>
 
-      {/* ─── 1. ARCHITECTURAL & FLOOR-BY-FLOOR TOUR (Verbatim from infrastructure.php) ─── */}
-      <Section id="facilities" variant="default" className="bg-white py-12 sm:py-16">
+      {/* ─── 1. SILVER JUBILEE RETROSPECTIVE (1999) ───────────────────── */}
+      <Section id="silver-jubilee" variant="default" className="bg-white py-12 sm:py-16">
         <div className="mx-auto max-w-6xl">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                Historic 25-Year Milestone
+              </span>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate mt-1">
+                Silver Jubilee Retrospective (1999)
+              </h2>
+              <p className="text-xs sm:text-sm text-academic-slate/70 font-sans mt-1">
+                Archival captures from the 25th anniversary celebrations, state honors, and rank holders recognition:
+              </p>
+            </div>
+            <div className="text-xs font-bold text-montfortian-blue bg-royal-cream px-3 py-1.5 rounded-full border border-stone-texture/40 shrink-0 font-sans">
+              25 Years of Excellence
+            </div>
+          </div>
+          <GalleryGrid items={SILVER_JUBILEE_IMAGES} />
+        </div>
+      </Section>
+
+      {/* ─── 2. GOLDEN JUBILEE CELEBRATION (1974–2024) ─────────────────── */}
+      <Section id="golden-jubilee" variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30 py-12 sm:py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                Historic Milestone
+              </span>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate mt-1">
+                Golden Jubilee Celebrations (1974–2024)
+              </h2>
+              <p className="text-xs sm:text-sm text-academic-slate/70 font-sans mt-1">
+                Commemorating 50 glorious years of Montfortian education, alumni reunions, and cultural presentations:
+              </p>
+            </div>
+            <div className="text-xs font-bold text-montfortian-blue bg-royal-cream px-3 py-1.5 rounded-full border border-stone-texture/40 shrink-0 font-sans">
+              50 Years of Excellence
+            </div>
+          </div>
+
+          <GalleryGrid items={GOLDEN_JUBILEE_IMAGES} />
+
+          {/* Official 22-Item Program Schedule (Verbatim from goldenjubilee.php) */}
+          <div className="mt-10 bg-white rounded-2xl border border-stone-texture/50 p-6 sm:p-8">
+            <div className="flex items-center gap-2 mb-4">
+              <Sparkles className="w-5 h-5 text-heritage-gold-strong" />
+              <h3 className="font-serif text-lg sm:text-xl font-bold text-academic-slate">
+                Official Golden Jubilee Celebration Program of Events
+              </h3>
+            </div>
+            <p className="text-xs text-academic-slate/75 mb-6 font-sans">
+              Order of proceedings conducted at the LFJC Golden Jubilee main stage:
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+              {goldenJubileeSchedule.map((item, idx) => (
+                <div
+                  key={item}
+                  className="bg-royal-cream/30 p-3 rounded-lg border border-stone-texture/40 shadow-xs flex items-center gap-2.5 text-xs text-academic-slate font-sans"
+                >
+                  <span className="w-5 h-5 rounded-full bg-heritage-gold/20 text-montfortian-blue text-[10px] font-bold flex items-center justify-center shrink-0">
+                    {idx + 1}
+                  </span>
+                  <span className="font-medium leading-tight">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* ─── 3. CAMPUS & LABS (Gallery & Floor-by-Floor Tour) ───────────── */}
+      <Section id="campus" variant="default" className="bg-white py-12 sm:py-16">
+        <div id="campus-labs" className="mx-auto max-w-6xl">
+          <div className="mb-6">
+            <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+              Campus Infrastructure & Laboratories
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate mt-1">
+              Campus & Laboratories Gallery
+            </h2>
+            <p className="text-xs sm:text-sm text-academic-slate/70 font-sans mt-1">
+              Visual walkthrough of the academic building, laboratories, central library, and athletic grounds:
+            </p>
+          </div>
+          <GalleryGrid items={CAMPUS_LABS_IMAGES} />
+        </div>
+
+        {/* Verbatim Architectural & Floor-by-Floor Tour */}
+        <div id="facilities" className="mx-auto max-w-6xl mt-12 pt-10 border-t border-stone-texture/40">
           <div className="mb-8">
             <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
               Comprehensive Architectural Tour
@@ -242,88 +332,14 @@ export function CampusLife({ activeInst = "lfjc" }: { activeInst?: "root" | "lfs
         </div>
       </Section>
 
-      {/* ─── 2. CAMPUS & LABS PHOTO GALLERY ───────────────────────────── */}
-      <Section id="campus-labs" variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30 py-12 sm:py-16">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mb-2">
-            Campus & Laboratories Gallery
-          </h2>
-          <p className="text-xs sm:text-sm text-academic-slate/70 mb-6 font-sans">
-            Visual walkthrough of the academic building, laboratories, central library, and athletic grounds:
-          </p>
-          <GalleryGrid items={CAMPUS_LABS_IMAGES} />
-        </div>
-      </Section>
-
-      {/* ─── 3. GOLDEN JUBILEE CELEBRATION (1974–2024) ─────────────────── */}
-      <Section id="golden-jubilee" variant="default" className="bg-white py-12 sm:py-16">
-        <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-                Historic Milestone
-              </span>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate mt-1">
-                Golden Jubilee Celebrations (1974–2024)
-              </h2>
-              <p className="text-xs sm:text-sm text-academic-slate/70 font-sans mt-1">
-                Commemorating 50 glorious years of Montfortian education, alumni reunions, and cultural presentations:
-              </p>
-            </div>
-            <div className="text-xs font-bold text-montfortian-blue bg-royal-cream px-3 py-1.5 rounded-full border border-stone-texture/40 shrink-0 font-sans">
-              50 Years of Excellence
-            </div>
-          </div>
-
-          <GalleryGrid items={GOLDEN_JUBILEE_IMAGES} />
-
-          {/* Official 22-Item Program Schedule (Verbatim from goldenjubilee.php) */}
-          <div className="mt-10 bg-royal-cream/25 rounded-2xl border border-stone-texture/50 p-6 sm:p-8">
-            <div className="flex items-center gap-2 mb-4">
-              <Sparkles className="w-5 h-5 text-heritage-gold-strong" />
-              <h3 className="font-serif text-lg sm:text-xl font-bold text-academic-slate">
-                Official Golden Jubilee Celebration Program of Events
-              </h3>
-            </div>
-            <p className="text-xs text-academic-slate/75 mb-6 font-sans">
-              Order of proceedings conducted at the LFJC Golden Jubilee main stage:
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
-              {goldenJubileeSchedule.map((item, idx) => (
-                <div
-                  key={item}
-                  className="bg-white p-3 rounded-lg border border-stone-texture/40 shadow-xs flex items-center gap-2.5 text-xs text-academic-slate font-sans"
-                >
-                  <span className="w-5 h-5 rounded-full bg-heritage-gold/20 text-montfortian-blue text-[10px] font-bold flex items-center justify-center shrink-0">
-                    {idx + 1}
-                  </span>
-                  <span className="font-medium leading-tight">{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* ─── 4. SILVER JUBILEE RETROSPECTIVE (1999) ───────────────────── */}
-      <Section id="silver-jubilee" variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30 py-12 sm:py-16">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mb-1">
-            Silver Jubilee Retrospective (1999)
-          </h2>
-          <p className="text-xs sm:text-sm text-academic-slate/70 mb-6 font-sans">
-            Archival captures from the 25th anniversary celebrations, state honors, and rank holders recognition:
-          </p>
-          <GalleryGrid items={SILVER_JUBILEE_IMAGES} />
-        </div>
-      </Section>
-
-      {/* ─── 5. EVENTS & SPORTS ───────────────────────────────────────── */}
-      <Section id="events" variant="default" className="bg-white py-12 sm:py-16">
+      {/* ─── 4. EVENTS & SPORTS ───────────────────────────────────────── */}
+      <Section id="events" variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30 py-12 sm:py-16">
         <div className="mx-auto max-w-6xl space-y-10">
           <div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mb-1">
+            <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+              Assemblies & Seminars
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1 mb-1">
               Events, Seminars & Assemblies
             </h2>
             <p className="text-xs sm:text-sm text-academic-slate/70 mb-6 font-sans">
@@ -332,8 +348,11 @@ export function CampusLife({ activeInst = "lfjc" }: { activeInst?: "root" | "lfs
             <GalleryGrid items={ASSEMBLIES_IMAGES} />
           </div>
 
-          <div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mb-1">
+          <div id="sports" className="pt-6 border-t border-stone-texture/30">
+            <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+              Athletic Excellence
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1 mb-1">
               Athletics & Sports Tournaments
             </h2>
             <p className="text-xs sm:text-sm text-academic-slate/70 mb-6 font-sans">
@@ -344,10 +363,13 @@ export function CampusLife({ activeInst = "lfjc" }: { activeInst?: "root" | "lfs
         </div>
       </Section>
 
-      {/* ─── 6. GOLDEN JUBILEE OFFICIAL VIDEOS ────────────────────────── */}
-      <Section id="videos" variant="default" className="bg-royal-cream/20 border-t border-stone-texture/30 py-12 sm:py-16">
+      {/* ─── 5. GOLDEN JUBILEE OFFICIAL VIDEOS & REMAINING CONTENT ───── */}
+      <Section id="videos" variant="default" className="bg-white py-12 sm:py-16">
         <div className="mx-auto max-w-6xl">
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mb-1">
+          <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+            Video Archive
+          </span>
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1 mb-1">
             Official Celebration Videos & Anthem
           </h2>
           <p className="text-xs sm:text-sm text-academic-slate/70 mb-6 font-sans">

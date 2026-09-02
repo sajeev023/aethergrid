@@ -69,7 +69,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
                 Our Foundation & Growth
               </span>
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate leading-snug">
-                From Abids Origins (1974) to 2-Acre Uppal Campus
+                From Abids Origins (1974) to 8-Acre Uppal Campus
               </h2>
               <div className="space-y-3 text-xs sm:text-sm leading-relaxed text-academic-slate/80 font-sans">
                 <p>
@@ -79,7 +79,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
                   When the college first opened its doors, it began with around <strong>200 students</strong>. Today, LFJC is home to over <strong>1,600 students</strong> pursuing Board-recognized Intermediate education across Mathematics, Physical Sciences, Biological Sciences, and Humanities.
                 </p>
                 <p>
-                  Spread across <strong>2 acres</strong> on the Tarnaka–Uppal Road opposite the Survey of India, the campus features a sprawling playground, modern science and computer laboratories, a central library, and the historic Heritage Hall, all fostering intellectual, moral, and physical growth.
+                  Spread across <strong>8 acres</strong> on the Tarnaka–Uppal Road opposite the Survey of India, the campus features a sprawling playground, modern science and computer laboratories, a central library, and the historic Heritage Hall, all fostering intellectual, moral, and physical growth.
                 </p>
               </div>
               <div className="grid grid-cols-3 gap-3 pt-2">
@@ -92,7 +92,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
                   <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-academic-slate/70">Students</div>
                 </div>
                 <div className="bg-royal-cream/40 p-3 rounded-lg border border-stone-texture/40 text-center">
-                  <div className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue">2 Acres</div>
+                  <div className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue">8 Acres</div>
                   <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-academic-slate/70">Campus</div>
                 </div>
               </div>

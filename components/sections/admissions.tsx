@@ -27,7 +27,7 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
               Intermediate Admissions 2026–2027
             </Heading>
             <p className="mt-3 text-xs sm:text-sm md:text-base leading-relaxed text-royal-cream/80 font-sans max-w-2xl mx-auto">
-              Admissions open for Class X board graduates in M.P.C, Bi.P.C, M.E.C, and C.E.C intermediate streams at our 2-acre Uppal campus.
+              Admissions open for Class X board graduates in M.P.C, Bi.P.C, M.E.C, and C.E.C intermediate streams at our 8-acre Uppal campus.
             </p>
 
             {/* Direct Official Online Portals Banner */}

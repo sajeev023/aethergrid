@@ -40,10 +40,10 @@ const HERO_SLIDES: HeroSlide[] = [
     id: "hero-2-campus-quad",
     src: "/images/hero/hero-2-campus-quad.webp",
     fallbackSrc: "/images/hero/hero-2-campus-quad.jpg",
-    alt: "Spacious 2-Acre Uppal Heritage Campus Grounds & Quadrangle Lawn",
+    alt: "Spacious 8-Acre Uppal Heritage Campus Grounds & Quadrangle Lawn",
     objectPosition: "center center",
     mobileObjectPosition: "center 35%",
-    title: "Spacious 2-Acre Green Campus & Quadrangle",
+    title: "Spacious 8-Acre Green Campus & Quadrangle",
   },
   {
     id: "hero-3-academic-lab",

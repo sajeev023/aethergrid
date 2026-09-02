@@ -155,7 +155,7 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
         <div className="mx-auto flex max-w-[1440px] items-center justify-between px-3 sm:px-6 md:px-8 lg:px-10">
           <div className="flex items-center divide-x divide-white/10">
             <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 first:pl-0 py-1.5 sm:py-2 text-heritage-gold-bright">
-              Est. {instData.established} • 2-Acre Uppal Campus
+              Est. {instData.established} • 8-Acre Uppal Campus
             </span>
           </div>
           <div className="flex items-center divide-x divide-white/10">

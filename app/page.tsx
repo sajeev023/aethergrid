@@ -138,7 +138,7 @@ export default function LFJCPage() {
             <div className="grid gap-6 sm:gap-10 lg:grid-cols-12 lg:items-center">
               <Reveal className="lg:col-span-7 space-y-3">
                 <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold font-sans">
-                  Historic 2-Acre Campus
+                  Historic 8-Acre Campus
                 </span>
                 <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
                   A Vibrant Campus Opposite Survey of India
