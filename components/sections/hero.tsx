@@ -24,6 +24,7 @@ interface HeroSlide {
   objectPosition: string;
   mobileObjectPosition?: string;
   title: string;
+  isPoster?: boolean;
 }
 
 const HERO_SLIDES: HeroSlide[] = [
@@ -99,6 +100,26 @@ const HERO_SLIDES: HeroSlide[] = [
     mobileObjectPosition: "center 25%",
     title: "Montfortian Heritage & 50-Year Legacy",
   },
+  {
+    id: "hero-9-toppers-1st-year-2026",
+    src: "/images/hero/1st-year-toppers-2026.avif",
+    fallbackSrc: "/images/hero/1st-year-toppers-2026.avif",
+    alt: "Little Flower Junior College 1st Year Toppers 2026 Official State Board Merit List",
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
+    title: "1st Year Toppers 2026",
+    isPoster: true,
+  },
+  {
+    id: "hero-10-toppers-2nd-year-2026",
+    src: "/images/hero/2nd-year-toppers-2026.avif",
+    fallbackSrc: "/images/hero/2nd-year-toppers-2026.avif",
+    alt: "Little Flower Junior College 2nd Year Toppers 2026 Official State Board Merit List",
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
+    title: "2nd Year Toppers 2026",
+    isPoster: true,
+  },
 ];
 
 const containerVariants = {
@@ -128,6 +149,8 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [loadedIndices, setLoadedIndices] = useState<number[]>([0, 1]);
 
+  const isPosterActive = Boolean(HERO_SLIDES[activeSlideIndex]?.isPoster);
+
   useEffect(() => {
     if (prefersReducedMotion || !isAutoPlaying) return;
     const timer = setInterval(() => {
@@ -143,7 +166,7 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
         });
         return next;
       });
-    }, 5500);
+    }, 4000);
     return () => clearInterval(timer);
   }, [prefersReducedMotion, isAutoPlaying]);
 
@@ -164,12 +187,12 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
                 key={slide.id}
                 initial={false}
                 animate={{
-                  opacity: isActive ? 0.90 : 0,
-                  scale: isActive ? (prefersReducedMotion ? 1.0 : 1.03) : 1.0,
+                  opacity: isActive ? (slide.isPoster ? 1.0 : 0.90) : 0,
+                  scale: isActive ? (prefersReducedMotion || slide.isPoster ? 1.0 : 1.03) : 1.0,
                 }}
                 transition={{
                   opacity: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1.0] },
-                  scale: isActive && !prefersReducedMotion
+                  scale: isActive && !prefersReducedMotion && !slide.isPoster
                     ? { duration: 6.0, ease: "linear" }
                     : { duration: 0 },
                 }}
@@ -181,24 +204,68 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
                   fill
                   priority={index === 0}
                   sizes="(min-width: 1024px) 100vw, 100vw"
-                  className="object-cover [object-position:var(--mobile-pos)] lg:[object-position:var(--desktop-pos)]"
-                  style={{
-                    ["--mobile-pos" as string]: slide.mobileObjectPosition || slide.objectPosition,
-                    ["--desktop-pos" as string]: slide.objectPosition,
-                  }}
+                  className={cn(
+                    slide.isPoster
+                      ? "object-contain p-2 sm:p-4 md:p-6 drop-shadow-2xl"
+                      : "object-cover [object-position:var(--mobile-pos)] lg:[object-position:var(--desktop-pos)]"
+                  )}
+                  style={
+                    slide.isPoster
+                      ? undefined
+                      : {
+                          ["--mobile-pos" as string]: slide.mobileObjectPosition || slide.objectPosition,
+                          ["--desktop-pos" as string]: slide.objectPosition,
+                        }
+                  }
                 />
               </motion.div>
             );
           })}
 
-          {/* Directional Vignette */}
-          <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/90 via-deep-navy/75 to-deep-navy/95 lg:bg-gradient-to-r lg:from-deep-navy/90 lg:via-deep-navy/65 lg:via-50% lg:to-deep-navy/15" />
-          <div className="absolute inset-x-0 top-0 h-12 sm:h-20 bg-gradient-to-b from-deep-navy/80 via-deep-navy/30 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 h-12 sm:h-24 bg-gradient-to-t from-deep-navy/95 via-deep-navy/40 to-transparent" />
+          {/* Directional Vignette (fades out on poster slides to preserve full poster clarity) */}
+          <div
+            className={cn(
+              "absolute inset-0 bg-gradient-to-b from-deep-navy/90 via-deep-navy/75 to-deep-navy/95 lg:bg-gradient-to-r lg:from-deep-navy/90 lg:via-deep-navy/65 lg:via-50% lg:to-deep-navy/15 transition-opacity duration-700",
+              isPosterActive ? "opacity-0 pointer-events-none" : "opacity-100"
+            )}
+          />
+          <div
+            className={cn(
+              "absolute inset-x-0 top-0 h-12 sm:h-20 bg-gradient-to-b from-deep-navy/80 via-deep-navy/30 to-transparent transition-opacity duration-700",
+              isPosterActive ? "opacity-0 pointer-events-none" : "opacity-100"
+            )}
+          />
+          <div
+            className={cn(
+              "absolute inset-x-0 bottom-0 h-12 sm:h-24 bg-gradient-to-t from-deep-navy/95 via-deep-navy/40 to-transparent transition-opacity duration-700",
+              isPosterActive ? "opacity-0 pointer-events-none" : "opacity-100"
+            )}
+          />
         </div>
 
-        {/* Carousel Play/Pause Accessibility Control */}
-        <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20">
+        {/* Carousel Play/Pause Accessibility & Slide Selection Control */}
+        <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 flex items-center gap-2">
+          {/* Subtle slide indicators */}
+          <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-deep-navy/80 border border-white/20 backdrop-blur-xs shadow-sm">
+            {HERO_SLIDES.map((s, idx) => (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => {
+                  setActiveSlideIndex(idx);
+                  setLoadedIndices((current) => Array.from(new Set([...current, idx, (idx + 1) % HERO_SLIDES.length])));
+                }}
+                aria-label={`Go to slide ${idx + 1}: ${s.title}`}
+                className={cn(
+                  "h-1.5 rounded-full transition-all cursor-pointer",
+                  idx === activeSlideIndex
+                    ? "w-4 bg-heritage-gold-bright"
+                    : "w-1.5 bg-white/40 hover:bg-white/80"
+                )}
+              />
+            ))}
+          </div>
+
           <button
             type="button"
             onClick={() => setIsAutoPlaying((prev) => !prev)}
@@ -219,8 +286,14 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
           </button>
         </div>
 
-        {/* Main Content */}
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 md:px-8 w-full py-5 sm:py-8 md:py-12 lg:py-16 flex-grow flex flex-col justify-center">
+        {/* Main Content (fades out on poster slides so student photos and poster text remain 100% visible) */}
+        <div
+          className={cn(
+            "relative z-10 mx-auto max-w-7xl px-4 sm:px-6 md:px-8 w-full py-5 sm:py-8 md:py-12 lg:py-16 flex-grow flex flex-col justify-center transition-opacity duration-700",
+            isPosterActive ? "opacity-0 pointer-events-none" : "opacity-100"
+          )}
+          aria-hidden={isPosterActive}
+        >
           <motion.div
             variants={containerVariants}
             initial={prefersReducedMotion ? false : "hidden"}
