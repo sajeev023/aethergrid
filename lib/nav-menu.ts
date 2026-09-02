@@ -1,6 +1,7 @@
 import {
   Award,
   Building2,
+  Clock,
   Compass,
   History,
   Landmark,
@@ -37,6 +38,7 @@ export const navMenu: NavMenuItem[] = [
       { label: "Leadership", href: "/faculty#leadership", icon: Award },
       { label: "Departments", href: "/faculty#departments", icon: Users },
       { label: "Former Principals", href: "/faculty#principals", icon: History },
+      { label: "Retired Faculty", href: "/faculty#retired", icon: Clock },
     ],
   },
   {

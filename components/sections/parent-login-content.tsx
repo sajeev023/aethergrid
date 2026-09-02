@@ -1,66 +1,89 @@
 "use client";
 
 import Link from "next/link";
-import { Clock, Phone, Mail } from "lucide-react";
+import { ExternalLink, Phone, Mail, ShieldCheck, UserCheck, KeyRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/reveal";
+import { PORTAL_LINKS, lfjcData } from "@/lib/site-data";
 
 export function ParentLoginContent() {
   return (
-    <div className="section-texture overflow-hidden bg-royal-cream/40 py-6 sm:py-10 md:py-14 min-h-[40vh] flex items-center">
+    <div className="section-texture overflow-hidden bg-royal-cream/40 py-10 sm:py-16 min-h-[50vh] flex items-center">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 md:px-8 w-full">
         <Reveal>
-          <div className="bg-white border border-stone-texture shadow-[0_15px_40px_rgba(16,31,44,0.06)] rounded-lg overflow-hidden">
+          <div className="bg-white border border-stone-texture shadow-float rounded-2xl overflow-hidden">
             {/* Header Banner */}
-            <div className="bg-academic-slate p-3.5 sm:p-5 text-white border-b border-stone-texture/20 text-center">
-              <h1 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-tight leading-snug">
-                Parent Portal
+            <div className="bg-gradient-to-r from-deep-navy to-montfortian-blue p-6 text-white text-center">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-heritage-gold-bright font-sans">
+                Official College ERP Gateway
+              </span>
+              <h1 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1">
+                Parent & Student Login
               </h1>
+              <p className="text-xs text-royal-cream/80 font-sans mt-1">
+                Powered by MySkoolCom for Little Flower Junior College, Uppal
+              </p>
             </div>
 
-            <div className="p-4 sm:p-6 space-y-4 text-center">
-              <div className="w-12 h-12 rounded-full bg-royal-cream text-heritage-gold-strong flex items-center justify-center mx-auto border border-stone-texture/50 shadow-inner">
-                <Clock className="h-6 w-6" />
+            <div className="p-6 sm:p-8 space-y-6 text-center">
+              <div className="w-14 h-14 rounded-2xl bg-royal-cream text-montfortian-blue flex items-center justify-center mx-auto border border-stone-texture/60 shadow-inner">
+                <ShieldCheck className="h-7 w-7 text-heritage-gold-strong" />
               </div>
 
               <div className="space-y-2">
-                <span className="inline-block bg-amber-100 text-amber-900 border border-amber-300 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider font-sans">
-                  Coming Soon
-                </span>
+                <h2 className="font-serif text-lg font-bold text-academic-slate">
+                  Access Academic Records, Attendance & Fee Receipts
+                </h2>
                 <p className="text-xs sm:text-sm leading-relaxed text-academic-slate/75 font-sans max-w-lg mx-auto">
-                  Attendance, examination marks, and fee receipts will be available online. Until then, contact the college office for records.
+                  Students and parents can access real-time attendance, internal examination marks, terminal evaluation reports, and official fee transaction receipts via the active MySkoolCom college ERP system.
                 </p>
               </div>
 
-              <div className="pt-1 grid sm:grid-cols-2 gap-2 text-xs max-w-md mx-auto">
-                <a
-                  href="tel:+917673960151"
-                  className="flex items-center gap-2 font-semibold text-montfortian-blue hover:underline bg-white p-2 rounded border border-stone-texture/60"
-                >
-                  <Phone className="h-3.5 w-3.5" />
-                  <span>+91 7673960151</span>
-                </a>
-                <a
-                  href="mailto:info@lfjc.co.in"
-                  className="flex items-center gap-2 font-semibold text-montfortian-blue hover:underline bg-white p-2 rounded border border-stone-texture/60"
-                >
-                  <Mail className="h-3.5 w-3.5" />
-                  <span>info@lfjc.co.in</span>
-                </a>
+              {/* Login Credentials Instructions */}
+              <div className="text-left bg-royal-cream/30 p-4 rounded-xl border border-stone-texture/50 text-xs font-sans space-y-2">
+                <div className="flex items-start gap-2">
+                  <UserCheck className="w-4 h-4 text-montfortian-blue shrink-0 mt-0.5" />
+                  <span><strong>Username:</strong> Registered Student Admission Number or Mobile Number provided during enrollment.</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <KeyRound className="w-4 h-4 text-montfortian-blue shrink-0 mt-0.5" />
+                  <span><strong>Password:</strong> Assigned during admission. If forgotten, contact the administrative fee counter.</span>
+                </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="pt-2 flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center items-center">
-                <Button asChild size="lg" className="w-full sm:w-auto text-xs font-bold tracking-wider uppercase h-10 px-6 rounded-sm shadow-sm">
-                  <Link href="/contact" className="inline-flex items-center gap-2">
-                    Contact Administration Office
+              {/* Action Button */}
+              <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <Button asChild size="lg" className="w-full sm:w-auto bg-heritage-gold hover:bg-heritage-gold-bright text-deep-navy font-bold text-xs uppercase tracking-wider h-11 px-8 rounded-md shadow-md">
+                  <a
+                    href={PORTAL_LINKS.parentStudentLogin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2"
+                  >
+                    Proceed to MySkoolCom Portal
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </Button>
+                <Button asChild variant="secondary" size="lg" className="w-full sm:w-auto text-xs font-bold uppercase tracking-wider h-11 px-6">
+                  <Link href="/contact">
+                    Office Support
                   </Link>
                 </Button>
-                <Button asChild variant="secondary" size="lg" className="w-full sm:w-auto text-xs font-bold tracking-wider uppercase h-10 px-6 rounded-sm border-stone-texture/80 hover:bg-royal-cream/5 transition-all">
-                  <Link href="/" className="inline-flex items-center gap-1.5">
-                    Back to Home
-                  </Link>
-                </Button>
+              </div>
+
+              {/* Contact Assistance */}
+              <div className="pt-4 border-t border-stone-texture/20 text-xs text-academic-slate/70 font-sans">
+                <p>Need assistance with student login credentials?</p>
+                <div className="mt-2 flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-montfortian-blue">
+                  <a href={`tel:${lfjcData.phone.replace(/\s/g, "")}`} className="hover:underline flex items-center gap-1">
+                    <Phone className="w-3.5 h-3.5" />
+                    <span>{lfjcData.phone}</span>
+                  </a>
+                  <a href={`mailto:${lfjcData.email}`} className="hover:underline flex items-center gap-1">
+                    <Mail className="w-3.5 h-3.5" />
+                    <span>{lfjcData.email}</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

@@ -6,10 +6,17 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
+  Building2,
+  BookOpen,
+  Atom,
+  FlaskConical,
+  Trophy,
+  Sparkles,
 } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
 import { Section } from "@/components/section";
+import { campusInfrastructureData, goldenJubileeSchedule } from "@/lib/site-data";
 
 export interface GalleryItem {
   id: number;
@@ -31,7 +38,7 @@ const SILVER_JUBILEE_IMAGES: GalleryItem[] = [
   { id: 103, src: "/images/silver-jubilee/silver-jubilee-governor-message.jpg", badge: "1999", title: "Governor's message", category: "silver-jubilee" },
   { id: 104, src: "/images/silver-jubilee/silver-jubilee-rank-holders.jpg", badge: "1999", title: "IIT & State Rank Holders record", category: "silver-jubilee" },
   { id: 105, src: "/images/silver-jubilee/silver-jubilee-bro-vincent-portrait.jpg", badge: "1974", title: "Founding Principal Rev. Bro. Vincent", category: "silver-jubilee" },
-  { id: 106, src: "/images/silver-jubilee/silver-jubilee-dr-emmanuel.jpg", badge: "1976", title: "Dr. Emmanuel, Principal", category: "silver-jubilee" },
+  { id: 106, src: "/images/silver-jubilee/silver-jubilee-dr-emmanuel.jpg", badge: "1976", title: "Rev. Bro. Emmanuel, Principal", category: "silver-jubilee" },
   { id: 107, src: "/images/silver-jubilee/silver-jubilee-bro-claude.jpg", badge: "1979", title: "Rev. Bro. Claude, Principal", category: "silver-jubilee" },
   { id: 108, src: "/images/silver-jubilee/silver-jubilee-bro-john-kallarackal.jpg", badge: "1983", title: "Rev. Bro. John Kallarackal, Principal", category: "silver-jubilee" },
   { id: 109, src: "/images/silver-jubilee/silver-jubilee-bro-celestine.jpg", badge: "1990", title: "Rev. Bro. Celestine, Principal", category: "silver-jubilee" },
@@ -77,13 +84,13 @@ const SPORTS_IMAGES: GalleryItem[] = [
 ];
 
 const CAMPUS_LABS_IMAGES: GalleryItem[] = [
-  { id: 501, src: "/images/campus-drone.jpg", badge: "Campus", title: "Aerial view of campus", category: "campus" },
-  { id: 502, src: "/images/campus-building.jpg", badge: "Campus", title: "Main academic block", category: "campus" },
-  { id: 503, src: "/images/physics-lab.jpg", badge: "Lab", title: "Physics laboratory", category: "campus" },
+  { id: 501, src: "/images/campus-drone.jpg", badge: "Campus", title: "Aerial view of 2-acre campus", category: "campus" },
+  { id: 502, src: "/images/campus-building.jpg", badge: "Campus", title: "Main 3-storeyed academic block", category: "campus" },
+  { id: 503, src: "/images/physics-lab.jpg", badge: "Lab", title: "Physics laboratory & competitive coaching", category: "campus" },
   { id: 504, src: "/images/chemistry-lab.jpg", badge: "Lab", title: "Chemistry laboratory", category: "campus" },
-  { id: 505, src: "/images/computer-lab.jpg", badge: "Lab", title: "Computer centre", category: "campus" },
-  { id: 506, src: "/images/library-heritage.jpg", badge: "Library", title: "Reference library", category: "campus" },
-  { id: 507, src: "/images/sports-arena.jpg", badge: "Sports", title: "Sports arena", category: "campus" },
+  { id: 505, src: "/images/computer-lab.jpg", badge: "Lab", title: "Computer centre & Humanities diploma", category: "campus" },
+  { id: 506, src: "/images/library-heritage.jpg", badge: "Library", title: "Central reference library", category: "campus" },
+  { id: 507, src: "/images/sports-arena.jpg", badge: "Sports", title: "Sports arena & playgrounds", category: "campus" },
 ];
 
 const GOLDEN_JUBILEE_VIDEOS: VideoItem[] = [
@@ -106,18 +113,22 @@ function GalleryGrid({ items }: { items: GalleryItem[] }) {
             key={item.id}
             type="button"
             onClick={() => setLightbox(idx)}
-            className="group relative aspect-[4/3] overflow-hidden rounded-lg border border-stone-texture/50 bg-royal-cream text-left"
+            className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-stone-texture/50 bg-royal-cream text-left shadow-xs hover:border-heritage-gold/60 transition-all"
           >
             <Image
               src={item.src}
               alt={item.title}
               fill
               sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, 50vw"
-              className="object-cover transition-transform group-hover:scale-105"
+              className="object-cover transition-transform group-hover:scale-105 duration-300"
             />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-deep-navy/90 to-transparent p-2 sm:p-3">
-              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-heritage-gold-bright font-sans">{item.badge}</span>
-              <p className="text-[11px] sm:text-xs font-semibold text-white leading-tight mt-0.5">{item.title}</p>
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-deep-navy/90 via-deep-navy/50 to-transparent p-2.5 sm:p-3">
+              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-heritage-gold-bright font-sans">
+                {item.badge}
+              </span>
+              <p className="text-[11px] sm:text-xs font-semibold text-white leading-tight mt-0.5">
+                {item.title}
+              </p>
             </div>
           </button>
         ))}
@@ -125,13 +136,13 @@ function GalleryGrid({ items }: { items: GalleryItem[] }) {
 
       {lightbox !== null && (
         <div
-          className="fixed inset-0 z-50 bg-deep-navy/95 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-deep-navy/95 flex items-center justify-center p-4 backdrop-blur-sm"
           onClick={() => setLightbox(null)}
         >
           <button
             type="button"
             onClick={() => setLightbox(null)}
-            className="absolute top-4 right-4 text-white hover:text-heritage-gold-bright"
+            className="absolute top-4 right-4 p-2 text-white hover:text-heritage-gold-bright transition-colors rounded-full bg-white/10"
           >
             <X className="h-6 w-6" />
           </button>
@@ -139,7 +150,7 @@ function GalleryGrid({ items }: { items: GalleryItem[] }) {
             type="button"
             disabled={lightbox === 0}
             onClick={(e) => { e.stopPropagation(); setLightbox((l) => (l ?? 0) - 1); }}
-            className="absolute left-4 text-white disabled:opacity-30 hover:text-heritage-gold-bright"
+            className="absolute left-4 p-2 text-white disabled:opacity-30 hover:text-heritage-gold-bright transition-colors rounded-full bg-white/10"
           >
             <ChevronLeft className="h-8 w-8" />
           </button>
@@ -147,11 +158,11 @@ function GalleryGrid({ items }: { items: GalleryItem[] }) {
             type="button"
             disabled={lightbox === items.length - 1}
             onClick={(e) => { e.stopPropagation(); setLightbox((l) => (l ?? 0) + 1); }}
-            className="absolute right-4 text-white disabled:opacity-30 hover:text-heritage-gold-bright"
+            className="absolute right-4 p-2 text-white disabled:opacity-30 hover:text-heritage-gold-bright transition-colors rounded-full bg-white/10"
           >
             <ChevronRight className="h-8 w-8" />
           </button>
-          <div className="relative w-full max-w-4xl aspect-[4/3]">
+          <div className="relative w-full max-w-4xl aspect-[4/3] max-h-[85vh]">
             <Image
               src={items[lightbox].src}
               alt={items[lightbox].title}
@@ -169,60 +180,202 @@ export function CampusLife({ activeInst = "lfjc" }: { activeInst?: "root" | "lfs
   void activeInst;
   return (
     <div id="campus" className="bg-white">
-      <Section id="campus" variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30">
-        <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate">Campus & Labs</h1>
-        <div className="mt-5 sm:mt-8">
+      {/* ─── PAGE HEADER ──────────────────────────────────────────────── */}
+      <Section variant="default" className="bg-gradient-to-b from-deep-navy to-montfortian-blue text-white py-12 sm:py-16">
+        <div className="mx-auto max-w-4xl text-center">
+          <Reveal>
+            <span className="inline-block px-3 py-1 rounded-full bg-heritage-gold/20 border border-heritage-gold/40 text-heritage-gold-bright text-xs font-bold uppercase tracking-widest font-sans mb-3">
+              Campus & Infrastructure
+            </span>
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-white tracking-tight">
+              Campus Life & Heritage
+            </h1>
+            <p className="mt-2 text-sm sm:text-base text-royal-cream/80 max-w-2xl mx-auto font-sans leading-relaxed">
+              Experience the 2-acre historic Uppal campus with modern science laboratories, expansive sports grounds, and five decades of student achievements.
+            </p>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* ─── 1. ARCHITECTURAL & FLOOR-BY-FLOOR TOUR (Verbatim from infrastructure.php) ─── */}
+      <Section id="facilities" variant="default" className="bg-white py-12 sm:py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-8">
+            <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+              Comprehensive Architectural Tour
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1">
+              Building Layout & Campus Facilities
+            </h2>
+            <p className="text-xs sm:text-sm text-academic-slate/70 font-sans mt-1 max-w-3xl">
+              {campusInfrastructureData.summary}
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            {campusInfrastructureData.floors.map((floor, idx) => {
+              const icons = [Building2, BookOpen, Atom, FlaskConical, Trophy];
+              const Icon = icons[idx % icons.length];
+
+              return (
+                <Reveal key={floor.level} delay={idx * 0.03}>
+                  <div className="bg-royal-cream/20 rounded-2xl border border-stone-texture/50 p-5 h-full flex flex-col justify-between hover:border-heritage-gold/60 transition-colors">
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-montfortian-blue text-white font-sans">
+                          {floor.level}
+                        </span>
+                        <Icon className="w-5 h-5 text-heritage-gold-strong" />
+                      </div>
+                      <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate mb-2">
+                        {floor.title}
+                      </h3>
+                      <p className="text-xs leading-relaxed text-academic-slate/75 font-sans">
+                        {floor.description}
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </Section>
+
+      {/* ─── 2. CAMPUS & LABS PHOTO GALLERY ───────────────────────────── */}
+      <Section id="campus-labs" variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30 py-12 sm:py-16">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mb-2">
+            Campus & Laboratories Gallery
+          </h2>
+          <p className="text-xs sm:text-sm text-academic-slate/70 mb-6 font-sans">
+            Visual walkthrough of the academic building, laboratories, central library, and athletic grounds:
+          </p>
           <GalleryGrid items={CAMPUS_LABS_IMAGES} />
         </div>
       </Section>
-      <Section id="silver-jubilee" variant="default" className="bg-white">
-        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate">Silver Jubilee</h2>
-        <p className="mt-2 text-xs sm:text-sm text-academic-slate/70 font-sans">25th Anniversary — 1999</p>
-        <div className="mt-5 sm:mt-8">
+
+      {/* ─── 3. GOLDEN JUBILEE CELEBRATION (1974–2024) ─────────────────── */}
+      <Section id="golden-jubilee" variant="default" className="bg-white py-12 sm:py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                Historic Milestone
+              </span>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate mt-1">
+                Golden Jubilee Celebrations (1974–2024)
+              </h2>
+              <p className="text-xs sm:text-sm text-academic-slate/70 font-sans mt-1">
+                Commemorating 50 glorious years of Montfortian education, alumni reunions, and cultural presentations:
+              </p>
+            </div>
+            <div className="text-xs font-bold text-montfortian-blue bg-royal-cream px-3 py-1.5 rounded-full border border-stone-texture/40 shrink-0 font-sans">
+              50 Years of Excellence
+            </div>
+          </div>
+
+          <GalleryGrid items={GOLDEN_JUBILEE_IMAGES} />
+
+          {/* Official 22-Item Program Schedule (Verbatim from goldenjubilee.php) */}
+          <div className="mt-10 bg-royal-cream/25 rounded-2xl border border-stone-texture/50 p-6 sm:p-8">
+            <div className="flex items-center gap-2 mb-4">
+              <Sparkles className="w-5 h-5 text-heritage-gold-strong" />
+              <h3 className="font-serif text-lg sm:text-xl font-bold text-academic-slate">
+                Official Golden Jubilee Celebration Program of Events
+              </h3>
+            </div>
+            <p className="text-xs text-academic-slate/75 mb-6 font-sans">
+              Order of proceedings conducted at the LFJC Golden Jubilee main stage:
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+              {goldenJubileeSchedule.map((item, idx) => (
+                <div
+                  key={item}
+                  className="bg-white p-3 rounded-lg border border-stone-texture/40 shadow-xs flex items-center gap-2.5 text-xs text-academic-slate font-sans"
+                >
+                  <span className="w-5 h-5 rounded-full bg-heritage-gold/20 text-montfortian-blue text-[10px] font-bold flex items-center justify-center shrink-0">
+                    {idx + 1}
+                  </span>
+                  <span className="font-medium leading-tight">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* ─── 4. SILVER JUBILEE RETROSPECTIVE (1999) ───────────────────── */}
+      <Section id="silver-jubilee" variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30 py-12 sm:py-16">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mb-1">
+            Silver Jubilee Retrospective (1999)
+          </h2>
+          <p className="text-xs sm:text-sm text-academic-slate/70 mb-6 font-sans">
+            Archival captures from the 25th anniversary celebrations, state honors, and rank holders recognition:
+          </p>
           <GalleryGrid items={SILVER_JUBILEE_IMAGES} />
         </div>
       </Section>
-      <Section id="golden-jubilee" variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30">
-        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate">Golden Jubilee</h2>
-        <p className="mt-2 text-xs sm:text-sm text-academic-slate/70 font-sans">50th Anniversary — 1974–2024</p>
-        <div className="mt-5 sm:mt-8">
-          <GalleryGrid items={GOLDEN_JUBILEE_IMAGES} />
-        </div>
-      </Section>
-      <Section id="events" variant="default" className="bg-white">
-        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate">Events & Sports</h2>
-        <div className="mt-5 sm:mt-8 grid gap-8 sm:gap-10">
+
+      {/* ─── 5. EVENTS & SPORTS ───────────────────────────────────────── */}
+      <Section id="events" variant="default" className="bg-white py-12 sm:py-16">
+        <div className="mx-auto max-w-6xl space-y-10">
           <div>
-            <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate mb-3">Events & Seminars</h3>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mb-1">
+              Events, Seminars & Assemblies
+            </h2>
+            <p className="text-xs sm:text-sm text-academic-slate/70 mb-6 font-sans">
+              Guest lectures, motivational addresses, science seminars, and student assemblies at St. Montfort Auditorium:
+            </p>
             <GalleryGrid items={ASSEMBLIES_IMAGES} />
           </div>
+
           <div>
-            <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate mb-3">Sports</h3>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mb-1">
+              Athletics & Sports Tournaments
+            </h2>
+            <p className="text-xs sm:text-sm text-academic-slate/70 mb-6 font-sans">
+              Inter-college tournaments and annual sports meets in Volleyball, Basketball, Track & Field:
+            </p>
             <GalleryGrid items={SPORTS_IMAGES} />
           </div>
         </div>
       </Section>
-      <Section id="videos" variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30">
-        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate">Golden Jubilee Videos</h2>
-        <div className="mt-5 sm:mt-8 grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {GOLDEN_JUBILEE_VIDEOS.map((video, idx) => (
-            <Reveal key={video.title} delay={idx * 0.05}>
-              <div className="rounded-xl overflow-hidden border border-stone-texture/50 bg-white shadow-panel">
-                <div className="relative aspect-video">
-                  <iframe
-                    src={video.embedUrl}
-                    title={video.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                  />
+
+      {/* ─── 6. GOLDEN JUBILEE OFFICIAL VIDEOS ────────────────────────── */}
+      <Section id="videos" variant="default" className="bg-royal-cream/20 border-t border-stone-texture/30 py-12 sm:py-16">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mb-1">
+            Official Celebration Videos & Anthem
+          </h2>
+          <p className="text-xs sm:text-sm text-academic-slate/70 mb-6 font-sans">
+            Live video recordings from the Little Flower Junior College Golden Jubilee ceremonies:
+          </p>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {GOLDEN_JUBILEE_VIDEOS.map((video, idx) => (
+              <Reveal key={video.title} delay={idx * 0.04}>
+                <div className="rounded-2xl overflow-hidden border border-stone-texture/50 bg-white shadow-xs hover:border-heritage-gold/60 transition-colors">
+                  <div className="relative aspect-video bg-black">
+                    <iframe
+                      src={video.embedUrl}
+                      title={video.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-serif text-sm font-bold text-academic-slate">
+                      {video.title}
+                    </h3>
+                  </div>
                 </div>
-                <div className="p-3 sm:p-4">
-                  <h3 className="font-serif text-sm font-bold text-academic-slate">{video.title}</h3>
-                </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
         </div>
       </Section>
     </div>

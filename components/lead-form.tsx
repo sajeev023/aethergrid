@@ -14,7 +14,7 @@ import { getInstitutionData } from "@/lib/site-data";
 type FormType = "inquiry" | "contact" | "admissions";
 
 type LeadFormProps = {
-  type: FormType;
+  type?: FormType;
   activeInst?: "root" | "lfs" | "lfjc" | "lfdc";
   title?: string;
   description?: string;
@@ -30,7 +30,7 @@ type FormStatus = {
 };
 
 export function LeadForm({
-  type,
+  type = "admissions",
   activeInst = "lfjc",
   title,
   description,

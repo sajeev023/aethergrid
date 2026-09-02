@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
-import { getInstitutionData } from "@/lib/site-data";
+import { getInstitutionData, PORTAL_LINKS } from "@/lib/site-data";
 import { navMenu, type NavMenuItem, type NavSubItem } from "@/lib/nav-menu";
 import { cn } from "@/lib/utils";
 import { useFocusTrap } from "@/lib/use-focus-trap";
@@ -155,15 +155,23 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
         <div className="mx-auto flex max-w-[1440px] items-center justify-between px-3 sm:px-6 md:px-8 lg:px-10">
           <div className="flex items-center divide-x divide-white/10">
             <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 first:pl-0 py-1.5 sm:py-2 text-heritage-gold-bright">
-              Est. {instData.established}
+              Est. {instData.established} • 2-Acre Uppal Campus
             </span>
           </div>
           <div className="flex items-center divide-x divide-white/10">
+            <a
+              href={PORTAL_LINKS.studentSignup}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 sm:py-2 text-heritage-gold-bright hover:text-white transition-colors"
+            >
+              ★ Apply Online (2026–27)
+            </a>
             <Link
               href="/parent-login"
-              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-2 hover:text-white transition-colors"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 sm:py-2 hover:text-white transition-colors"
             >
-              Parent Portal
+              Parent & Student Portal
             </Link>
             <a
               className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 first:pl-0 py-1.5 sm:py-2 hover:text-white transition-colors"
@@ -315,7 +323,7 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: prefersReducedMotion ? 0 : 8 }}
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute left-0 right-0 top-full z-40 hidden xl:block"
+              className="absolute left-0 right-0 top-full z-40 hidden lg:block"
               onMouseEnter={() => openMenuFn(activeItem.label)}
               onMouseLeave={scheduleClose}
               onKeyDown={handleMenuKeyDown}

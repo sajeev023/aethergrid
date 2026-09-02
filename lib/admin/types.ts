@@ -132,6 +132,7 @@ export interface AlumniSubmission {
   studentId?: string;
   verificationDetails?: string;
   status: AlumniSubmissionStatus;
+  consentShare?: boolean;
   notes: string;
   updatedAt: string | null;
 }
