@@ -4,7 +4,7 @@ import { Faculty } from "@/components/sections/faculty";
 export const metadata: Metadata = {
   title: "Faculty",
   description:
-    "Leadership, departments, and former principals of Little Flower Junior College.",
+    "Meet the dedicated educators, department heads, and mentors of Little Flower Junior College — committed to excellence across all four intermediate streams.",
 };
 
 export default function LFJCFacultyPage() {

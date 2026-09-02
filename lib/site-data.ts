@@ -39,16 +39,16 @@ The activities of the Brothers of St. Gabriel in India are as multifarious as th
 };
 
 export const patronessData = {
-  name: "St. Thérèse of Lisieux",
-  title: "Patroness — The Little Flower of Jesus",
+  name: "St. ThÃ©rÃ¨se of Lisieux",
+  title: "Patroness â€” The Little Flower of Jesus",
   birthDate: "2 January 1873",
   deathDate: "30 September 1897",
   canonizationDate: "17 May 1925 by Pope Pius XI",
   image: "/images/official/st_therese.jpg",
   quote: "What matters in life is not great deeds, but great love.",
-  fullText: `St Therese of Lisieux, born Marie Françoise-Thérèse Martin (2 January 1873 – 30 September 1897) was a French Catholic who became a Carmelite nun at an early age. She is popularly known as "The Little Flower of Jesus", or simply "The Little Flower."
+  fullText: `St Therese of Lisieux, born Marie FranÃ§oise-ThÃ©rÃ¨se Martin (2 January 1873 â€“ 30 September 1897) was a French Catholic who became a Carmelite nun at an early age. She is popularly known as "The Little Flower of Jesus", or simply "The Little Flower."
 
-She died in obscurity at the age of 24. However, after her death, her autobiography – Story of a Soul was published and became a best-seller around the world. Her books explained her spiritual path of love and selflessness, and she became one among the three ladies to be considered a Doctor of the Catholic Church.
+She died in obscurity at the age of 24. However, after her death, her autobiography â€“ Story of a Soul was published and became a best-seller around the world. Her books explained her spiritual path of love and selflessness, and she became one among the three ladies to be considered a Doctor of the Catholic Church.
 
 "What matters in life," she wrote, "is not great deeds, but great love." She loved flowers and saw herself as the "Little Flower of Jesus". Because of this beautiful analogy, the title "Little Flower" remained with her. St. Therese was canonized by Pope Pius XI on May 17, 1925.`,
 };
@@ -81,28 +81,28 @@ export const visionMissionData = {
 
 // 4. ANNUAL THEMES ARCHIVE (Verbatim from theme.php & index.php)
 export const annualThemeData = {
-  currentYear: "2024–25",
+  currentYear: "2024â€“25",
   currentTheme: "ASPIRE ACQUIRE ACHIEVE",
   emblemImage: "/images/official/theme2024-25.jpg",
   facets: ["Aims", "Creativity", "Knowledge", "Skills", "Rewards", "Success", "Goals"],
   history: [
-    { year: "2024–25", theme: "Aspire Acquire Achieve" },
-    { year: "2023–24", theme: "Conserve, Preserve, Flourish" },
-    { year: "2022–23", theme: "Ignite to Enlighten" },
-    { year: "2021–22", theme: "Resilience & Renewal" },
-    { year: "2020–21", theme: "Transforming Challenges into Opportunities" },
-    { year: "2019–20", theme: "Rooted in Values, Soaring in Excellence" },
-    { year: "2018–19", theme: "Knowledge for Service" },
-    { year: "2017–18", theme: "Empowered to Excel" },
-    { year: "2016–17", theme: "Towards a Fraternal Society" },
-    { year: "2015–16", theme: "In Pursuit of Truth" },
+    { year: "2024â€“25", theme: "Aspire Acquire Achieve" },
+    { year: "2023â€“24", theme: "Conserve, Preserve, Flourish" },
+    { year: "2022â€“23", theme: "Ignite to Enlighten" },
+    { year: "2021â€“22", theme: "Resilience & Renewal" },
+    { year: "2020â€“21", theme: "Transforming Challenges into Opportunities" },
+    { year: "2019â€“20", theme: "Rooted in Values, Soaring in Excellence" },
+    { year: "2018â€“19", theme: "Knowledge for Service" },
+    { year: "2017â€“18", theme: "Empowered to Excel" },
+    { year: "2016â€“17", theme: "Towards a Fraternal Society" },
+    { year: "2015â€“16", theme: "In Pursuit of Truth" },
   ],
 };
 
 // 5. CAMPUS INFRASTRUCTURE TOUR (Verbatim synthesis from infrastructure.php - 6,162 chars)
 export const campusInfrastructureData = {
   summary:
-    "Situated on Tarnaka-Uppal Road opposite Survey of India, Little Flower Junior College is enclosed within a tall boundary wall lined with large trees. The 2-acre campus houses a grand three-storeyed building (ground plus three floors), expansive playgrounds for football, basketball, and volleyball, Brother's Quarters, and a regal welcoming statue of Patron Saint Thérèse.",
+    "Situated on Tarnaka-Uppal Road opposite Survey of India, Little Flower Junior College is enclosed within a tall boundary wall lined with large trees. The 2-acre campus houses a grand three-storeyed building (ground plus three floors), expansive playgrounds for football, basketball, and volleyball, Brother's Quarters, and a regal welcoming statue of Patron Saint ThÃ©rÃ¨se.",
   floors: [
     {
       level: "Ground Floor",
@@ -157,67 +157,67 @@ export const formerPrincipalsData: FormerPrincipal[] = [
   {
     name: "Late Rev. Bro. Vincent",
     designation: "Founder Principal & Correspondent",
-    tenure: "1974–76, 1982–83 (Correspondent 1976–79)",
+    tenure: "1974â€“76, 1982â€“83 (Correspondent 1976â€“79)",
     image: "/images/principals/bro_vincent.jpg",
   },
   {
     name: "Late Rev. Bro. Emmanuel",
     designation: "Principal",
-    tenure: "1976–1979",
+    tenure: "1976â€“1979",
     image: "/images/principals/bro_emmanuel.jpg",
   },
   {
     name: "Rev. Bro. Claude",
     designation: "Correspondent & Principal",
-    tenure: "1979–1982",
+    tenure: "1979â€“1982",
     image: "/images/principals/bro_claude.jpg",
   },
   {
     name: "Rev. Bro. John Kallarackal",
     designation: "Correspondent & Principal (Chief Patron, LFJCAN)",
-    tenure: "1983–1989",
+    tenure: "1983â€“1989",
     image: "/images/principals/bro_john.jpg",
   },
   {
     name: "Rev. Bro. Celestine",
     designation: "Correspondent & Principal",
-    tenure: "1989–1994",
+    tenure: "1989â€“1994",
     image: "/images/principals/bro_celestine.jpg",
   },
   {
     name: "Rev. Bro. M. A. George",
     designation: "Correspondent & Principal",
-    tenure: "1994–2000",
+    tenure: "1994â€“2000",
     image: "/images/principals/bro_george.jpg",
   },
   {
     name: "Late Rev. Bro. N. A. James",
     designation: "Correspondent & Principal",
-    tenure: "2000–2006",
+    tenure: "2000â€“2006",
     image: "/images/principals/bro_james_na.jpg",
   },
   {
     name: "Rev. Bro. Franky Noronha",
     designation: "Correspondent & Principal",
-    tenure: "2006–2011",
+    tenure: "2006â€“2011",
     image: "/images/principals/bro_franky.jpg",
   },
   {
     name: "Rev. Bro. Jaico Gervasis",
     designation: "Correspondent & Principal",
-    tenure: "2011–2017",
+    tenure: "2011â€“2017",
     image: "/images/principals/bro_jaico.jpg",
   },
   {
     name: "Rev. Bro. Vincent Reddy",
     designation: "Correspondent & Principal",
-    tenure: "2017–2023",
+    tenure: "2017â€“2023",
     image: "/images/principals/bro_vincent.jpg", // Verified image from jubilee archive
   },
   {
     name: "Rev. Bro. Arun Prakash Lawrance",
     designation: "Correspondent & Principal",
-    tenure: "2023–Present",
+    tenure: "2023â€“Present",
     image: "/images/principals/bro_arun_prakash.jpg",
   },
 ];
@@ -231,37 +231,37 @@ export interface FormerStaff {
 }
 
 export const formerStaffData: FormerStaff[] = [
-  { name: "Mr. E. V. Subbarao", designation: "Lecturer", department: "Physics", tenure: "1974–1997" },
-  { name: "Mr. Davis Joseph", designation: "Administrative Staff", department: "Administration", tenure: "1974–1997" },
-  { name: "Mr. Jayatheerth Katti", designation: "Lecturer", department: "Mathematics", tenure: "1981–2003" },
-  { name: "Ms. B. D. M. Sakunthala", designation: "Lecturer", department: "Zoology", tenure: "1974–2005" },
-  { name: "Ms. U. Saraswathi", designation: "Lecturer", department: "English", tenure: "1995–2005" },
-  { name: "Mr. K. Jyothi Ram", designation: "Administrative Staff", department: "Administration", tenure: "1990–2005" },
-  { name: "Ms. Sadhana Srivastava", designation: "Lecturer", department: "English", tenure: "1983–2008" },
-  { name: "Mr. Nagaraja Kumar", designation: "Lecturer", department: "Physics", tenure: "1982–2010" },
-  { name: "Ms. Sudheshan Chattopadhyay", designation: "Lecturer", department: "French", tenure: "1981–2013" },
-  { name: "Mr. T. Rajeshwara Reddy", designation: "Lecturer", department: "Sanskrit", tenure: "1982–2013" },
-  { name: "Mr. P. Kesavacharya", designation: "Lecturer", department: "Telugu", tenure: "1982–2013" },
-  { name: "Ms. Savithri Narayanam", designation: "Lecturer", department: "Library Science", tenure: "1999–2014" },
-  { name: "Dr. B. Shaila Tanuja", designation: "Lecturer", department: "Zoology", tenure: "1984–2016" },
-  { name: "Dr. Riyaz Ul Ansari", designation: "Lecturer", department: "Hindi", tenure: "1991–2016" },
-  { name: "Mr. Bheeshma Chary", designation: "Support Staff", department: "Campus Support", tenure: "1987–2016" },
-  { name: "Ms. J. Meenakshi", designation: "Lecturer", department: "Sanskrit", tenure: "2000–2017" },
-  { name: "Mr. A. R. Narasimha Rao", designation: "Lecturer", department: "Physics", tenure: "1985–2017" },
-  { name: "Ms. P. Usha", designation: "Lecturer", department: "Chemistry", tenure: "1983–2017" },
-  { name: "Mr. Mohammed Jahangir", designation: "Support Staff", department: "Campus Support", tenure: "1982–2018" },
-  { name: "Ms. K. Susheela", designation: "Support Staff", department: "Campus Support", tenure: "1987–2018" },
-  { name: "Mr. K. Srinivasdev", designation: "Lecturer", department: "Physics", tenure: "1991–2019" },
-  { name: "Mr. S. Balaiah", designation: "Support Staff", department: "Campus Support", tenure: "1985–2020" },
-  { name: "Dr. Anitha Lincoln", designation: "Lecturer", department: "Chemistry", tenure: "1986–2020" },
-  { name: "Ms. Rachel Oommen", designation: "Lecturer", department: "English", tenure: "1988–2020" },
-  { name: "Mr. T. D. Babu", designation: "Support Staff", department: "Campus Support", tenure: "1989–2022" },
-  { name: "Ms. Sabiha Fathima", designation: "Lecturer", department: "Chemistry", tenure: "1987–2023" },
-  { name: "Mr. Shaik Lateef", designation: "Support Staff", department: "Campus Support", tenure: "1983–2023" },
-  { name: "Mr. B. Paul Raju", designation: "Lecturer", department: "Mathematics", tenure: "2000–2023" },
-  { name: "Mr. M. Amarnath", designation: "Lecturer", department: "Computer Science", tenure: "1996–2023" },
-  { name: "Mr. Ch. Devender", designation: "Support Staff", department: "Campus Support", tenure: "1985–2023" },
-  { name: "Ms. Jayashree", designation: "Lecturer", department: "Botany", tenure: "1990–2024" },
+  { name: "Mr. E. V. Subbarao", designation: "Lecturer", department: "Physics", tenure: "1974â€“1997" },
+  { name: "Mr. Davis Joseph", designation: "Administrative Staff", department: "Administration", tenure: "1974â€“1997" },
+  { name: "Mr. Jayatheerth Katti", designation: "Lecturer", department: "Mathematics", tenure: "1981â€“2003" },
+  { name: "Ms. B. D. M. Sakunthala", designation: "Lecturer", department: "Zoology", tenure: "1974â€“2005" },
+  { name: "Ms. U. Saraswathi", designation: "Lecturer", department: "English", tenure: "1995â€“2005" },
+  { name: "Mr. K. Jyothi Ram", designation: "Administrative Staff", department: "Administration", tenure: "1990â€“2005" },
+  { name: "Ms. Sadhana Srivastava", designation: "Lecturer", department: "English", tenure: "1983â€“2008" },
+  { name: "Mr. Nagaraja Kumar", designation: "Lecturer", department: "Physics", tenure: "1982â€“2010" },
+  { name: "Ms. Sudheshan Chattopadhyay", designation: "Lecturer", department: "French", tenure: "1981â€“2013" },
+  { name: "Mr. T. Rajeshwara Reddy", designation: "Lecturer", department: "Sanskrit", tenure: "1982â€“2013" },
+  { name: "Mr. P. Kesavacharya", designation: "Lecturer", department: "Telugu", tenure: "1982â€“2013" },
+  { name: "Ms. Savithri Narayanam", designation: "Lecturer", department: "Library Science", tenure: "1999â€“2014" },
+  { name: "Dr. B. Shaila Tanuja", designation: "Lecturer", department: "Zoology", tenure: "1984â€“2016" },
+  { name: "Dr. Riyaz Ul Ansari", designation: "Lecturer", department: "Hindi", tenure: "1991â€“2016" },
+  { name: "Mr. Bheeshma Chary", designation: "Support Staff", department: "Campus Support", tenure: "1987â€“2016" },
+  { name: "Ms. J. Meenakshi", designation: "Lecturer", department: "Sanskrit", tenure: "2000â€“2017" },
+  { name: "Mr. A. R. Narasimha Rao", designation: "Lecturer", department: "Physics", tenure: "1985â€“2017" },
+  { name: "Ms. P. Usha", designation: "Lecturer", department: "Chemistry", tenure: "1983â€“2017" },
+  { name: "Mr. Mohammed Jahangir", designation: "Support Staff", department: "Campus Support", tenure: "1982â€“2018" },
+  { name: "Ms. K. Susheela", designation: "Support Staff", department: "Campus Support", tenure: "1987â€“2018" },
+  { name: "Mr. K. Srinivasdev", designation: "Lecturer", department: "Physics", tenure: "1991â€“2019" },
+  { name: "Mr. S. Balaiah", designation: "Support Staff", department: "Campus Support", tenure: "1985â€“2020" },
+  { name: "Dr. Anitha Lincoln", designation: "Lecturer", department: "Chemistry", tenure: "1986â€“2020" },
+  { name: "Ms. Rachel Oommen", designation: "Lecturer", department: "English", tenure: "1988â€“2020" },
+  { name: "Mr. T. D. Babu", designation: "Support Staff", department: "Campus Support", tenure: "1989â€“2022" },
+  { name: "Ms. Sabiha Fathima", designation: "Lecturer", department: "Chemistry", tenure: "1987â€“2023" },
+  { name: "Mr. Shaik Lateef", designation: "Support Staff", department: "Campus Support", tenure: "1983â€“2023" },
+  { name: "Mr. B. Paul Raju", designation: "Lecturer", department: "Mathematics", tenure: "2000â€“2023" },
+  { name: "Mr. M. Amarnath", designation: "Lecturer", department: "Computer Science", tenure: "1996â€“2023" },
+  { name: "Mr. Ch. Devender", designation: "Support Staff", department: "Campus Support", tenure: "1985â€“2023" },
+  { name: "Ms. Jayashree", designation: "Lecturer", department: "Botany", tenure: "1990â€“2024" },
 ];
 
 // 7b. RETIRED FACULTY ARCHIVE (27 Emeritus Educators with Verified Portraits)
@@ -281,7 +281,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Chemistry Department",
     category: "retired",
     image: "/images/faculty/retired/dr_anitha_lincon.jpg",
-    tenure: "1986–2020",
+    tenure: "1986â€“2020",
   },
   {
     name: "Dr. Riyaz Ul Ansari",
@@ -289,7 +289,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Languages Department",
     category: "retired",
     image: "/images/faculty/retired/dr_riyaz_ui_ansari.jpg",
-    tenure: "1991–2016",
+    tenure: "1991â€“2016",
   },
   {
     name: "Dr. T. Rajeswara Reddy",
@@ -297,7 +297,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Languages Department",
     category: "retired",
     image: "/images/faculty/retired/dr_t_rajeswara_reddy.jpg",
-    tenure: "1982–2013",
+    tenure: "1982â€“2013",
   },
   {
     name: "Mr. B. Paul Raju",
@@ -305,7 +305,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Mathematics Department",
     category: "retired",
     image: "/images/faculty/retired/mr_b_paul_raju.jpg",
-    tenure: "2000–2023",
+    tenure: "2000â€“2023",
   },
   {
     name: "Mr. Bheeshma Chary",
@@ -313,7 +313,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Support Staff",
     category: "retired",
     image: "/images/faculty/retired/mr_bheeshma_chary.jpg",
-    tenure: "1987–2016",
+    tenure: "1987â€“2016",
   },
   {
     name: "Mr. David Joseph",
@@ -321,7 +321,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Office Administration",
     category: "retired",
     image: "/images/faculty/retired/mr_david_joseph.jpg",
-    tenure: "1974–1997",
+    tenure: "1974â€“1997",
   },
   {
     name: "Mr. E. V. Subbarao",
@@ -329,7 +329,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Physics Department",
     category: "retired",
     image: "/images/faculty/retired/mr_e_v_subbarao.jpg",
-    tenure: "1974–1997",
+    tenure: "1974â€“1997",
   },
   {
     name: "Mr. Jayatheerth Katti",
@@ -337,7 +337,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Mathematics Department",
     category: "retired",
     image: "/images/faculty/retired/mr_jayatheerth_katti.jpg",
-    tenure: "1981–2003",
+    tenure: "1981â€“2003",
   },
   {
     name: "Mr. K. Srinivadev",
@@ -345,7 +345,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Physics Department",
     category: "retired",
     image: "/images/faculty/retired/mr_k_srinivadev.jpg",
-    tenure: "1991–2019",
+    tenure: "1991â€“2019",
   },
   {
     name: "Mr. M. Amarnath",
@@ -353,7 +353,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Computer & Library Department",
     category: "retired",
     image: "/images/faculty/retired/mr_m_amarnath.jpg",
-    tenure: "1996–2023",
+    tenure: "1996â€“2023",
   },
   {
     name: "Mr. S. Balaiah",
@@ -361,7 +361,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Support Staff",
     category: "retired",
     image: "/images/faculty/retired/mr_s_balaiah.jpg",
-    tenure: "1985–2020",
+    tenure: "1985â€“2020",
   },
   {
     name: "Mr. T. D. Babu",
@@ -369,7 +369,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Support Staff",
     category: "retired",
     image: "/images/faculty/retired/mr_t_d_baaabu.jpg",
-    tenure: "1989–2022",
+    tenure: "1989â€“2022",
   },
   {
     name: "Mr. A. R. Narasimharao",
@@ -377,7 +377,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Physics Department",
     category: "retired",
     image: "/images/faculty/retired/mr_a_r_narasimharao.jpg",
-    tenure: "1985–2017",
+    tenure: "1985â€“2017",
   },
   {
     name: "Mr. K. Jothi Ram",
@@ -385,7 +385,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Office Administration",
     category: "retired",
     image: "/images/faculty/retired/mr_k_jothi_ram.jpg",
-    tenure: "1990–2005",
+    tenure: "1990â€“2005",
   },
   {
     name: "Mr. Nagaraja Kumar",
@@ -393,7 +393,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Physics Department",
     category: "retired",
     image: "/images/faculty/retired/mr_nagaraja_kumar.jpg",
-    tenure: "1982–2010",
+    tenure: "1982â€“2010",
   },
   {
     name: "Mr. P. Kesavacharaya",
@@ -401,7 +401,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Languages Department",
     category: "retired",
     image: "/images/faculty/retired/mr_p_kesavacharaya.jpg",
-    tenure: "1982–2013",
+    tenure: "1982â€“2013",
   },
   {
     name: "Ms. B. M. D. Sakunthala",
@@ -409,7 +409,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Biology Department",
     category: "retired",
     image: "/images/faculty/retired/ms_bmd_sakunthala.jpg",
-    tenure: "1974–2005",
+    tenure: "1974â€“2005",
   },
   {
     name: "Ms. Raachel Oommen",
@@ -417,7 +417,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Languages Department",
     category: "retired",
     image: "/images/faculty/retired/ms_raachel_oommen.jpg",
-    tenure: "1988–2020",
+    tenure: "1988â€“2020",
   },
   {
     name: "Ms. Saghana Srivastava",
@@ -425,7 +425,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Languages Department",
     category: "retired",
     image: "/images/faculty/retired/ms_saghana_srivastava.jpg",
-    tenure: "1983–2008",
+    tenure: "1983â€“2008",
   },
   {
     name: "Ms. Savithri Narayanan",
@@ -433,7 +433,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Computer & Library Department",
     category: "retired",
     image: "/images/faculty/retired/ms_savithri_narayanan.jpg",
-    tenure: "1999–2014",
+    tenure: "1999â€“2014",
   },
   {
     name: "Ms. Sudheshna Chattopadhyay",
@@ -441,7 +441,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Languages Department",
     category: "retired",
     image: "/images/faculty/retired/ms_sudheshna_chattopadhyay.jpg",
-    tenure: "1981–2013",
+    tenure: "1981â€“2013",
   },
   {
     name: "Ms. J. Meenakshi",
@@ -449,7 +449,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Languages Department",
     category: "retired",
     image: "/images/faculty/retired/ms_j_menakshi.jpg",
-    tenure: "2000–2017",
+    tenure: "2000â€“2017",
   },
   {
     name: "Ms. K. Susheela",
@@ -457,7 +457,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Support Staff",
     category: "retired",
     image: "/images/faculty/retired/ms_k_susheela.jpg",
-    tenure: "1987–2018",
+    tenure: "1987â€“2018",
   },
   {
     name: "Ms. P. Usha",
@@ -465,7 +465,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Chemistry Department",
     category: "retired",
     image: "/images/faculty/retired/ms_p_usha.jpg",
-    tenure: "1983–2017",
+    tenure: "1983â€“2017",
   },
   {
     name: "Ms. Sabiha Fathima",
@@ -473,7 +473,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Chemistry Department",
     category: "retired",
     image: "/images/faculty/retired/ms_sabiha_fathima.jpg",
-    tenure: "1987–2023",
+    tenure: "1987â€“2023",
   },
   {
     name: "Ms. V. Saraswathi",
@@ -481,7 +481,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Languages Department",
     category: "retired",
     image: "/images/faculty/retired/ms_v_saraswathi.jpg",
-    tenure: "1995–2005",
+    tenure: "1995â€“2005",
   },
   {
     name: "Mr. Shaik Lateef",
@@ -489,61 +489,61 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     department: "Support Staff",
     category: "retired",
     image: "/images/faculty/retired/shaik_lateef.jpg",
-    tenure: "1983–2023",
+    tenure: "1983â€“2023",
   },
 ];
 
 
 // 8. BROTHERS WHO STUDIED AT LFJC AND SERVED >25 YEARS IN BROTHERHOOD (Verbatim from heritage.php - 20 Brothers)
 export const brothersInServiceData = [
-  { name: "Bro. James C.A.", batch: "1974–76" },
-  { name: "Bro. Sleeva Reddy", batch: "1974–76" },
-  { name: "Bro. Franky Noronha", batch: "1977–79" },
-  { name: "Bro. William D’Mello", batch: "1977–79" },
-  { name: "Bro. James N.A.", batch: "1977–79" },
-  { name: "Bro. Sebastian P.T.", batch: "1978–80" },
-  { name: "Bro. Jaico Gervasis", batch: "1979–81" },
-  { name: "Late Bro. Yuju Francis", batch: "1980–82" },
-  { name: "Late Bro. Benny Jose", batch: "1981–83" },
-  { name: "Bro. Chinnappa Reddy", batch: "1982–84" },
-  { name: "Bro. Monson Kuriakose", batch: "1982–84" },
-  { name: "Late Bro. Ravikumar Reddy", batch: "1982–84" },
-  { name: "Bro. Vincent Mendonca", batch: "1984–86" },
-  { name: "Bro. Hruday Kumar Reddy", batch: "1985–87" },
-  { name: "Bro. Jimmy Kalapurayil", batch: "1985–87" },
-  { name: "Bro. Anthony M.A.", batch: "1985–87" },
-  { name: "Bro. Roque D’Cunha", batch: "1985–87" },
-  { name: "Bro. Balashourie", batch: "1986–88" },
-  { name: "Bro. George Joseph", batch: "1986–88" },
-  { name: "Bro. Shajan Anthony M.", batch: "1986–88" },
+  { name: "Bro. James C.A.", batch: "1974â€“76" },
+  { name: "Bro. Sleeva Reddy", batch: "1974â€“76" },
+  { name: "Bro. Franky Noronha", batch: "1977â€“79" },
+  { name: "Bro. William Dâ€™Mello", batch: "1977â€“79" },
+  { name: "Bro. James N.A.", batch: "1977â€“79" },
+  { name: "Bro. Sebastian P.T.", batch: "1978â€“80" },
+  { name: "Bro. Jaico Gervasis", batch: "1979â€“81" },
+  { name: "Late Bro. Yuju Francis", batch: "1980â€“82" },
+  { name: "Late Bro. Benny Jose", batch: "1981â€“83" },
+  { name: "Bro. Chinnappa Reddy", batch: "1982â€“84" },
+  { name: "Bro. Monson Kuriakose", batch: "1982â€“84" },
+  { name: "Late Bro. Ravikumar Reddy", batch: "1982â€“84" },
+  { name: "Bro. Vincent Mendonca", batch: "1984â€“86" },
+  { name: "Bro. Hruday Kumar Reddy", batch: "1985â€“87" },
+  { name: "Bro. Jimmy Kalapurayil", batch: "1985â€“87" },
+  { name: "Bro. Anthony M.A.", batch: "1985â€“87" },
+  { name: "Bro. Roque Dâ€™Cunha", batch: "1985â€“87" },
+  { name: "Bro. Balashourie", batch: "1986â€“88" },
+  { name: "Bro. George Joseph", batch: "1986â€“88" },
+  { name: "Bro. Shajan Anthony M.", batch: "1986â€“88" },
 ];
 
 // 9. OFFICIAL LFJC ALUMNI NETWORK EXECUTIVE BOARD (Circular 4)
 export const alumniExecutiveBoard = [
-  { role: "Chief Patron", name: "Rev. Bro. John Kallarackal", details: "Former Principal, LFJC (1983–89)" },
+  { role: "Chief Patron", name: "Rev. Bro. John Kallarackal", details: "Former Principal, LFJC (1983â€“89)" },
   { role: "Chairman", name: "Rev. Bro. Arun Prakash Lawrance", details: "Principal, Little Flower Junior College" },
-  { role: "President", name: "Major Gen. MLN Sravan Kumar", details: "1976 Batch — Retired Army Officer" },
-  { role: "Vice President", name: "Dr. B.V.J. Vikas", details: "1986 Batch — Prosthodontist & Dental Surgeon" },
-  { role: "Vice President", name: "Dr. Vandana Samba", details: "1999 Batch — Professor" },
-  { role: "Secretary", name: "Mr. Ravi Devulapally", details: "1989 Batch — Managing Director, Database — IT Industry" },
-  { role: "Secretary", name: "Dr. Sneha Verghese", details: "2005 Batch — Asst. Section Officer, ICAR" },
-  { role: "Treasurer", name: "Mr. Naveen Kaparthy", details: "1998 Batch — Vice President, JP Morgan Chase" },
-  { role: "Executive Member", name: "Prof. Dr. A. Patrick", details: "1992 Batch — Sr. Asst. Professor, Dept. of Commerce, OU" },
-  { role: "Executive Member", name: "Dr. Vijaykumar", details: "1989 Batch — Doctor" },
+  { role: "President", name: "Major Gen. MLN Sravan Kumar", details: "1976 Batch â€” Retired Army Officer" },
+  { role: "Vice President", name: "Dr. B.V.J. Vikas", details: "1986 Batch â€” Prosthodontist & Dental Surgeon" },
+  { role: "Vice President", name: "Dr. Vandana Samba", details: "1999 Batch â€” Professor" },
+  { role: "Secretary", name: "Mr. Ravi Devulapally", details: "1989 Batch â€” Managing Director, Database â€” IT Industry" },
+  { role: "Secretary", name: "Dr. Sneha Verghese", details: "2005 Batch â€” Asst. Section Officer, ICAR" },
+  { role: "Treasurer", name: "Mr. Naveen Kaparthy", details: "1998 Batch â€” Vice President, JP Morgan Chase" },
+  { role: "Executive Member", name: "Prof. Dr. A. Patrick", details: "1992 Batch â€” Sr. Asst. Professor, Dept. of Commerce, OU" },
+  { role: "Executive Member", name: "Dr. Vijaykumar", details: "1989 Batch â€” Doctor" },
 ];
 
 // 10. 25 CORE COMMITTEE ALUMNI (Verbatim from Circular 2)
 export const alumniCoreCommittee = [
   { name: "Major Gen. MLN Sravan Kumar", batch: "1976 Batch", role: "Retired Army Officer", designation: "President" },
   { name: "Dr. Subbarayudu", batch: "1983 Batch", role: "Professor", designation: "Core Committee Member" },
-  { name: "Dr. B.V.J. Vikas", batch: "1986 Batch", role: "Prosthodontics – Dental Surgeon", designation: "Vice President" },
+  { name: "Dr. B.V.J. Vikas", batch: "1986 Batch", role: "Prosthodontics â€“ Dental Surgeon", designation: "Vice President" },
   { name: "Mr. Venkateshwarlu", batch: "1987 Batch", role: "Manager, State Bank of India", designation: "Core Committee Member" },
   { name: "Dr. Vijaykumar", batch: "1989 Batch", role: "Doctor", designation: "Executive Member" },
-  { name: "Mr. Ravi Devulapally", batch: "1989 Batch", role: "Managing Director of Database – IT Industry", designation: "Secretary" },
+  { name: "Mr. Ravi Devulapally", batch: "1989 Batch", role: "Managing Director of Database â€“ IT Industry", designation: "Secretary" },
   { name: "Prof. Dr. A. Patrick", batch: "1992 Batch", role: "Sr. Asst Professor, Dept. of Commerce, OU", designation: "Executive Member" },
-  { name: "Dr. Ranganath", batch: "1994 Batch", role: "Doctor – Oncologist, NIMS", designation: "Core Committee Member" },
+  { name: "Dr. Ranganath", batch: "1994 Batch", role: "Doctor â€“ Oncologist, NIMS", designation: "Core Committee Member" },
   { name: "Mr. Rakesh Chandra", batch: "1994 Batch", role: "Director Finance in Virtusa S/W Consulting", designation: "Core Committee Member" },
-  { name: "Dr. Pratap Varma", batch: "1995 Batch", role: "Doctor – Oncologist, AOI", designation: "Core Committee Member" },
+  { name: "Dr. Pratap Varma", batch: "1995 Batch", role: "Doctor â€“ Oncologist, AOI", designation: "Core Committee Member" },
   { name: "Mr. K. Venkat Sainath", batch: "1995 Batch", role: "Regional Manager, Policy Bazar", designation: "Core Committee Member" },
   { name: "Mr. Pankaj Agarwal", batch: "1996 Batch", role: "Entrepreneur", designation: "Core Committee Member" },
   { name: "Mr. Vijay Reddy", batch: "1997 Batch", role: "Lecturer, Little Flower Degree College, Uppal", designation: "Core Committee Member" },
@@ -564,9 +564,9 @@ export const alumniCoreCommittee = [
 // Official Alumni Testimonial (Verbatim from index.php)
 export const officialAlumniTestimonial = {
   quote:
-    "There’s nothing in a caterpillar that shows it will be a Butterfly tomorrow. Likewise, children are the same. People and institutions they get to work with will make a profound influence on their thinking and future. LFJC has time and again for 50 years proved to shape lives of numerous students, who in turn made a positive impact in the larger society. Heartening to see the standards and charisma being consistently maintained over the past five decades. Thank you for all that I immensely benefitted from being a part at my formative years here.",
+    "Thereâ€™s nothing in a caterpillar that shows it will be a Butterfly tomorrow. Likewise, children are the same. People and institutions they get to work with will make a profound influence on their thinking and future. LFJC has time and again for 50 years proved to shape lives of numerous students, who in turn made a positive impact in the larger society. Heartening to see the standards and charisma being consistently maintained over the past five decades. Thank you for all that I immensely benefitted from being a part at my formative years here.",
   author: "Naveen Kaparthy",
-  batch: "1996–98 Batch",
+  batch: "1996â€“98 Batch",
   designation: "Vice President, JP Morgan Chase | Treasurer, LFJC Alumni Network",
 };
 
@@ -578,7 +578,7 @@ export const goldenJubileeSchedule = [
   "Welcome Dance",
   "Jubilee Song",
   "Japanese Flower Dance",
-  "Principal’s Address (Rev. Bro. Arun Prakash)",
+  "Principalâ€™s Address (Rev. Bro. Arun Prakash)",
   "Mindful Living Performance",
   "Mime on Drug Menace Awareness",
   "Felicitation and Keynote Speeches",
@@ -615,15 +615,15 @@ export const lfjcData = {
   postalCode: "500039",
   country: "IN",
   society: "Brothers of St. Gabriel Educational Society",
-  admissionsLabel: "Admissions 2026–27 Open (MPC, BiPC, MEC, CEC)",
+  admissionsLabel: "Admissions 2026â€“27 Open (MPC, BiPC, MEC, CEC)",
   principalName: "Rev. Bro. Arun Prakash Lawrance",
   principalRole: "Correspondent & Principal",
   principalQuote: "Education is the passport to the future, for tomorrow belongs to those who prepare for it today.",
   principalMessage:
-    "Warm greetings and best wishes to all. In an ever-evolving world, education remains the cornerstone of personal and national growth. At Little Flower Junior College, Uppal, we have proudly upheld this belief for the last 50 years, establishing ourselves as a premier institution for quality education. Our alumni’s accomplishments—gracing esteemed positions across Medicine, Engineering, Arts, Administration, Sports, Cinema, and Politics—stand as a testament to our commitment to nation-building and excellence. 'Education is the passport to the future, for tomorrow belongs to those who prepare for it today.' Little Flower Junior College will continue to illuminate paths for generations to come.",
+    "Warm greetings and best wishes to all. In an ever-evolving world, education remains the cornerstone of personal and national growth. At Little Flower Junior College, Uppal, we have proudly upheld this belief for the last 50 years, establishing ourselves as a premier institution for quality education. Our alumniâ€™s accomplishmentsâ€”gracing esteemed positions across Medicine, Engineering, Arts, Administration, Sports, Cinema, and Politicsâ€”stand as a testament to our commitment to nation-building and excellence. 'Education is the passport to the future, for tomorrow belongs to those who prepare for it today.' Little Flower Junior College will continue to illuminate paths for generations to come.",
   principalImg: "/images/principals/bro_arun_prakash.jpg",
   stats: [
-    { value: "50+", label: "Years of Academic Legacy (1974–2024)" },
+    { value: "50+", label: "Years of Academic Legacy (1974â€“2024)" },
     { value: "1,600+", label: "Current Enrolled Students" },
     { value: "2", label: "Acres Campus Opposite Survey of India" },
     { value: "4", label: "Board-Recognized Intermediate Streams" },
@@ -685,13 +685,13 @@ export const lfjcData = {
 
   // VERIFIED ACTIVE FACULTY & STAFF (100% ground-truth match to dept.php)
   faculty: [
-    // 1. Leadership
+    // 1. Principal (first index)
     {
       name: "Rev. Bro. Arun Prakash Lawrance",
       designation: "Correspondent & Principal",
       subject: "Administration & Leadership",
       department: "Administrative Staff",
-      image: "/images/principals/bro_arun_prakash.jpg",
+      image: "/images/brother_arun_official.jpg"
     },
     // 2. Mathematics Department
     {
@@ -699,78 +699,85 @@ export const lfjcData = {
       designation: "HOD",
       subject: "Mathematics",
       department: "Mathematics Department",
-      image: "/images/faculty/evsrlakshmi.jpg",
+      image: "/images/faculty/evsrlakshmi.jpg"
     },
     {
-      name: "Mr. Praveen",
+      name: "Mr. Praveen Kumar",
       designation: "Faculty",
       subject: "Mathematics",
       department: "Mathematics Department",
-      image: "/images/faculty/praveenkumar.jpg",
+      image: "/images/faculty/praveenkumar.jpg"
     },
     {
       name: "Mr. H. Naresh Kumar",
       designation: "Faculty",
       subject: "Mathematics",
       department: "Mathematics Department",
-      image: "/images/faculty/hnareshkumar.jpg",
+      image: "/images/faculty/hnareshkumar.jpg"
     },
     {
-      name: "Mr. P. Mahesh",
+      name: "Mr. P Mahesh",
       designation: "Faculty",
       subject: "Mathematics",
       department: "Mathematics Department",
-      image: "/images/faculty/pmahesh.jpg",
+      image: "/images/faculty/pmahesh.jpg"
     },
     {
       name: "Mr. Purnachander",
       designation: "Faculty",
       subject: "Mathematics",
       department: "Mathematics Department",
-      image: "/images/faculty/purnachendar.jpg",
+      image: "/images/faculty/purnachendar.jpg"
     },
     {
       name: "Mr. Satheesh S",
       designation: "Faculty",
       subject: "Mathematics",
       department: "Mathematics Department",
-      image: "/images/faculty/satheeshkumar.jpg",
+      image: "/images/faculty/satheeshkumar.jpg"
     },
     {
       name: "Mr. Sharanraj",
       designation: "Faculty",
       subject: "Mathematics",
       department: "Mathematics Department",
-      image: "/images/faculty/sharanraj.jpg",
+      image: "/images/faculty/sharanraj.jpg"
+    },
+    {
+      name: "Mr. Nellutla Kiran Prasad",
+      designation: "Faculty",
+      subject: "Mathematics",
+      department: "Mathematics Department",
+      image: "/images/faculty/nellutlakiranprasad.jpg"
     },
     // 3. Physics Department
     {
-      name: "Mr. R. Srikanth",
+      name: "Mr. R Srikanth",
       designation: "HOD",
       subject: "Physics",
       department: "Physics Department",
-      image: "/images/faculty/srikanth.jpg",
+      image: "/images/faculty/srikanth.jpg"
     },
     {
-      name: "Mr. C. Naresh Kumar",
+      name: "Mr. C Naresh Kumar",
       designation: "Faculty",
       subject: "Physics",
       department: "Physics Department",
-      image: "/images/faculty/nareshkumar.jpg",
+      image: "/images/faculty/nareshkumar.jpg"
     },
     {
-      name: "Mr. K. Kishore",
+      name: "Mr. K Kishore",
       designation: "Faculty",
       subject: "Physics",
       department: "Physics Department",
-      image: "/images/faculty/kishore.jpg",
+      image: "/images/faculty/kishore.jpg"
     },
     {
       name: "Ms. Bhargavi",
       designation: "Faculty",
       subject: "Physics",
       department: "Physics Department",
-      image: "/images/faculty/bhargavi.jpg",
+      image: "/images/faculty/bhargavi.jpg"
     },
     // 4. Chemistry Department
     {
@@ -778,308 +785,563 @@ export const lfjcData = {
       designation: "HOD",
       subject: "Chemistry",
       department: "Chemistry Department",
-      image: "/images/faculty/baburao.jpg",
+      image: "/images/faculty/baburao.jpg"
     },
     {
       name: "Ms. Shruthi P",
       designation: "Faculty",
       subject: "Chemistry",
       department: "Chemistry Department",
-      image: "/images/faculty/shruthip.jpg",
+      image: "/images/faculty/shruthip.jpg"
     },
     {
       name: "Ms. Koteswari B",
       designation: "Faculty",
       subject: "Chemistry",
       department: "Chemistry Department",
-      image: "/images/faculty/koteswari.jpg",
+      image: "/images/faculty/koteswari.jpg"
     },
     {
-      name: "Ms. Gayathri",
+      name: "Ms. Gayathri K",
       designation: "Faculty",
       subject: "Chemistry",
       department: "Chemistry Department",
-      image: "/images/faculty/gayathrik.jpg",
+      image: "/images/faculty/gayathrik.jpg"
     },
-    // 5. Department of Biological Sciences
+    // 5. Biology Department
     {
-      name: "Ms. Husna",
-      designation: "Faculty",
+      name: "Ms. Husna Sultana",
+      designation: "Coordinator & Faculty",
       subject: "Botany",
       department: "Biology Department",
-      image: "/images/faculty/husnasultana.jpg",
+      image: "/images/faculty/husnasultana.jpg"
     },
     {
-      name: "Ms. T. Bhramara",
+      name: "Ms. T Bhramara",
       designation: "Faculty",
       subject: "Zoology",
       department: "Biology Department",
-      image: "/images/faculty/tbhramara.jpg",
+      image: "/images/faculty/tbhramara.jpg"
     },
-    // 6. Department of Humanities
+    // 6. Humanities Department
     {
       name: "Ms. Vani M",
       designation: "HOD",
-      subject: "Commerce & Civics",
+      subject: "Civics & Humanities",
       department: "Humanities Department",
-      image: "/images/faculty/vani.jpg",
+      image: "/images/faculty/vani.jpg"
     },
     {
       name: "Ms. Vasavi K",
       designation: "Faculty",
       subject: "Economics",
       department: "Humanities Department",
-      image: "/images/faculty/vasavi.jpg",
+      image: "/images/faculty/vasavi.jpg"
     },
     {
-      name: "Mr. Venugopal",
+      name: "Mr. Venugopal Karne",
       designation: "Faculty",
       subject: "Economics",
       department: "Humanities Department",
-      image: "/images/faculty/venugopalkarne.jpg",
+      image: "/images/faculty/venugopalkarne.jpg"
     },
     {
-      name: "Mr. Nagarjuna Kumar",
-      designation: "Faculty",
-      subject: "Commerce",
-      department: "Humanities Department",
-      image: "/images/faculty/nagarjunakumar.jpg",
-    },
-    {
-      name: "Mr. N. Rajasekhar",
-      designation: "Faculty",
-      subject: "Commerce",
-      department: "Humanities Department",
-      image: "/images/faculty/rajashekar.jpg",
-    },
-    {
-      name: "Mr. A. Varun Reddy",
+      name: "Mr. A Varun Reddy",
       designation: "Faculty",
       subject: "Political Science",
       department: "Humanities Department",
-      image: "/images/faculty/varunreddy.jpg",
+      image: "/images/faculty/varunreddy.jpg"
     },
-    // 7. Department of English
     {
-      name: "Ms. K. H. Deepika",
-      designation: "HOD",
+      name: "Mr. Nagarjuna Kumar",
+      designation: "Coordinator & Faculty",
+      subject: "Commerce & Accountancy",
+      department: "Humanities Department",
+      image: "/images/faculty/nagarjunakumar.jpg"
+    },
+    // 7. Languages Department
+    {
+      name: "Dr. Raghavendra Gupta",
+      designation: "Head of Dept (Languages)",
+      subject: "Hindi",
+      department: "Languages Department",
+      image: "/images/faculty/dr.raghavendragupta.jpg"
+    },
+    {
+      name: "Ms. Srividya Sankara",
+      designation: "Faculty",
+      subject: "Sanskrit",
+      department: "Languages Department",
+      image: "/images/faculty/srividyasankara.jpg"
+    },
+    {
+      name: "Ms. G Swapna",
+      designation: "Faculty",
+      subject: "Telugu",
+      department: "Languages Department",
+      image: "/images/faculty/swapna.jpg"
+    },
+    {
+      name: "Ms. Saraswathy Devi",
+      designation: "Faculty",
+      subject: "French",
+      department: "Languages Department",
+      image: "/images/faculty/saraswathydevi.jpg"
+    },
+    {
+      name: "Ms. K H Deepika",
+      designation: "Lead Faculty (English)",
       subject: "English",
-      department: "Department of English",
-      image: "/images/faculty/deepika.jpg",
+      department: "Languages Department",
+      image: "/images/faculty/deepika.jpg"
     },
     {
       name: "Ms. Rajoulu Esther",
       designation: "Faculty",
       subject: "English",
-      department: "Department of English",
-      image: "/images/faculty/easter.jpg",
+      department: "Languages Department",
+      image: "/images/faculty/easter.jpg"
     },
     {
       name: "Ms. Hema Taneja",
       designation: "Faculty",
       subject: "English",
-      department: "Department of English",
-      image: "/images/faculty/hemataneja.jpg",
+      department: "Languages Department",
+      image: "/images/faculty/hemataneja.jpg"
     },
     {
       name: "Mr. Shyam K",
       designation: "Faculty",
       subject: "English",
-      department: "Department of English",
-      image: "/images/faculty/shyamk.jpg",
-    },
-    {
-      name: "Ms. Rupa Jha",
-      designation: "Faculty",
-      subject: "English",
-      department: "Department of English",
-      image: "/images/faculty/rupajha.jpg",
-    },
-    // 8. Department of Languages
-    {
-      name: "Mr. Raghavendra",
-      designation: "HOD & Faculty",
-      subject: "Hindi",
       department: "Languages Department",
-      image: "/images/faculty/dr.raghavendragupta.jpg",
+      image: "/images/faculty/shyamk.jpg"
     },
-    {
-      name: "Ms. G. Swapna",
-      designation: "Faculty",
-      subject: "Telugu",
-      department: "Languages Department",
-      image: "/images/faculty/swapna.jpg",
-    },
-    {
-      name: "Ms. Srividhya S",
-      designation: "Faculty",
-      subject: "Sanskrit",
-      department: "Languages Department",
-      image: "/images/faculty/srividyasankara.jpg",
-    },
-    {
-      name: "Ms. Saraswathi",
-      designation: "Faculty",
-      subject: "French",
-      department: "Languages Department",
-      image: "/images/faculty/saraswathydevi.jpg",
-    },
-    // 9. Department of Computer Science, Library Science & Sports
-    {
-      name: "Mr. Milind Pathak",
-      designation: "Librarian",
-      subject: "Library Science",
-      department: "Computer & Library Department",
-      image: "/images/faculty/milindpathak.jpg",
-    },
+    // 8. Computer & Library Department
     {
       name: "Mr. N. Sai",
-      designation: "System Administrator",
+      designation: "Faculty",
       subject: "Computer Science",
       department: "Computer & Library Department",
-      image: "/images/faculty/sailu.jpg",
+      image: "/images/faculty/sailu.jpg"
     },
     {
-      name: "Mr. M. L. Prasad",
+      name: "Ms. P. Swathi",
+      designation: "Faculty",
+      subject: "Computer Science",
+      department: "Computer & Library Department",
+      image: "/images/faculty/computer_mam.jpg"
+    },
+    {
+      name: "Ms. Shriji",
+      designation: "Office Staff",
+      subject: "Office Operations",
+      department: "Computer & Library Department",
+      image: "/images/faculty/shriji.jpg"
+    },
+    // 9. Physical Education & Sports
+    {
+      name: "Mr. M L Prasad",
       designation: "Physical Director",
       subject: "Physical Education & Athletics",
       department: "Physical Education & Sports",
-      image: "/images/faculty/prasad.jpg",
+      image: "/images/faculty/prasad.jpg"
     },
-    // 10. Office Staff
+    {
+      name: "Ms. PET Faculty",
+      designation: "Faculty",
+      subject: "Physical Education & Athletics",
+      department: "Physical Education & Sports",
+      image: "/images/faculty/dsc_4946.jpg"
+    },
+    // 10. Office Administration
     {
       name: "Ms. J. Sri Lakshmi",
       designation: "Office Staff",
       subject: "Office Operations",
       department: "Office Administration",
-      image: "/images/faculty/srilakshmi.jpg",
+      image: "/images/faculty/srilakshmi.jpg"
     },
     {
       name: "Ms. Aditya M",
       designation: "Office Staff",
       subject: "Office Operations",
       department: "Office Administration",
-      image: "/images/faculty/aditya.jpg",
+      image: "/images/faculty/aditya.jpg"
     },
     {
       name: "Ms. Ranganayaki",
       designation: "Office Staff",
       subject: "Office Operations",
       department: "Office Administration",
-      image: "/images/faculty/ranganayaki.jpg",
+      image: "/images/faculty/ranganayaki.jpg"
     },
     {
       name: "Mr. T. Sivasinu Goud",
       designation: "Office Staff",
       subject: "Office Operations",
       department: "Office Administration",
-      image: "/images/faculty/sivasinugoud.jpg",
+      image: "/images/faculty/sivasinugoud.jpg"
     },
     {
       name: "Ms. Archana",
       designation: "Office Staff",
       subject: "Office Operations",
       department: "Office Administration",
-      image: "/images/faculty/archana.jpg",
+      image: "/images/faculty/archana.jpg"
     },
+    // 11. Support Staff
     {
-      name: "Ms. Shiji J",
-      designation: "Office Staff",
-      subject: "Office Operations",
-      department: "Office Administration",
-      image: "/images/faculty/shriji.jpg",
-    },
-    // 11. Support Staff (Verbatim from dept.php)
-    {
-      name: "Mr. Md. Jehangir",
+      name: "Mr. Anthony",
       designation: "Support Staff",
+      subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/jahagir.jpg",
+      image: "/images/faculty/anthony.jpg"
     },
     {
-      name: "Mr. Ch. Mallaiah",
-      designation: "Support Staff",
+      name: "Mr. G. Naresh",
+      designation: "Faculty & Lab In-charge",
+      subject: "Computer Science",
       department: "Support Staff",
-      image: "",
+      image: "/images/faculty/gnaresh.jpg"
     },
     {
-      name: "Mr. Narender Bahadur",
+      name: "Ms. Jahagir",
       designation: "Support Staff",
+      subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/narenderbahadur.jpg",
+      image: "/images/faculty/jahagir.jpg"
     },
     {
-      name: "Mr. D. Ramulu",
+      name: "Ms. Lakshmi",
       designation: "Support Staff",
+      subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/ramulu.jpg",
-    },
-    {
-      name: "Ms. K. Lakshmi",
-      designation: "Support Staff",
-      department: "Support Staff",
-      image: "/images/faculty/lakshmi.jpg",
+      image: "/images/faculty/lakshmi.jpg"
     },
     {
       name: "Ms. Manjula Vani",
       designation: "Support Staff",
+      subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/manjulavani.jpg",
-    },
-    {
-      name: "Ms. Sudha",
-      designation: "Support Staff",
-      department: "Support Staff",
-      image: "/images/faculty/sudha.jpg",
+      image: "/images/faculty/manjulavani.jpg"
     },
     {
       name: "Ms. Mary",
       designation: "Support Staff",
+      subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/mary.jpg",
+      image: "/images/faculty/mary.jpg"
     },
     {
       name: "Mr. V. Narendar",
       designation: "Support Staff",
+      subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/narendar.jpg",
+      image: "/images/faculty/narendar.jpg"
     },
     {
-      name: "Mr. Suraj",
+      name: "Mr. Narender Bahadur",
       designation: "Support Staff",
+      subject: "Campus Security & Operations",
       department: "Support Staff",
-      image: "/images/faculty/suraj.jpg",
+      image: "/images/faculty/narenderbahadur.jpg"
     },
     {
       name: "Mr. Ramesh",
       designation: "Support Staff",
+      subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/ramesh.jpg",
+      image: "/images/faculty/ramesh.jpg"
     },
     {
-      name: "Mr. Naresh",
+      name: "Mr. D. Ramulu",
       designation: "Support Staff",
+      subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/gnaresh.jpg",
-    },
-    {
-      name: "Mr. Bhaskar",
-      designation: "Support Staff",
-      department: "Support Staff",
-      image: "",
-    },
-    {
-      name: "Mr. Anthony",
-      designation: "Support Staff",
-      department: "Support Staff",
-      image: "/images/faculty/anthony.jpg",
+      image: "/images/faculty/ramulu.jpg"
     },
     {
       name: "Ms. M. Sheeba Rani",
       designation: "Support Staff",
+      subject: "Campus Operations",
       department: "Support Staff",
-      image: "/images/faculty/sheeba_rani.jpg",
+      image: "/images/faculty/sheeba_rani.jpg"
     },
+    {
+      name: "Ms. Sudha",
+      designation: "Support Staff",
+      subject: "Campus Operations",
+      department: "Support Staff",
+      image: "/images/faculty/sudha.jpg"
+    },
+    {
+      name: "Mr. Suraj",
+      designation: "Support Staff",
+      subject: "Campus Operations",
+      department: "Support Staff",
+      image: "/images/faculty/suraj.jpg"
+    },
+    {
+      name: "Mr. Prabhu Das",
+      designation: "Support Staff",
+      subject: "Campus Operations",
+      department: "Support Staff",
+      image: "/images/faculty/prabhudas.jpg"
+    },
+    // 12. Former Principals (Verified Institutional Chronology 1974–Present)
+    {
+      name: "Rev. Bro. Vincent",
+      designation: "Founder Principal (1974–76 & 1982–83)",
+      department: "Former Principals",
+      category: "former-principal",
+      image: "/images/principals/bro_vincent.jpg"
+    },
+    {
+      name: "Dr. Emmanuel",
+      designation: "II Principal (1976–1979)",
+      department: "Former Principals",
+      category: "former-principal",
+      image: "/images/principals/bro_emmanuel.jpg"
+    },
+    {
+      name: "Rev. Bro. Claude",
+      designation: "III Principal (1979–1982)",
+      department: "Former Principals",
+      category: "former-principal",
+      image: "/images/principals/bro_claude.jpg"
+    },
+    {
+      name: "Rev. Bro. James Pannivelil",
+      designation: "Director & Principal (1982–1983)",
+      department: "Former Principals",
+      category: "former-principal",
+      image: "/images/principals/bro_james_pannivelil.jpg"
+    },
+    {
+      name: "Rev. Bro. John Kallarackal",
+      designation: "IV Principal (1983–1989)",
+      department: "Former Principals",
+      category: "former-principal",
+      image: "/images/principals/bro_john.jpg"
+    },
+    {
+      name: "Rev. Bro. Celestine",
+      designation: "V Principal (1989–1994)",
+      department: "Former Principals",
+      category: "former-principal",
+      image: "/images/silver-jubilee/silver-jubilee-bro-celestine.jpg"
+    },
+    {
+      name: "Rev. Bro. M.A. George",
+      designation: "VI Principal (1994–2000)",
+      department: "Former Principals",
+      category: "former-principal",
+      image: "/images/principals/bro_george.jpg"
+    },
+    {
+      name: "Rev. Bro. Gervasis",
+      designation: "Former Principal (2000–2008)",
+      department: "Former Principals",
+      category: "former-principal",
+      image: "/images/principals/bro_gervasis.jpg"
+    },
+    {
+      name: "Rev. Bro. Franky",
+      designation: "Former Principal (2008–2016)",
+      department: "Former Principals",
+      category: "former-principal",
+      image: "/images/principals/bro_franky.jpg"
+    },
+    // 13. Retired Faculty / Former Teachers
+    {
+      name: "Dr. Anitha Lincon",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/dr_anitha_lincon.jpg"
+    },
+    {
+      name: "Dr. Riyaz Ul Ansari",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/dr_riyaz_ui_ansari.jpg"
+    },
+    {
+      name: "Dr. T. Rajeswara Reddy",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/dr_t_rajeswara_reddy.jpg"
+    },
+    {
+      name: "Mr. B. Paul Raju",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/mr_b_paul_raju.jpg"
+    },
+    {
+      name: "Mr. Bheeshma Chary",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/mr_bheeshma_chary.jpg"
+    },
+    {
+      name: "Mr. David Joseph",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/mr_david_joseph.jpg"
+    },
+    {
+      name: "Mr. E. V. Subbarao",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/mr_e_v_subbarao.jpg"
+    },
+    {
+      name: "Mr. Jayatheerth Katti",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/mr_jayatheerth_katti.jpg"
+    },
+    {
+      name: "Mr. K. Srinivadev",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/mr_k_srinivadev.jpg"
+    },
+    {
+      name: "Mr. M. Amarnath",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/mr_m_amarnath.jpg"
+    },
+    {
+      name: "Mr. S. Balaiah",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/mr_s_balaiah.jpg"
+    },
+    {
+      name: "Mr. T. D. Babu",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/mr_t_d_baaabu.jpg"
+    },
+    {
+      name: "Mr. A. R. Narasimharao",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/mr_a_r_narasimharao.jpg"
+    },
+    {
+      name: "Mr. K. Jothi Ram",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/mr_k_jothi_ram.jpg"
+    },
+    {
+      name: "Mr. Nagaraja Kumar",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/mr_nagaraja_kumar.jpg"
+    },
+    {
+      name: "Mr. P. Kesavacharaya",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/mr_p_kesavacharaya.jpg"
+    },
+    {
+      name: "Ms. B. M. D. Sakunthala",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/ms_bmd_sakunthala.jpg"
+    },
+    {
+      name: "Ms. Raachel Oommen",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/ms_raachel_oommen.jpg"
+    },
+    {
+      name: "Ms. Saghana Srivastava",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/ms_saghana_srivastava.jpg"
+    },
+    {
+      name: "Ms. Savithri Narayanan",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/ms_savithri_narayanan.jpg"
+    },
+    {
+      name: "Ms. Sudheshna Chattopadhyay",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/ms_sudheshna_chattopadhyay.jpg"
+    },
+    {
+      name: "Ms. J. Meenakshi",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/ms_j_menakshi.jpg"
+    },
+    {
+      name: "Ms. K. Susheela",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/ms_k_susheela.jpg"
+    },
+    {
+      name: "Ms. P. Usha",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/ms_p_usha.jpg"
+    },
+    {
+      name: "Ms. Sabiha Fathima",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/ms_sabiha_fathima.jpg"
+    },
+    {
+      name: "Ms. V. Saraswathi",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/ms_v_saraswathi.jpg"
+    },
+    {
+      name: "Mr. Shaik Lateef",
+      designation: "Faculty (Retired)",
+      department: "Retired Faculty",
+      category: "retired",
+      image: "/images/faculty/retired/shaik_lateef.jpg"
+    }
   ],
 
   admissionsSteps: [
