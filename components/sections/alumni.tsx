@@ -100,7 +100,7 @@ export function Alumni({ activeInst }: AlumniProps) {
   const [isFormOpen, setIsFormOpen] = useState(false);
   useFocusTrap(isFormOpen, drawerRef);
   const [dynamicAlumni, setDynamicAlumni] = useState<Alumnus[]>([]);
-  const [loadingDynamic, setLoadingDynamic] = useState(true);
+  const [loadingDynamic, setLoadingDynamic] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   // Form submission states
