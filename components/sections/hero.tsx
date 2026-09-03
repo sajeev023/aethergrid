@@ -27,7 +27,7 @@ interface HeroSlide {
   isPoster?: boolean;
 }
 
-// Exactly 4 Hero Slides: College Photo, Campus Building View, 1st Year Toppers 2026, 2nd Year Toppers 2026
+// Exactly 4 Hero Slides: College Photo, Campus Top-Angle Photo (12.jpg), 1st Year Toppers 2026, 2nd Year Toppers 2026
 const HERO_SLIDES: HeroSlide[] = [
   {
     id: "hero-1-building",
@@ -39,9 +39,9 @@ const HERO_SLIDES: HeroSlide[] = [
     title: "College Photo",
   },
   {
-    id: "hero-6-gjb",
-    src: "/images/hero/hero-6-gjb.webp",
-    fallbackSrc: "/images/hero/hero-6-gjb.webp",
+    id: "hero-2-campus-quad",
+    src: "/images/hero/hero-2-campus-quad.webp",
+    fallbackSrc: "/images/hero/hero-2-campus-quad.jpg",
     alt: "Little Flower Junior College Campus Building and Facade",
     objectPosition: "center center",
     mobileObjectPosition: "center center",
