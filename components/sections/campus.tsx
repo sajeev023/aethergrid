@@ -102,26 +102,26 @@ function GalleryGrid({ items }: { items: GalleryItem[] }) {
 
   return (
     <>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 sm:gap-3.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
         {items.map((item, idx) => (
           <button
             key={item.id}
             type="button"
             onClick={() => setLightbox(idx)}
-            className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-stone-texture/50 bg-royal-cream text-left shadow-xs hover:border-heritage-gold/60 transition-all"
+            className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-stone-texture/50 bg-royal-cream text-left shadow-xs hover:border-heritage-gold/60 transition-all cursor-zoom-in"
           >
             <Image
               src={item.src}
               alt={item.title}
               fill
-              sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, 50vw"
+              sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
               className="object-cover transition-transform group-hover:scale-105 duration-300"
             />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-deep-navy/90 via-deep-navy/50 to-transparent p-2.5 sm:p-3">
-              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-heritage-gold-bright font-sans">
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-deep-navy/95 via-deep-navy/60 to-transparent p-3 sm:p-4">
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-heritage-gold-bright font-sans">
                 {item.badge}
               </span>
-              <p className="text-[11px] sm:text-xs font-semibold text-white leading-tight mt-0.5">
+              <p className="text-xs sm:text-sm font-semibold text-white leading-snug mt-1">
                 {item.title}
               </p>
             </div>
@@ -343,7 +343,7 @@ export function CampusLifeCombinedView() {
 
       {/* ─── SECTION 1: CAMPUS & LABS ──────────────────────────────────── */}
       <Section id="campus" variant="default" className="bg-white py-12 sm:py-16">
-        <div id="campus-labs" className="mx-auto max-w-6xl scroll-mt-24">
+        <div id="campus-labs" className="mx-auto max-w-7xl scroll-mt-24">
           <div className="mb-6">
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate mt-1">
               Campus &amp; Laboratories Gallery
@@ -351,22 +351,20 @@ export function CampusLifeCombinedView() {
           </div>
           <GalleryGrid items={CAMPUS_LABS_IMAGES} />
         </div>
-
-
       </Section>
 
       {/* ─── SECTION 2: EVENTS & SPORTS ───────────────────────────────── */}
       <Section id="events" variant="default" className="bg-royal-cream/20 border-t border-stone-texture/30 py-12 sm:py-16 scroll-mt-24">
-        <div className="mx-auto max-w-6xl space-y-10">
+        <div className="mx-auto max-w-7xl space-y-12">
           <div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1 mb-1">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1 mb-2">
               Events, Seminars &amp; Assemblies
             </h2>
             <GalleryGrid items={ASSEMBLIES_IMAGES} />
           </div>
 
           <div id="sports" className="pt-8 border-t border-stone-texture/30 scroll-mt-24">
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1 mb-1">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1 mb-2">
               Athletics &amp; Sports Tournaments
             </h2>
             <GalleryGrid items={SPORTS_IMAGES} />
