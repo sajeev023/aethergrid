@@ -27,7 +27,7 @@ interface HeroSlide {
   isPoster?: boolean;
 }
 
-// Exactly 6 Hero Slides: College Photo, College Top-Angle Photo, 1st Year Toppers 2026, 2nd Year Toppers 2026, Campus Building View, Aerial Campus View
+// Exactly 4 Hero Slides: College Photo, Campus Building View, 1st Year Toppers 2026, 2nd Year Toppers 2026
 const HERO_SLIDES: HeroSlide[] = [
   {
     id: "hero-1-building",
@@ -39,13 +39,13 @@ const HERO_SLIDES: HeroSlide[] = [
     title: "College Photo",
   },
   {
-    id: "hero-2-campus-quad",
-    src: "/images/hero/hero-2-campus-quad.webp",
-    fallbackSrc: "/images/hero/hero-2-campus-quad.jpg",
-    alt: "Spacious 8-Acre Uppal Heritage Campus Grounds & Quadrangle Lawn",
+    id: "hero-6-gjb",
+    src: "/images/hero/hero-6-gjb.webp",
+    fallbackSrc: "/images/hero/hero-6-gjb.webp",
+    alt: "Little Flower Junior College Campus Building and Facade",
     objectPosition: "center center",
-    mobileObjectPosition: "center 35%",
-    title: "College Top-Angle Photo",
+    mobileObjectPosition: "center center",
+    title: "Campus Building View",
   },
   {
     id: "hero-toppers-1st-year-2026",
@@ -66,24 +66,6 @@ const HERO_SLIDES: HeroSlide[] = [
     mobileObjectPosition: "center center",
     title: "2nd Year Toppers 2026",
     isPoster: true,
-  },
-  {
-    id: "hero-6-gjb",
-    src: "/images/hero/hero-6-gjb.webp",
-    fallbackSrc: "/images/hero/hero-6-gjb.webp",
-    alt: "Little Flower Junior College Campus Building and Facade",
-    objectPosition: "center 25%",
-    mobileObjectPosition: "center 20%",
-    title: "Campus Building View",
-  },
-  {
-    id: "hero-7-college",
-    src: "/images/hero/hero-7-college.webp",
-    fallbackSrc: "/images/hero/hero-7-college.webp",
-    alt: "Little Flower Junior College Aerial Campus View",
-    objectPosition: "center 20%",
-    mobileObjectPosition: "center 15%",
-    title: "Aerial Campus View",
   },
 ];
 

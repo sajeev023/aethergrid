@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, User } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowRight, User, X } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
 import { Card } from "@/components/ui/card";
@@ -24,7 +27,61 @@ function getFacultyCategory(member: FacultySeedMember): FacultyCategory {
   return member.category ?? "present";
 }
 
-function RetiredFacultyCard({ member, index }: { member: FacultySeedMember; index: number }) {
+function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  if (!src) return null;
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-deep-navy/95 flex flex-col items-center justify-center p-4 sm:p-6 backdrop-blur-sm animate-in fade-in duration-200"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Enlarged view of ${alt}`}
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute top-4 right-4 p-2 text-white hover:text-heritage-gold-bright transition-colors rounded-full bg-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-heritage-gold"
+        aria-label="Close lightbox"
+      >
+        <X className="h-6 w-6" />
+      </button>
+      <div
+        className="relative w-full max-w-2xl max-h-[82vh] h-[80vh] flex items-center justify-center"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-contain drop-shadow-2xl"
+          sizes="(min-width: 1024px) 80vw, 95vw"
+          priority
+        />
+      </div>
+      <p className="mt-3 text-center text-royal-cream font-serif text-base sm:text-lg font-semibold tracking-wide select-none">
+        {alt}
+      </p>
+    </div>
+  );
+}
+
+function RetiredFacultyCard({
+  member,
+  index,
+  onPhotoClick,
+}: {
+  member: FacultySeedMember;
+  index: number;
+  onPhotoClick: (src: string, alt: string) => void;
+}) {
   const cleanName = member.name.replace(/^(Bro\.|Ms\.|Mr\.|Dr\.)\s+/i, "");
   const nameParts = cleanName.split(" ").filter(Boolean);
   const initials =
@@ -37,13 +94,20 @@ function RetiredFacultyCard({ member, index }: { member: FacultySeedMember; inde
       <Card className="group h-full flex flex-col overflow-hidden bg-white transition-all duration-300 ease-out rounded-lg border-2 border-stone-texture/70 hover:border-heritage-gold/60 shadow-xs hover:shadow-panel-hover">
         <div className="relative aspect-[600/720] w-full overflow-hidden bg-royal-cream/30">
           {member.image ? (
-            <Image
-              src={member.image}
-              alt={member.name}
-              fill
-              sizes="(min-width: 1280px) 15vw, (min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
-              className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-            />
+            <button
+              type="button"
+              onClick={() => onPhotoClick(member.image!, member.name)}
+              className="absolute inset-0 w-full h-full text-left cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-inset focus:ring-heritage-gold block"
+              aria-label={`View enlarged portrait of ${member.name}`}
+            >
+              <Image
+                src={member.image}
+                alt={member.name}
+                fill
+                sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
+                className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.01]"
+              />
+            </button>
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-2 sm:p-3 relative text-center">
               <div className="absolute inset-0 opacity-[0.03] stone-pattern pointer-events-none" />
@@ -66,6 +130,7 @@ export function FacultyRetired({ activeInst = "lfjc" }: FacultyRetiredProps) {
   const instData = getInstitutionData(activeInst);
   const allStaff = instData.faculty.slice(1) as FacultySeedMember[];
   const retiredStaff = allStaff.filter((m) => getFacultyCategory(m) === "retired");
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
   return (
     <section id="retired-faculty" className="bg-white py-6 sm:py-8 md:py-12 overflow-hidden">
@@ -85,9 +150,14 @@ export function FacultyRetired({ activeInst = "lfjc" }: FacultyRetiredProps) {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
         {retiredStaff.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5 sm:gap-4 md:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
             {retiredStaff.map((member, index) => (
-              <RetiredFacultyCard key={`${member.name}-${index}`} member={member} index={index} />
+              <RetiredFacultyCard
+                key={`${member.name}-${index}`}
+                member={member}
+                index={index}
+                onPhotoClick={(src, alt) => setLightbox({ src, alt })}
+              />
             ))}
           </div>
         ) : (
@@ -127,6 +197,8 @@ export function FacultyRetired({ activeInst = "lfjc" }: FacultyRetiredProps) {
           </Link>
         </Reveal>
       </div>
+
+      {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />}
     </section>
   );
 }

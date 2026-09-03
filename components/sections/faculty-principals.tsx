@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { Award, ShieldCheck, User } from "lucide-react";
+import { useState } from "react";
+import { Award, ShieldCheck, User, X } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,13 +27,49 @@ function getFacultyCategory(member: FacultySeedMember): FacultyCategory {
   return member.category ?? "present";
 }
 
-function FormerPrincipalCard({ member, index }: { member: FacultySeedMember; index: number }) {
+function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
+  if (!src) return null;
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-deep-navy/95 flex items-center justify-center p-4 backdrop-blur-sm"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Enlarged view of ${alt}`}
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute top-4 right-4 p-2 text-white hover:text-heritage-gold-bright transition-colors rounded-full bg-white/10"
+        aria-label="Close lightbox"
+      >
+        <X className="h-6 w-6" />
+      </button>
+      <div className="relative w-full max-w-4xl max-h-[85vh] aspect-[4/5]">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-contain"
+          sizes="(min-width: 1024px) 80vw, 95vw"
+        />
+      </div>
+    </div>
+  );
+}
+
+function FormerPrincipalCard({ member, index, onPhotoClick }: { member: FacultySeedMember; index: number; onPhotoClick: (src: string, alt: string) => void }) {
   return (
     <Reveal key={`${member.name}-${index}`} delay={index * 0.03} className="h-full">
       <Card className="group h-full flex flex-col overflow-hidden bg-white transition-all duration-300 ease-out rounded-lg border-2 border-stone-texture/70 hover:border-heritage-gold/60 shadow-xs hover:shadow-panel-hover">
         <div className="relative aspect-[4/5] w-full overflow-hidden bg-royal-cream/30 border-b border-stone-texture/40">
           {member.image ? (
-            <>
+            <button
+              type="button"
+              onClick={() => onPhotoClick(member.image!, member.name)}
+              className="absolute inset-0 w-full h-full text-left cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-inset focus:ring-heritage-gold"
+              aria-label={`View enlarged portrait of ${member.name}`}
+            >
               <Image
                 src={member.image}
                 alt={member.name}
@@ -38,7 +77,7 @@ function FormerPrincipalCard({ member, index }: { member: FacultySeedMember; ind
                 sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                 className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
               />
-            </>
+            </button>
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-2 sm:p-3 relative text-center">
               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-heritage-gold/30 flex items-center justify-center bg-white shadow-xs mb-1.5 sm:mb-2">
@@ -76,6 +115,7 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
   const instData = getInstitutionData(activeInst);
   const allStaff = instData.faculty.slice(1) as FacultySeedMember[];
   const formerPrincipals = allStaff.filter((m) => getFacultyCategory(m) === "former-principal");
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
   return (
     <section id="former-principals" className="section-texture bg-white py-6 sm:py-8 md:py-12 overflow-hidden">
@@ -97,7 +137,7 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
         {formerPrincipals.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 sm:gap-4 md:gap-5">
             {formerPrincipals.map((member, index) => (
-              <FormerPrincipalCard key={`${member.name}-${index}`} member={member} index={index} />
+              <FormerPrincipalCard key={`${member.name}-${index}`} member={member} index={index} onPhotoClick={(src, alt) => setLightbox({ src, alt })} />
             ))}
           </div>
         ) : (
@@ -198,6 +238,8 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
           </Link>
         </div>
       </div>
+
+      {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />}
     </section>
   );
 }

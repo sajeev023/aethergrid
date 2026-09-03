@@ -10,6 +10,37 @@ import { Card, CardContent } from "@/components/ui/card";
 import { getInstitutionData } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
+function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
+  if (!src) return null;
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-deep-navy/95 flex items-center justify-center p-4 backdrop-blur-sm"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Enlarged view of ${alt}`}
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute top-4 right-4 p-2 text-white hover:text-heritage-gold-bright transition-colors rounded-full bg-white/10"
+        aria-label="Close lightbox"
+      >
+        <X className="h-6 w-6" />
+      </button>
+      <div className="relative w-full max-w-4xl max-h-[85vh] aspect-[4/5]">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-contain"
+          sizes="(min-width: 1024px) 80vw, 95vw"
+        />
+      </div>
+    </div>
+  );
+}
+
 interface FacultyTeachingProps {
   activeInst?: "root" | "lfs" | "lfjc" | "lfdc";
   isPreview?: boolean;
@@ -42,7 +73,7 @@ const departmentOrder = [
   "Support Staff",
 ];
 
-function FacultyMemberCard({ member, index }: { member: FacultySeedMember; index: number }) {
+function FacultyMemberCard({ member, index, onPhotoClick }: { member: FacultySeedMember; index: number; onPhotoClick: (src: string, alt: string) => void }) {
   const cleanName = member.name.replace(/^(Bro\.|Ms\.|Mr\.|Dr\.)\s+/i, "");
   const nameParts = cleanName.split(" ").filter(Boolean);
   const initials =
@@ -69,13 +100,20 @@ function FacultyMemberCard({ member, index }: { member: FacultySeedMember; index
             </div>
           )}
           {member.image ? (
-            <Image
-              src={member.image}
-              alt={member.name}
-              fill
-              sizes="(min-width: 1280px) 15vw, (min-width: 1024px) 20vw, (min-width: 640px) 40vw, 50vw"
-              className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-            />
+            <button
+              type="button"
+              onClick={() => onPhotoClick(member.image!, member.name)}
+              className="absolute inset-0 w-full h-full text-left cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-inset focus:ring-heritage-gold"
+              aria-label={`View enlarged portrait of ${member.name}`}
+            >
+              <Image
+                src={member.image}
+                alt={member.name}
+                fill
+                sizes="(min-width: 1280px) 15vw, (min-width: 1024px) 20vw, (min-width: 640px) 40vw, 50vw"
+                className="object-cover object-[center_15%] transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+              />
+            </button>
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-2 sm:p-3 relative">
               <div className="absolute inset-0 opacity-[0.03] stone-pattern pointer-events-none" />
@@ -112,6 +150,7 @@ function FacultyMemberCard({ member, index }: { member: FacultySeedMember; index
 
 export function FacultyTeaching({ activeInst = "lfjc", isPreview = false }: FacultyTeachingProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
   const instData = getInstitutionData(activeInst);
   const allStaff = instData.faculty.slice(1) as FacultySeedMember[];
   const presentStaff = allStaff.filter((m) => getFacultyCategory(m) === "present");
@@ -196,7 +235,12 @@ export function FacultyTeaching({ activeInst = "lfjc", isPreview = false }: Facu
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5 sm:gap-3.5 md:gap-4">
                   {deptStaff.map((member, index) => (
-                    <FacultyMemberCard key={`${member.name}-${index}`} member={member} index={index} />
+                    <FacultyMemberCard
+                      key={`${member.name}-${index}`}
+                      member={member}
+                      index={index}
+                      onPhotoClick={(src, alt) => setLightbox({ src, alt })}
+                    />
                   ))}
                 </div>
               </div>
@@ -266,6 +310,13 @@ export function FacultyTeaching({ activeInst = "lfjc", isPreview = false }: Facu
               </Link>
             </Reveal>
           </>
+        )}
+        {lightbox && (
+          <Lightbox
+            src={lightbox.src}
+            alt={lightbox.alt}
+            onClose={() => setLightbox(null)}
+          />
         )}
       </div>
     </section>
