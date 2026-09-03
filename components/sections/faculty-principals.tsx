@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Award, ShieldCheck, User, X } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
@@ -28,10 +28,18 @@ function getFacultyCategory(member: FacultySeedMember): FacultyCategory {
 }
 
 function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
   if (!src) return null;
   return (
     <div
-      className="fixed inset-0 z-50 bg-deep-navy/95 flex items-center justify-center p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 bg-deep-navy/95 flex flex-col items-center justify-center p-4 sm:p-6 backdrop-blur-sm animate-in fade-in duration-200"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -40,20 +48,27 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
       <button
         type="button"
         onClick={onClose}
-        className="absolute top-4 right-4 p-2 text-white hover:text-heritage-gold-bright transition-colors rounded-full bg-white/10"
+        className="absolute top-4 right-4 p-2 text-white hover:text-heritage-gold-bright transition-colors rounded-full bg-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-heritage-gold"
         aria-label="Close lightbox"
       >
         <X className="h-6 w-6" />
       </button>
-      <div className="relative w-full max-w-4xl max-h-[85vh] aspect-[4/5]">
+      <div
+        className="relative w-full max-w-2xl max-h-[82vh] h-[80vh] flex items-center justify-center"
+        onClick={(e) => e.stopPropagation()}
+      >
         <Image
           src={src}
           alt={alt}
           fill
-          className="object-contain"
+          className="object-contain drop-shadow-2xl"
           sizes="(min-width: 1024px) 80vw, 95vw"
+          priority
         />
       </div>
+      <p className="mt-3 text-center text-royal-cream font-serif text-base sm:text-lg font-semibold tracking-wide select-none">
+        {alt}
+      </p>
     </div>
   );
 }
@@ -75,7 +90,7 @@ function FormerPrincipalCard({ member, index, onPhotoClick }: { member: FacultyS
                 alt={member.name}
                 fill
                 sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-                className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.01]"
               />
             </button>
           ) : (
@@ -203,9 +218,20 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
               <Reveal key={p.name} delay={idx * 0.05}>
                 <div className="border border-stone-texture/60 bg-royal-cream/10 rounded-xl p-4 shadow-2xs hover:shadow-md hover:border-heritage-gold/50 transition-all duration-300 h-full flex flex-col justify-between">
                   <div>
-                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg mb-2.5 sm:mb-3 border border-stone-texture/40">
-                      <Image src={p.image} alt={p.name} fill sizes="(min-width: 1024px) 33vw, 90vw" className="object-cover" />
-                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setLightbox({ src: p.image, alt: `${p.name} (${p.tenure})` })}
+                      className="relative aspect-[4/3] w-full overflow-hidden rounded-lg mb-2.5 sm:mb-3 border border-stone-texture/40 text-left cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-heritage-gold block group/img"
+                      aria-label={`View enlarged archival photograph of ${p.name}`}
+                    >
+                      <Image
+                        src={p.image}
+                        alt={p.name}
+                        fill
+                        sizes="(min-width: 1024px) 33vw, 90vw"
+                        className="object-cover transition-transform duration-500 ease-out group-hover/img:scale-[1.02]"
+                      />
+                    </button>
                     <div className="flex items-center gap-1 text-[10px] text-heritage-gold-strong font-bold uppercase tracking-wider mb-1 font-sans">
                       <Award className="h-3.5 w-3.5" />
                       <span>Original Archival Negative • 1999</span>

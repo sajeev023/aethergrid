@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BookOpen, HeartHandshake, Search, ShieldCheck, X } from "lucide-react";
@@ -11,10 +11,18 @@ import { getInstitutionData } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
   if (!src) return null;
   return (
     <div
-      className="fixed inset-0 z-50 bg-deep-navy/95 flex items-center justify-center p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 bg-deep-navy/95 flex flex-col items-center justify-center p-4 sm:p-6 backdrop-blur-sm animate-in fade-in duration-200"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -23,20 +31,27 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
       <button
         type="button"
         onClick={onClose}
-        className="absolute top-4 right-4 p-2 text-white hover:text-heritage-gold-bright transition-colors rounded-full bg-white/10"
+        className="absolute top-4 right-4 p-2 text-white hover:text-heritage-gold-bright transition-colors rounded-full bg-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-heritage-gold"
         aria-label="Close lightbox"
       >
         <X className="h-6 w-6" />
       </button>
-      <div className="relative w-full max-w-4xl max-h-[85vh] aspect-[4/5]">
+      <div
+        className="relative w-full max-w-2xl max-h-[82vh] h-[80vh] flex items-center justify-center"
+        onClick={(e) => e.stopPropagation()}
+      >
         <Image
           src={src}
           alt={alt}
           fill
-          className="object-contain"
+          className="object-contain drop-shadow-2xl"
           sizes="(min-width: 1024px) 80vw, 95vw"
+          priority
         />
       </div>
+      <p className="mt-3 text-center text-royal-cream font-serif text-base sm:text-lg font-semibold tracking-wide select-none">
+        {alt}
+      </p>
     </div>
   );
 }
@@ -111,7 +126,7 @@ function FacultyMemberCard({ member, index, onPhotoClick }: { member: FacultySee
                 alt={member.name}
                 fill
                 sizes="(min-width: 1280px) 15vw, (min-width: 1024px) 20vw, (min-width: 640px) 40vw, 50vw"
-                className="object-cover object-[center_15%] transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.01]"
               />
             </button>
           ) : (
