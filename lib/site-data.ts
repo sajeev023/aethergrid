@@ -137,6 +137,91 @@ export const campusInfrastructureData = {
   ],
 };
 
+// 6. ALL 12 FORMER CORRESPONDENTS & PRINCIPALS (Verbatim from heritage.php)
+export interface FormerPrincipal {
+  name: string;
+  designation: string;
+  tenure: string;
+  image: string;
+  roleDescription?: string;
+}
+
+export const formerPrincipalsData: FormerPrincipal[] = [
+  {
+    name: "Rev. Bro. James Pannivelil",
+    designation: "Builder of LFJC Uppal Campus",
+    tenure: "Founding Builder",
+    image: "/images/principals/bro_james_pannivelil.jpg",
+    roleDescription: "Architect and builder of the historic Little Flower Junior College Uppal campus building.",
+  },
+  {
+    name: "Late Rev. Bro. Vincent",
+    designation: "Founder Principal & Correspondent",
+    tenure: "1974–76, 1982–83 (Correspondent 1976–79)",
+    image: "/images/principals/bro_vincent.jpg",
+  },
+  {
+    name: "Late Rev. Bro. Emmanuel",
+    designation: "Principal",
+    tenure: "1976–1979",
+    image: "/images/principals/bro_emmanuel.jpg",
+  },
+  {
+    name: "Rev. Bro. Claude",
+    designation: "Correspondent & Principal",
+    tenure: "1979–1982",
+    image: "/images/principals/bro_claude.jpg",
+  },
+  {
+    name: "Rev. Bro. John Kallarackal",
+    designation: "Correspondent & Principal (Chief Patron, LFJCAN)",
+    tenure: "1983–1989",
+    image: "/images/principals/bro_john.jpg",
+  },
+  {
+    name: "Rev. Bro. Celestine",
+    designation: "Correspondent & Principal",
+    tenure: "1989–1994",
+    image: "/images/principals/bro_celestine.jpg",
+  },
+  {
+    name: "Rev. Bro. M. A. George",
+    designation: "Correspondent & Principal",
+    tenure: "1994–2000",
+    image: "/images/principals/bro_george.jpg",
+  },
+  {
+    name: "Late Rev. Bro. N. A. James",
+    designation: "Correspondent & Principal",
+    tenure: "2000–2006",
+    image: "/images/principals/bro_james_na.jpg",
+  },
+  {
+    name: "Rev. Bro. Franky Noronha",
+    designation: "Correspondent & Principal",
+    tenure: "2006–2011",
+    image: "/images/principals/bro_franky.jpg",
+  },
+  {
+    name: "Rev. Bro. Jaico Gervasis",
+    designation: "Correspondent & Principal",
+    tenure: "2011–2017",
+    image: "/images/principals/bro_jaico.jpg",
+  },
+  {
+    name: "Rev. Bro. Vincent Reddy",
+    designation: "Correspondent & Principal",
+    tenure: "2017–2023",
+    image: "/images/principals/bro_vincent.jpg", // Verified image from jubilee archive
+  },
+  {
+    name: "Rev. Bro. Arun Prakash Lawrance",
+    designation: "Correspondent & Principal",
+    tenure: "2023–Present",
+    image: "/images/principals/bro_arun_prakash.jpg",
+  },
+];
+
 // 7. FORMER STAFF MEMBERS (Verbatim from heritage.php - 31 Members)
 export interface FormerStaff {
   name: string;
@@ -178,6 +263,236 @@ export const formerStaffData: FormerStaff[] = [
   { name: "Mr. Ch. Devender", designation: "Support Staff", department: "Campus Support", tenure: "1985–2023" },
   { name: "Ms. Jayashree", designation: "Lecturer", department: "Botany", tenure: "1990–2024" },
 ];
+
+// 7b. RETIRED FACULTY ARCHIVE (27 Emeritus Educators with Verified Portraits)
+export interface RetiredFacultyMember {
+  name: string;
+  designation: string;
+  department: string;
+  category: "retired";
+  image: string;
+  tenure?: string;
+}
+
+export const retiredFacultyData: RetiredFacultyMember[] = [
+  {
+    name: "Dr. Anitha Lincoln",
+    designation: "Faculty (Retired)",
+    department: "Chemistry Department",
+    category: "retired",
+    image: "/images/faculty/retired/dr_anitha_lincon.jpg",
+    tenure: "1986–2020",
+  },
+  {
+    name: "Dr. Riyaz Ul Ansari",
+    designation: "Faculty (Retired)",
+    department: "Languages Department",
+    category: "retired",
+    image: "/images/faculty/retired/dr_riyaz_ui_ansari.jpg",
+    tenure: "1991–2016",
+  },
+  {
+    name: "Dr. T. Rajeswara Reddy",
+    designation: "Faculty (Retired)",
+    department: "Languages Department",
+    category: "retired",
+    image: "/images/faculty/retired/dr_t_rajeswara_reddy.jpg",
+    tenure: "1982–2013",
+  },
+  {
+    name: "Mr. B. Paul Raju",
+    designation: "Faculty (Retired)",
+    department: "Mathematics Department",
+    category: "retired",
+    image: "/images/faculty/retired/mr_b_paul_raju.jpg",
+    tenure: "2000–2023",
+  },
+  {
+    name: "Mr. Bheeshma Chary",
+    designation: "Faculty (Retired)",
+    department: "Support Staff",
+    category: "retired",
+    image: "/images/faculty/retired/mr_bheeshma_chary.jpg",
+    tenure: "1987–2016",
+  },
+  {
+    name: "Mr. David Joseph",
+    designation: "Faculty (Retired)",
+    department: "Office Administration",
+    category: "retired",
+    image: "/images/faculty/retired/mr_david_joseph.jpg",
+    tenure: "1974–1997",
+  },
+  {
+    name: "Mr. E. V. Subbarao",
+    designation: "Faculty (Retired)",
+    department: "Physics Department",
+    category: "retired",
+    image: "/images/faculty/retired/mr_e_v_subbarao.jpg",
+    tenure: "1974–1997",
+  },
+  {
+    name: "Mr. Jayatheerth Katti",
+    designation: "Faculty (Retired)",
+    department: "Mathematics Department",
+    category: "retired",
+    image: "/images/faculty/retired/mr_jayatheerth_katti.jpg",
+    tenure: "1981–2003",
+  },
+  {
+    name: "Mr. K. Srinivadev",
+    designation: "Faculty (Retired)",
+    department: "Physics Department",
+    category: "retired",
+    image: "/images/faculty/retired/mr_k_srinivadev.jpg",
+    tenure: "1991–2019",
+  },
+  {
+    name: "Mr. M. Amarnath",
+    designation: "Faculty (Retired)",
+    department: "Computer & Library Department",
+    category: "retired",
+    image: "/images/faculty/retired/mr_m_amarnath.jpg",
+    tenure: "1996–2023",
+  },
+  {
+    name: "Mr. S. Balaiah",
+    designation: "Faculty (Retired)",
+    department: "Support Staff",
+    category: "retired",
+    image: "/images/faculty/retired/mr_s_balaiah.jpg",
+    tenure: "1985–2020",
+  },
+  {
+    name: "Mr. T. D. Babu",
+    designation: "Faculty (Retired)",
+    department: "Support Staff",
+    category: "retired",
+    image: "/images/faculty/retired/mr_t_d_baaabu.jpg",
+    tenure: "1989–2022",
+  },
+  {
+    name: "Mr. A. R. Narasimharao",
+    designation: "Faculty (Retired)",
+    department: "Physics Department",
+    category: "retired",
+    image: "/images/faculty/retired/mr_a_r_narasimharao.jpg",
+    tenure: "1985–2017",
+  },
+  {
+    name: "Mr. K. Jothi Ram",
+    designation: "Faculty (Retired)",
+    department: "Office Administration",
+    category: "retired",
+    image: "/images/faculty/retired/mr_k_jothi_ram.jpg",
+    tenure: "1990–2005",
+  },
+  {
+    name: "Mr. Nagaraja Kumar",
+    designation: "Faculty (Retired)",
+    department: "Physics Department",
+    category: "retired",
+    image: "/images/faculty/retired/mr_nagaraja_kumar.jpg",
+    tenure: "1982–2010",
+  },
+  {
+    name: "Mr. P. Kesavacharaya",
+    designation: "Faculty (Retired)",
+    department: "Languages Department",
+    category: "retired",
+    image: "/images/faculty/retired/mr_p_kesavacharaya.jpg",
+    tenure: "1982–2013",
+  },
+  {
+    name: "Ms. B. M. D. Sakunthala",
+    designation: "Faculty (Retired)",
+    department: "Biology Department",
+    category: "retired",
+    image: "/images/faculty/retired/ms_bmd_sakunthala.jpg",
+    tenure: "1974–2005",
+  },
+  {
+    name: "Ms. Raachel Oommen",
+    designation: "Faculty (Retired)",
+    department: "Languages Department",
+    category: "retired",
+    image: "/images/faculty/retired/ms_raachel_oommen.jpg",
+    tenure: "1988–2020",
+  },
+  {
+    name: "Ms. Saghana Srivastava",
+    designation: "Faculty (Retired)",
+    department: "Languages Department",
+    category: "retired",
+    image: "/images/faculty/retired/ms_saghana_srivastava.jpg",
+    tenure: "1983–2008",
+  },
+  {
+    name: "Ms. Savithri Narayanan",
+    designation: "Faculty (Retired)",
+    department: "Computer & Library Department",
+    category: "retired",
+    image: "/images/faculty/retired/ms_savithri_narayanan.jpg",
+    tenure: "1999–2014",
+  },
+  {
+    name: "Ms. Sudheshna Chattopadhyay",
+    designation: "Faculty (Retired)",
+    department: "Languages Department",
+    category: "retired",
+    image: "/images/faculty/retired/ms_sudheshna_chattopadhyay.jpg",
+    tenure: "1981–2013",
+  },
+  {
+    name: "Ms. J. Meenakshi",
+    designation: "Faculty (Retired)",
+    department: "Languages Department",
+    category: "retired",
+    image: "/images/faculty/retired/ms_j_menakshi.jpg",
+    tenure: "2000–2017",
+  },
+  {
+    name: "Ms. K. Susheela",
+    designation: "Faculty (Retired)",
+    department: "Support Staff",
+    category: "retired",
+    image: "/images/faculty/retired/ms_k_susheela.jpg",
+    tenure: "1987–2018",
+  },
+  {
+    name: "Ms. P. Usha",
+    designation: "Faculty (Retired)",
+    department: "Chemistry Department",
+    category: "retired",
+    image: "/images/faculty/retired/ms_p_usha.jpg",
+    tenure: "1983–2017",
+  },
+  {
+    name: "Ms. Sabiha Fathima",
+    designation: "Faculty (Retired)",
+    department: "Chemistry Department",
+    category: "retired",
+    image: "/images/faculty/retired/ms_sabiha_fathima.jpg",
+    tenure: "1987–2023",
+  },
+  {
+    name: "Ms. V. Saraswathi",
+    designation: "Faculty (Retired)",
+    department: "Languages Department",
+    category: "retired",
+    image: "/images/faculty/retired/ms_v_saraswathi.jpg",
+    tenure: "1995–2005",
+  },
+  {
+    name: "Mr. Shaik Lateef",
+    designation: "Faculty (Retired)",
+    department: "Support Staff",
+    category: "retired",
+    image: "/images/faculty/retired/shaik_lateef.jpg",
+    tenure: "1983–2023",
+  },
+];
+
 
 // 8. BROTHERS WHO STUDIED AT LFJC AND SERVED >25 YEARS IN BROTHERHOOD (Verbatim from heritage.php - 20 Brothers)
 export const brothersInServiceData = [
@@ -1314,6 +1629,7 @@ export const alumniData: Alumnus[] = [
 export const stats = lfjcData.stats;
 export const programs = lfjcData.programs;
 export const faculty = lfjcData.faculty;
+export const retiredFaculty = retiredFacultyData;
 export const admissionsSteps = lfjcData.admissionsSteps;
 export const admissionsDocuments = lfjcData.admissionsDocuments;
 export interface AlumniVideo {
