@@ -339,15 +339,9 @@ export function CampusLifeCombinedView() {
       <Section variant="default" className="bg-gradient-to-b from-deep-navy to-montfortian-blue text-white py-12 sm:py-16">
         <div className="mx-auto max-w-4xl text-center">
           <Reveal>
-            <span className="inline-block px-3 py-1 rounded-full bg-heritage-gold/20 border border-heritage-gold/40 text-heritage-gold-bright text-xs font-bold uppercase tracking-widest font-sans mb-3">
-              Campus &amp; Student Life
-            </span>
             <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-white tracking-tight">
-              Campus &amp; Labs, Events &amp; Sports
+              Campus &amp; Sports
             </h1>
-            <p className="mt-2 text-sm sm:text-base text-royal-cream/80 max-w-2xl mx-auto font-sans leading-relaxed">
-              Discover the 8-acre Uppal campus infrastructure, state-of-the-art laboratories, central library, academic seminars, and athletic tournaments.
-            </p>
           </Reveal>
         </div>
       </Section>
@@ -356,15 +350,9 @@ export function CampusLifeCombinedView() {
       <Section id="campus" variant="default" className="bg-white py-12 sm:py-16">
         <div id="campus-labs" className="mx-auto max-w-6xl scroll-mt-24">
           <div className="mb-6">
-            <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-              Campus Infrastructure &amp; Laboratories
-            </span>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate mt-1">
               Campus &amp; Laboratories Gallery
             </h2>
-            <p className="text-xs sm:text-sm text-academic-slate/70 font-sans mt-1">
-              Visual walkthrough of the academic building, laboratories, central library, and athletic grounds:
-            </p>
           </div>
           <GalleryGrid items={CAMPUS_LABS_IMAGES} />
         </div>
@@ -372,15 +360,9 @@ export function CampusLifeCombinedView() {
         {/* Floor-by-Floor Tour */}
         <div id="facilities" className="mx-auto max-w-6xl mt-12 pt-10 border-t border-stone-texture/40 scroll-mt-24">
           <div className="mb-8">
-            <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-              Comprehensive Architectural Tour
-            </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1">
               Building Layout &amp; Campus Facilities
             </h2>
-            <p className="text-xs sm:text-sm text-academic-slate/70 font-sans mt-1 max-w-3xl">
-              {campusInfrastructureData.summary}
-            </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
@@ -417,28 +399,16 @@ export function CampusLifeCombinedView() {
       <Section id="events" variant="default" className="bg-royal-cream/20 border-t border-stone-texture/30 py-12 sm:py-16 scroll-mt-24">
         <div className="mx-auto max-w-6xl space-y-10">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-              Assemblies &amp; Seminars
-            </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1 mb-1">
               Events, Seminars &amp; Assemblies
             </h2>
-            <p className="text-xs sm:text-sm text-academic-slate/70 mb-6 font-sans">
-              Guest lectures, motivational addresses, science seminars, and student assemblies at St. Montfort Auditorium:
-            </p>
             <GalleryGrid items={ASSEMBLIES_IMAGES} />
           </div>
 
           <div id="sports" className="pt-8 border-t border-stone-texture/30 scroll-mt-24">
-            <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-              Athletic Excellence
-            </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1 mb-1">
               Athletics &amp; Sports Tournaments
             </h2>
-            <p className="text-xs sm:text-sm text-academic-slate/70 mb-6 font-sans">
-              Inter-college tournaments and annual sports meets in Volleyball, Basketball, Track &amp; Field:
-            </p>
             <GalleryGrid items={SPORTS_IMAGES} />
           </div>
         </div>

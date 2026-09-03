@@ -149,7 +149,7 @@ export default function LFJCPage() {
                 <div className="pt-3 flex flex-wrap gap-3">
                   <Button asChild variant="gold" size="lg">
                     <Link href="/campus/campus-life" className="inline-flex items-center gap-2">
-                      Explore Campus & Labs
+                      Explore Campus & Sports
                       <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </Link>
                   </Button>
