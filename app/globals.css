@@ -39,19 +39,39 @@
   --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
   --font-editorial: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
 
-  /* ─── Slightly Enlarged Font Scale for Readability ─────────────────────── */
-  --text-xs: 0.875rem;
-  --text-xs--line-height: 1.35rem;
-  --text-sm: 1rem;
-  --text-sm--line-height: 1.55rem;
-  --text-base: 1.0625rem;
-  --text-base--line-height: 1.65rem;
+  /* ─── Enlarged Font Scale for Readability ────────────────────────────── */
+  --text-xs: 0.9375rem;
+  --text-xs--line-height: 1.45rem;
+  --text-sm: 1.0625rem;
+  --text-sm--line-height: 1.65rem;
+  --text-base: 1.125rem;
+  --text-base--line-height: 1.75rem;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.85rem;
+  --text-xl: 1.375rem;
+  --text-xl--line-height: 1.95rem;
+  --text-2xl: 1.625rem;
+  --text-2xl--line-height: 2.1rem;
+  --text-3xl: 1.9375rem;
+  --text-3xl--line-height: 2.35rem;
+  --text-4xl: 2.375rem;
+  --text-4xl--line-height: 2.75rem;
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 3.25rem;
+  --text-6xl: 3.625rem;
+  --text-6xl--line-height: 3.85rem;
+  --text-7xl: 4.375rem;
+  --text-7xl--line-height: 4.5rem;
+  --text-8xl: 5.25rem;
+  --text-8xl--line-height: 5.4rem;
+  --text-9xl: 6.5rem;
+  --text-9xl--line-height: 6.65rem;
 
   /* ─── Micro Type Scale ───────────────────────────────────────────────── */
   /* Institutional label sizes — elevated for clear legibility */
-  --text-micro: 0.6875rem;  /* 11px */
-  --text-label: 0.75rem;    /* 12px */
-  --text-caption: 0.8125rem; /* 13px */
+  --text-micro: 0.75rem;  /* 12px */
+  --text-label: 0.8125rem; /* 13px */
+  --text-caption: 0.875rem; /* 14px */
 
   /* ─── Radius ─────────────────────────────────────────────────────────── */
   --radius-sm: 0.25rem;

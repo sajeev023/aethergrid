@@ -218,23 +218,23 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
             <div
               className={cn(
                 "relative rounded-full border border-heritage-gold/30 overflow-hidden bg-white p-0.5 shrink-0 group-hover:border-heritage-gold/70 transition-all duration-300 shadow-xs group-hover:shadow-md",
-                isScrolled ? "w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11" : "w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12",
+                isScrolled ? "w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12" : "w-11 h-11 sm:w-12 sm:h-12 md:w-13 md:h-13",
               )}
             >
               <Image
                 src="/images/lfjc-logo.jpg"
                 alt="LFJC Official Logo"
-                width={48}
-                height={48}
+                width={56}
+                height={56}
                 className="w-full h-full object-contain rounded-full"
                 priority
               />
             </div>
             <div className="flex flex-col justify-center">
-              <span className="font-serif font-bold leading-tight text-montfortian-blue text-base sm:text-lg md:text-xl xl:text-[22px] transition-colors duration-300 group-hover:text-montfortian-blue/90 whitespace-nowrap">
+              <span className="font-serif font-bold leading-tight text-montfortian-blue text-lg sm:text-xl md:text-2xl xl:text-[26px] transition-colors duration-300 group-hover:text-montfortian-blue/90 whitespace-nowrap">
                 Little Flower
               </span>
-              <span className="font-sans font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-heritage-gold-strong text-[9px] sm:text-[10px] xl:text-[10.5px] leading-tight mt-0.5 transition-colors duration-300 whitespace-nowrap">
+              <span className="font-sans font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-heritage-gold-strong text-[10px] sm:text-[11px] xl:text-xs leading-tight mt-0.5 transition-colors duration-300 whitespace-nowrap">
                 Junior College
               </span>
             </div>
@@ -392,20 +392,20 @@ export function Navbar({ activeInst = "lfjc" }: NavbarProps) {
                 onClick={closeDrawer}
                 className="flex items-center gap-2.5 sm:gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-montfortian-blue"
               >
-                <div className="rounded-full border border-heritage-gold/25 overflow-hidden bg-white p-0.5 w-10 h-10 sm:w-11 sm:h-11 flex-shrink-0">
+                <div className="rounded-full border border-heritage-gold/25 overflow-hidden bg-white p-0.5 w-11 h-11 sm:w-12 sm:h-12 flex-shrink-0">
                   <Image
                     src="/images/lfjc-logo.jpg"
                     alt="LFJC Official Logo"
-                    width={48}
-                    height={48}
+                    width={56}
+                    height={56}
                     className="w-full h-full object-contain rounded-full"
                   />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-serif font-bold leading-none text-montfortian-blue text-[15px] sm:text-base">
+                  <span className="font-serif font-bold leading-none text-montfortian-blue text-base sm:text-lg">
                     Little Flower
                   </span>
-                  <span className="font-sans font-bold uppercase tracking-[0.16em] text-heritage-gold-strong text-[9px] sm:text-[10px] mt-1">
+                  <span className="font-sans font-bold uppercase tracking-[0.16em] text-heritage-gold-strong text-[10px] sm:text-[11px] mt-1">
                     Junior College
                   </span>
                 </div>
