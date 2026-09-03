@@ -50,73 +50,17 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
         </div>
       </Section>
 
-      {/* ─── 1. INSTITUTIONAL HISTORY ─────────────────────────────────── */}
-      <Section id="history" variant="default" className="bg-white py-12 sm:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
-          <Reveal className="lg:col-span-5">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-stone-texture/50 shadow-float">
-              <Image
-                src="/images/campus-hero.jpg"
-                alt="LFJC Uppal Campus Grounds"
-                fill
-                sizes="(min-width: 1024px) 40vw, 90vw"
-                className="object-cover"
-                priority
-              />
-              <div className="absolute bottom-3 left-3 bg-deep-navy/85 backdrop-blur-md px-3 py-1.5 rounded-md border border-white/15 text-white text-xs font-sans font-semibold">
-                Uppal Campus • Opposite Survey of India
-              </div>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1} className="lg:col-span-7">
-            <div className="space-y-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-                Our Foundation & Growth
-              </span>
-              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate leading-snug">
-                From Abids Origins (1974) to 8-Acre Uppal Campus
-              </h2>
-              <div className="space-y-3 text-xs sm:text-sm leading-relaxed text-academic-slate/80 font-sans">
-                <p>
-                  Little Flower Junior College was established in <strong>1974</strong> by upgrading the historic Little Flower High School of Abids, Hyderabad. The college was later relocated in <strong>1982</strong> to its current spacious campus in Uppal.
-                </p>
-                <p>
-                  When the college first opened its doors, it began with around <strong>200 students</strong>. Today, LFJC is home to over <strong>1,600 students</strong> pursuing Board-recognized Intermediate education across Mathematics, Physical Sciences, Biological Sciences, and Humanities.
-                </p>
-                <p>
-                  Spread across <strong>8 acres</strong> on the Tarnaka–Uppal Road opposite the Survey of India, the campus features a sprawling playground, modern science and computer laboratories, a central library, and the historic Heritage Hall, all fostering intellectual, moral, and physical growth.
-                </p>
-              </div>
-              <div className="grid grid-cols-3 gap-3 pt-2">
-                <div className="bg-royal-cream/40 p-3 rounded-lg border border-stone-texture/40 text-center">
-                  <div className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue">1974</div>
-                  <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-academic-slate/70">Founded</div>
-                </div>
-                <div className="bg-royal-cream/40 p-3 rounded-lg border border-stone-texture/40 text-center">
-                  <div className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue">1,600+</div>
-                  <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-academic-slate/70">Students</div>
-                </div>
-                <div className="bg-royal-cream/40 p-3 rounded-lg border border-stone-texture/40 text-center">
-                  <div className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue">8 Acres</div>
-                  <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-academic-slate/70">Campus</div>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </Section>
-
-      {/* ─── 2. FOUNDER & PATRONESS PROFILES ───────────────────────────── */}
-      <Section id="founder" variant="default" className="bg-royal-cream/25 border-y border-stone-texture/30 py-12 sm:py-16">
+      {/* ─── 1. FOUNDER & PATRONESS PROFILES (Moved to Top) ───────────── */}
+      <Section id="founder" variant="default" className="bg-royal-cream/25 border-b border-stone-texture/30 py-12 sm:py-16">
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-10">
             <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-              Spiritual & Institutional Roots
+              Spiritual &amp; Institutional Roots
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-academic-slate mt-1">
               Our Founder &amp; Patroness
             </h2>
-            <p className="text-xs sm:text-sm text-academic-slate/70 max-w-xl mx-auto mt-2 font-sans">
+            <p className="text-xs sm:text-sm text-academic-slate/80 max-w-xl mx-auto mt-2 font-sans">
               Little Flower Junior College draws perpetual inspiration from our Founder Saint Louis Marie de Montfort and our Patroness Saint Thérèse of Lisieux.
             </p>
           </div>
@@ -153,7 +97,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
                       <h3 className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue leading-tight mt-0.5">
                         St. Louis Marie de Montfort
                       </h3>
-                      <p className="text-xs text-academic-slate/70 font-sans mt-0.5">
+                      <p className="text-xs text-academic-slate/75 font-sans mt-0.5">
                         Born: {founderData.birthDate} • Died: {founderData.deathDate}
                       </p>
                       <p className="text-[11px] text-heritage-gold-strong font-semibold font-sans mt-1">
@@ -162,7 +106,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
                     </div>
                   </div>
 
-                  <div className="space-y-3 text-xs sm:text-sm leading-relaxed text-academic-slate/80 font-sans border-t border-stone-texture/20 pt-4">
+                  <div className="space-y-3 text-xs sm:text-sm leading-relaxed text-academic-slate/85 font-sans border-t border-stone-texture/20 pt-4">
                     <p>
                       <strong>Louis Mary Grignion</strong>, popularly known as Montfort, grew to be a prophet of his times. He saw God in the poor and gave his life for their cause. In him welled up a constant spring of Love, Courage, Self-surrendering Service, and Commitment.
                     </p>
@@ -210,7 +154,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
                       <h3 className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue leading-tight mt-0.5">
                         St. Thérèse of Lisieux
                       </h3>
-                      <p className="text-xs text-academic-slate/70 font-sans mt-0.5">
+                      <p className="text-xs text-academic-slate/75 font-sans mt-0.5">
                         &quot;The Little Flower of Jesus&quot; (1873–1897)
                       </p>
                       <p className="text-[11px] text-heritage-gold-strong font-semibold font-sans mt-1">
@@ -219,7 +163,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
                     </div>
                   </div>
 
-                  <div className="space-y-3 text-xs sm:text-sm leading-relaxed text-academic-slate/80 font-sans border-t border-stone-texture/20 pt-4">
+                  <div className="space-y-3 text-xs sm:text-sm leading-relaxed text-academic-slate/85 font-sans border-t border-stone-texture/20 pt-4">
                     <p>
                       Born <strong>Marie Françoise-Thérèse Martin</strong> in France, she became a Carmelite nun at an early age. She is popularly celebrated as <em>&quot;The Little Flower of Jesus&quot;</em> — the direct namesake of Little Flower Junior College.
                     </p>
@@ -239,6 +183,62 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
               </div>
             </Reveal>
           </div>
+        </div>
+      </Section>
+
+      {/* ─── 2. INSTITUTIONAL HISTORY ─────────────────────────────────── */}
+      <Section id="history" variant="default" className="bg-white py-12 sm:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+          <Reveal className="lg:col-span-5">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-stone-texture/50 shadow-float">
+              <Image
+                src="/images/campus-hero.jpg"
+                alt="LFJC Uppal Campus Grounds"
+                fill
+                sizes="(min-width: 1024px) 40vw, 90vw"
+                className="object-cover"
+                priority
+              />
+              <div className="absolute bottom-3 left-3 bg-deep-navy/85 backdrop-blur-md px-3 py-1.5 rounded-md border border-white/15 text-white text-xs font-sans font-semibold">
+                Uppal Campus • Opposite Survey of India
+              </div>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1} className="lg:col-span-7">
+            <div className="space-y-4">
+              <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                Our Foundation &amp; Growth
+              </span>
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate leading-snug">
+                From Abids Origins (1974) to 8-Acre Uppal Campus
+              </h2>
+              <div className="space-y-3 text-xs sm:text-sm leading-relaxed text-academic-slate/80 font-sans">
+                <p>
+                  Little Flower Junior College was established in <strong>1974</strong> by upgrading the historic Little Flower High School of Abids, Hyderabad. The college was later relocated in <strong>1982</strong> to its current spacious campus in Uppal.
+                </p>
+                <p>
+                  When the college first opened its doors, it began with around <strong>200 students</strong>. Today, LFJC is home to over <strong>1,600 students</strong> pursuing Board-recognized Intermediate education across Mathematics, Physical Sciences, Biological Sciences, and Humanities.
+                </p>
+                <p>
+                  Spread across <strong>8 acres</strong> on the Tarnaka–Uppal Road opposite the Survey of India, the campus features a sprawling playground, modern science and computer laboratories, a central library, and the historic Heritage Hall, all fostering intellectual, moral, and physical growth.
+                </p>
+              </div>
+              <div className="grid grid-cols-3 gap-3 pt-2">
+                <div className="bg-royal-cream/40 p-3 rounded-lg border border-stone-texture/40 text-center">
+                  <div className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue">1974</div>
+                  <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-academic-slate/70">Founded</div>
+                </div>
+                <div className="bg-royal-cream/40 p-3 rounded-lg border border-stone-texture/40 text-center">
+                  <div className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue">1,600+</div>
+                  <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-academic-slate/70">Students</div>
+                </div>
+                <div className="bg-royal-cream/40 p-3 rounded-lg border border-stone-texture/40 text-center">
+                  <div className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue">8 Acres</div>
+                  <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-academic-slate/70">Campus</div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </Section>
 
@@ -271,7 +271,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
                     Vow of {vow}
                   </span>
                 ))}
-                <span className="px-3 py-1 bg-montfortian-blue text-white rounded-full text-xs font-bold font-sans">
+                <span className="px-3 py-1 bg-royal-cream text-montfortian-blue border border-stone-texture/40 rounded-full text-xs font-bold font-sans">
                   Pontifical Right (1910)
                 </span>
                 <span className="px-3 py-1 bg-heritage-gold/20 text-montfortian-blue border border-heritage-gold/30 rounded-full text-xs font-bold font-sans">
@@ -407,19 +407,20 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
       <Section id="principal" variant="default" className="bg-white py-12 sm:py-16">
         <div className="mx-auto max-w-5xl">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
-            <Reveal className="lg:col-span-4">
+            <Reveal className="lg:col-span-5">
               <button
                 type="button"
                 onClick={() => setLightboxImage({ src: lfjcData.principalImg, title: lfjcData.principalName, subtitle: lfjcData.principalRole })}
-                className="relative aspect-[3/4] w-full max-w-xs mx-auto lg:mx-0 overflow-hidden rounded-2xl border-2 border-heritage-gold/30 shadow-float bg-royal-cream/40 cursor-zoom-in group block text-left focus:outline-none focus:ring-2 focus:ring-heritage-gold transition-all"
+                className="relative aspect-[4/3] sm:aspect-[2455/1736] w-full max-w-sm lg:max-w-none mx-auto overflow-hidden rounded-2xl border-2 border-heritage-gold/30 shadow-float bg-royal-cream/40 cursor-zoom-in group block text-left focus:outline-none focus:ring-2 focus:ring-heritage-gold transition-all"
                 aria-label={`Click to enlarge ${lfjcData.principalName} portrait`}
               >
                 <Image
                   src={lfjcData.principalImg}
                   alt={lfjcData.principalName}
                   fill
-                  sizes="(min-width: 1024px) 30vw, 60vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(min-width: 1024px) 40vw, 90vw"
+                  className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                  priority
                 />
                 <div className="absolute inset-0 bg-deep-navy/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <div className="bg-deep-navy/85 border border-heritage-gold/50 px-3.5 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-white text-xs font-sans font-semibold">
@@ -430,7 +431,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
               </button>
             </Reveal>
 
-            <Reveal delay={0.1} className="lg:col-span-8 space-y-3">
+            <Reveal delay={0.1} className="lg:col-span-7 space-y-3">
               <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
                 Principal&apos;s Desk
               </span>
@@ -445,7 +446,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
                 &quot;{lfjcData.principalQuote}&quot;
               </blockquote>
 
-              <div className="space-y-2.5 text-xs sm:text-sm leading-relaxed text-academic-slate/80 font-sans">
+              <div className="space-y-2.5 text-xs sm:text-sm leading-relaxed text-academic-slate/85 font-sans">
                 <p>{lfjcData.principalMessage}</p>
               </div>
             </Reveal>

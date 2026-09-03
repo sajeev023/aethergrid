@@ -11,11 +11,11 @@
   --color-heritage-gold: #c29b53;
   --color-heritage-gold-bright: #ebd09b;
   --color-heritage-gold-strong: #8a6625;
-  /* Academic slate — refined dark neutral for body/headings */
-  --color-academic-slate: #1e2a32;
-  --color-academic-slate-soft: #3a4a54;
+  /* Academic slate — refined dark neutral for body/headings (darkened for high readability) */
+  --color-academic-slate: #0f1821;
+  --color-academic-slate-soft: #1e2933;
   /* Ink — deepest text */
-  --color-ink: #0c1216;
+  --color-ink: #080d12;
   /* Royal cream — warm archival background */
   --color-royal-cream: #f7f3e9;
   --color-royal-cream-deefe: #efe8d8;
@@ -29,21 +29,29 @@
   --color-surface-container: #f3efe6;
   --color-surface-container-high: #ece7dc;
   --color-surface-container-highest: #e5dfd2;
-  --color-on-surface: #1a2328;
-  --color-on-surface-variant: #4a5560;
-  --color-outline: #7a8290;
-  --color-outline-variant: #c8cfda;
+  --color-on-surface: #0f1821;
+  --color-on-surface-variant: #283540;
+  --color-outline: #687382;
+  --color-outline-variant: #b8c1ce;
 
   /* ─── Typography ─────────────────────────────────────────────────────── */
   --font-sans: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
   --font-editorial: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
 
+  /* ─── Slightly Enlarged Font Scale for Readability ─────────────────────── */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.25rem;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.45rem;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.65rem;
+
   /* ─── Micro Type Scale ───────────────────────────────────────────────── */
-  /* Institutional label sizes — nothing below 10px, reserved for true micro-use. */
-  --text-micro: 0.625rem;   /* 10px — minimum for uppercase tracking labels */
-  --text-label: 0.6875rem;  /* 11px — standard eyebrow / meta label */
-  --text-caption: 0.75rem;  /* 12px — captions, secondary UI */
+  /* Institutional label sizes — elevated for clear legibility */
+  --text-micro: 0.6875rem;  /* 11px */
+  --text-label: 0.75rem;    /* 12px */
+  --text-caption: 0.8125rem; /* 13px */
 
   /* ─── Radius ─────────────────────────────────────────────────────────── */
   --radius-sm: 0.25rem;
@@ -67,10 +75,16 @@
     min-height: 100vh;
     background: var(--color-surface);
     color: var(--color-on-surface);
+    font-weight: 450;
     overflow-x: hidden;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  p {
+    color: var(--color-academic-slate);
+    line-height: 1.65;
   }
 
   a,
@@ -107,6 +121,8 @@
 
   /* ─── Heading System ─────────────────────────────────────────────────── */
   h1, h2, h3, h4, h5 {
+    color: var(--color-academic-slate);
+    font-weight: 700;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -114,22 +130,42 @@
 
   h1 {
     letter-spacing: -0.03em;
-    line-height: 1.08;
+    line-height: 1.1;
   }
 
   h2 {
     letter-spacing: -0.02em;
-    line-height: 1.12;
+    line-height: 1.15;
   }
 
   h3 {
     letter-spacing: -0.015em;
-    line-height: 1.2;
+    line-height: 1.22;
   }
 
   h4 {
     letter-spacing: -0.01em;
-    line-height: 1.25;
+    line-height: 1.28;
+  }
+
+  /* ─── High Contrast Supporting Text ──────────────────────────────────── */
+  .text-academic-slate\/60 {
+    color: color-mix(in srgb, var(--color-academic-slate) 82%, transparent) !important;
+  }
+  .text-academic-slate\/70 {
+    color: color-mix(in srgb, var(--color-academic-slate) 88%, transparent) !important;
+  }
+  .text-academic-slate\/75 {
+    color: color-mix(in srgb, var(--color-academic-slate) 91%, transparent) !important;
+  }
+  .text-academic-slate\/80 {
+    color: color-mix(in srgb, var(--color-academic-slate) 95%, transparent) !important;
+  }
+  .text-academic-slate\/85 {
+    color: color-mix(in srgb, var(--color-academic-slate) 97%, transparent) !important;
+  }
+  .text-royal-cream\/80 {
+    color: color-mix(in srgb, var(--color-royal-cream) 92%, transparent) !important;
   }
 
   /* ─── Gold-accented text refinement ──────────────────────────────────── */
