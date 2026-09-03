@@ -25,9 +25,10 @@ interface HeroSlide {
   mobileObjectPosition?: string;
   title: string;
   isPoster?: boolean;
+  objectFit?: "cover" | "contain";
 }
 
-// Exactly 4 Hero Slides: College Photo, Campus Top-Angle Photo (12.jpg), 1st Year Toppers 2026, 2nd Year Toppers 2026
+// Exactly 4 Hero Slides: College Photo, Dignitaries Award Presentation, 1st Year Toppers 2026, 2nd Year Toppers 2026
 const HERO_SLIDES: HeroSlide[] = [
   {
     id: "hero-1-building",
@@ -37,15 +38,17 @@ const HERO_SLIDES: HeroSlide[] = [
     objectPosition: "center 35%",
     mobileObjectPosition: "center 20%",
     title: "College Photo",
+    objectFit: "cover",
   },
   {
     id: "hero-2-campus-quad",
     src: "/images/hero/hero-2-campus-quad.webp",
     fallbackSrc: "/images/hero/hero-2-campus-quad.jpg",
-    alt: "Little Flower Junior College Campus Building and Facade",
-    objectPosition: "center center",
+    alt: "Little Flower Junior College Dignitaries and Award Presentation",
+    objectPosition: "right center",
     mobileObjectPosition: "center center",
-    title: "Campus Building View",
+    title: "Dignitaries & Felicitation",
+    objectFit: "contain",
   },
   {
     id: "hero-toppers-1st-year-2026",
@@ -110,23 +113,24 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
       <section
         id="home"
         aria-label="Little Flower Junior College Hero"
-        className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[76svh] flex flex-col justify-center overflow-hidden bg-deep-navy text-white"
+        className="relative min-h-[62vh] sm:min-h-[72vh] lg:min-h-[80svh] flex flex-col justify-center overflow-hidden bg-deep-navy text-white"
       >
         {/* Cinematic Background Image Carousel */}
         <div className="absolute inset-0 z-0 overflow-hidden bg-deep-navy">
           {HERO_SLIDES.map((slide, index) => {
             const isActive = index === activeSlideIndex;
+            const isUnzoomed = slide.isPoster || slide.objectFit === "contain";
             return (
               <motion.div
                 key={slide.id}
                 initial={false}
                 animate={{
                   opacity: isActive ? (slide.isPoster ? 1.0 : 0.90) : 0,
-                  scale: isActive ? (prefersReducedMotion || slide.isPoster ? 1.0 : 1.03) : 1.0,
+                  scale: isActive ? (prefersReducedMotion || isUnzoomed ? 1.0 : 1.03) : 1.0,
                 }}
                 transition={{
                   opacity: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1.0] },
-                  scale: isActive && !prefersReducedMotion && !slide.isPoster
+                  scale: isActive && !prefersReducedMotion && !isUnzoomed
                     ? { duration: 6.0, ease: "linear" }
                     : { duration: 0 },
                 }}
@@ -157,6 +161,29 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
                           />
                         </div>
                       </div>
+                    </div>
+                  </div>
+                ) : slide.objectFit === "contain" ? (
+                  <div className="relative w-full h-full flex items-center justify-center lg:justify-end">
+                    {/* Ambient subtle background fill so edges blend seamlessly into deep-navy */}
+                    <Image
+                      src={slide.src}
+                      alt=""
+                      fill
+                      aria-hidden="true"
+                      priority={index === 0}
+                      className="object-cover blur-3xl opacity-35 scale-110 pointer-events-none"
+                    />
+                    {/* Full uncropped, unzoomed image */}
+                    <div className="relative w-full lg:w-[65%] xl:w-[60%] h-full max-h-[85vh] flex items-center justify-center lg:justify-end lg:pr-6 xl:pr-12">
+                      <Image
+                        src={slide.src}
+                        alt={slide.alt}
+                        fill
+                        priority={index === 0}
+                        sizes="(min-width: 1024px) 65vw, 100vw"
+                        className="object-contain object-center lg:object-right drop-shadow-2xl"
+                      />
                     </div>
                   </div>
                 ) : (
