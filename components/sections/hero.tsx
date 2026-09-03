@@ -27,7 +27,7 @@ interface HeroSlide {
   isPoster?: boolean;
 }
 
-// Exactly 4 Hero Slides: College Photo, College Top Angle, 1st Year Toppers 2026, 2nd Year Toppers 2026
+// Exactly 7 Hero Slides: College Photo, College Top-Angle Photo, 1st Year Toppers 2026, 2nd Year Toppers 2026, 3 New Campus/Event Photos
 const HERO_SLIDES: HeroSlide[] = [
   {
     id: "hero-1-building",
@@ -67,6 +67,33 @@ const HERO_SLIDES: HeroSlide[] = [
     title: "2nd Year Toppers 2026",
     isPoster: true,
   },
+  {
+    id: "hero-5-event",
+    src: "/images/hero/hero-5-event.webp",
+    fallbackSrc: "/images/hero/hero-5-event.webp",
+    alt: "Little Flower Junior College Golden Jubilee Celebration and Distinguished Guests",
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
+    title: "Golden Jubilee Event",
+  },
+  {
+    id: "hero-6-gjb",
+    src: "/images/hero/hero-6-gjb.webp",
+    fallbackSrc: "/images/hero/hero-6-gjb.webp",
+    alt: "Little Flower Junior College Campus Building and Facade",
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
+    title: "Campus Building View",
+  },
+  {
+    id: "hero-7-college",
+    src: "/images/hero/hero-7-college.webp",
+    fallbackSrc: "/images/hero/hero-7-college.webp",
+    alt: "Little Flower Junior College Aerial Campus View",
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
+    title: "Aerial Campus View",
+  },
 ];
 
 const containerVariants = {
@@ -96,12 +123,12 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
 
   const isPosterActive = Boolean(HERO_SLIDES[activeSlideIndex]?.isPoster);
 
-  // Automatic rotation approximately every 4 seconds
+  // Automatic rotation approximately every 3.5 seconds
   useEffect(() => {
     if (prefersReducedMotion) return;
     const timer = setInterval(() => {
       setActiveSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 4000);
+    }, 3500);
     return () => clearInterval(timer);
   }, [prefersReducedMotion]);
 
