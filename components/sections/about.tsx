@@ -271,10 +271,11 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
                     Vow of {vow}
                   </span>
                 ))}
-                <span className="px-3 py-1 bg-royal-cream text-montfortian-blue border border-stone-texture/40 rounded-full text-xs font-bold font-sans">
+                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-academic-slate/80 font-sans cursor-default">
+                  <span className="w-1.5 h-1.5 rounded-full bg-heritage-gold-strong" aria-hidden="true" />
                   Pontifical Right (1910)
                 </span>
-                <span className="px-3 py-1 bg-heritage-gold/20 text-montfortian-blue border border-heritage-gold/30 rounded-full text-xs font-bold font-sans">
+                <span className="px-3 py-1 bg-heritage-gold/15 text-montfortian-blue border border-heritage-gold/25 rounded-full text-xs font-bold font-sans">
                   30 Countries Globally
                 </span>
               </div>
@@ -411,7 +412,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
               <button
                 type="button"
                 onClick={() => setLightboxImage({ src: lfjcData.principalImg, title: lfjcData.principalName, subtitle: lfjcData.principalRole })}
-                className="relative aspect-[4/3] sm:aspect-[2455/1736] w-full max-w-sm lg:max-w-none mx-auto overflow-hidden rounded-2xl border-2 border-heritage-gold/30 shadow-float bg-royal-cream/40 cursor-zoom-in group block text-left focus:outline-none focus:ring-2 focus:ring-heritage-gold transition-all"
+                className="relative aspect-[2455/1736] w-full max-w-sm lg:max-w-none mx-auto overflow-hidden rounded-2xl border-2 border-heritage-gold/30 shadow-float bg-royal-cream/40 cursor-zoom-in group block text-left focus:outline-none focus:ring-2 focus:ring-heritage-gold transition-all"
                 aria-label={`Click to enlarge ${lfjcData.principalName} portrait`}
               >
                 <Image
@@ -419,7 +420,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
                   alt={lfjcData.principalName}
                   fill
                   sizes="(min-width: 1024px) 40vw, 90vw"
-                  className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                  className="object-contain object-center"
                   priority
                 />
                 <div className="absolute inset-0 bg-deep-navy/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

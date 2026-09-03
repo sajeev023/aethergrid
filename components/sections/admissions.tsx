@@ -42,8 +42,8 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
                 Submit your preliminary application on the official Little Flower Junior College student registration portal.
               </p>
 
-              <div className="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-3.5 pt-2 max-w-xl mx-auto">
-                <Button asChild size="lg" className="w-full md:w-auto h-auto min-h-[44px] sm:min-h-[48px] py-3 px-5 sm:px-6 bg-heritage-gold hover:bg-heritage-gold-bright text-deep-navy font-bold text-xs uppercase tracking-wider shadow-md whitespace-normal sm:whitespace-nowrap text-center justify-center">
+              <div className="mt-6 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 max-w-xl mx-auto">
+                <Button asChild size="lg" className="w-full sm:w-auto h-auto min-h-[44px] sm:min-h-[48px] py-3 px-5 sm:px-6 bg-heritage-gold hover:bg-heritage-gold-bright text-deep-navy font-bold text-xs uppercase tracking-wider shadow-md whitespace-normal sm:whitespace-nowrap">
                   <a
                     href={PORTAL_LINKS.studentSignup}
                     target="_blank"
@@ -54,7 +54,7 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
                     <ExternalLink className="w-4 h-4 shrink-0" />
                   </a>
                 </Button>
-                <Button asChild variant="inverse" size="lg" className="w-full md:w-auto h-auto min-h-[44px] sm:min-h-[48px] py-3 px-5 sm:px-6 border-white/40 hover:border-white text-white font-bold text-xs uppercase tracking-wider whitespace-normal sm:whitespace-nowrap text-center justify-center">
+                <Button asChild variant="inverse" size="lg" className="w-full sm:w-auto h-auto min-h-[44px] sm:min-h-[48px] py-3 px-5 sm:px-6 border-white/40 hover:border-white text-white font-bold text-xs uppercase tracking-wider whitespace-normal sm:whitespace-nowrap">
                   <a
                     href={PORTAL_LINKS.onlineAdmissionPortal}
                     target="_blank"

@@ -32,64 +32,6 @@ interface AlumniProps {
   headingLevel?: "h1" | "h2";
 }
 
-// Curated list of featured alumni success stories to display in the top banner
-const featuredAlumni = [
-  {
-    name: "Vijay Deverakonda",
-    title: "National Film Sensation",
-    role: "Actor & Film Producer",
-    batch: "Batch of 2007 (MPC)",
-    category: "Actors & Filmmakers",
-    bio: "Renowned Indian actor who studied intermediate MPC at LFJC. Rose to absolute national stardom, launching the apparel brand 'Rowdy' and establishing a global youth following.",
-    image: "/images/alumni/vijay-deverakonda.jpg",
-    achievement: "Filmfare Best Actor Award & Forbes 30 Under 30",
-    objectPosition: "object-[center_10%]",
-  },
-  {
-    name: "Akkineni Nagarjuna",
-    title: "Cinematic Legend & Entrepreneur",
-    role: "Superstar & Television Presenter",
-    batch: "Batch of 1976",
-    category: "Actors & Filmmakers",
-    bio: "A titan of Telugu cinema and business, Nagarjuna completed his intermediate study at LFJC. Beyond acting in 100+ films, he manages Annapurna Studios and multiple hospitality ventures.",
-    image: "/images/alumni/akkineni-nagarjuna.jpg",
-    achievement: "Winner of 9 Nandi Awards & 3 National Film Awards",
-    objectPosition: "object-[center_10%]",
-  },
-  {
-    name: "Shashanka K, IAS",
-    title: "Distinguished Civil Service Officer",
-    role: "District Collector & Magistrate",
-    batch: "Batch of 2005",
-    category: "Civil Servants & Judiciary",
-    bio: "Completed his intermediate study at LFJC before cracking the Civil Services. Served as District Collector in multiple key regions, spearheading rural development, healthcare, and water security initiatives.",
-    image: "/images/alumni/shashanka-k.jpg",
-    achievement: "Eminent Administrative Officer & Public Policy Reformer",
-    objectPosition: "object-[center_12%]",
-  },
-  {
-    name: "Nandamuri Balakrishna",
-    title: "Cinema Icon & Public Leader",
-    role: "Actor & Legislator",
-    batch: "Batch of 1978",
-    category: "Actors & Filmmakers",
-    bio: "Legendary Telugu cinema actor with over 100 films, celebrated for his larger-than-life performances. Also serves as a Member of the Legislative Assembly, blending cinematic stardom with public service.",
-    image: "/images/alumni/nandamuri-balakrishna.jpg",
-    achievement: "MLA & Multiple Filmfare Award Winner",
-    objectPosition: "object-[center_12%]",
-  },
-  {
-    name: "Geetha Madhuri",
-    title: "Celebrated Playback Vocalist",
-    role: "Playback Singer & Dubbing Artist",
-    batch: "Batch of 2006",
-    category: "Singers & Artists",
-    bio: "Leading playback singer who has recorded over 500 songs across Telugu, Tamil, Kannada, and Malayalam cinema, establishing herself as one of Tollywood's most sought-after voices.",
-    image: "/images/alumni/geetha-madhuri.jpg",
-    achievement: "Nandi Award & Filmfare Award South Recipient",
-    objectPosition: "object-[center_12%]",
-  },
-];
 
 export function Alumni({ activeInst }: AlumniProps) {
   const pathname = usePathname() || "";
@@ -397,69 +339,6 @@ export function Alumni({ activeInst }: AlumniProps) {
               </div>
             </div>
           </Reveal>
-        )}
-
-        {/* Featured Success Stories Section */}
-        {isFullPage && (
-          <div id="success-stories" className="scroll-mt-28">
-            <Reveal>
-              <div className="flex items-center gap-2.5 sm:gap-3 mb-4 sm:mb-6">
-                <span className="w-1.5 h-5 sm:h-6 bg-heritage-gold rounded-full" />
-                <h2 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-academic-slate">
-                  Featured Alumni Success Stories
-                </h2>
-              </div>
-            </Reveal>
-
-            <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-start">
-              {featuredAlumni.map((featured, idx) => (
-                <Reveal key={featured.name} delay={idx * 0.05} className="h-full">
-                  <Card className="group flex flex-col overflow-hidden border-2 border-heritage-gold/25 bg-royal-cream/10 rounded-lg hover:border-heritage-gold/75 hover:shadow-lg transition-all duration-300 h-auto">
-                    <div className="relative aspect-[3/4] w-full overflow-hidden bg-surface-container-low">
-                      <Image
-                        src={featured.image}
-                        alt={featured.name}
-                        fill
-                        sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 50vw"
-                        className={cn(
-                          "object-cover group-hover:scale-[1.03] transition-transform duration-500",
-                          featured.objectPosition || "object-[center_15%]"
-                        )}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/55 via-transparent to-transparent pointer-events-none" />
-                      <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
-                        <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded bg-white/95 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
-                          {featured.category}
-                        </span>
-                      </div>
-                    </div>
-                    <CardContent className="p-2.5 sm:p-3 flex-1 flex flex-col justify-between bg-white">
-                      <div>
-                        <div className="flex items-center text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-0.5 sm:mb-1">
-                          <span className="inline-flex items-center gap-1">
-                            <GraduationCap className="h-3.5 w-3.5 shrink-0" />
-                            {featured.batch.replace(/^Batch of\s+/i, "Batch: ")}
-                          </span>
-                        </div>
-                        <h3 className="font-serif text-xs sm:text-base font-bold text-academic-slate mb-0.5 sm:mb-1 line-clamp-1">
-                          {featured.name}
-                        </h3>
-                        <p className="text-[11px] sm:text-xs font-medium text-academic-slate/75 font-sans mb-1.5 sm:mb-2.5 line-clamp-1">
-                          {featured.role}
-                        </p>
-                        <div className="flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm">
-                          <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
-                          <span className="text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong leading-normal font-sans line-clamp-1">
-                            {featured.title}
-                          </span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Reveal>
-              ))}
-            </div>
-          </div>
         )}
 
         {/* ─── COMPLETE ALUMNI DIRECTORY SECTION ───────────────────────── */}
