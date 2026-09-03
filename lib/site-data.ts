@@ -1129,7 +1129,7 @@ export const lfjcData = {
       designation: "V Principal (1989–1994)",
       department: "Former Principals",
       category: "former-principal",
-      image: "/images/principals/bro_celestine.jpg"
+      image: "/images/principals/bro_celestine.png"
     },
     {
       name: "Rev. Bro. M.A. George",
