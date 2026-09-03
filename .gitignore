@@ -30,6 +30,8 @@ inspect*.mjs
 shot.mjs
 campus-desktop.png
 campus-mobile.png
+test-results/
+responsive-screenshots/
 
 # ─── Runtime data (PII / credentials — NEVER commit) ─────────────────────────
 # JSON-file persistence holds parent/student PII (submissions, alumni uploads)

@@ -1,7 +1,6 @@
 import {
   Award,
   Building2,
-  Compass,
   History,
   Landmark,
   Sparkles,
@@ -45,6 +44,7 @@ export const navMenu: NavMenuItem[] = [
     children: [
       { label: "Silver Jubilee", href: "/campus/silver-jubilee", icon: Landmark },
       { label: "Golden Jubilee", href: "/campus/golden-jubilee", icon: Sparkles },
+      { label: "Campus & Sports", href: "/campus/campus-life", icon: Building2 },
     ],
   },
   { label: "Admissions", href: "/admissions" },

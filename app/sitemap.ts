@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about", priority: 0.9, changeFrequency: "monthly" },
     { path: "/academics", priority: 0.9, changeFrequency: "monthly" },
     { path: "/faculty", priority: 0.85, changeFrequency: "monthly" },
+    { path: "/campus", priority: 0.8, changeFrequency: "monthly" },
     { path: "/campus/silver-jubilee", priority: 0.85, changeFrequency: "monthly" },
     { path: "/campus/golden-jubilee", priority: 0.85, changeFrequency: "monthly" },
     { path: "/campus/campus-life", priority: 0.85, changeFrequency: "monthly" },

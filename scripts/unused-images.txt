@@ -1,0 +1,142 @@
+Referenced images: 237
+Existing images:   350
+Missing referenced images: 12
+  MISSING /images/hero/hero-3-academic-lab.webp
+  MISSING /images/hero/hero-3-academic-lab.jpg
+  MISSING /images/hero/hero-4-central-library.webp
+  MISSING /images/hero/hero-4-central-library.jpg
+  MISSING /images/hero/hero-5-national-celebration.webp
+  MISSING /images/hero/hero-5-national-celebration.jpg
+  MISSING /images/hero/hero-6-auditorium.webp
+  MISSING /images/hero/hero-6-auditorium.jpg
+  MISSING /images/hero/hero-7-sports-day.webp
+  MISSING /images/hero/hero-7-sports-day.jpg
+  MISSING /images/hero/hero-8-montfortian-heritage.webp
+  MISSING /images/hero/hero-8-montfortian-heritage.jpg
+
+Unused public images: 125
+  /images/academic-background.jpg
+  /images/admissions-hero.jpg
+  /images/contact-campus.jpg
+  /images/events/ptm-staff-schedule-matrix.jpg
+  /images/events/ptm-staff-schedule-matrix.png
+  /images/events/ptm-welcome-banner.jpg
+  /images/events/ptm-welcome-banner.png
+  /images/faculty-lead.jpg
+  /images/faculty/sai_sir.jpg
+  /images/heritage-portrait-fixed.jpg
+  /images/heritage-portrait.jpg
+  /images/lfjc-logo-original-backup.jpg
+  /images/official/bro2.png
+  /images/official/bro3.png
+  /images/official/bro4.png
+  /images/official/sttheresa.jpg
+  /images/official/top3.jpeg
+  /images/principals/bro_claude.webp
+  /images/principals/bro_emmanuel.webp
+  /images/principals/bro_franky.webp
+  /images/principals/bro_george.webp
+  /images/principals/bro_gervasis.webp
+  /images/principals/bro_james_pannivelil.webp
+  /images/principals/bro_john.webp
+  /images/principals/bro_vincent.webp
+  /images/silver-jubilee/silver-jubilee-cm-naidu-portrait.jpg
+  /images/sports.jpg
+  /images/sports/basketball-attack-transition.webp
+  /images/sports/basketball-coaching-freethrow.webp
+  /images/sports/basketball-court-match.webp
+  /images/sports/basketball-drive-to-hoop.webp
+  /images/sports/basketball-fastbreak-dribble.webp
+  /images/sports/basketball-finalists-celebration.webp
+  /images/sports/basketball-shooting-clinic.webp
+  /images/sports/basketball-squad-faculty.webp
+  /images/sports/basketball-team-squad.webp
+  /images/sports/campus-sports-day-crowd.jpg
+  /images/sports/field-event-action.jpg
+  /images/sports/sports-arena-gallery-view.jpg
+  /images/sports/sports-ground-assembly.jpg
+  /images/sports/sports-meet-competitors.jpg
+  /images/sports/track-and-field-relay.jpg
+  /images/sports/volleyball-court-action.webp
+  /images/sports/volleyball-referee-match.webp
+  /images/sports/volleyball-service-play.webp
+  /images/sports/volleyball-spike-action.webp
+  /images/sports/volleyball-team-faculty-1.webp
+  /images/sports/volleyball-team-faculty-2.webp
+  /images/sports/volleyball-team-faculty-3.webp
+  /images/sports_options/dsc_0380.jpg
+  /images/sports_options/dsc_0924.jpg
+  /images/sports_options/dsc_0945.jpg
+  /images/sports_options/dsc_1165.jpg
+  /images/sports_options/dsc_1776.jpg
+  /images/sports_options/dsc_6292.jpg
+  /images/sports_options/sports.jpg
+  /images/sports_options/sports_2.jpg
+  /images/sports_options/sports_3.jpg
+  /images/sports_options/sports_4.jpg
+  /images/sports_options/sports_5.jpg
+  /images/sports_options/sports_6.jpg
+  /images/toppers/1st-year/1st_bipc_14_gudla_sahasra.png
+  /images/toppers/1st-year/1st_bipc_15_konkotti_keerthana.png
+  /images/toppers/1st-year/1st_bipc_16_jakkula_vaishnavi.png
+  /images/toppers/1st-year/1st_bipc_17_ashwathi_nair.png
+  /images/toppers/1st-year/1st_bipc_18_samantha_d_silva.png
+  /images/toppers/1st-year/1st_bipc_19_deekonda_mayabodhi.png
+  /images/toppers/1st-year/1st_bipc_20_jecinthamary_b.png
+  /images/toppers/1st-year/1st_cec_29_kavathi_yashaswini_reddy.png
+  /images/toppers/1st-year/1st_cec_30_dusari_karishma_goud.png
+  /images/toppers/1st-year/1st_cec_31_bandi_apoorva.png
+  /images/toppers/1st-year/1st_cec_32_marneni_nirmiti_mary.png
+  /images/toppers/1st-year/1st_cec_33_joannie_livingstone_kondapalli.png
+  /images/toppers/1st-year/1st_mec_21_madhipally_ekshitha.png
+  /images/toppers/1st-year/1st_mec_22_gunmedelli_nithya.png
+  /images/toppers/1st-year/1st_mec_23_sai_suhas_jilla.png
+  /images/toppers/1st-year/1st_mec_24_devunoori_sai_sudhamshu.png
+  /images/toppers/1st-year/1st_mec_25_khushi_heda.png
+  /images/toppers/1st-year/1st_mec_26_arra_anushna.png
+  /images/toppers/1st-year/1st_mec_27_keerthana_rajesh.png
+  /images/toppers/1st-year/1st_mec_28_ramani_shrushti_patel.png
+  /images/toppers/1st-year/1st_mpc_10_ponnapaty_edward_wesley.png
+  /images/toppers/1st-year/1st_mpc_11_r_aravindh.png
+  /images/toppers/1st-year/1st_mpc_12_mohammed_amaan.png
+  /images/toppers/1st-year/1st_mpc_13_atharva_namdev_potdar.png
+  /images/toppers/1st-year/1st_mpc_1_tipparaju_akshaya.png
+  /images/toppers/1st-year/1st_mpc_2_ridha_fatema.png
+  /images/toppers/1st-year/1st_mpc_3_hanumanthu_avinash_reddy.png
+  /images/toppers/1st-year/1st_mpc_4_neesala_joel_austin.png
+  /images/toppers/1st-year/1st_mpc_5_kavya_swargam.png
+  /images/toppers/1st-year/1st_mpc_6_rayabaghi_raghavendra_lochan.png
+  /images/toppers/1st-year/1st_mpc_7_cheela_shrijani.png
+  /images/toppers/1st-year/1st_mpc_8_moganti_srinidhi.png
+  /images/toppers/1st-year/1st_mpc_9_daggumati_amal.png
+  /images/toppers/1st-year/card_sample_1.png
+  /images/toppers/1st-year/card_sample_3.png
+  /images/toppers/1st-year/card_sample_4.png
+  /images/toppers/1st-year/test_1.png
+  /images/toppers/2nd-year/2nd_bipc_13_bangari_rishika_swathi.png
+  /images/toppers/2nd-year/2nd_bipc_14_aditi_upadhyay.png
+  /images/toppers/2nd-year/2nd_bipc_15_alivia_mary_thomas.png
+  /images/toppers/2nd-year/2nd_bipc_16_syeda_sufia_jahan.png
+  /images/toppers/2nd-year/2nd_bipc_17_hemanshi_choudary.png
+  /images/toppers/2nd-year/2nd_cec_23_ginodiya_nikhitha.png
+  /images/toppers/2nd-year/2nd_cec_24_shaik_owais.png
+  /images/toppers/2nd-year/2nd_cec_25_tammareddy_ashrita.png
+  /images/toppers/2nd-year/2nd_cec_26_nakka_vani.png
+  /images/toppers/2nd-year/2nd_cec_27_mohamed_ibrahim.png
+  /images/toppers/2nd-year/2nd_mec_18_leela.png
+  /images/toppers/2nd-year/2nd_mec_19_g_achutha_sree.png
+  /images/toppers/2nd-year/2nd_mec_20_bandari_shri_vedha.png
+  /images/toppers/2nd-year/2nd_mec_21_godugupally_sai_sanvi.png
+  /images/toppers/2nd-year/2nd_mec_22_nethikar_kalash.png
+  /images/toppers/2nd-year/2nd_mpc_10_kurapati_sathwik.png
+  /images/toppers/2nd-year/2nd_mpc_11_thirumala_reddy_venkata_keerthana_reddy.png
+  /images/toppers/2nd-year/2nd_mpc_12_lattupalli_sai_ganesh_reddy.png
+  /images/toppers/2nd-year/2nd_mpc_1_gyara_akshara_sindhu.png
+  /images/toppers/2nd-year/2nd_mpc_2_goriga_akash_goud.png
+  /images/toppers/2nd-year/2nd_mpc_3_chhavi_jain.png
+  /images/toppers/2nd-year/2nd_mpc_4_katakam_yashaswini_sreenayi.png
+  /images/toppers/2nd-year/2nd_mpc_5_konatham_charith_reddy.png
+  /images/toppers/2nd-year/2nd_mpc_6_nadapa_sushna_reddy.png
+  /images/toppers/2nd-year/2nd_mpc_7_sarabudla_shrasha.png
+  /images/toppers/2nd-year/2nd_mpc_8_j_jeffrey.png
+  /images/toppers/2nd-year/2nd_mpc_9_sofia_naaz.png
