@@ -6,17 +6,12 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
-  Building2,
-  BookOpen,
-  Atom,
-  FlaskConical,
-  Trophy,
   Sparkles,
 } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
 import { Section } from "@/components/section";
-import { campusInfrastructureData, goldenJubileeSchedule } from "@/lib/site-data";
+import { goldenJubileeSchedule } from "@/lib/site-data";
 
 export interface GalleryItem {
   id: number;
@@ -357,42 +352,7 @@ export function CampusLifeCombinedView() {
           <GalleryGrid items={CAMPUS_LABS_IMAGES} />
         </div>
 
-        {/* Floor-by-Floor Tour */}
-        <div id="facilities" className="mx-auto max-w-6xl mt-12 pt-10 border-t border-stone-texture/40 scroll-mt-24">
-          <div className="mb-8">
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1">
-              Building Layout &amp; Campus Facilities
-            </h2>
-          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {campusInfrastructureData.floors.map((floor, idx) => {
-              const icons = [Building2, BookOpen, Atom, FlaskConical, Trophy];
-              const Icon = icons[idx % icons.length];
-
-              return (
-                <Reveal key={floor.level} delay={idx * 0.03}>
-                  <div className="bg-royal-cream/20 rounded-2xl border border-stone-texture/50 p-5 h-full flex flex-col justify-between hover:border-heritage-gold/60 transition-colors">
-                    <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-montfortian-blue text-white font-sans">
-                          {floor.level}
-                        </span>
-                        <Icon className="w-5 h-5 text-heritage-gold-strong" />
-                      </div>
-                      <h3 className="font-serif text-base sm:text-lg font-bold text-academic-slate mb-2">
-                        {floor.title}
-                      </h3>
-                      <p className="text-xs leading-relaxed text-academic-slate/75 font-sans">
-                        {floor.description}
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
       </Section>
 
       {/* ─── SECTION 2: EVENTS & SPORTS ───────────────────────────────── */}
