@@ -52,20 +52,20 @@ export function ParentLoginContent() {
               </div>
 
               {/* Action Button */}
-              <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center items-center">
-                <Button asChild size="lg" className="w-full sm:w-auto bg-heritage-gold hover:bg-heritage-gold-bright text-deep-navy font-bold text-xs uppercase tracking-wider h-11 px-8 rounded-md shadow-md">
+              <div className="pt-2 flex flex-col sm:flex-row flex-wrap items-stretch justify-center gap-3">
+                <Button asChild size="lg" className="w-full sm:w-auto flex-1 sm:flex-none h-auto min-h-[44px] sm:min-h-[48px] py-3 px-6 sm:px-8 bg-heritage-gold hover:bg-heritage-gold-bright text-deep-navy font-bold text-xs uppercase tracking-wider rounded-md shadow-md whitespace-normal">
                   <a
                     href={PORTAL_LINKS.parentStudentLogin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2"
+                    className="inline-flex flex-wrap items-center justify-center gap-2 text-center"
                   >
                     Proceed to MySkoolCom Portal
-                    <ExternalLink className="w-4 h-4" />
+                    <ExternalLink className="w-4 h-4 shrink-0" />
                   </a>
                 </Button>
-                <Button asChild variant="secondary" size="lg" className="w-full sm:w-auto text-xs font-bold uppercase tracking-wider h-11 px-6">
-                  <Link href="/contact">
+                <Button asChild variant="secondary" size="lg" className="w-full sm:w-auto flex-1 sm:flex-none h-auto min-h-[44px] sm:min-h-[48px] py-3 px-6 text-xs font-bold uppercase tracking-wider whitespace-normal">
+                  <Link href="/contact" className="inline-flex items-center justify-center text-center">
                     Office Support
                   </Link>
                 </Button>
