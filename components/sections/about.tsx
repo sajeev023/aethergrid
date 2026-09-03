@@ -238,63 +238,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
       </Section>
 
 
-      {/* ─── 3. INSTITUTIONAL HISTORY ─────────────────────────────────── */}
-      <Section id="history" variant="default" className="bg-white py-12 sm:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
-          <Reveal className="lg:col-span-5">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-stone-texture/50 shadow-float">
-              <Image
-                src="/images/campus-hero.jpg"
-                alt="LFJC Uppal Campus Grounds"
-                fill
-                sizes="(min-width: 1024px) 40vw, 90vw"
-                className="object-cover"
-                priority
-              />
-              <div className="absolute bottom-3 left-3 bg-deep-navy/85 backdrop-blur-md px-3 py-1.5 rounded-md border border-white/15 text-white text-xs font-sans font-semibold">
-                Uppal Campus • Opposite Survey of India
-              </div>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1} className="lg:col-span-7">
-            <div className="space-y-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-                Our Foundation &amp; Growth
-              </span>
-              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate leading-snug">
-                From Abids Origins (1974) to 8-Acre Uppal Campus
-              </h2>
-              <div className="space-y-3 text-xs sm:text-sm leading-relaxed text-academic-slate/80 font-sans">
-                <p>
-                  Little Flower Junior College was established in <strong>1974</strong> by upgrading the historic Little Flower High School of Abids, Hyderabad. The college was later relocated in <strong>1982</strong> to its current spacious campus in Uppal.
-                </p>
-                <p>
-                  When the college first opened its doors, it began with around <strong>200 students</strong>. Today, LFJC is home to over <strong>1,600 students</strong> pursuing Board-recognized Intermediate education across Mathematics, Physical Sciences, Biological Sciences, and Humanities.
-                </p>
-                <p>
-                  Spread across <strong>8 acres</strong> on the Tarnaka–Uppal Road opposite the Survey of India, the campus features a sprawling playground, modern science and computer laboratories, a central library, and the historic Heritage Hall, all fostering intellectual, moral, and physical growth.
-                </p>
-              </div>
-              <div className="grid grid-cols-3 gap-3 pt-2">
-                <div className="bg-royal-cream/40 p-3 rounded-lg border border-stone-texture/40 text-center">
-                  <div className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue">1974</div>
-                  <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-academic-slate/70">Founded</div>
-                </div>
-                <div className="bg-royal-cream/40 p-3 rounded-lg border border-stone-texture/40 text-center">
-                  <div className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue">1,600+</div>
-                  <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-academic-slate/70">Students</div>
-                </div>
-                <div className="bg-royal-cream/40 p-3 rounded-lg border border-stone-texture/40 text-center">
-                  <div className="font-serif text-xl sm:text-2xl font-bold text-montfortian-blue">8 Acres</div>
-                  <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-academic-slate/70">Campus</div>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </Section>
-
-      {/* ─── 4. GOVERNING SOCIETY & CHARISM ────────────────────────────── */}
+      {/* ─── 3. GOVERNING SOCIETY & CHARISM ────────────────────────────── */}
       <Section id="society" variant="default" className="bg-white py-12 sm:py-16">
         <div className="mx-auto max-w-5xl">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
