@@ -415,7 +415,6 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
             {isFullPage ? (
               <SectionHeading
                 as={headingLevel}
-                eyebrow="Official Registry • 1974–2024"
                 title="Official Alumni Registry"
                 description="Little Flower Junior College has nurtured over 15,000 graduates across five decades. Our alumni lead and excel globally in civil administration, national cinema, science, judiciary, and enterprise."
               />
