@@ -1,12 +1,31 @@
 "use client";
 
-import { Mail, MapPin, Phone, ExternalLink } from "lucide-react";
+import { Mail, MapPin, Phone, ExternalLink, Globe } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { getInstitutionData, PORTAL_LINKS } from "@/lib/site-data";
 
 interface FooterProps {
   activeInst?: "root" | "lfs" | "lfjc" | "lfdc";
+}
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
 }
 
 export function Footer({ activeInst = "lfjc" }: FooterProps) {
@@ -17,7 +36,7 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-8 sm:py-12">
         <div className="grid gap-8 sm:gap-10 sm:grid-cols-2 lg:grid-cols-12 items-start">
           {/* Brand & Society */}
-          <div className="lg:col-span-4 space-y-3">
+          <div className="lg:col-span-3 space-y-3">
             <Link href="/" className="group flex items-center gap-3">
               <div className="grid h-12 w-12 sm:h-14 sm:w-14 place-items-center rounded-full border border-heritage-gold/30 overflow-hidden bg-white p-1 shrink-0">
                 <Image
@@ -93,8 +112,62 @@ export function Footer({ activeInst = "lfjc" }: FooterProps) {
             </ul>
           </div>
 
+          {/* Official Social & Institutional Links */}
+          <div className="lg:col-span-3 space-y-2 text-xs">
+            <p className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-bright">
+              Official Social & Institutional Links
+            </p>
+            <ul className="space-y-1.5 text-royal-cream/70 font-sans">
+              <li>
+                <a
+                  href="https://www.instagram.com/lfjcuppal/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white inline-flex items-center gap-1.5 transition-colors"
+                >
+                  <InstagramIcon className="w-3.5 h-3.5 text-heritage-gold-bright shrink-0" />
+                  <span>Instagram</span>
+                  <ExternalLink className="w-3 h-3 text-heritage-gold" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.lfdc.edu.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white inline-flex items-center gap-1.5 transition-colors"
+                >
+                  <Globe className="w-3.5 h-3.5 text-heritage-gold-bright shrink-0" />
+                  <span>Little Flower Degree College (LFDC)</span>
+                  <ExternalLink className="w-3 h-3 text-heritage-gold" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://lfshyd.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white inline-flex items-center gap-1.5 transition-colors"
+                >
+                  <Globe className="w-3.5 h-3.5 text-heritage-gold-bright shrink-0" />
+                  <span>Little Flower High School (LFS)</span>
+                  <ExternalLink className="w-3 h-3 text-heritage-gold" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${instData.secondaryEmail}`}
+                  className="hover:text-white inline-flex items-center gap-1.5 transition-colors"
+                >
+                  <Mail className="w-3.5 h-3.5 text-heritage-gold-bright shrink-0" />
+                  <span>{instData.secondaryEmail}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
           {/* Contact Details */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-3">
             <p className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-bright mb-2">
               Campus Contact & Location
             </p>
