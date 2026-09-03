@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight, User, X } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { getInstitutionData } from "@/lib/site-data";
 
 interface FacultyRetiredProps {
@@ -21,6 +21,7 @@ type FacultySeedMember = {
   department: string;
   image?: string;
   category?: FacultyCategory;
+  tenure?: string;
 };
 
 function getFacultyCategory(member: FacultySeedMember): FacultyCategory {
@@ -92,7 +93,7 @@ function RetiredFacultyCard({
   return (
     <Reveal key={`${member.name}-${index}`} delay={index * 0.02} className="h-full">
       <Card className="group h-full flex flex-col overflow-hidden bg-white transition-all duration-300 ease-out rounded-lg border-2 border-stone-texture/70 hover:border-heritage-gold/60 shadow-xs hover:shadow-panel-hover">
-        <div className="relative aspect-[600/720] w-full overflow-hidden bg-royal-cream/30">
+        <div className="relative aspect-[3/4] w-full overflow-hidden bg-royal-cream/50 border-b border-stone-texture/40">
           {member.image ? (
             <button
               type="button"
@@ -105,7 +106,7 @@ function RetiredFacultyCard({
                 alt={member.name}
                 fill
                 sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.01]"
+                className="object-contain object-top transition-transform duration-500 ease-out group-hover:scale-[1.01]"
               />
             </button>
           ) : (
@@ -121,6 +122,24 @@ function RetiredFacultyCard({
             </div>
           )}
         </div>
+        <CardContent className="flex-1 flex flex-col justify-between p-2.5 sm:p-3 bg-white">
+          <div className="space-y-0.5 sm:space-y-1">
+            <p className="text-[10px] sm:text-[11px] font-sans font-bold uppercase tracking-wider text-heritage-gold-strong line-clamp-1">
+              {member.designation}
+            </p>
+            <h3 className="font-serif text-xs sm:text-sm md:text-base font-bold leading-snug text-ink group-hover:text-montfortian-blue transition-colors duration-300 line-clamp-2">
+              {member.name}
+            </h3>
+            {member.tenure && (
+              <p className="text-[11px] sm:text-xs text-academic-slate/80 font-sans line-clamp-1">
+                {member.tenure}
+              </p>
+            )}
+          </div>
+          <p className="mt-2 pt-1.5 border-t border-stone-texture/30 text-[9px] sm:text-[10px] text-academic-slate/60 font-sans line-clamp-1">
+            {member.department}
+          </p>
+        </CardContent>
       </Card>
     </Reveal>
   );
