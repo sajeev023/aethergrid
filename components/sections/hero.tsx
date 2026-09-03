@@ -27,7 +27,7 @@ interface HeroSlide {
   isPoster?: boolean;
 }
 
-// Exactly 7 Hero Slides: College Photo, College Top-Angle Photo, 1st Year Toppers 2026, 2nd Year Toppers 2026, 3 New Campus/Event Photos
+// Exactly 6 Hero Slides: College Photo, College Top-Angle Photo, 1st Year Toppers 2026, 2nd Year Toppers 2026, Campus Building View, Aerial Campus View
 const HERO_SLIDES: HeroSlide[] = [
   {
     id: "hero-1-building",
@@ -68,21 +68,12 @@ const HERO_SLIDES: HeroSlide[] = [
     isPoster: true,
   },
   {
-    id: "hero-5-event",
-    src: "/images/hero/hero-5-event.webp",
-    fallbackSrc: "/images/hero/hero-5-event.webp",
-    alt: "Little Flower Junior College Golden Jubilee Celebration and Distinguished Guests",
-    objectPosition: "center center",
-    mobileObjectPosition: "center center",
-    title: "Golden Jubilee Event",
-  },
-  {
     id: "hero-6-gjb",
     src: "/images/hero/hero-6-gjb.webp",
     fallbackSrc: "/images/hero/hero-6-gjb.webp",
     alt: "Little Flower Junior College Campus Building and Facade",
-    objectPosition: "center center",
-    mobileObjectPosition: "center center",
+    objectPosition: "center 25%",
+    mobileObjectPosition: "center 20%",
     title: "Campus Building View",
   },
   {
@@ -90,8 +81,8 @@ const HERO_SLIDES: HeroSlide[] = [
     src: "/images/hero/hero-7-college.webp",
     fallbackSrc: "/images/hero/hero-7-college.webp",
     alt: "Little Flower Junior College Aerial Campus View",
-    objectPosition: "center center",
-    mobileObjectPosition: "center center",
+    objectPosition: "center 20%",
+    mobileObjectPosition: "center 15%",
     title: "Aerial Campus View",
   },
 ];
