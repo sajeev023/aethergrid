@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 type SectionHeadingProps = {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description?: string;
   align?: "left" | "center";
@@ -32,7 +32,7 @@ export function SectionHeading({
         className,
       )}
     >
-      <Badge onDark={onDark}>{eyebrow}</Badge>
+      {eyebrow ? <Badge onDark={onDark}>{eyebrow}</Badge> : null}
       <Heading className={cn(
         "mt-2.5 sm:mt-4 font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-snug sm:leading-tight tracking-tight",
         onDark ? "text-white" : "text-academic-slate",
