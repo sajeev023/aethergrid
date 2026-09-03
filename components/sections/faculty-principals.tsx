@@ -38,11 +38,6 @@ function FormerPrincipalCard({ member, index }: { member: FacultySeedMember; ind
                 sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                 className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
               />
-              <div className="absolute top-2 left-2 z-10">
-                <span className="inline-flex items-center gap-1 bg-deep-navy/85 backdrop-blur-xs text-heritage-gold-bright border border-heritage-gold/30 px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-sans font-bold uppercase tracking-wider shadow-sm">
-                  Restored Archival Portrait
-                </span>
-              </div>
             </>
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-2 sm:p-3 relative text-center">
