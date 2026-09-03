@@ -22,6 +22,7 @@ const ROUTES = [
   "/campus/campus-life",
   "/admissions",
   "/alumni",
+  "/gallery",
   "/contact",
   "/parent-login",
   "/legal/anti-ragging",

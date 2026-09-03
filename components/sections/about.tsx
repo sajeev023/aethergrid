@@ -50,7 +50,58 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
         </div>
       </Section>
 
-      {/* ─── 1. FOUNDER & PATRONESS PROFILES (Moved to Top) ───────────── */}
+      {/* ─── 1. PRINCIPAL'S DESK WELCOME (Brother's Photo First) ──────── */}
+      <Section id="principal" variant="default" className="bg-white border-b border-stone-texture/30 py-12 sm:py-16">
+        <div className="mx-auto max-w-5xl">
+          <div className="grid lg:grid-cols-12 gap-8 items-center">
+            <Reveal className="lg:col-span-5">
+              <button
+                type="button"
+                onClick={() => setLightboxImage({ src: lfjcData.principalImg, title: lfjcData.principalName, subtitle: lfjcData.principalRole })}
+                className="relative aspect-[2455/1736] w-full max-w-sm lg:max-w-none mx-auto overflow-hidden rounded-2xl border-2 border-heritage-gold/30 shadow-float bg-royal-cream/40 cursor-zoom-in group block text-left focus:outline-none focus:ring-2 focus:ring-heritage-gold transition-all"
+                aria-label={`Click to enlarge ${lfjcData.principalName} portrait`}
+              >
+                <Image
+                  src={lfjcData.principalImg}
+                  alt={lfjcData.principalName}
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 90vw"
+                  className="object-contain object-center"
+                  priority
+                />
+                <div className="absolute inset-0 bg-deep-navy/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <div className="bg-deep-navy/85 border border-heritage-gold/50 px-3.5 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-white text-xs font-sans font-semibold">
+                    <ZoomIn className="w-4 h-4 text-heritage-gold-bright" />
+                    <span>Click to expand</span>
+                  </div>
+                </div>
+              </button>
+            </Reveal>
+
+            <Reveal delay={0.1} className="lg:col-span-7 space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                Principal&apos;s Desk
+              </span>
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate">
+                {lfjcData.principalName}
+              </h2>
+              <p className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                {lfjcData.principalRole}
+              </p>
+
+              <blockquote className="my-2 border-l-2 border-heritage-gold pl-3 font-editorial italic text-base sm:text-lg text-montfortian-blue">
+                &quot;{lfjcData.principalQuote}&quot;
+              </blockquote>
+
+              <div className="space-y-2.5 text-xs sm:text-sm leading-relaxed text-academic-slate/85 font-sans">
+                <p>{lfjcData.principalMessage}</p>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </Section>
+
+      {/* ─── 2. FOUNDER & PATRONESS PROFILES ───────────────────────────── */}
       <Section id="founder" variant="default" className="bg-royal-cream/25 border-b border-stone-texture/30 py-12 sm:py-16">
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-10">
@@ -186,7 +237,8 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
         </div>
       </Section>
 
-      {/* ─── 2. INSTITUTIONAL HISTORY ─────────────────────────────────── */}
+
+      {/* ─── 3. INSTITUTIONAL HISTORY ─────────────────────────────────── */}
       <Section id="history" variant="default" className="bg-white py-12 sm:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
           <Reveal className="lg:col-span-5">
@@ -242,7 +294,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
         </div>
       </Section>
 
-      {/* ─── 3. GOVERNING SOCIETY & CHARISM ────────────────────────────── */}
+      {/* ─── 4. GOVERNING SOCIETY & CHARISM ────────────────────────────── */}
       <Section id="society" variant="default" className="bg-white py-12 sm:py-16">
         <div className="mx-auto max-w-5xl">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
@@ -295,7 +347,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
         </div>
       </Section>
 
-      {/* ─── 4. OFFICIAL VISION & MISSION ─────────────────────────────── */}
+      {/* ─── 5. OFFICIAL VISION & MISSION ─────────────────────────────── */}
       <Section id="vision" variant="default" className="bg-deep-navy text-white py-12 sm:py-16">
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-10">
@@ -351,7 +403,7 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
         </div>
       </Section>
 
-      {/* ─── 5. ANNUAL THEME 2024–25 ──────────────────────────────────── */}
+      {/* ─── 6. ANNUAL THEME 2024–25 ────────────────────────────────────── */}
       <Section id="theme" variant="default" className="bg-royal-cream/20 border-b border-stone-texture/30 py-12 sm:py-16">
         <div className="mx-auto max-w-5xl">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
@@ -398,57 +450,6 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
                     </div>
                   ))}
                 </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </Section>
-
-      {/* ─── 6. PRINCIPAL'S DESK WELCOME ──────────────────────────────── */}
-      <Section id="principal" variant="default" className="bg-white py-12 sm:py-16">
-        <div className="mx-auto max-w-5xl">
-          <div className="grid lg:grid-cols-12 gap-8 items-center">
-            <Reveal className="lg:col-span-5">
-              <button
-                type="button"
-                onClick={() => setLightboxImage({ src: lfjcData.principalImg, title: lfjcData.principalName, subtitle: lfjcData.principalRole })}
-                className="relative aspect-[2455/1736] w-full max-w-sm lg:max-w-none mx-auto overflow-hidden rounded-2xl border-2 border-heritage-gold/30 shadow-float bg-royal-cream/40 cursor-zoom-in group block text-left focus:outline-none focus:ring-2 focus:ring-heritage-gold transition-all"
-                aria-label={`Click to enlarge ${lfjcData.principalName} portrait`}
-              >
-                <Image
-                  src={lfjcData.principalImg}
-                  alt={lfjcData.principalName}
-                  fill
-                  sizes="(min-width: 1024px) 40vw, 90vw"
-                  className="object-contain object-center"
-                  priority
-                />
-                <div className="absolute inset-0 bg-deep-navy/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <div className="bg-deep-navy/85 border border-heritage-gold/50 px-3.5 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-white text-xs font-sans font-semibold">
-                    <ZoomIn className="w-4 h-4 text-heritage-gold-bright" />
-                    <span>Click to expand</span>
-                  </div>
-                </div>
-              </button>
-            </Reveal>
-
-            <Reveal delay={0.1} className="lg:col-span-7 space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-                Principal&apos;s Desk
-              </span>
-              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate">
-                {lfjcData.principalName}
-              </h2>
-              <p className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-                {lfjcData.principalRole}
-              </p>
-
-              <blockquote className="my-2 border-l-2 border-heritage-gold pl-3 font-editorial italic text-base sm:text-lg text-montfortian-blue">
-                &quot;{lfjcData.principalQuote}&quot;
-              </blockquote>
-
-              <div className="space-y-2.5 text-xs sm:text-sm leading-relaxed text-academic-slate/85 font-sans">
-                <p>{lfjcData.principalMessage}</p>
               </div>
             </Reveal>
           </div>

@@ -392,34 +392,21 @@ export function Alumni({ activeInst }: AlumniProps) {
             <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-start">
               {filteredAlumni.map((alumnus, idx) => {
                 const hasImage = !!alumnus.image;
-                return (
+                return hasImage ? (
                   <Reveal key={alumnus.name} delay={(idx % 5) * 0.04} className="h-full">
                     <Card className="group flex flex-col overflow-hidden border border-stone-texture/70 bg-white hover:border-heritage-gold/60 hover:shadow-lg transition-all duration-300 rounded-lg h-full">
                       <div className="relative aspect-[3/4] w-full overflow-hidden bg-surface-container-low border-b border-stone-texture/40">
-                        {hasImage ? (
-                          <>
-                            <Image
-                              src={alumnus.image}
-                              alt={alumnus.name}
-                              fill
-                              sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 50vw"
-                              className={cn(
-                                "object-cover group-hover:scale-[1.03] transition-transform duration-500",
-                                alumnus.objectPosition || "object-[center_15%]"
-                              )}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/55 via-transparent to-transparent pointer-events-none" />
-                          </>
-                        ) : (
-                          <div className="w-full h-full bg-gradient-to-b from-deep-navy to-montfortian-blue flex flex-col items-center justify-center p-3 text-center">
-                            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-heritage-gold/20 border border-heritage-gold/40 flex items-center justify-center text-heritage-gold-bright mb-2 shadow-xs">
-                              <GraduationCap className="h-6 w-6 sm:h-7 sm:w-7" />
-                            </div>
-                            <span className="text-[9px] sm:text-[10px] font-bold text-royal-cream/90 uppercase tracking-widest font-sans">
-                              Official Registry
-                            </span>
-                          </div>
-                        )}
+                        <Image
+                          src={alumnus.image}
+                          alt={alumnus.name}
+                          fill
+                          sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 22vw, (min-width: 768px) 30vw, (min-width: 640px) 45vw, 50vw"
+                          className={cn(
+                            "object-cover group-hover:scale-[1.03] transition-transform duration-500",
+                            alumnus.objectPosition || "object-[center_15%]"
+                          )}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/55 via-transparent to-transparent pointer-events-none" />
                         <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5">
                           <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded bg-white/95 backdrop-blur-sm border border-stone-texture/30 text-montfortian-blue uppercase tracking-wider shadow-xs">
                             {alumnus.category}
@@ -449,6 +436,54 @@ export function Alumni({ activeInst }: AlumniProps) {
                           </div>
                         </div>
                       </CardContent>
+                    </Card>
+                  </Reveal>
+                ) : (
+                  <Reveal key={alumnus.name} delay={(idx % 5) * 0.04} className="h-full">
+                    <Card className="group flex flex-col justify-between overflow-hidden border border-stone-texture/70 bg-gradient-to-b from-royal-cream/35 via-white to-white hover:border-heritage-gold/60 hover:shadow-lg transition-all duration-300 rounded-lg h-full p-3 sm:p-3.5">
+                      <div className="flex flex-col flex-1 justify-between">
+                        <div>
+                          {/* Category Badge */}
+                          <div className="mb-2 sm:mb-2.5">
+                            <span className="inline-block font-sans text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded bg-royal-cream border border-stone-texture/50 text-montfortian-blue uppercase tracking-wider">
+                              {alumnus.category}
+                            </span>
+                          </div>
+
+                          {/* Batch / Year */}
+                          <div className="flex items-center text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-heritage-gold-strong mb-1">
+                            <span className="inline-flex items-center gap-1">
+                              <GraduationCap className="h-3.5 w-3.5 shrink-0" />
+                              {alumnus.year.replace(/^Batch of\s+/i, "Batch: ")}
+                            </span>
+                          </div>
+
+                          {/* Prominent Name */}
+                          <h3 className="font-serif text-sm sm:text-base font-bold text-academic-slate mb-1 group-hover:text-montfortian-blue transition-colors leading-snug">
+                            {alumnus.name}
+                          </h3>
+
+                          {/* Designation / Role */}
+                          <p className="text-[11px] sm:text-xs font-medium text-academic-slate/80 font-sans mb-2 leading-relaxed">
+                            {alumnus.designation}
+                          </p>
+
+                          {/* Description if present */}
+                          {alumnus.description && (
+                            <p className="text-[10px] sm:text-[11px] text-academic-slate/70 font-sans italic leading-relaxed line-clamp-3 mb-2">
+                              &quot;{alumnus.description}&quot;
+                            </p>
+                          )}
+                        </div>
+
+                        {/* Achievement Box */}
+                        <div className="flex items-start gap-1 sm:gap-1.5 bg-royal-cream/45 border border-stone-texture/30 p-1.5 sm:p-2 rounded-sm mt-auto">
+                          <Award className="h-3.5 w-3.5 text-heritage-gold-strong shrink-0 mt-0.5" />
+                          <span className="text-[10px] sm:text-[11px] font-bold text-heritage-gold-strong leading-normal font-sans line-clamp-2">
+                            {alumnus.achievement.replace(/https?:\/\/[^\s]+/, "").trim() || "Distinguished Achiever"}
+                          </span>
+                        </div>
+                      </div>
                     </Card>
                   </Reveal>
                 );

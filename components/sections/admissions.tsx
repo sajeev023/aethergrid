@@ -3,7 +3,6 @@ import { CheckCircle2, FileText, HelpCircle, ExternalLink } from "lucide-react";
 import { LeadForm } from "@/components/lead-form";
 import { Reveal } from "@/components/motion/reveal";
 import { Section } from "@/components/section";
-import { Button } from "@/components/ui/button";
 import { admissionsSteps, admissionsDocuments, PORTAL_LINKS } from "@/lib/site-data";
 
 interface AdmissionsProps {
@@ -31,40 +30,36 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
             </p>
 
             {/* Direct Official Online Portals Banner */}
-            <div className="mt-8 max-w-2xl mx-auto bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-5 sm:p-6 text-center">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-bright font-sans block mb-1">
+            <div className="mt-8 max-w-2xl mx-auto bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-6 sm:p-8 text-center shadow-lg">
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-heritage-gold-bright font-sans block mb-1">
                 Official College Application Portals
               </span>
-              <h3 className="font-serif text-lg sm:text-xl font-bold text-white mb-2">
+              <h3 className="font-serif text-lg sm:text-2xl font-bold text-white mb-2">
                 Apply Directly Online
               </h3>
-              <p className="text-xs text-royal-cream/80 font-sans mb-4 max-w-lg mx-auto">
+              <p className="text-xs sm:text-sm text-royal-cream/85 font-sans mb-6 max-w-lg mx-auto leading-relaxed">
                 Submit your preliminary application on the official Little Flower Junior College student registration portal.
               </p>
 
-              <div className="mt-6 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 max-w-xl mx-auto">
-                <Button asChild size="lg" className="w-full sm:w-auto h-auto min-h-[44px] sm:min-h-[48px] py-3 px-5 sm:px-6 bg-heritage-gold hover:bg-heritage-gold-bright text-deep-navy font-bold text-xs uppercase tracking-wider shadow-md whitespace-normal sm:whitespace-nowrap">
-                  <a
-                    href={PORTAL_LINKS.studentSignup}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2"
-                  >
-                    <span>New Admissions Portal (MySkoolCom)</span>
-                    <ExternalLink className="w-4 h-4 shrink-0" />
-                  </a>
-                </Button>
-                <Button asChild variant="inverse" size="lg" className="w-full sm:w-auto h-auto min-h-[44px] sm:min-h-[48px] py-3 px-5 sm:px-6 border-white/40 hover:border-white text-white font-bold text-xs uppercase tracking-wider whitespace-normal sm:whitespace-nowrap">
-                  <a
-                    href={PORTAL_LINKS.onlineAdmissionPortal}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-1.5"
-                  >
-                    <span>Secondary Registration</span>
-                    <ExternalLink className="w-3.5 h-3.5 shrink-0" />
-                  </a>
-                </Button>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 max-w-xl mx-auto">
+                <a
+                  href={PORTAL_LINKS.studentSignup}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-sm bg-heritage-gold hover:bg-heritage-gold-bright text-deep-navy font-bold text-xs uppercase tracking-wider shadow-md transition-all duration-300 active:scale-[0.99] text-center"
+                >
+                  <span>New Admissions Portal (MySkoolCom)</span>
+                  <ExternalLink className="w-4 h-4 shrink-0" />
+                </a>
+                <a
+                  href={PORTAL_LINKS.onlineAdmissionPortal}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-6 py-3.5 rounded-sm border border-white/40 hover:border-white bg-white/5 hover:bg-white hover:text-deep-navy text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 active:scale-[0.99] text-center"
+                >
+                  <span>Secondary Registration</span>
+                  <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                </a>
               </div>
             </div>
           </Reveal>
