@@ -191,7 +191,7 @@ export function FacultyTeaching({ activeInst = "lfjc", isPreview = false }: Facu
             Teaching &amp; Support Staff
           </h1>
           <p className="mt-2 sm:mt-3 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/75 font-sans max-w-2xl mx-auto">
-            Our academic departments are led by board-certified educators, HODs, and subject specialists committed to student excellence in every stream.
+            Our academic departments are led by dedicated educators, HODs, and subject specialists committed to student excellence in every stream.
           </p>
           <span className="gold-rule gold-rule-center" />
         </div>

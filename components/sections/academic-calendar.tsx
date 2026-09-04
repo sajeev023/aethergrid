@@ -27,20 +27,20 @@ export function AcademicCalendarSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-              Official Schedule
+              Archival Schedule Reference
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1">
-              Academic Calendar 2024–2025
+              Archive — Academic Calendar 2024–2025
             </h2>
             <p className="text-xs sm:text-sm text-academic-slate/75 font-sans mt-1">
-              Key instructional milestones, examination schedules, and term holidays issued by LFJC administration.
+              Archived instructional milestones for reference. The official 2026–2027 academic session schedule will be published following State Board notifications.
             </p>
           </div>
 
           <Button asChild size="sm" className="shrink-0 bg-montfortian-blue hover:bg-montfortian-blue/90 text-white font-sans text-xs font-bold uppercase tracking-wider">
             <a href="/docs/academic-calendar-2024-25.pdf" download="LFJC-Academic-Calendar-2024-25.pdf" className="inline-flex items-center gap-2">
               <Download className="w-4 h-4" />
-              Download Official Calendar (PDF)
+              Download Archive Calendar (PDF)
             </a>
           </Button>
         </div>

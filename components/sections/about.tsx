@@ -362,14 +362,16 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
               </div>
             </Reveal>
             <Reveal delay={0.1} className="lg:col-span-7 space-y-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-                Academic Theme of the Year {annualThemeData.currentYear}
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="inline-block px-2.5 py-0.5 rounded bg-heritage-gold/20 border border-heritage-gold/50 text-heritage-gold-strong text-[10px] font-bold uppercase tracking-wider font-sans">
+                  Recent Theme Archive ({annualThemeData.currentYear})
+                </span>
+              </div>
               <h2 className="font-serif text-3xl sm:text-4xl font-bold text-academic-slate tracking-tight">
                 {annualThemeData.currentTheme}
               </h2>
               <p className="text-xs sm:text-sm text-academic-slate/80 leading-relaxed font-sans">
-                Every academic year at Little Flower Junior College is guided by a formative central theme. For 2024–25, our theme invites students to reach their highest potential through seven interconnected domains of character and endeavor:
+                Every academic year at Little Flower Junior College is guided by a formative central theme. The theme for the recent 2024–25 session, <em>Aspire Acquire Achieve</em>, guided student development through seven interconnected domains. The theme for the upcoming 2026–27 session will be formally unveiled by the Principal at the annual inaugural assembly:
               </p>
 
               <div className="flex flex-wrap gap-2 pt-1">

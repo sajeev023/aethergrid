@@ -5,7 +5,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 export const metadata: Metadata = {
   title: "Teaching & Support Staff",
   description:
-    "Meet the board-certified department heads and subject educators of Little Flower Junior College — experts in Mathematics, Physics, Chemistry, Biology, Commerce, and Languages.",
+    "Meet the experienced department heads and subject educators of Little Flower Junior College — specialists in Mathematics, Physics, Chemistry, Biology, Commerce, and Languages.",
 };
 
 export default function FacultyTeachingPage() {

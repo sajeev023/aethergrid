@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowRight, ExternalLink, Calendar, ShieldCheck } from "lucide-react";
 
 import { buildStructuredData } from "@/lib/structured-data";
-import { programs, PORTAL_LINKS } from "@/lib/site-data";
+import { programs, PORTAL_LINKS, approvedInstitutionStats } from "@/lib/site-data";
 import { Hero } from "@/components/sections/hero";
 import { Section } from "@/components/section";
 import { Button } from "@/components/ui/button";
@@ -32,7 +32,7 @@ export default function LFJCPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2 text-academic-slate font-medium">
             <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Intermediate Admissions 2026–27 Open (MPC • BiPC • MEC • CEC)</span>
+            <span>{approvedInstitutionStats.admissionsStatus} ({approvedInstitutionStats.streamList})</span>
           </div>
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <Button asChild size="sm" className="bg-heritage-gold hover:bg-heritage-gold-bright text-deep-navy font-bold text-[11px] uppercase tracking-wider h-8">

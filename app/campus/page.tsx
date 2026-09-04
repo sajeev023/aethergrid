@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function CampusPage() {
-  redirect("/campus/silver-jubilee");
+  redirect("/campus/campus-life");
 }

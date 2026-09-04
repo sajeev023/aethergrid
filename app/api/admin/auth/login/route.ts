@@ -10,6 +10,12 @@ const WINDOW_MS = 60_000; // 1 minute
 
 function checkRateLimit(ip: string): boolean {
   const now = Date.now();
+  // Prune expired records to prevent unbounded memory growth
+  if (loginAttempts.size > 200) {
+    for (const [k, v] of loginAttempts.entries()) {
+      if (now > v.resetAt) loginAttempts.delete(k);
+    }
+  }
   const record = loginAttempts.get(ip);
   if (!record || now > record.resetAt) {
     loginAttempts.set(ip, { count: 1, resetAt: now + WINDOW_MS });

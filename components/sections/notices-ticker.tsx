@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Bell, ArrowRight, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { approvedInstitutionStats } from "@/lib/site-data";
+
 export interface NoticeItem {
   id: string;
   text: string;
@@ -17,7 +19,7 @@ export interface NoticeItem {
 const DEFAULT_NOTICES: NoticeItem[] = [
   {
     id: "adm-2026",
-    text: "Admissions for Intermediate 2026–27 Session opening shortly upon Class X results.",
+    text: `${approvedInstitutionStats.admissionsStatus} — ${approvedInstitutionStats.admissionsDetail}.`,
     badge: "Admissions Notice",
     linkUrl: "/admissions#admissions-form",
     linkText: "Submit Inquiry",

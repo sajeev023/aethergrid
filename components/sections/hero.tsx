@@ -94,8 +94,6 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
   const prefersReducedMotion = useReducedMotion();
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
-  const isPosterActive = Boolean(HERO_SLIDES[activeSlideIndex]?.isPoster);
-
   // Automatic rotation approximately every 3.5 seconds
   useEffect(() => {
     if (prefersReducedMotion) return;
@@ -110,7 +108,7 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
       <section
         id="home"
         aria-label="Little Flower Junior College Hero"
-        className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[76svh] flex flex-col justify-center overflow-hidden bg-deep-navy text-white"
+        className="relative min-h-[480px] sm:min-h-[600px] lg:min-h-[72svh] flex flex-col justify-center overflow-hidden bg-deep-navy text-white"
       >
         {/* Cinematic Background Image Carousel */}
         <div className="absolute inset-0 z-0 overflow-hidden bg-deep-navy">
@@ -176,36 +174,21 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
               </motion.div>
             );
           })}
-
-          {/* Directional Vignette (fades out on poster slides to preserve full poster clarity) */}
-          <div
-            className={cn(
-              "absolute inset-0 bg-gradient-to-b from-deep-navy/90 via-deep-navy/75 to-deep-navy/95 lg:bg-gradient-to-r lg:from-deep-navy/90 lg:via-deep-navy/65 lg:via-50% lg:to-deep-navy/15 transition-opacity duration-700",
-              isPosterActive ? "opacity-0 pointer-events-none" : "opacity-100"
-            )}
-          />
-          <div
-            className={cn(
-              "absolute inset-x-0 top-0 h-12 sm:h-20 bg-gradient-to-b from-deep-navy/80 via-deep-navy/30 to-transparent transition-opacity duration-700",
-              isPosterActive ? "opacity-0 pointer-events-none" : "opacity-100"
-            )}
-          />
-          <div
-            className={cn(
-              "absolute inset-x-0 bottom-0 h-12 sm:h-24 bg-gradient-to-t from-deep-navy/95 via-deep-navy/40 to-transparent transition-opacity duration-700",
-              isPosterActive ? "opacity-0 pointer-events-none" : "opacity-100"
-            )}
-          />
         </div>
 
-        {/* Main Content (fades out on poster slides so student photos and poster text remain 100% visible) */}
+        {/* Directional High-Contrast Scrim Overlay - Guarantees 100% text readability across all background images */}
         <div
-          className={cn(
-            "relative z-10 mx-auto max-w-7xl px-4 sm:px-6 md:px-8 w-full py-5 sm:py-8 md:py-12 lg:py-16 flex-grow flex flex-col justify-center transition-opacity duration-700",
-            isPosterActive ? "opacity-0 pointer-events-none" : "opacity-100"
-          )}
-          aria-hidden={isPosterActive}
-        >
+          className="absolute inset-0 bg-gradient-to-b from-deep-navy/95 via-deep-navy/80 to-deep-navy/95 lg:bg-gradient-to-r lg:from-deep-navy/95 lg:via-deep-navy/75 lg:via-55% lg:to-deep-navy/35 pointer-events-none z-[2]"
+        />
+        <div
+          className="absolute inset-x-0 top-0 h-16 sm:h-24 bg-gradient-to-b from-deep-navy via-deep-navy/50 to-transparent pointer-events-none z-[2]"
+        />
+        <div
+          className="absolute inset-x-0 bottom-0 h-16 sm:h-28 bg-gradient-to-t from-deep-navy via-deep-navy/60 to-transparent pointer-events-none z-[2]"
+        />
+
+        {/* Main Content - Permanently visible across all carousel states & mobile viewports */}
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 md:px-8 w-full py-8 sm:py-12 md:py-16 lg:py-20 flex flex-col justify-center">
           <motion.div
             variants={containerVariants}
             initial={prefersReducedMotion ? false : "hidden"}
@@ -213,14 +196,14 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
             className="max-w-3xl w-full"
           >
             <motion.div variants={itemVariants}>
-              <Badge onDark className="mb-2 sm:mb-4 text-[10px] sm:text-xs py-0.5 px-2.5 sm:py-1 sm:px-3 tracking-wider font-semibold shadow-sm backdrop-blur-md bg-deep-navy/80 border border-white/20">
+              <Badge onDark className="mb-2.5 sm:mb-4 text-[10px] sm:text-xs py-1 px-3 tracking-wider font-semibold shadow-sm backdrop-blur-md bg-deep-navy/80 border border-white/20">
                 Est. {data.established} • Uppal, Hyderabad
               </Badge>
             </motion.div>
 
             <motion.h1
               variants={itemVariants}
-              className="font-serif text-[1.65rem] sm:text-4xl md:text-5.5xl lg:text-6.5xl font-bold leading-[1.12] sm:leading-[1.06] text-white tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.65)]"
+              className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.12] sm:leading-[1.06] text-white tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.75)]"
             >
               Little Flower{" "}
               <span className="text-heritage-gold italic font-editorial font-normal">
@@ -230,28 +213,47 @@ export function Hero({ activeInst = "lfjc" }: HeroProps) {
 
             <motion.p
               variants={itemVariants}
-              className="mt-2 sm:mt-4 max-w-xl text-xs sm:text-sm md:text-base leading-relaxed text-royal-cream font-sans font-medium drop-shadow-[0_1px_8px_rgba(0,0,0,0.55)]"
+              className="mt-2.5 sm:mt-4 max-w-xl text-xs sm:text-sm md:text-base leading-relaxed text-royal-cream font-sans font-medium drop-shadow-[0_1px_8px_rgba(0,0,0,0.65)]"
             >
-              Knowledge is Truth. Board-recognised intermediate education in MPC, BiPC, MEC, and CEC.
+              Knowledge is Truth. Board-recognised intermediate education in MPC, BiPC, MEC, and CEC at our 8-acre campus opposite Survey of India.
             </motion.p>
 
             <motion.div
               variants={itemVariants}
-              className="mt-3.5 sm:mt-6 flex flex-col gap-2 sm:flex-row sm:flex-wrap w-full sm:w-auto"
-              aria-label="Primary actions"
+              className="mt-4 sm:mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap w-full sm:w-auto"
+              aria-label="Primary admissions actions"
             >
-              <Button asChild size="lg" className="w-full sm:w-auto min-h-[42px] sm:min-h-[48px] py-2 sm:py-3 text-xs sm:text-sm font-bold uppercase tracking-wider group shadow-md">
+              <Button asChild size="lg" className="w-full sm:w-auto min-h-[44px] sm:min-h-[48px] py-2.5 sm:py-3 px-5 sm:px-6 text-xs sm:text-sm font-bold uppercase tracking-wider group shadow-md bg-heritage-gold hover:bg-heritage-gold-bright text-deep-navy">
                 <a href="/admissions" className="inline-flex items-center justify-center gap-2">
                   Begin Admissions Inquiry
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </a>
               </Button>
-              <Button asChild variant="inverse" size="lg" className="w-full sm:w-auto min-h-[42px] sm:min-h-[48px] py-2 sm:py-3 text-xs sm:text-sm font-bold uppercase tracking-wider border-white/30 hover:border-white">
+              <Button asChild variant="inverse" size="lg" className="w-full sm:w-auto min-h-[44px] sm:min-h-[48px] py-2.5 sm:py-3 px-5 sm:px-6 text-xs sm:text-sm font-bold uppercase tracking-wider border-white/40 hover:border-white text-white hover:bg-white/15">
                 <a href="/contact" className="inline-flex items-center justify-center">
                   Contact Office
                 </a>
               </Button>
             </motion.div>
+
+            {/* Slide Navigation Dots */}
+            <div className="mt-5 sm:mt-8 flex items-center gap-2" aria-label="Hero carousel navigation">
+              {HERO_SLIDES.map((slide, idx) => (
+                <button
+                  key={slide.id}
+                  type="button"
+                  onClick={() => setActiveSlideIndex(idx)}
+                  className={cn(
+                    "h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-heritage-gold",
+                    idx === activeSlideIndex
+                      ? "w-6 bg-heritage-gold"
+                      : "w-2 bg-white/40 hover:bg-white/70"
+                  )}
+                  aria-label={`Switch to slide ${idx + 1}: ${slide.title}`}
+                  aria-current={idx === activeSlideIndex ? "true" : undefined}
+                />
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>

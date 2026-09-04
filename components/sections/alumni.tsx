@@ -26,7 +26,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { Section } from "@/components/section";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { PORTAL_LINKS, alumniData as seedAlumniData, Alumnus } from "@/lib/site-data";
+import { PORTAL_LINKS, alumniData as seedAlumniData, Alumnus, approvedInstitutionStats } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 import { AlumniSubmission } from "@/lib/admin/types";
 import { useFocusTrap } from "@/lib/use-focus-trap";
@@ -368,13 +368,13 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
         <div className="mx-auto max-w-4xl text-center px-4 sm:px-6">
           <Reveal>
             <span className="inline-block px-3 py-1 rounded-full bg-heritage-gold/20 border border-heritage-gold/40 text-heritage-gold-bright text-xs font-bold uppercase tracking-widest font-sans mb-3">
-              Official Alumni Network (LFJCAN)
+              LFJC Alumni Community
             </span>
             <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-white tracking-tight">
               Little Flower Alumni Community
             </h1>
             <p className="mt-2 text-sm sm:text-base text-royal-cream/80 max-w-2xl mx-auto font-sans leading-relaxed">
-              50 years of distinguished alumni shaping public service, medicine, corporate leadership, sciences, arts, and cinema across the globe.
+              Five decades of distinguished alumni contributing to public service, healthcare, enterprise, sciences, arts, and academia across the globe.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
@@ -385,7 +385,7 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2"
                 >
-                  Official Google Registration Form
+                  Alumni Registration Form
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </Button>
@@ -415,27 +415,27 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
             {isFullPage ? (
               <SectionHeading
                 as={headingLevel}
-                title="Official Alumni Registry"
-                description="Little Flower Junior College has nurtured over 15,000 graduates across five decades. Our alumni lead and excel globally in civil administration, national cinema, science, judiciary, and enterprise."
+                title="Alumni Directory & Network"
+                description="Little Flower Junior College takes pride in generations of graduates who have contributed across public administration, healthcare, industry, academia, arts, and enterprise."
               />
             ) : (
               <SectionHeading
                 eyebrow="Montfortian Legacy"
-                title="Official Alumni Registry"
+                title="Alumni Community"
                 description="Our graduates carry forward the values of academic rigor and moral discipline, achieving distinguished careers in government, cinema, classical arts, and business."
               />
             )}
           </div>
         </Reveal>
 
-        {/* Official Registry Verification Trust Notice */}
+        {/* Institutional Alumni Directory Notice */}
         <Reveal delay={0.01}>
           <div className="mb-4 sm:mb-6 rounded-lg border border-heritage-gold/50 bg-royal-cream/35 p-3.5 sm:p-4 text-xs sm:text-sm text-academic-slate/85 font-sans flex items-start gap-3 shadow-2xs">
             <ShieldCheck className="h-5 w-5 text-heritage-gold-strong shrink-0 mt-0.5" />
             <div>
-              <p className="font-semibold text-academic-slate">Official Institutional Alumni Registry</p>
+              <p className="font-semibold text-academic-slate">LFJC Alumni Directory</p>
               <p className="text-xs text-academic-slate/75 mt-0.5">
-                All featured alumni profiles and batch records are authenticated against college enrollment records. <strong>Alumni records held at the college office — verify in person.</strong>
+                Profiles featured in this directory reflect published alumni records and submissions. <strong>Official academic transcripts and archival batch registers are held at the college office.</strong>
               </p>
             </div>
           </div>
@@ -470,27 +470,27 @@ export function Alumni({ activeInst, headingLevel = "h2" }: AlumniProps) {
           <Reveal delay={0.05}>
             <div id="network" className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 mb-4 sm:mb-6 border-t border-b border-stone-texture/45 py-3 sm:py-4 bg-royal-cream/15 rounded-lg px-3 sm:px-6 scroll-mt-28">
               <div className="text-center md:border-r border-stone-texture/40">
-                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">15,000+</span>
+                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">{approvedInstitutionStats.academicLegacy}</span>
                 <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
-                  <Users className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Global Network
+                  <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Montfortian Legacy
                 </span>
               </div>
               <div className="text-center md:border-r border-stone-texture/40">
-                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">18+</span>
+                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">{approvedInstitutionStats.enrolledStudents}</span>
                 <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
-                  <Globe className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Countries
+                  <Users className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Student Body
                 </span>
               </div>
               <div className="text-center md:border-r border-stone-texture/40">
-                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">12+</span>
+                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">{approvedInstitutionStats.recognizedStreams}</span>
                 <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
-                  <Building2 className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Sectors
+                  <Building2 className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Academic Wings
                 </span>
               </div>
               <div className="text-center">
-                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">50+</span>
+                <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-montfortian-blue block mb-0.5 sm:mb-1">Global</span>
                 <span className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-academic-slate/70 flex items-center justify-center gap-1 sm:gap-1.5">
-                  <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Board Medals
+                  <Globe className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-heritage-gold-strong" /> Alumni Presence
                 </span>
               </div>
             </div>

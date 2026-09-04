@@ -11,11 +11,25 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.lfjc.co
 export const CANONICAL_ADDRESS =
   "#2-18-25, Zahid Nagar, Opp: Survey of India, Uppal, Hyderabad, Telangana 500039";
 
+// Centralized approved institutional statistics (single source of truth for all pages)
+export const approvedInstitutionStats = {
+  established: "1974",
+  academicLegacy: "50+ Years",
+  legacyPeriod: "Established 1974 • 50+ Years of Academic Excellence",
+  enrolledStudents: "1,600+",
+  campusAcres: "8 Acres",
+  recognizedStreams: "4 Streams",
+  streamList: "MPC, BiPC, MEC, CEC",
+  admissionsStatus: "Admissions Inquiries Open (2026–27)",
+  admissionsDetail: "Applications commence following Class X board results",
+  goldenJubileeYear: "1974–2024",
+};
+
 // Official Portals & Direct Links
 export const PORTAL_LINKS = {
   parentStudentLogin: "https://app.myskoolcom.tech/lfjc_uppal/login",
   studentSignup: "https://app.myskoolcom.tech/lfjc_uppal/student_signup/home",
-  onlineAdmissionPortal: "https://littlefloweruppal.co.in/lfjcaddmission\\",
+  onlineAdmissionPortal: "https://littlefloweruppal.co.in/lfjcaddmission/",
   alumniRegistrationGoogleForm:
     "https://docs.google.com/forms/d/1Jg6bOWkfeYRQxnmE2Xr9ykhtiSBgoR_MPQpEcAlhWA0/viewform?edit_requested=true",
   officialWebsite: "https://lfjc.co.in/index.php",
@@ -142,7 +156,7 @@ export interface FormerPrincipal {
   name: string;
   designation: string;
   tenure: string;
-  image: string;
+  image?: string;
   roleDescription?: string;
 }
 
@@ -182,7 +196,7 @@ export const formerPrincipalsData: FormerPrincipal[] = [
     name: "Rev. Bro. Celestine",
     designation: "Correspondent & Principal",
     tenure: "1989–1994",
-    image: "/images/principals/bro_celestine.jpg",
+    image: "/images/principals/bro_celestine.png",
   },
   {
     name: "Rev. Bro. M. A. George",
@@ -194,7 +208,6 @@ export const formerPrincipalsData: FormerPrincipal[] = [
     name: "Late Rev. Bro. N. A. James",
     designation: "Correspondent & Principal",
     tenure: "2000–2006",
-    image: "/images/principals/bro_james_na.jpg",
   },
   {
     name: "Rev. Bro. Franky Noronha",
@@ -206,7 +219,7 @@ export const formerPrincipalsData: FormerPrincipal[] = [
     name: "Rev. Bro. Jaico Gervasis",
     designation: "Correspondent & Principal",
     tenure: "2011–2017",
-    image: "/images/principals/bro_jaico.jpg",
+    image: "/images/principals/bro_gervasis.jpg",
   },
   {
     name: "Rev. Bro. Vincent Reddy",
@@ -615,7 +628,7 @@ export const lfjcData = {
   postalCode: "500039",
   country: "IN",
   society: "Brothers of St. Gabriel Educational Society",
-  admissionsLabel: "Admissions 2026–27 Open (MPC, BiPC, MEC, CEC)",
+  admissionsLabel: `${approvedInstitutionStats.admissionsStatus} (${approvedInstitutionStats.streamList})`,
   principalName: "Rev. Bro. Arun Prakash Lawrance",
   principalRole: "Correspondent & Principal",
   principalQuote: "Education is the passport to the future, for tomorrow belongs to those who prepare for it today.",
@@ -623,10 +636,10 @@ export const lfjcData = {
     "Warm greetings and best wishes to all. In an ever-evolving world, education remains the cornerstone of personal and national growth. At Little Flower Junior College, Uppal, we have proudly upheld this belief for the last 50 years, establishing ourselves as a premier institution for quality education. Our alumni's accomplishments—gracing esteemed positions across Medicine, Engineering, Arts, Administration, Sports, Cinema, and Politics—stand as a testament to our commitment to nation-building and excellence. 'Education is the passport to the future, for tomorrow belongs to those who prepare for it today.' Little Flower Junior College will continue to illuminate paths for generations to come.",
   principalImg: "/images/principals/bro_arun_prakash.jpg",
   stats: [
-    { value: "50+", label: "Years of Academic Legacy (1974–2024)" },
-    { value: "1,600+", label: "Current Enrolled Students" },
-    { value: "8", label: "Acres Campus Opposite Survey of India" },
-    { value: "4", label: "Board-Recognized Intermediate Streams" },
+    { value: approvedInstitutionStats.academicLegacy, label: "Years of Academic Legacy (Est. 1974)" },
+    { value: approvedInstitutionStats.enrolledStudents, label: "Current Enrolled Students" },
+    { value: approvedInstitutionStats.campusAcres.replace(" Acres", ""), label: "Acres Campus Opposite Survey of India" },
+    { value: approvedInstitutionStats.recognizedStreams.replace(" Streams", ""), label: "Board-Recognized Intermediate Streams" },
   ],
   programs: [
     {
@@ -945,13 +958,6 @@ export const lfjcData = {
       subject: "Physical Education & Athletics",
       department: "Physical Education & Sports",
       image: "/images/faculty/prasad.jpg"
-    },
-    {
-      name: "Ms. PET Faculty",
-      designation: "Faculty",
-      subject: "Physical Education & Athletics",
-      department: "Physical Education & Sports",
-      image: "/images/faculty/dsc_4946.jpg"
     },
     // 10. Office Administration
     {
@@ -1394,7 +1400,7 @@ export const navItems = [
   { label: "About", href: "/about" },
   { label: "Academics", href: "/academics" },
   { label: "Faculty", href: "/faculty" },
-  { label: "Campus Life", href: "/campus" },
+  { label: "Campus Life", href: "/campus/campus-life" },
   { label: "Admissions", href: "/admissions" },
   { label: "Alumni", href: "/alumni" },
   { label: "Contact", href: "/contact" },

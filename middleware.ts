@@ -19,7 +19,10 @@ export async function middleware(request: NextRequest) {
 
   // Protect all admin page routes and admin API routes
   const isAdminPage = pathname === "/admin" || pathname.startsWith("/admin/");
-  const isAdminAPI = pathname.startsWith("/api/admin") && !pathname.startsWith("/api/admin/auth/login");
+  const isPublicAdminRoute =
+    pathname.startsWith("/api/admin/auth/login") ||
+    pathname.startsWith("/api/admin/alumni-upload");
+  const isAdminAPI = pathname.startsWith("/api/admin") && !isPublicAdminRoute;
 
   if (!isAdminPage && !isAdminAPI) {
     return NextResponse.next();
@@ -46,13 +49,17 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/admin/dashboard", request.url));
     }
 
-    // Attach user info via headers for downstream routes
-    const response = NextResponse.next();
-    response.headers.set("x-admin-user-id", String(payload.userId));
-    response.headers.set("x-admin-username", String(payload.username));
-    response.headers.set("x-admin-role", String(payload.role));
-    response.headers.set("x-admin-display-name", String(payload.displayName));
-    return response;
+    // Forward user info via request headers internally for downstream routes (without leaking to browser)
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-admin-user-id", String(payload.userId));
+    requestHeaders.set("x-admin-username", String(payload.username));
+    requestHeaders.set("x-admin-role", String(payload.role));
+    requestHeaders.set("x-admin-display-name", String(payload.displayName));
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
   } catch {
     if (isAdminAPI) {
       return NextResponse.json(

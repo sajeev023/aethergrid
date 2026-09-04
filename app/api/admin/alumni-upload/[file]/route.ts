@@ -3,6 +3,7 @@ import path from "path";
 import { NextRequest, NextResponse } from "next/server";
 
 import { getSessionFromCookie } from "@/lib/admin/auth";
+import { getAlumniSubmissions } from "@/lib/admin/db";
 import { hasPermission } from "@/lib/admin/types";
 
 export const runtime = "nodejs";
@@ -18,19 +19,15 @@ const MIME_BY_EXT: Record<string, string> = {
 };
 
 /**
- * Streams a pending alumni upload to an authenticated admin reviewer only.
- * Pending uploads live outside /public so they are never world-readable by
- * URL before approval. Requires the "alumni" permission.
+ * Streams alumni upload images.
+ * - Authenticated admins with "alumni" permission can view pending and approved uploads.
+ * - Public visitors can only view photos belonging to APPROVED alumni submissions.
+ * - Pending uploads remain completely protected from unauthorized access.
  */
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ file: string }> },
 ) {
-  const session = await getSessionFromCookie();
-  if (!session || !hasPermission(session.role, "alumni")) {
-    return NextResponse.json({ message: "Forbidden" }, { status: 403 });
-  }
-
   const { file } = await params;
   // Defend against path traversal: only allow a bare filename, no slashes/dots.
   const safeName = path.basename(file);
@@ -49,12 +46,32 @@ export async function GET(
     return new NextResponse("Not found", { status: 404 });
   }
 
+  const session = await getSessionFromCookie();
+  const isAdmin = session && hasPermission(session.role, "alumni");
+
+  if (!isAdmin) {
+    // Verify whether this file belongs to an approved alumni record
+    const submissions = getAlumniSubmissions();
+    const isApproved = submissions.some(
+      (s) =>
+        s.status === "approved" &&
+        (s.photoUrl.endsWith(safeName) ||
+          s.supportingImages?.some((img) => img.endsWith(safeName)))
+    );
+
+    if (!isApproved) {
+      return NextResponse.json({ message: "Forbidden" }, { status: 403 });
+    }
+  }
+
   const data = fs.readFileSync(filePath);
   return new NextResponse(data, {
     status: 200,
     headers: {
       "Content-Type": mime,
-      "Cache-Control": "private, max-age=0, no-store",
+      "Cache-Control": isAdmin
+        ? "private, max-age=0, no-store"
+        : "public, max-age=86400, stale-while-revalidate=43200",
     },
   });
 }

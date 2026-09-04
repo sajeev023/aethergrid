@@ -11,6 +11,28 @@ const ALLOWED_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const UPLOAD_DIR = path.join(process.cwd(), "public", "images", "gallery-uploads");
 
+const SIGNATURES: { ext: string; match: (b: Buffer) => boolean }[] = [
+  { ext: ".jpg", match: (b) => b.length >= 3 && b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff },
+  {
+    ext: ".png",
+    match: (b) =>
+      b.length >= 8 &&
+      b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47 &&
+      b[4] === 0x0d && b[5] === 0x0a && b[6] === 0x1a && b[7] === 0x0a,
+  },
+  {
+    ext: ".webp",
+    match: (b) =>
+      b.length >= 12 &&
+      b[0] === 0x52 && b[1] === 0x49 && b[2] === 0x46 && b[3] === 0x46 &&
+      b[8] === 0x57 && b[9] === 0x45 && b[10] === 0x42 && b[11] === 0x50,
+  },
+];
+
+function isValidImage(buffer: Buffer): boolean {
+  return SIGNATURES.some((sig) => sig.match(buffer));
+}
+
 export async function POST(request: NextRequest) {
   const session = await getSessionFromCookie();
   if (!session || !hasPermission(session.role, "gallery")) {
@@ -41,6 +63,14 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const buffer = Buffer.from(await file.arrayBuffer());
+  if (!isValidImage(buffer)) {
+    return NextResponse.json(
+      { message: "Invalid image content. File signature does not match JPEG, PNG, or WEBP." },
+      { status: 400 }
+    );
+  }
+
   const baseName = file.name
     .replace(/[^a-zA-Z0-9._-]/g, "_")
     .toLowerCase()
@@ -53,7 +83,6 @@ export async function POST(request: NextRequest) {
   }
 
   const filePath = path.join(UPLOAD_DIR, safeFilename);
-  const buffer = Buffer.from(await file.arrayBuffer());
   fs.writeFileSync(filePath, buffer);
 
   const publicUrl = `/images/gallery-uploads/${safeFilename}`;

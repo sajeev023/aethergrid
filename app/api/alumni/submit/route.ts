@@ -43,7 +43,40 @@ function detectImage(buffer: Buffer): { ext: string; mime: string } | null {
   return null;
 }
 
+// ─── In-memory rate limiting ──────────────────────────────────────────────────
+const RATE_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
+const RATE_MAX = 5; // 5 submissions per IP
+const ipHits = new Map<string, { count: number; firstAt: number }>();
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  if (ipHits.size > 200) {
+    for (const [k, v] of ipHits.entries()) {
+      if (now - v.firstAt > RATE_WINDOW_MS) ipHits.delete(k);
+    }
+  }
+  const entry = ipHits.get(ip);
+  if (!entry || now - entry.firstAt > RATE_WINDOW_MS) {
+    ipHits.set(ip, { count: 1, firstAt: now });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > RATE_MAX;
+}
+
 export async function POST(request: NextRequest) {
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+    request.headers.get("x-real-ip") ??
+    "unknown";
+
+  if (rateLimited(ip)) {
+    return NextResponse.json(
+      { message: "Too many submission attempts. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   let formData: FormData;
   try {
     formData = await request.formData();
@@ -51,24 +84,24 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Invalid form data." }, { status: 400 });
   }
 
-  const name = String(formData.get("name") ?? "").trim();
-  const email = String(formData.get("email") ?? "").trim();
-  const phone = String(formData.get("phone") ?? "").trim();
-  const batchFrom = String(formData.get("batchFrom") ?? "").trim();
-  const batchTo = String(formData.get("batchTo") ?? "").trim();
-  const stream = String(formData.get("stream") ?? "").trim();
-  const category = String(formData.get("category") ?? "").trim();
-  const position = String(formData.get("position") ?? "").trim();
-  const company = String(formData.get("company") ?? "").trim();
-  const industry = String(formData.get("industry") ?? "").trim();
-  const qualification = String(formData.get("qualification") ?? "").trim();
-  const achievements = String(formData.get("achievements") ?? "").trim();
-  const bio = String(formData.get("bio") ?? "").trim();
-  const linkedin = String(formData.get("linkedin") ?? "").trim();
-  const city = String(formData.get("city") ?? "").trim();
-  const country = String(formData.get("country") ?? "").trim();
-  const studentId = String(formData.get("studentId") ?? "").trim();
-  const verificationDetails = String(formData.get("verificationDetails") ?? "").trim();
+  const name = String(formData.get("name") ?? "").trim().substring(0, 100);
+  const email = String(formData.get("email") ?? "").trim().substring(0, 100);
+  const phone = String(formData.get("phone") ?? "").trim().substring(0, 50);
+  const batchFrom = String(formData.get("batchFrom") ?? "").trim().substring(0, 20);
+  const batchTo = String(formData.get("batchTo") ?? "").trim().substring(0, 20);
+  const stream = String(formData.get("stream") ?? "").trim().substring(0, 100);
+  const category = String(formData.get("category") ?? "").trim().substring(0, 100);
+  const position = String(formData.get("position") ?? "").trim().substring(0, 150);
+  const company = String(formData.get("company") ?? "").trim().substring(0, 150);
+  const industry = String(formData.get("industry") ?? "").trim().substring(0, 100);
+  const qualification = String(formData.get("qualification") ?? "").trim().substring(0, 200);
+  const achievements = String(formData.get("achievements") ?? "").trim().substring(0, 2000);
+  const bio = String(formData.get("bio") ?? "").trim().substring(0, 3000);
+  const linkedin = String(formData.get("linkedin") ?? "").trim().substring(0, 300);
+  const city = String(formData.get("city") ?? "").trim().substring(0, 100);
+  const country = String(formData.get("country") ?? "").trim().substring(0, 100);
+  const studentId = String(formData.get("studentId") ?? "").trim().substring(0, 100);
+  const verificationDetails = String(formData.get("verificationDetails") ?? "").trim().substring(0, 2000);
   const consent = formData.get("consent") === "true" || formData.get("consent") === "on";
 
   // Form Field Validation
@@ -88,6 +121,10 @@ export async function POST(request: NextRequest) {
       { message: "Please fill in all required fields and accept the publishing consent." },
       { status: 400 }
     );
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return NextResponse.json({ message: "Please provide a valid email address." }, { status: 400 });
   }
 
   // Ensure private upload directory exists
@@ -134,7 +171,8 @@ export async function POST(request: NextRequest) {
   }
 
   const supportingImages: string[] = [];
-  const supportFiles = formData.getAll("supportingImages") as File[];
+  // Cap supporting files to a maximum of 3
+  const supportFiles = (formData.getAll("supportingImages") as File[]).slice(0, 3);
   for (let i = 0; i < supportFiles.length; i++) {
     const file = supportFiles[i];
     if (file && file.size > 0) {

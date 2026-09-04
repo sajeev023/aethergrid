@@ -38,31 +38,106 @@ export function Admissions({ activeInst = "lfjc", headingLevel = "h2" }: Admissi
                 Apply Directly Online
               </h3>
               <p className="text-xs sm:text-sm text-royal-cream/85 font-sans mb-6 max-w-lg mx-auto leading-relaxed">
-                Submit your preliminary application on the official Little Flower Junior College student registration portal.
+                Submit your online registration on the primary LFJC student admissions portal. Inquiries are processed within 24 business hours.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 max-w-xl mx-auto">
-                <a
-                  href={PORTAL_LINKS.studentSignup}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-sm bg-heritage-gold hover:bg-heritage-gold-bright text-deep-navy font-bold text-xs uppercase tracking-wider shadow-md transition-all duration-300 active:scale-[0.99] text-center"
-                >
-                  <span>New Admissions Portal (MySkoolCom)</span>
-                  <ExternalLink className="w-4 h-4 shrink-0" />
-                </a>
-                <a
-                  href={PORTAL_LINKS.onlineAdmissionPortal}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-6 py-3.5 rounded-sm border border-white/40 hover:border-white bg-white/5 hover:bg-white hover:text-deep-navy text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 active:scale-[0.99] text-center"
-                >
-                  <span>Secondary Registration</span>
-                  <ExternalLink className="w-3.5 h-3.5 shrink-0" />
-                </a>
+                <div className="w-full sm:w-auto text-center">
+                  <a
+                    href={PORTAL_LINKS.studentSignup}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-sm bg-heritage-gold hover:bg-heritage-gold-bright text-deep-navy font-bold text-xs uppercase tracking-wider shadow-md transition-all duration-300 active:scale-[0.99] text-center"
+                  >
+                    <span>Primary Admissions Portal (MySkoolCom)</span>
+                    <ExternalLink className="w-4 h-4 shrink-0" />
+                  </a>
+                  <span className="block text-[10px] text-royal-cream/70 font-sans mt-1">
+                    Official primary online application route
+                  </span>
+                </div>
+
+                <div className="w-full sm:w-auto text-center">
+                  <a
+                    href={PORTAL_LINKS.onlineAdmissionPortal}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-6 py-3.5 rounded-sm border border-white/40 hover:border-white bg-white/5 hover:bg-white hover:text-deep-navy text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 active:scale-[0.99] text-center"
+                  >
+                    <span>Secondary / Alternate Registration</span>
+                    <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                  </a>
+                  <span className="block text-[10px] text-royal-cream/70 font-sans mt-1">
+                    Use if directed by college admissions desk
+                  </span>
+                </div>
               </div>
             </div>
           </Reveal>
+        </div>
+      </Section>
+
+      {/* ─── DECISION-MAKING ESSENTIALS FOR PARENTS & APPLICANTS ──────── */}
+      <Section variant="default" className="bg-royal-cream/25 border-b border-stone-texture/30 py-10 sm:py-14">
+        <div className="mx-auto max-w-5xl">
+          <div className="text-center mb-8">
+            <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+              Parent &amp; Student Guidance
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1">
+              Key Admissions Information
+            </h2>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white p-4 sm:p-5 rounded-xl border border-stone-texture/50 shadow-xs space-y-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans block">
+                1. Application Timeline
+              </span>
+              <h3 className="font-serif text-sm sm:text-base font-bold text-academic-slate">
+                Opening &amp; Processing
+              </h3>
+              <p className="text-xs text-academic-slate/75 font-sans leading-relaxed">
+                Online inquiries are open now. Application processing and batch allotment commence immediately upon Class X board result declarations (SSC, CBSE, ICSE).
+              </p>
+            </div>
+
+            <div className="bg-white p-4 sm:p-5 rounded-xl border border-stone-texture/50 shadow-xs space-y-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans block">
+                2. Counseling &amp; Hours
+              </span>
+              <h3 className="font-serif text-sm sm:text-base font-bold text-academic-slate">
+                Mon – Sat: 9 AM – 4 PM
+              </h3>
+              <p className="text-xs text-academic-slate/75 font-sans leading-relaxed">
+                In-person academic counseling and document verification are held at the Ground Floor Reception Counter. Competitive coaching begins at 8:00 AM.
+              </p>
+            </div>
+
+            <div className="bg-white p-4 sm:p-5 rounded-xl border border-stone-texture/50 shadow-xs space-y-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans block">
+                3. Fee Structure
+              </span>
+              <h3 className="font-serif text-sm sm:text-base font-bold text-academic-slate">
+                Transparent &amp; Regulated
+              </h3>
+              <p className="text-xs text-academic-slate/75 font-sans leading-relaxed">
+                Fees follow Board of Intermediate Education, Telangana norms. Complete fee schedules for all streams are available directly at the college office. Merit concessions apply.
+              </p>
+            </div>
+
+            <div className="bg-white p-4 sm:p-5 rounded-xl border border-stone-texture/50 shadow-xs space-y-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-heritage-gold-strong font-sans block">
+                4. Helpdesk &amp; SLA
+              </span>
+              <h3 className="font-serif text-sm sm:text-base font-bold text-academic-slate">
+                24-Hour Response
+              </h3>
+              <p className="text-xs text-academic-slate/75 font-sans leading-relaxed">
+                Call <strong>+91 7673960151</strong> or email <strong>info@lfjc.co.in</strong>. Admissions desk staff respond to all digital inquiries within 24 business hours.
+              </p>
+            </div>
+          </div>
         </div>
       </Section>
 

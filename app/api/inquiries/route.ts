@@ -33,6 +33,14 @@ const ipHits = new Map<string, { count: number; firstAt: number }>();
 
 function rateLimited(ip: string): boolean {
   const now = Date.now();
+  // Prune expired entries to prevent unbounded memory growth
+  if (ipHits.size > 200) {
+    for (const [key, val] of ipHits.entries()) {
+      if (now - val.firstAt > RATE_WINDOW_MS) {
+        ipHits.delete(key);
+      }
+    }
+  }
   const entry = ipHits.get(ip);
   if (!entry || now - entry.firstAt > RATE_WINDOW_MS) {
     ipHits.set(ip, { count: 1, firstAt: now });
@@ -110,9 +118,6 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Diagnostic logging: log every incoming payload shape
-  console.info("[inquiries] Incoming payload:", JSON.stringify(payload));
-
   // ── Honeypot check (silent discard for bots) ──
   if (payload.website) {
     console.warn("[inquiries] Bot honeypot triggered from IP:", ip);
@@ -150,6 +155,13 @@ export async function POST(request: NextRequest) {
   if (name.length < 2 || message.length < 8) {
     return NextResponse.json(
       { message: "Please enter a valid name and message (minimum 8 characters)." },
+      { status: 400 },
+    );
+  }
+
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return NextResponse.json(
+      { message: "Please enter a valid email address." },
       { status: 400 },
     );
   }
@@ -233,7 +245,9 @@ export async function POST(request: NextRequest) {
   const fromEmail =
     process.env.FORM_FROM_EMAIL ?? `${instData.shortName} Website <onboarding@resend.dev>`;
 
-  const subject = `${instData.shortName} ${titleCase(type)} Submission [Ref: ${refNumber}] - ${name}`;
+  const cleanName = name.replace(/[\r\n]/g, " ").trim();
+  const cleanType = titleCase(type).replace(/[\r\n]/g, " ").trim();
+  const subject = `${instData.shortName} ${cleanType} Submission [Ref: ${refNumber}] - ${cleanName}`;
   const html = renderEmail(sanitizedPayload, instData.name, refNumber);
 
   const slaNotice = "The admissions office will respond within 24 hours.";
