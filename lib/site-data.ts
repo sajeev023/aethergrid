@@ -280,7 +280,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Chemistry Department",
     category: "retired",
-    image: "/images/faculty/retired/dr_anitha_lincon.jpg",
+    image: "/images/faculty/retired/dr_anitha_lincon.png",
     tenure: "1986–2020",
   },
   {
@@ -288,7 +288,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Languages Department",
     category: "retired",
-    image: "/images/faculty/retired/dr_riyaz_ui_ansari.jpg",
+    image: "/images/faculty/retired/dr_riyaz_ui_ansari.png",
     tenure: "1991–2016",
   },
   {
@@ -296,7 +296,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Languages Department",
     category: "retired",
-    image: "/images/faculty/retired/dr_t_rajeswara_reddy.jpg",
+    image: "/images/faculty/retired/dr_t_rajeswara_reddy.png",
     tenure: "1982–2013",
   },
   {
@@ -304,7 +304,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Mathematics Department",
     category: "retired",
-    image: "/images/faculty/retired/mr_b_paul_raju.jpg",
+    image: "/images/faculty/retired/mr_b_paul_raju.png",
     tenure: "2000–2023",
   },
   {
@@ -312,7 +312,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Support Staff",
     category: "retired",
-    image: "/images/faculty/retired/mr_bheeshma_chary.jpg",
+    image: "/images/faculty/retired/mr_bheeshma_chary.png",
     tenure: "1987–2016",
   },
   {
@@ -320,7 +320,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Office Administration",
     category: "retired",
-    image: "/images/faculty/retired/mr_david_joseph.jpg",
+    image: "/images/faculty/retired/mr_david_joseph.png",
     tenure: "1974–1997",
   },
   {
@@ -328,7 +328,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Physics Department",
     category: "retired",
-    image: "/images/faculty/retired/mr_e_v_subbarao.jpg",
+    image: "/images/faculty/retired/mr_e_v_subbarao.png",
     tenure: "1974–1997",
   },
   {
@@ -336,7 +336,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Mathematics Department",
     category: "retired",
-    image: "/images/faculty/retired/mr_jayatheerth_katti.jpg",
+    image: "/images/faculty/retired/mr_jayatheerth_katti.png",
     tenure: "1981–2003",
   },
   {
@@ -344,7 +344,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Physics Department",
     category: "retired",
-    image: "/images/faculty/retired/mr_k_srinivadev.jpg",
+    image: "/images/faculty/retired/mr_k_srinivadev.png",
     tenure: "1991–2019",
   },
   {
@@ -352,7 +352,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Computer & Library Department",
     category: "retired",
-    image: "/images/faculty/retired/mr_m_amarnath.jpg",
+    image: "/images/faculty/retired/mr_m_amarnath.png",
     tenure: "1996–2023",
   },
   {
@@ -360,7 +360,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Support Staff",
     category: "retired",
-    image: "/images/faculty/retired/mr_s_balaiah.jpg",
+    image: "/images/faculty/retired/mr_s_balaiah.png",
     tenure: "1985–2020",
   },
   {
@@ -368,7 +368,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Support Staff",
     category: "retired",
-    image: "/images/faculty/retired/mr_t_d_baaabu.jpg",
+    image: "/images/faculty/retired/mr_t_d_baaabu.png",
     tenure: "1989–2022",
   },
   {
@@ -376,7 +376,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Physics Department",
     category: "retired",
-    image: "/images/faculty/retired/mr_a_r_narasimharao.jpg",
+    image: "/images/faculty/retired/mr_a_r_narasimharao.png",
     tenure: "1985–2017",
   },
   {
@@ -384,7 +384,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Office Administration",
     category: "retired",
-    image: "/images/faculty/retired/mr_k_jothi_ram.jpg",
+    image: "/images/faculty/retired/mr_k_jothi_ram.png",
     tenure: "1990–2005",
   },
   {
@@ -392,7 +392,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Physics Department",
     category: "retired",
-    image: "/images/faculty/retired/mr_nagaraja_kumar.jpg",
+    image: "/images/faculty/retired/mr_nagaraja_kumar.png",
     tenure: "1982–2010",
   },
   {
@@ -400,7 +400,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Languages Department",
     category: "retired",
-    image: "/images/faculty/retired/mr_p_kesavacharaya.jpg",
+    image: "/images/faculty/retired/mr_p_kesavacharaya.png",
     tenure: "1982–2013",
   },
   {
@@ -408,7 +408,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Biology Department",
     category: "retired",
-    image: "/images/faculty/retired/ms_bmd_sakunthala.jpg",
+    image: "/images/faculty/retired/ms_bmd_sakunthala.png",
     tenure: "1974–2005",
   },
   {
@@ -416,7 +416,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Languages Department",
     category: "retired",
-    image: "/images/faculty/retired/ms_raachel_oommen.jpg",
+    image: "/images/faculty/retired/ms_raachel_oommen.png",
     tenure: "1988–2020",
   },
   {
@@ -424,7 +424,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Languages Department",
     category: "retired",
-    image: "/images/faculty/retired/ms_saghana_srivastava.jpg",
+    image: "/images/faculty/retired/ms_saghana_srivastava.png",
     tenure: "1983–2008",
   },
   {
@@ -432,7 +432,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Computer & Library Department",
     category: "retired",
-    image: "/images/faculty/retired/ms_savithri_narayanan.jpg",
+    image: "/images/faculty/retired/ms_savithri_narayanan.png",
     tenure: "1999–2014",
   },
   {
@@ -440,7 +440,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Languages Department",
     category: "retired",
-    image: "/images/faculty/retired/ms_sudheshna_chattopadhyay.jpg",
+    image: "/images/faculty/retired/ms_sudheshna_chattopadhyay.png",
     tenure: "1981–2013",
   },
   {
@@ -448,7 +448,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Languages Department",
     category: "retired",
-    image: "/images/faculty/retired/ms_j_menakshi.jpg",
+    image: "/images/faculty/retired/ms_j_menakshi.png",
     tenure: "2000–2017",
   },
   {
@@ -456,7 +456,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Support Staff",
     category: "retired",
-    image: "/images/faculty/retired/ms_k_susheela.jpg",
+    image: "/images/faculty/retired/ms_k_susheela.png",
     tenure: "1987–2018",
   },
   {
@@ -464,7 +464,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Chemistry Department",
     category: "retired",
-    image: "/images/faculty/retired/ms_p_usha.jpg",
+    image: "/images/faculty/retired/ms_p_usha.png",
     tenure: "1983–2017",
   },
   {
@@ -472,7 +472,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Chemistry Department",
     category: "retired",
-    image: "/images/faculty/retired/ms_sabiha_fathima.jpg",
+    image: "/images/faculty/retired/ms_sabiha_fathima.png",
     tenure: "1987–2023",
   },
   {
@@ -480,7 +480,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Languages Department",
     category: "retired",
-    image: "/images/faculty/retired/ms_v_saraswathi.jpg",
+    image: "/images/faculty/retired/ms_v_saraswathi.png",
     tenure: "1995–2005",
   },
   {
@@ -488,7 +488,7 @@ export const retiredFacultyData: RetiredFacultyMember[] = [
     designation: "Faculty (Retired)",
     department: "Support Staff",
     category: "retired",
-    image: "/images/faculty/retired/shaik_lateef.jpg",
+    image: "/images/faculty/retired/shaik_lateef.png",
     tenure: "1983–2023",
   },
 ];
@@ -1158,189 +1158,189 @@ export const lfjcData = {
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/dr_anitha_lincon.jpg"
+      image: "/images/faculty/retired/dr_anitha_lincon.png"
     },
     {
       name: "Dr. Riyaz Ul Ansari",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/dr_riyaz_ui_ansari.jpg"
+      image: "/images/faculty/retired/dr_riyaz_ui_ansari.png"
     },
     {
       name: "Dr. T. Rajeswara Reddy",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/dr_t_rajeswara_reddy.jpg"
+      image: "/images/faculty/retired/dr_t_rajeswara_reddy.png"
     },
     {
       name: "Mr. B. Paul Raju",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/mr_b_paul_raju.jpg"
+      image: "/images/faculty/retired/mr_b_paul_raju.png"
     },
     {
       name: "Mr. Bheeshma Chary",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/mr_bheeshma_chary.jpg"
+      image: "/images/faculty/retired/mr_bheeshma_chary.png"
     },
     {
       name: "Mr. David Joseph",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/mr_david_joseph.jpg"
+      image: "/images/faculty/retired/mr_david_joseph.png"
     },
     {
       name: "Mr. E. V. Subbarao",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/mr_e_v_subbarao.jpg"
+      image: "/images/faculty/retired/mr_e_v_subbarao.png"
     },
     {
       name: "Mr. Jayatheerth Katti",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/mr_jayatheerth_katti.jpg"
+      image: "/images/faculty/retired/mr_jayatheerth_katti.png"
     },
     {
       name: "Mr. K. Srinivadev",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/mr_k_srinivadev.jpg"
+      image: "/images/faculty/retired/mr_k_srinivadev.png"
     },
     {
       name: "Mr. M. Amarnath",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/mr_m_amarnath.jpg"
+      image: "/images/faculty/retired/mr_m_amarnath.png"
     },
     {
       name: "Mr. S. Balaiah",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/mr_s_balaiah.jpg"
+      image: "/images/faculty/retired/mr_s_balaiah.png"
     },
     {
       name: "Mr. T. D. Babu",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/mr_t_d_baaabu.jpg"
+      image: "/images/faculty/retired/mr_t_d_baaabu.png"
     },
     {
       name: "Mr. A. R. Narasimharao",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/mr_a_r_narasimharao.jpg"
+      image: "/images/faculty/retired/mr_a_r_narasimharao.png"
     },
     {
       name: "Mr. K. Jothi Ram",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/mr_k_jothi_ram.jpg"
+      image: "/images/faculty/retired/mr_k_jothi_ram.png"
     },
     {
       name: "Mr. Nagaraja Kumar",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/mr_nagaraja_kumar.jpg"
+      image: "/images/faculty/retired/mr_nagaraja_kumar.png"
     },
     {
       name: "Mr. P. Kesavacharaya",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/mr_p_kesavacharaya.jpg"
+      image: "/images/faculty/retired/mr_p_kesavacharaya.png"
     },
     {
       name: "Ms. B. M. D. Sakunthala",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/ms_bmd_sakunthala.jpg"
+      image: "/images/faculty/retired/ms_bmd_sakunthala.png"
     },
     {
       name: "Ms. Raachel Oommen",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/ms_raachel_oommen.jpg"
+      image: "/images/faculty/retired/ms_raachel_oommen.png"
     },
     {
       name: "Ms. Saghana Srivastava",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/ms_saghana_srivastava.jpg"
+      image: "/images/faculty/retired/ms_saghana_srivastava.png"
     },
     {
       name: "Ms. Savithri Narayanan",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/ms_savithri_narayanan.jpg"
+      image: "/images/faculty/retired/ms_savithri_narayanan.png"
     },
     {
       name: "Ms. Sudheshna Chattopadhyay",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/ms_sudheshna_chattopadhyay.jpg"
+      image: "/images/faculty/retired/ms_sudheshna_chattopadhyay.png"
     },
     {
       name: "Ms. J. Meenakshi",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/ms_j_menakshi.jpg"
+      image: "/images/faculty/retired/ms_j_menakshi.png"
     },
     {
       name: "Ms. K. Susheela",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/ms_k_susheela.jpg"
+      image: "/images/faculty/retired/ms_k_susheela.png"
     },
     {
       name: "Ms. P. Usha",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/ms_p_usha.jpg"
+      image: "/images/faculty/retired/ms_p_usha.png"
     },
     {
       name: "Ms. Sabiha Fathima",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/ms_sabiha_fathima.jpg"
+      image: "/images/faculty/retired/ms_sabiha_fathima.png"
     },
     {
       name: "Ms. V. Saraswathi",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/ms_v_saraswathi.jpg"
+      image: "/images/faculty/retired/ms_v_saraswathi.png"
     },
     {
       name: "Mr. Shaik Lateef",
       designation: "Faculty (Retired)",
       department: "Retired Faculty",
       category: "retired",
-      image: "/images/faculty/retired/shaik_lateef.jpg"
+      image: "/images/faculty/retired/shaik_lateef.png"
     }
   ],
 
