@@ -6,12 +6,10 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
-  Sparkles,
 } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
 import { Section } from "@/components/section";
-import { goldenJubileeSchedule } from "@/lib/site-data";
 
 export interface GalleryItem {
   id: number;
@@ -256,33 +254,6 @@ export function GoldenJubileeView() {
           </div>
 
           <GalleryGrid items={GOLDEN_JUBILEE_IMAGES} />
-
-          {/* Official 22-Item Program Schedule (Verbatim from goldenjubilee.php) */}
-          <div className="mt-12 bg-royal-cream/20 rounded-2xl border border-stone-texture/50 p-6 sm:p-8">
-            <div className="flex items-center gap-2 mb-4">
-              <Sparkles className="w-5 h-5 text-heritage-gold-strong" />
-              <h3 className="font-serif text-lg sm:text-xl font-bold text-academic-slate">
-                Official Golden Jubilee Celebration Program of Events
-              </h3>
-            </div>
-            <p className="text-xs text-academic-slate/75 mb-6 font-sans">
-              Order of proceedings conducted at the LFJC Golden Jubilee main stage:
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
-              {goldenJubileeSchedule.map((item, idx) => (
-                <div
-                  key={item}
-                  className="bg-white p-3 rounded-lg border border-stone-texture/40 shadow-xs flex items-center gap-2.5 text-xs text-academic-slate font-sans"
-                >
-                  <span className="w-5 h-5 rounded-full bg-heritage-gold/20 text-montfortian-blue text-[10px] font-bold flex items-center justify-center shrink-0">
-                    {idx + 1}
-                  </span>
-                  <span className="font-medium leading-tight">{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </Section>
 

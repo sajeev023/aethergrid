@@ -240,54 +240,237 @@ export function About({ activeInst = "lfjc" }: AboutProps = {}) {
 
       {/* ─── 3. GOVERNING SOCIETY & CHARISM ────────────────────────────── */}
       <Section id="society" variant="default" className="bg-white py-12 sm:py-16">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-6xl">
+          {/* Primary Governing Society Overview & General Chapter */}
           <div className="grid lg:grid-cols-12 gap-8 items-center">
             <Reveal className="lg:col-span-7 space-y-4">
               <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-                Governing Body
+                Governing Body &amp; Institutional Heritage
               </span>
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate leading-snug">
                 Brothers of St. Gabriel Educational Society
               </h2>
               <div className="space-y-3 text-xs sm:text-sm leading-relaxed text-academic-slate/80 font-sans">
                 <p>
-                  The college is administered by the <strong>Montfort Brothers of St. Gabriel</strong>, a religious institute of pontifical right recognized in the Catholic Church since 1910, actively engaged in educational and social upliftment across <strong>30 countries</strong>.
+                  Little Flower Junior College is administered by the <strong>Montfort Brothers of St. Gabriel</strong>, an international religious institute actively engaged in educational, technical, and social upliftment across <strong>30 countries</strong> with over 200 institutions in India.
                 </p>
                 <p>
-                  Gabriel Deshayes gave new impetus to the Brothers, stressing particularly the vital importance of the teaching profession. The Brothers consecrate their lives to God through the three vows of <strong>Poverty, Chastity, and Obedience</strong>, committing themselves to be <em>&quot;signs and bearers of God&apos;s love&quot;</em> with a preferential option for youth and the marginalized.
+                  Drawing inspiration from Founder St. Louis Marie de Montfort and energized by Fr. Gabriel Deshayes, who stressed the vital importance of the teaching profession, the Brothers dedicate their lives through sacred vows to be <em>&quot;signs and bearers of God&apos;s love&quot;</em> with a preferential option for youth and the marginalized.
                 </p>
               </div>
 
-              <div className="pt-2 flex flex-wrap gap-2">
+              {/* Pontifical Right, Three Vows & Global Footprint */}
+              <div className="pt-2 flex flex-wrap items-center gap-2">
+                <span className="px-3 py-1 bg-royal-cream text-montfortian-blue border border-stone-texture/50 rounded-full text-xs font-bold font-sans shadow-2xs">
+                  Pontifical Right (1910)
+                </span>
                 {managementData.threeVows.map((vow) => (
                   <span
                     key={vow}
-                    className="px-3 py-1 bg-royal-cream text-montfortian-blue border border-stone-texture/40 rounded-full text-xs font-bold font-sans"
+                    className="px-3 py-1 bg-royal-cream text-montfortian-blue border border-stone-texture/50 rounded-full text-xs font-bold font-sans shadow-2xs"
                   >
                     Vow of {vow}
                   </span>
                 ))}
-                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-academic-slate/80 font-sans cursor-default">
-                  <span className="w-1.5 h-1.5 rounded-full bg-heritage-gold-strong" aria-hidden="true" />
-                  Pontifical Right (1910)
-                </span>
-                <span className="px-3 py-1 bg-heritage-gold/15 text-montfortian-blue border border-heritage-gold/25 rounded-full text-xs font-bold font-sans">
+                <span className="px-3 py-1 bg-heritage-gold/15 text-montfortian-blue border border-heritage-gold/30 rounded-full text-xs font-bold font-sans">
                   30 Countries Globally
+                </span>
+                <span className="px-3 py-1 bg-academic-slate/5 text-academic-slate border border-academic-slate/20 rounded-full text-xs font-bold font-sans">
+                  200+ Institutions in India
                 </span>
               </div>
             </Reveal>
 
+            {/* Primary Feature: Worldwide General Chapter Assembly */}
             <Reveal delay={0.1} className="lg:col-span-5">
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-stone-texture/50 shadow-float">
-                <Image
-                  src="/images/official/brothers.png"
-                  alt="Montfort Brothers of St. Gabriel"
-                  fill
-                  className="object-cover"
-                />
+              <div className="space-y-2">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setLightboxImage({
+                      src: "/images/official/brothers.png",
+                      title: "Montfort Brothers of St. Gabriel — Worldwide Congregation",
+                      subtitle: "General Chapter & International Assembly of the Brothers of St. Gabriel gathered in fraternity.",
+                    })
+                  }
+                  className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden border border-stone-texture/60 shadow-float group cursor-pointer block text-left"
+                  aria-label="View Montfort Brothers General Chapter Assembly full photo"
+                >
+                  <Image
+                    src="/images/official/brothers.png"
+                    alt="Montfort Brothers of St. Gabriel General Chapter"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(min-width: 1024px) 420px, 100vw"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/90 via-deep-navy/25 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
+                  <div className="absolute top-3 right-3 p-1.5 bg-black/40 backdrop-blur-xs rounded-full text-white/90 group-hover:text-heritage-gold-bright transition-colors">
+                    <ZoomIn className="w-4 h-4" />
+                  </div>
+                  <div className="absolute bottom-0 inset-x-0 p-4 text-white">
+                    <span className="inline-block px-2 py-0.5 rounded bg-heritage-gold/30 text-heritage-gold-bright text-[10px] font-bold uppercase tracking-wider font-sans mb-1">
+                      Worldwide Congregation
+                    </span>
+                    <h4 className="font-serif text-sm sm:text-base font-bold text-white leading-snug">
+                      General Chapter Assembly
+                    </h4>
+                    <p className="text-[11px] text-royal-cream/80 font-sans mt-0.5 line-clamp-1">
+                      Brothers of St. Gabriel assembled in international fellowship
+                    </p>
+                  </div>
+                </button>
               </div>
             </Reveal>
           </div>
+
+          {/* ─── SUPPORTING MONTFORT ARCHIVAL & COMMUNITY GALLERY ──────── */}
+          <Reveal delay={0.2} className="mt-10 pt-8 border-t border-stone-texture/40">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
+                  Montfortian Identity &amp; Global Mission
+                </span>
+                <h3 className="font-serif text-xl sm:text-2xl font-bold text-academic-slate mt-0.5">
+                  Communities of Fellowship &amp; Formation
+                </h3>
+              </div>
+              <p className="text-xs text-academic-slate/70 font-sans max-w-md">
+                Click any photograph to view high-resolution archival documentation of the Brothers of St. Gabriel:
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {/* Card 1: Global Presence across 30 Countries */}
+              <button
+                type="button"
+                onClick={() =>
+                  setLightboxImage({
+                    src: "/images/official/bro4.png",
+                    title: "Global Mission Across 30 Countries",
+                    subtitle: "Montfortian international council delegates representing educational missions across Europe, Africa, Asia, and the Americas.",
+                  })
+                }
+                className="group text-left bg-royal-cream/15 hover:bg-white rounded-xl border border-stone-texture/50 p-3 shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer"
+                aria-label="View Global Mission photo"
+              >
+                <div className="relative aspect-[16/10] w-full rounded-lg overflow-hidden border border-stone-texture/40 bg-stone-texture/20">
+                  <Image
+                    src="/images/official/bro4.png"
+                    alt="Global Presence Across 30 Countries"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(min-width: 1024px) 340px, (min-width: 640px) 50vw, 100vw"
+                  />
+                  <div className="absolute top-2 right-2 p-1 bg-black/40 backdrop-blur-xs rounded-full text-white/90 group-hover:text-heritage-gold-bright transition-colors">
+                    <ZoomIn className="w-3.5 h-3.5" />
+                  </div>
+                  <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-deep-navy/80 backdrop-blur-xs text-heritage-gold-bright text-[10px] font-bold font-sans">
+                    30 Countries
+                  </span>
+                </div>
+                <div className="mt-3 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h4 className="font-serif text-sm font-bold text-montfortian-blue group-hover:text-heritage-gold-strong transition-colors">
+                      Global Presence &amp; International Mission
+                    </h4>
+                    <p className="text-xs text-academic-slate/75 font-sans mt-1 leading-relaxed">
+                      Delegates from worldwide provinces witnessing through pedagogical leadership and human empowerment.
+                    </p>
+                  </div>
+                  <span className="text-[11px] font-bold text-montfortian-blue/80 font-sans mt-2 flex items-center gap-1 group-hover:underline">
+                    View archival photo →
+                  </span>
+                </div>
+              </button>
+
+              {/* Card 2: Leadership & Felicitation */}
+              <button
+                type="button"
+                onClick={() =>
+                  setLightboxImage({
+                    src: "/images/official/bro2.png",
+                    title: "Montfortian Leadership & Provincial Felicitation",
+                    subtitle: "Provincial Superiors and leaders honored in ceremonial shawls, embodying servant leadership in secondary education.",
+                  })
+                }
+                className="group text-left bg-royal-cream/15 hover:bg-white rounded-xl border border-stone-texture/50 p-3 shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer"
+                aria-label="View Provincial Leadership photo"
+              >
+                <div className="relative aspect-[16/10] w-full rounded-lg overflow-hidden border border-stone-texture/40 bg-stone-texture/20">
+                  <Image
+                    src="/images/official/bro2.png"
+                    alt="Montfortian Leadership & Provincial Felicitation"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(min-width: 1024px) 340px, (min-width: 640px) 50vw, 100vw"
+                  />
+                  <div className="absolute top-2 right-2 p-1 bg-black/40 backdrop-blur-xs rounded-full text-white/90 group-hover:text-heritage-gold-bright transition-colors">
+                    <ZoomIn className="w-3.5 h-3.5" />
+                  </div>
+                  <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-deep-navy/80 backdrop-blur-xs text-heritage-gold-bright text-[10px] font-bold font-sans">
+                    Servant Leadership
+                  </span>
+                </div>
+                <div className="mt-3 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h4 className="font-serif text-sm font-bold text-montfortian-blue group-hover:text-heritage-gold-strong transition-colors">
+                      Provincial Leadership &amp; Felicitation
+                    </h4>
+                    <p className="text-xs text-academic-slate/75 font-sans mt-1 leading-relaxed">
+                      Brothers and provincial superiors honored for lifelong dedication to youth formation and academic stewardship.
+                    </p>
+                  </div>
+                  <span className="text-[11px] font-bold text-montfortian-blue/80 font-sans mt-2 flex items-center gap-1 group-hover:underline">
+                    View archival photo →
+                  </span>
+                </div>
+              </button>
+
+              {/* Card 3: Scholastics & Formation Community */}
+              <button
+                type="button"
+                onClick={() =>
+                  setLightboxImage({
+                    src: "/images/official/bro3.png",
+                    title: "Scholastics & Community Formation",
+                    subtitle: "Brothers and scholastics gathered in community life, committing to teaching excellence and Christian humanism.",
+                  })
+                }
+                className="group text-left bg-royal-cream/15 hover:bg-white rounded-xl border border-stone-texture/50 p-3 shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer sm:col-span-2 lg:col-span-1"
+                aria-label="View Scholastics & Community Formation photo"
+              >
+                <div className="relative aspect-[16/10] w-full rounded-lg overflow-hidden border border-stone-texture/40 bg-stone-texture/20">
+                  <Image
+                    src="/images/official/bro3.png"
+                    alt="Scholastics & Community in Formation"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(min-width: 1024px) 340px, 100vw"
+                  />
+                  <div className="absolute top-2 right-2 p-1 bg-black/40 backdrop-blur-xs rounded-full text-white/90 group-hover:text-heritage-gold-bright transition-colors">
+                    <ZoomIn className="w-3.5 h-3.5" />
+                  </div>
+                  <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-deep-navy/80 backdrop-blur-xs text-heritage-gold-bright text-[10px] font-bold font-sans">
+                    Formation Charism
+                  </span>
+                </div>
+                <div className="mt-3 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h4 className="font-serif text-sm font-bold text-montfortian-blue group-hover:text-heritage-gold-strong transition-colors">
+                      Scholastics &amp; Formation Community
+                    </h4>
+                    <p className="text-xs text-academic-slate/75 font-sans mt-1 leading-relaxed">
+                      Brothers and young scholars preparing through disciplined spiritual and academic formation for the classroom.
+                    </p>
+                  </div>
+                  <span className="text-[11px] font-bold text-montfortian-blue/80 font-sans mt-2 flex items-center gap-1 group-hover:underline">
+                    View archival photo →
+                  </span>
+                </div>
+              </button>
+            </div>
+          </Reveal>
         </div>
       </Section>
 
