@@ -1043,7 +1043,6 @@ export const retiredStaffRoster: RetiredStaffMember[] = [
     dor: "2026",
     designation: "Faculty (Retired)",
     category: "retired",
-    image: "/images/faculty/nagarjunakumar.jpg",
   },
 ];
 
