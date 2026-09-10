@@ -110,7 +110,7 @@ function FormerPrincipalCard({ member, index, onPhotoClick }: { member: FacultyS
             <h3 className="font-serif text-sm sm:text-base font-bold text-academic-slate group-hover:text-montfortian-blue transition-colors">
               {member.name}
             </h3>
-            <p className="text-[10px] sm:text-[11px] font-sans font-bold text-heritage-gold-strong uppercase tracking-wider mt-0.5">
+            <p className="text-[10px] sm:text-[11px] font-sans font-bold text-heritage-gold-strong uppercase tracking-wider mt-0.5 whitespace-pre-line">
               {member.designation}
             </p>
           </div>

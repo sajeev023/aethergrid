@@ -172,7 +172,7 @@ export const formerPrincipalsData: FormerPrincipal[] = [
     name: "Late Rev. Bro. Vincent",
     designation: "Founder Principal & Correspondent",
     tenure: "1974–76, 1982–83 (Correspondent 1976–79)",
-    image: "/images/principals/bro_vincent.jpg",
+    image: "/images/principals/late_bro_vincent.png",
   },
   {
     name: "Late Rev. Bro. Emmanuel",
@@ -798,7 +798,7 @@ export const lfjcData = {
       designation: "HOD",
       subject: "Chemistry",
       department: "Chemistry Department",
-      image: "/images/faculty/baburao.jpg"
+      image: "/images/faculty/BabuRao.jpg"
     },
     {
       name: "Ms. Shruthi P",
@@ -959,6 +959,13 @@ export const lfjcData = {
       department: "Physical Education & Sports",
       image: "/images/faculty/prasad.jpg"
     },
+    {
+      name: "Unknown",
+      designation: "Physical Director",
+      subject: "Physical Education & Athletics",
+      department: "Physical Education & Sports",
+      image: "/images/faculty/DSC_4946.JPG"
+    },
     // 10. Office Administration
     {
       name: "Ms. J. Sri Lakshmi",
@@ -1096,11 +1103,11 @@ export const lfjcData = {
     },
     // 12. Former Principals (Verified Institutional Chronology 1974–Present)
     {
-      name: "Rev. Bro. Vincent",
-      designation: "Founder Principal (1974–76 & 1982–83)",
+      name: "Late Rev. Bro. Vincent",
+      designation: "Correspondent & Principal (1974-76, 1982-83)\nCorrespondent (1976-79)",
       department: "Former Principals",
       category: "former-principal",
-      image: "/images/principals/bro_vincent.jpg"
+      image: "/images/principals/late_bro_vincent.png"
     },
     {
       name: "Dr. Emmanuel",
@@ -1157,6 +1164,13 @@ export const lfjcData = {
       department: "Former Principals",
       category: "former-principal",
       image: "/images/principals/bro_franky.jpg"
+    },
+    {
+      name: "Rev. Bro. Vincent",
+      designation: "Founder Principal (1974–76 & 1982–83)",
+      department: "Former Principals",
+      category: "former-principal",
+      image: "/images/principals/bro_vincent.jpg"
     },
     // 13. Retired Faculty / Former Teachers
     {
