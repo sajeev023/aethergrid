@@ -163,75 +163,76 @@ export interface FormerPrincipal {
 export const formerPrincipalsData: FormerPrincipal[] = [
   {
     name: "Rev. Bro. James Pannivelil",
-    designation: "Builder of LFJC Uppal Campus",
-    tenure: "Founding Builder",
+    designation: "Builder of LFJC Building",
+    tenure: "Builder of LFJC Building",
     image: "/images/principals/bro_james_pannivelil.jpg",
     roleDescription: "Architect and builder of the historic Little Flower Junior College Uppal campus building.",
   },
   {
     name: "Late Rev. Bro. Vincent",
-    designation: "Founder Principal & Correspondent",
+    designation: "Correspondent & Principal (1974–76, 1982–83)\nCorrespondent (1976–79)",
     tenure: "1974–76, 1982–83 (Correspondent 1976–79)",
     image: "/images/principals/late_bro_vincent.png",
   },
   {
     name: "Late Rev. Bro. Emmanuel",
-    designation: "Principal",
-    tenure: "1976–1979",
+    designation: "Principal (1976–79)",
+    tenure: "1976–79",
     image: "/images/principals/bro_emmanuel.jpg",
   },
   {
     name: "Rev. Bro. Claude",
-    designation: "Correspondent & Principal",
-    tenure: "1979–1982",
+    designation: "Correspondent & Principal (1979–82)",
+    tenure: "1979–82",
     image: "/images/principals/bro_claude.jpg",
   },
   {
     name: "Rev. Bro. John Kallarackal",
-    designation: "Correspondent & Principal (Chief Patron, LFJCAN)",
-    tenure: "1983–1989",
+    designation: "Correspondent & Principal (1983–89)",
+    tenure: "1983–89",
     image: "/images/principals/bro_john.jpg",
   },
   {
     name: "Rev. Bro. Celestine",
-    designation: "Correspondent & Principal",
-    tenure: "1989–1994",
+    designation: "Correspondent & Principal (1989–94)",
+    tenure: "1989–94",
     image: "/images/principals/bro_celestine.png",
   },
   {
     name: "Rev. Bro. M. A. George",
-    designation: "Correspondent & Principal",
+    designation: "Correspondent & Principal (1994–2000)",
     tenure: "1994–2000",
     image: "/images/principals/bro_george.jpg",
   },
   {
     name: "Late Rev. Bro. N. A. James",
-    designation: "Correspondent & Principal",
-    tenure: "2000–2006",
+    designation: "Correspondent & Principal (2000–06)",
+    tenure: "2000–06",
+    image: "/images/principals/bro_na_james.jpg",
   },
   {
     name: "Rev. Bro. Franky Noronha",
-    designation: "Correspondent & Principal",
-    tenure: "2006–2011",
+    designation: "Correspondent & Principal (2006–11)",
+    tenure: "2006–11",
     image: "/images/principals/bro_franky.jpg",
   },
   {
     name: "Rev. Bro. Jaico Gervasis",
-    designation: "Correspondent & Principal",
-    tenure: "2011–2017",
+    designation: "Correspondent & Principal (2011–17)",
+    tenure: "2011–17",
     image: "/images/principals/bro_gervasis.jpg",
   },
   {
     name: "Rev. Bro. Vincent Reddy",
-    designation: "Correspondent & Principal",
-    tenure: "2017–2023",
-    image: "/images/principals/bro_vincent.jpg", // Verified image from jubilee archive
+    designation: "Correspondent & Principal (2017–23)",
+    tenure: "2017–23",
+    image: "/images/principals/bro_vincent.jpg",
   },
   {
-    name: "Rev. Bro. Arun Prakash Lawrance",
+    name: "Rev. Bro. Arun Prakash",
     designation: "Correspondent & Principal",
-    tenure: "2023–Present",
-    image: "/images/principals/bro_arun_prakash.jpg",
+    tenure: "2023–Till Date",
+    image: "/images/principals/bro_arun_prakash.png",
   },
 ];
 
@@ -1067,12 +1068,12 @@ export const lfjcData = {
   country: "IN",
   society: "Brothers of St. Gabriel Educational Society",
   admissionsLabel: `${approvedInstitutionStats.admissionsStatus} (${approvedInstitutionStats.streamList})`,
-  principalName: "Rev. Bro. Arun Prakash Lawrance",
+  principalName: "Rev. Bro. Arun Prakash",
   principalRole: "Correspondent & Principal",
   principalQuote: "Education is the passport to the future, for tomorrow belongs to those who prepare for it today.",
   principalMessage:
     "Warm greetings and best wishes to all. In an ever-evolving world, education remains the cornerstone of personal and national growth. At Little Flower Junior College, Uppal, we have proudly upheld this belief for the last 50 years, establishing ourselves as a premier institution for quality education. Our alumni's accomplishments—gracing esteemed positions across Medicine, Engineering, Arts, Administration, Sports, Cinema, and Politics—stand as a testament to our commitment to nation-building and excellence. 'Education is the passport to the future, for tomorrow belongs to those who prepare for it today.' Little Flower Junior College will continue to illuminate paths for generations to come.",
-  principalImg: "/images/principals/bro_arun_prakash.jpg",
+  principalImg: "/images/principals/bro_arun_prakash.png",
   stats: [
     { value: approvedInstitutionStats.academicLegacy, label: "Years of Academic Legacy (Est. 1974)" },
     { value: approvedInstitutionStats.enrolledStudents, label: "Current Enrolled Students" },
@@ -1539,77 +1540,14 @@ export const lfjcData = {
       department: "Support Staff",
       image: "/images/faculty/prabhudas.jpg"
     },
-    // 12. Former Principals (Verified Institutional Chronology 1974–Present)
-    {
-      name: "Late Rev. Bro. Vincent",
-      designation: "Correspondent & Principal (1974-76, 1982-83)\nCorrespondent (1976-79)",
+    // 12. Former Correspondents & Principals (Locked Official Chronology 1974–Present)
+    ...formerPrincipalsData.map((p) => ({
+      name: p.name,
+      designation: p.designation,
       department: "Former Principals",
-      category: "former-principal",
-      image: "/images/principals/late_bro_vincent.png"
-    },
-    {
-      name: "Dr. Emmanuel",
-      designation: "II Principal (1976–1979)",
-      department: "Former Principals",
-      category: "former-principal",
-      image: "/images/principals/bro_emmanuel.jpg"
-    },
-    {
-      name: "Rev. Bro. Claude",
-      designation: "III Principal (1979–1982)",
-      department: "Former Principals",
-      category: "former-principal",
-      image: "/images/principals/bro_claude.jpg"
-    },
-    {
-      name: "Rev. Bro. James Pannivelil",
-      designation: "Director & Principal (1982–1983)",
-      department: "Former Principals",
-      category: "former-principal",
-      image: "/images/principals/bro_james_pannivelil.jpg"
-    },
-    {
-      name: "Rev. Bro. John Kallarackal",
-      designation: "IV Principal (1983–1989)",
-      department: "Former Principals",
-      category: "former-principal",
-      image: "/images/principals/bro_john.jpg"
-    },
-    {
-      name: "Rev. Bro. Celestine",
-      designation: "V Principal (1989–1994)",
-      department: "Former Principals",
-      category: "former-principal",
-      image: "/images/principals/bro_celestine.png"
-    },
-    {
-      name: "Rev. Bro. M.A. George",
-      designation: "VI Principal (1994–2000)",
-      department: "Former Principals",
-      category: "former-principal",
-      image: "/images/principals/bro_george.jpg"
-    },
-    {
-      name: "Rev. Bro. Gervasis",
-      designation: "Former Principal (2000–2008)",
-      department: "Former Principals",
-      category: "former-principal",
-      image: "/images/principals/bro_gervasis.jpg"
-    },
-    {
-      name: "Rev. Bro. Franky",
-      designation: "Former Principal (2008–2016)",
-      department: "Former Principals",
-      category: "former-principal",
-      image: "/images/principals/bro_franky.jpg"
-    },
-    {
-      name: "Rev. Bro. Vincent",
-      designation: "Founder Principal (1974–76 & 1982–83)",
-      department: "Former Principals",
-      category: "former-principal",
-      image: "/images/principals/bro_vincent.jpg"
-    },
+      category: "former-principal" as const,
+      image: p.image,
+    })),
     // 13. Retired Faculty & Staff (Locked Sequence 1–39 Verbatim Roster)
     ...retiredStaffRoster
   ],

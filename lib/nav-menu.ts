@@ -33,7 +33,7 @@ export const navMenu: NavMenuItem[] = [
     label: "Faculty",
     href: "/faculty",
     children: [
-      { label: "Former Principals", href: "/faculty/principals", icon: Award },
+      { label: "Former Correspondents & Principals", href: "/faculty/principals", icon: Award },
       { label: "Teaching & Support Staff", href: "/faculty/teaching", icon: Users },
       { label: "Retired Faculty", href: "/faculty/retired", icon: History },
     ],

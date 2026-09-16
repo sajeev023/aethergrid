@@ -54,6 +54,11 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/heritage.php",
+        destination: "/heritage",
+        permanent: true,
+      },
     ];
   },
   async headers() {

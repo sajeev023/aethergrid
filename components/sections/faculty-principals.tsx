@@ -3,28 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Award, ShieldCheck, User, X } from "lucide-react";
+import { Award, User, X, ZoomIn } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
-import { Card, CardContent } from "@/components/ui/card";
-import { getInstitutionData } from "@/lib/site-data";
+import { Card } from "@/components/ui/card";
+import { formerPrincipalsData, FormerPrincipal } from "@/lib/site-data";
 
 interface FacultyPrincipalsProps {
   activeInst?: "root" | "lfs" | "lfjc" | "lfdc";
-}
-
-type FacultyCategory = "present" | "retired" | "former-principal";
-type FacultySeedMember = {
-  name: string;
-  designation: string;
-  subject?: string;
-  department: string;
-  image?: string;
-  category?: FacultyCategory;
-};
-
-function getFacultyCategory(member: FacultySeedMember): FacultyCategory {
-  return member.category ?? "present";
 }
 
 function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
@@ -48,7 +34,7 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
       <button
         type="button"
         onClick={onClose}
-        className="absolute top-4 right-4 p-2 text-white hover:text-heritage-gold-bright transition-colors rounded-full bg-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-heritage-gold"
+        className="absolute top-4 right-4 p-2 text-white hover:text-heritage-gold-bright transition-colors rounded-full bg-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-heritage-gold cursor-pointer"
         aria-label="Close lightbox"
       >
         <X className="h-6 w-6" />
@@ -73,110 +59,116 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
   );
 }
 
-function FormerPrincipalCard({ member, index, onPhotoClick }: { member: FacultySeedMember; index: number; onPhotoClick: (src: string, alt: string) => void }) {
+function FormerPrincipalCard({
+  member,
+  index,
+  onPhotoClick,
+}: {
+  member: FormerPrincipal;
+  index: number;
+  onPhotoClick: (src: string, alt: string) => void;
+}) {
   return (
-    <Reveal key={`${member.name}-${index}`} delay={index * 0.03} className="h-full">
-      <Card className="group h-full flex flex-col overflow-hidden bg-white transition-all duration-300 ease-out rounded-lg border-2 border-stone-texture/70 hover:border-heritage-gold/60 shadow-xs hover:shadow-panel-hover">
-        <div className="relative aspect-[4/5] w-full overflow-hidden bg-royal-cream/30 border-b border-stone-texture/40">
+    <Reveal key={`${member.name}-${index}`} delay={index * 0.04} className="h-full">
+      <Card className="group h-full flex flex-col overflow-hidden bg-white rounded-xl border border-stone-texture/70 hover:border-heritage-gold/60 shadow-xs hover:shadow-panel-hover transition-all duration-300">
+        {/* Profile Image Frame */}
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-royal-cream/20">
           {member.image ? (
             <button
               type="button"
               onClick={() => onPhotoClick(member.image!, member.name)}
-              className="absolute inset-0 w-full h-full text-left cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-inset focus:ring-heritage-gold"
+              className="absolute inset-0 w-full h-full text-left cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-inset focus:ring-heritage-gold group/btn"
               aria-label={`View enlarged portrait of ${member.name}`}
             >
               <Image
                 src={member.image}
                 alt={member.name}
                 fill
-                sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-                className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.01]"
+                sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
+                priority={index < 4}
               />
+              <div className="absolute inset-0 bg-deep-navy/0 group-hover:bg-deep-navy/20 transition-colors flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-deep-navy/80 text-white p-2 rounded-full shadow-md">
+                  <ZoomIn className="w-4 h-4 text-heritage-gold-bright" />
+                </div>
+              </div>
             </button>
           ) : (
-            <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-2 sm:p-3 relative text-center">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-heritage-gold/30 flex items-center justify-center bg-white shadow-xs mb-1.5 sm:mb-2">
-                <User className="h-4 w-4 sm:h-5 sm:w-5 text-heritage-gold-strong/60" />
+            <div className="flex h-full w-full flex-col items-center justify-center bg-royal-cream text-academic-slate p-3 text-center">
+              <div className="w-12 h-12 rounded-full border border-heritage-gold/30 flex items-center justify-center bg-white shadow-xs mb-2">
+                <User className="h-6 w-6 text-heritage-gold-strong/60" />
               </div>
               <p className="text-xs font-bold text-academic-slate font-serif">{member.name}</p>
-              <span className="text-[10px] sm:text-[11px] font-sans font-bold uppercase tracking-wider text-heritage-gold-strong/90 mt-0.5 sm:mt-1">
-                Former Principal
+              <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-heritage-gold-strong/90 mt-1">
+                Former Correspondent &amp; Principal
               </span>
             </div>
           )}
         </div>
-        <CardContent className="flex-1 flex flex-col justify-between p-3 bg-white">
-          <div>
-            <h3 className="font-serif text-sm sm:text-base font-bold text-academic-slate group-hover:text-montfortian-blue transition-colors">
-              {member.name}
-            </h3>
-            <p className="text-[10px] sm:text-[11px] font-sans font-bold text-heritage-gold-strong uppercase tracking-wider mt-0.5 whitespace-pre-line">
-              {member.designation}
-            </p>
-          </div>
-          <div className="mt-2.5 pt-2 border-t border-stone-texture/30 flex items-center justify-between text-[9px] text-academic-slate/60 font-sans">
-            <span>50-Year Heritage Archive</span>
-            <span className="inline-flex items-center gap-0.5 text-montfortian-blue font-semibold">
-              <ShieldCheck className="h-3 w-3 text-heritage-gold-strong" /> Verified
-            </span>
-          </div>
-        </CardContent>
+
+        {/* Profile Caption Plate — Recreates official LFJC Heritage blue banner with refined typography */}
+        <div className="bg-montfortian-blue text-white p-3.5 sm:p-4 text-center flex flex-col justify-center items-center flex-1 border-t border-heritage-gold/30 transition-colors duration-300 group-hover:bg-deep-navy">
+          <h3 className="font-serif text-sm sm:text-base font-bold text-white leading-snug group-hover:text-heritage-gold-bright transition-colors">
+            {member.name}
+          </h3>
+          <p className="text-[10px] sm:text-[11px] font-sans font-semibold text-heritage-gold-bright uppercase tracking-wider mt-1 whitespace-pre-line leading-normal">
+            {member.designation}
+          </p>
+        </div>
       </Card>
     </Reveal>
   );
 }
 
 export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProps) {
-  const instData = getInstitutionData(activeInst);
-  const allStaff = instData.faculty.slice(1) as FacultySeedMember[];
-  const formerPrincipals = allStaff.filter((m) => getFacultyCategory(m) === "former-principal");
+  void activeInst;
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
   return (
-    <section id="former-principals" className="section-texture bg-white py-6 sm:py-8 md:py-12 overflow-hidden">
-      {/* Page Hero */}
-      <div className="mx-auto max-w-3xl text-center px-4 sm:px-6 md:px-8 mb-5 sm:mb-8">
-        <span className="font-sans text-xs font-bold text-heritage-gold-strong uppercase tracking-wider mb-1.5 sm:mb-2 block">
-          Institutional Leadership • 1974–Present
+    <section id="former-principals" className="section-texture bg-white py-8 sm:py-12 md:py-16 overflow-hidden">
+      {/* Official Section Heading Hierarchy */}
+      <div className="mx-auto max-w-3xl text-center px-4 sm:px-6 md:px-8 mb-8 sm:mb-12">
+        <span className="font-sans text-[11px] sm:text-xs font-bold text-heritage-gold-strong uppercase tracking-[0.2em] mb-2 block">
+          LFJC Heritage • Institutional Leadership (1974–Present)
         </span>
-        <h1 className="font-serif text-2xl sm:text-3xl font-bold leading-tight text-academic-slate md:text-4xl tracking-tight">
-          Former Principals
+        <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-academic-slate tracking-tight">
+          Former Correspondents &amp; Principals
         </h1>
-        <p className="mt-2 sm:mt-3 text-xs sm:text-sm leading-relaxed sm:leading-6 text-academic-slate/75 font-sans max-w-2xl mx-auto">
-          The verified succession timeline of visionary principals who guided Little Flower Junior College through each chapter of its 50-year history. Restored from official institutional archives and Silver Jubilee records.
+        <p className="mt-3 text-xs sm:text-sm leading-relaxed text-academic-slate/75 font-sans max-w-2xl mx-auto">
+          The verified succession timeline of visionary Correspondents and Principals who guided Little Flower Junior College through each chapter of its 50-year history.
         </p>
-        <span className="gold-rule gold-rule-center" />
+        <div className="w-24 h-1 bg-heritage-gold mx-auto mt-4 rounded-full" />
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-        {formerPrincipals.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 sm:gap-4 md:gap-5">
-            {formerPrincipals.map((member, index) => (
-              <FormerPrincipalCard key={`${member.name}-${index}`} member={member} index={index} onPhotoClick={(src, alt) => setLightbox({ src, alt })} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-10 sm:py-16 text-academic-slate/50 font-sans">
-            <User className="h-7 w-7 sm:h-8 sm:w-8 mx-auto mb-2 sm:mb-3 opacity-40" />
-            <p className="text-xs sm:text-sm">Former Principals gallery coming soon.</p>
-          </div>
-        )}
+        {/* 4 Columns per Row on Desktop (Matching Official col-md-3 Grid Hierarchy) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-7">
+          {formerPrincipalsData.map((member, index) => (
+            <FormerPrincipalCard
+              key={`${member.name}-${index}`}
+              member={member}
+              index={index}
+              onPhotoClick={(src, alt) => setLightbox({ src, alt })}
+            />
+          ))}
+        </div>
 
         {/* Silver Jubilee Archival Award Ceremony Gallery */}
-        <Reveal className="mt-6 sm:mt-12 border-t border-stone-texture/40 pt-6 sm:pt-10">
-          <div className="text-center max-w-2xl mx-auto mb-5 sm:mb-8">
+        <Reveal className="mt-12 sm:mt-16 border-t border-stone-texture/40 pt-8 sm:pt-12">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
             <span className="font-sans text-xs font-bold text-heritage-gold-strong uppercase tracking-wider block mb-1">
               Archival Evidence (1999 Silver Jubilee)
             </span>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-academic-slate">
               Principals Honored by Chief Minister N. Chandrababu Naidu
             </h2>
-            <p className="text-xs text-academic-slate/75 font-sans mt-1.5 sm:mt-2 leading-relaxed">
+            <p className="text-xs text-academic-slate/75 font-sans mt-2 leading-relaxed">
               Archival photographs from the 25th Anniversary Closing Ceremony (December 11, 1999) documenting the Hon&apos;ble Chief Minister conferring Silver Jubilee honors upon LFJC Principals.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {[
               {
                 name: "Rev. Bro. Vincent",
@@ -221,7 +213,7 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
                     <button
                       type="button"
                       onClick={() => setLightbox({ src: p.image, alt: `${p.name} (${p.tenure})` })}
-                      className="relative aspect-[4/3] w-full overflow-hidden rounded-lg mb-2.5 sm:mb-3 border border-stone-texture/40 text-left cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-heritage-gold block group/img"
+                      className="relative aspect-[4/3] w-full overflow-hidden rounded-lg mb-3 border border-stone-texture/40 text-left cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-heritage-gold block group/img"
                       aria-label={`View enlarged archival photograph of ${p.name}`}
                     >
                       <Image
@@ -254,13 +246,20 @@ export function FacultyPrincipals({ activeInst = "lfjc" }: FacultyPrincipalsProp
           </div>
         </Reveal>
 
-        {/* Back Link */}
-        <div className="mt-6 sm:mt-10 text-center">
+        {/* Navigation back links */}
+        <div className="mt-10 sm:mt-12 text-center flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm font-sans">
           <Link
             href="/faculty"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-montfortian-blue hover:text-montfortian-blue-light transition-colors font-sans"
+            className="font-bold text-montfortian-blue hover:text-montfortian-blue-light transition-colors"
           >
-            ← Return to All Faculty &amp; Academic Staff
+            ← Return to Faculty Directory
+          </Link>
+          <span className="text-stone-texture">•</span>
+          <Link
+            href="/about"
+            className="font-bold text-montfortian-blue hover:text-montfortian-blue-light transition-colors"
+          >
+            About LFJC &amp; Montfortian History →
           </Link>
         </div>
       </div>

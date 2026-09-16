@@ -17,10 +17,10 @@ const SUB_PAGES = [
   {
     icon: Award,
     eyebrow: "Institutional Leadership",
-    title: "Former Principals",
-    desc: "The official portrait gallery of the visionary principals who led Little Flower Junior College across five decades.",
+    title: "Former Correspondents & Principals",
+    desc: "The official portrait gallery of the visionary correspondents and principals who led Little Flower Junior College across five decades.",
     href: "/faculty/principals",
-    cta: "View Former Principals",
+    cta: "View Correspondents & Principals",
   },
   {
     icon: Users,

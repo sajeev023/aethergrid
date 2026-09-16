@@ -3,16 +3,16 @@ import { FacultyPrincipals } from "@/components/sections/faculty-principals";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Former Correspondents & Principals",
+  title: "Heritage | Former Correspondents & Principals",
   description:
-    "The official portrait gallery of the former correspondents and principals who led Little Flower Junior College through its 50-year institutional history.",
+    "Explore the 50-year heritage of Little Flower Junior College and the former correspondents and principals who guided the institution.",
 };
 
-export default function FacultyPrincipalsPage() {
+export default function HeritagePage() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl px-5 md:px-8 pt-6">
-        <Breadcrumb items={[{ label: "Faculty", href: "/faculty" }, { label: "Former Correspondents & Principals" }]} />
+        <Breadcrumb items={[{ label: "About", href: "/about" }, { label: "Heritage" }]} />
       </div>
       <FacultyPrincipals activeInst="lfjc" />
     </div>
