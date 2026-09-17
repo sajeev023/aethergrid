@@ -1,5 +1,5 @@
 {
-  "name": "lfjc-premium-website",
+  "name": "aethergrid",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -7,7 +7,11 @@
     "dev:webpack": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:production": "npx tsx scripts/test-production-suite.mjs",
+    "test:zero-trust": "npx tsx scripts/test-zero-trust-suite.mjs",
+    "test:marketplace": "npx tsx scripts/test-marketplace-e2e.mjs",
+    "test:all": "npx tsx scripts/test-production-suite.mjs && npx tsx scripts/test-zero-trust-suite.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",

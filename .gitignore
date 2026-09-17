@@ -44,5 +44,7 @@ submissions.json
 # served publicly before admin review.
 public/images/alumni/uploads/
 
-.vercel
+.vercel/
 .env*
+!.env.example
+legacy_college_archive/

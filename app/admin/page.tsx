@@ -1,154 +1,183 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
-import { Eye, EyeOff, Loader2, ShieldCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { 
+  Activity, 
+  Server, 
+  HardDrive, 
+  Users, 
+  ShieldCheck, 
+  Clock, 
+  RefreshCw,
+  Coins,
+  Database,
+  ArrowLeft,
+  CheckCircle2
+} from "lucide-react";
 
-export default function AdminLoginPage() {
-  const router = useRouter();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+export default function AdminTelemetryPage() {
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-
+  const fetchMetrics = async () => {
     try {
-      const res = await fetch("/api/admin/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message ?? "Login failed.");
-        setLoading(false);
-        return;
+      const res = await fetch("/api/admin/marketplace");
+      if (res.ok) {
+        setData(await res.json());
       }
-
-      router.push("/admin/dashboard");
-    } catch {
-      setError("Network error. Please try again.");
+    } catch {} finally {
       setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    fetchMetrics();
+    const interval = setInterval(fetchMetrics, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (loading && !data) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-5 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
+          <span>Loading Grid Telemetry...</span>
+        </div>
+      </div>
+    );
   }
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0f1419] px-4">
-      {/* Subtle background pattern */}
-      <div className="fixed inset-0 opacity-[0.03]" style={{
-        backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.05) 35px, rgba(255,255,255,0.05) 36px)`,
-      }} />
+  const metrics = data?.metrics || {};
+  const nodes = data?.nodes || [];
+  const heartbeats = data?.recentHeartbeats || [];
 
-      <div className="relative w-full max-w-md">
-        {/* Logo & Branding */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#1d70b8]/20 border border-[#1d70b8]/30 mb-4">
-            <ShieldCheck className="h-8 w-8 text-[#1d70b8]" />
+  const capGb = (metrics.totalCapacityBytes || 0) / (1024 * 1024 * 1024);
+  const allocGb = (metrics.allocatedBytes || 0) / (1024 * 1024 * 1024);
+  const usedMb = (metrics.usedBytes || 0) / (1024 * 1024);
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-100 py-10 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+          <div>
+            <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono uppercase mb-1">
+              <Activity className="w-4 h-4" /> Global Grid Telemetry
+            </div>
+            <h1 className="text-3xl font-extrabold text-white">Marketplace Health & Nodes</h1>
+            <p className="text-sm text-slate-400">
+              Live two-sided distributed storage marketplace analytics and heartbeat logs.
+            </p>
           </div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">
-            LFJC Admin Portal
-          </h1>
-          <p className="mt-2 text-sm text-gray-400">
-            Little Flower Junior College — Content Management System
-          </p>
+
+          <button
+            onClick={fetchMetrics}
+            className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-white"
+          >
+            <RefreshCw className="w-4 h-4" />
+          </button>
         </div>
 
-        {/* Login Card */}
-        <form
-          onSubmit={handleSubmit}
-          className="bg-[#1a1f26] border border-gray-800 rounded-xl p-8 shadow-2xl"
-        >
-          <div className="space-y-5">
-            {/* Username */}
-            <div>
-              <label
-                htmlFor="admin-username"
-                className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2"
-              >
-                Username
-              </label>
-              <input
-                id="admin-username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                autoComplete="username"
-                autoFocus
-                className="w-full px-4 py-3 bg-[#0f1419] border border-gray-700 rounded-lg text-white text-sm placeholder:text-gray-500 outline-none focus:border-[#1d70b8] focus:ring-2 focus:ring-[#1d70b8]/20 transition-all"
-                placeholder="Enter username"
-              />
+        {/* Big Metrics Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div className="p-5 rounded-2xl bg-slate-900 border border-white/10">
+            <div className="text-xs text-slate-400 font-mono flex items-center gap-1.5 mb-1">
+              <HardDrive className="w-3.5 h-3.5 text-cyan-400" /> Total Capacity
             </div>
+            <div className="text-3xl font-bold text-white">{capGb.toFixed(0)} GB</div>
+            <div className="text-xs text-slate-500 mt-1">Across all provider nodes</div>
+          </div>
 
-            {/* Password */}
-            <div>
-              <label
-                htmlFor="admin-password"
-                className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2"
-              >
-                Password
-              </label>
-              <div className="relative">
-                <input
-                  id="admin-password"
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  autoComplete="current-password"
-                  className="w-full px-4 py-3 pr-12 bg-[#0f1419] border border-gray-700 rounded-lg text-white text-sm placeholder:text-gray-500 outline-none focus:border-[#1d70b8] focus:ring-2 focus:ring-[#1d70b8]/20 transition-all"
-                  placeholder="Enter password"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
-                  tabIndex={-1}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
-                </button>
-              </div>
+          <div className="p-5 rounded-2xl bg-slate-900 border border-white/10">
+            <div className="text-xs text-slate-400 font-mono flex items-center gap-1.5 mb-1">
+              <Server className="w-3.5 h-3.5 text-emerald-400" /> Node Health
+            </div>
+            <div className="text-3xl font-bold text-emerald-400">
+              {metrics.onlineNodes} <span className="text-base font-normal text-slate-400">/ {nodes.length} Online</span>
+            </div>
+            <div className="text-xs text-slate-500 mt-1">10s heartbeat cadence</div>
+          </div>
+
+          <div className="p-5 rounded-2xl bg-slate-900 border border-white/10">
+            <div className="text-xs text-slate-400 font-mono flex items-center gap-1.5 mb-1">
+              <Users className="w-3.5 h-3.5 text-purple-400" /> Network Participants
+            </div>
+            <div className="text-3xl font-bold text-white">
+              {metrics.totalUsers} <span className="text-base font-normal text-slate-400">Users</span>
+            </div>
+            <div className="text-xs text-slate-500 mt-1">
+              {metrics.activeGivers} Givers • {metrics.activeTakers} Takers
             </div>
           </div>
 
-          {/* Error Message */}
-          {error && (
-            <div className="mt-4 px-4 py-3 bg-red-500/10 border border-red-500/20 rounded-lg text-sm text-red-400">
-              {error}
+          <div className="p-5 rounded-2xl bg-slate-900 border border-white/10">
+            <div className="text-xs text-slate-400 font-mono flex items-center gap-1.5 mb-1">
+              <Database className="w-3.5 h-3.5 text-blue-400" /> Stored Objects
             </div>
-          )}
+            <div className="text-3xl font-bold text-white">
+              {metrics.totalFiles} <span className="text-base font-normal text-slate-400">Files</span>
+            </div>
+            <div className="text-xs text-slate-500 mt-1">{metrics.totalChunks} AES-256 Chunks</div>
+          </div>
+        </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="mt-6 w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#1d70b8] hover:bg-[#1a65a5] disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-semibold rounded-lg transition-colors cursor-pointer"
-          >
-            {loading ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" />
-                Authenticating...
-              </>
-            ) : (
-              "Sign In"
-            )}
-          </button>
+        {/* Nodes & Recent Heartbeats Tables */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Storage Nodes List */}
+          <div className="lg:col-span-8 rounded-2xl bg-white/[0.02] border border-white/10 overflow-hidden">
+            <div className="p-5 border-b border-white/10">
+              <h3 className="font-bold text-white text-base">Registered Storage Nodes</h3>
+            </div>
+            <div className="divide-y divide-white/5">
+              {nodes.map((n: any) => {
+                const isOnline = n.status === "ONLINE";
+                return (
+                  <div key={n.id} className="p-4 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <span className={`w-2.5 h-2.5 rounded-full ${isOnline ? "bg-emerald-400 animate-pulse" : "bg-rose-500"}`} />
+                      <div>
+                        <div className="font-bold text-sm text-white">{n.node_name}</div>
+                        <div className="text-xs text-slate-400 font-mono">
+                          Owner: {n.owner_name} • Capacity: {Math.round(n.capacity_bytes / (1024 * 1024 * 1024))} GB
+                        </div>
+                      </div>
+                    </div>
+                    <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase ${
+                      isOnline ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30" : "bg-rose-500/10 text-rose-400 border border-rose-500/30"
+                    }`}>
+                      {n.status}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
-          <p className="mt-6 text-center text-[11px] text-gray-500">
-            Access restricted to authorized LFJC administrators only.
-          </p>
-        </form>
+          {/* Heartbeat Pulse Feed */}
+          <div className="lg:col-span-4 rounded-2xl bg-white/[0.02] border border-white/10 overflow-hidden">
+            <div className="p-5 border-b border-white/10">
+              <h3 className="font-bold text-white text-base">Recent Heartbeat Pings</h3>
+            </div>
+            <div className="divide-y divide-white/5 font-mono text-xs">
+              {heartbeats.length === 0 ? (
+                <div className="p-5 text-slate-500 text-xs">Waiting for node daemon pings...</div>
+              ) : (
+                heartbeats.map((h: any) => (
+                  <div key={h.id} className="p-3.5 flex items-center justify-between">
+                    <div>
+                      <div className="text-white font-medium">{h.node_name}</div>
+                      <div className="text-[10px] text-slate-400">{new Date(h.recorded_at).toLocaleTimeString()}</div>
+                    </div>
+                    <span className="text-[10px] text-emerald-400 px-1.5 py-0.5 rounded bg-emerald-500/10">
+                      {h.latency_ms}ms
+                    </span>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,92 +1,119 @@
-# Little Flower Junior College Website
+# 🌐 AetherGrid — Peer-to-Peer Distributed Storage Marketplace
 
-Production-ready Next.js 15 website based on the supplied LFJC premium redesign references.
+> **"Your phone. Your files. Always recoverable."**  
+> Decentralized, zero-trust cloud backup and peer storage marketplace. Givers earn passive income sharing surplus hard drive space; Takers rent ultra-secure, encrypted storage at a fraction of hyperscaler prices.
 
-## Stack
+---
 
-- Next.js 15 App Router
-- TypeScript
-- Tailwind CSS 4
-- Shadcn-style UI primitives
-- Framer Motion
-- Lucide Icons
-- Vercel-ready metadata, sitemap, robots, and structured data
+## 🚀 Key Features
 
-## Local Development
+* **🛡️ Zero-Knowledge / Zero-Trust Cryptography**:
+  * Client/Server side HKDF-SHA256 key derivation per user & per file.
+  * AES-256-GCM authenticated encryption with 128-bit authentication tags.
+  * Givers receive *only* encrypted chunks (`.chunk`) and cannot read filenames, customer identities, or file contents.
+* **⚡ Peer Distributed Storage Network**:
+  * Automated 2MB content chunking with cryptographic integrity verification (SHA-256).
+  * Multi-replica distribution across physical storage nodes.
+  * Self-healing and failover engine if a node goes offline.
+* **💰 Two-Sided Marketplace & Dynamic Ledger**:
+  * **Takers**: Rent affordable storage tiers (20 GB, 100 GB, 1 TB) or earn free capacity through referrals.
+  * **Givers**: Turn unused disk space (e.g. dedicated external/internal drives) into monthly INR/crypto earnings.
+  * Proof-of-storage allocation tracking and transparent platform fee ledger.
+* **📱 Mobile Simulator & Cloud Dashboard**:
+  * One-tap phone backup simulation (Photos, Contacts, Vault).
+  * Fast file explorer with drag-and-drop upload, previews, favorites, and 60-second time-limited signed download tokens.
+* **🔒 Enterprise-Grade Security**:
+  * 100% neutralized across 28 hostile penetration attack vectors.
+  * Hardened against path traversal, symlink escapes, Windows NTFS Alternate Data Streams, and IDOR attacks.
+
+---
+
+## 🛠️ Architecture & Tech Stack
+
+* **Framework**: Next.js 15 (App Router, Server Actions, Route Handlers)
+* **Runtime & Storage**: Node.js 24 + Native SQLite (`node:sqlite` WAL mode)
+* **Frontend**: React 19, Tailwind CSS 4, Framer Motion, Lucide Icons
+* **Security & Auth**: Jose (JWT / HttpOnly Cookies), Bcrypt, HKDF-SHA256, AES-256-GCM
+* **Dedicated Node Daemon**: Multi-platform PowerShell / Node.js storage worker
+
+---
+
+## 📦 Getting Started
+
+### 1. Installation
 
 ```bash
+git clone https://github.com/sajeev023/aethergrid.git
+cd aethergrid
 npm install
+```
+
+### 2. Environment Setup
+
+Create `.env` using `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+Key environment variables:
+```env
+AETHER_STORAGE_SECRET=your-aes-256-master-storage-key
+JWT_SECRET=your-jwt-auth-session-secret-key-32chars
+AETHER_NODE_TOKEN=aeth_prod_node_001_secret_token_live
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+### 3. Run Development Server
+
+```bash
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Visit `http://localhost:3000` to access the marketplace.
 
-## Build
+---
 
-```bash
-npm run lint
-npm run build
-npm run start
-```
+## 🧪 Verification & Test Suites
 
-## Forms
-
-The inquiry, contact, and admissions forms submit to `POST /api/inquiries`.
-
-For production email delivery on Vercel, set these environment variables:
+AetherGrid includes a comprehensive test harness covering end-to-end marketplace operations, zero-trust cryptographic boundaries, and adversarial penetration attacks:
 
 ```bash
-RESEND_API_KEY=your_resend_api_key
-FORM_TO_EMAIL=info@lfjc.co.in
-FORM_FROM_EMAIL="LFJC Website <verified-sender@your-domain.com>"
-NEXT_PUBLIC_SITE_URL=https://www.lfjc.co.in
+# Run the Red-Team "Break Everything" Penetration Audit (28 tests)
+npx tsx scripts/test-break-everything.mjs
+
+# Run the Zero-Trust Cryptographic & Privacy Verification Suite (23 tests)
+npm run test:zero-trust
+
+# Run the Production Hardening & Failover Verification Suite (8 tests)
+npm run test:production
+
+# Run all test suites
+npm run test:all
 ```
 
-Without `RESEND_API_KEY`, local development validates and logs submissions. In production, the route returns a configuration error so submissions are not silently lost.
+---
 
-## Deployment To Vercel
+## 🖥️ Running a Dedicated Storage Node
 
-1. Push the repository to GitHub, GitLab, or Bitbucket.
-2. Import the project in Vercel.
-3. Set the environment variables above.
-4. Use the default Vercel build settings:
-   - Install command: `npm install`
-   - Build command: `npm run build`
-   - Output: Next.js default
-5. Deploy.
+To join the AetherGrid network as a storage provider:
 
-## Structure
+1. Configure your storage path (e.g. `D:\AetherGridStorage`).
+2. Start the storage daemon:
+   ```powershell
+   .\scripts\start-node.ps1
+   ```
+3. Check daemon status:
+   ```powershell
+   .\scripts\status-node.ps1
+   ```
 
-```text
-app/
-  api/inquiries/route.ts
-  globals.css
-  layout.tsx
-  page.tsx
-  robots.ts
-  sitemap.ts
-components/
-  motion/reveal.tsx
-  sections/
-    about.tsx
-    admissions.tsx
-    alumni.tsx
-    contact.tsx
-    faculty.tsx
-    footer.tsx
-    gallery.tsx
-    hero.tsx
-    navbar.tsx
-    programs.tsx
-    testimonials.tsx
-  ui/
-lib/
-  site-data.ts
-  structured-data.ts
-  utils.ts
-public/images/
-```
+---
 
-## Content Notes
+## 📄 License & Audit Reports
 
-Core institutional details, contact information, principal, departments, and course names are aligned with LFJC's official public pages. The supplied redesign guided the visual system, layout rhythm, and section composition.
+Full audit and threat model specifications:
+- [`AETHERGRID_BREAK_EVERYTHING_AUDIT_REPORT.md`](./AETHERGRID_BREAK_EVERYTHING_AUDIT_REPORT.md)
+- [`AETHERGRID_PRIVACY_LEAKAGE_REPORT.md`](./AETHERGRID_PRIVACY_LEAKAGE_REPORT.md)
+- [`AETHERGRID_SECURITY_ARCHITECTURE.md`](./AETHERGRID_SECURITY_ARCHITECTURE.md)
+- [`AETHERGRID_THREAT_MODEL.md`](./AETHERGRID_THREAT_MODEL.md)

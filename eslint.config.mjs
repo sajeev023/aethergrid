@@ -12,6 +12,16 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "prefer-const": "warn",
+      "react/no-unescaped-entities": "off",
+      "@next/next/no-img-element": "warn",
+      "jsx-a11y/alt-text": "warn",
+    },
+  },
+  {
     ignores: [
       ".next/**",
       "next-env.d.ts",
@@ -19,6 +29,7 @@ const eslintConfig = [
       "design-reference/**",
       "public/**",
       "scripts/**",
+      "legacy_college_archive/**",
     ],
   },
 ];

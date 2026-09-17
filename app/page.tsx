@@ -1,180 +1,285 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, ExternalLink, Calendar, ShieldCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import { 
+  HardDrive, 
+  Cloud, 
+  ShieldCheck, 
+  Zap, 
+  Smartphone, 
+  TrendingUp, 
+  ChevronRight, 
+  Server, 
+  Lock, 
+  RefreshCw,
+  Cpu,
+  Coins,
+  CheckCircle2,
+  ArrowRight
+} from "lucide-react";
 
-import { buildStructuredData } from "@/lib/structured-data";
-import { programs, PORTAL_LINKS, approvedInstitutionStats } from "@/lib/site-data";
-import { Hero } from "@/components/sections/hero";
-import { Section } from "@/components/section";
-import { Button } from "@/components/ui/button";
-import { Reveal } from "@/components/motion/reveal";
+export default function HomePage() {
+  const [metrics, setMetrics] = useState<any>({
+    totalCapacityBytes: 250 * 1024 * 1024 * 1024,
+    onlineNodes: 2,
+    totalFiles: 0,
+    activeGivers: 1,
+    activeTakers: 1,
+  });
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/" },
-};
+  const [spareGb, setSpareGb] = useState<number>(100);
 
-export default function LFJCPage() {
+  useEffect(() => {
+    fetch("/api/admin/marketplace")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data && data.metrics) {
+          setMetrics(data.metrics);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const totalCapacityGb = Math.round(metrics.totalCapacityBytes / (1024 * 1024 * 1024));
+  const estimatedMonthlyEarnings = Math.round(spareGb * 1.5); // ₹1.5 per GB-month
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildStructuredData("lfjc")),
-        }}
-      />
+    <div className="relative min-h-screen bg-slate-950 overflow-hidden text-slate-100">
+      {/* Dynamic Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-gradient-to-b from-cyan-500/15 via-blue-600/10 to-transparent blur-3xl pointer-events-none -z-10" />
 
-      <Hero activeInst="lfjc" />
-
-      {/* ─── QUICK OFFICIAL ACTION STRIP ───────────────────────────────── */}
-      <section className="bg-royal-cream/40 border-b border-stone-texture/30 py-4 font-sans">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-2 text-academic-slate font-medium">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>{approvedInstitutionStats.admissionsStatus} ({approvedInstitutionStats.streamList})</span>
+      {/* Hero Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+        <div className="text-center max-w-4xl mx-auto">
+          {/* Eyebrow badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono uppercase tracking-wider mb-6">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            Decentralized Two-Sided Storage Grid • Live MVP
           </div>
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            <Button asChild size="sm" className="bg-heritage-gold hover:bg-heritage-gold-bright text-deep-navy font-bold text-[11px] uppercase tracking-wider h-8">
-              <a href={PORTAL_LINKS.studentSignup} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5">
-                Apply Online
-                <ExternalLink className="w-3 h-3" />
-              </a>
-            </Button>
-            <Button asChild variant="secondary" size="sm" className="font-bold text-[11px] uppercase tracking-wider h-8 border-stone-texture/60">
-              <Link href="/parent-login" className="inline-flex items-center gap-1.5">
-                <ShieldCheck className="w-3 h-3 text-montfortian-blue" />
-                Parent ERP Portal
-              </Link>
-            </Button>
-            <Button asChild variant="ghost" size="sm" className="font-bold text-[11px] uppercase tracking-wider h-8 text-montfortian-blue">
-              <a href="/docs/academic-calendar-2024-25.pdf" download className="inline-flex items-center gap-1.5">
-                <Calendar className="w-3 h-3" />
-                Academic Calendar
-              </a>
-            </Button>
-          </div>
-        </div>
-      </section>
 
-      {/* ─── OFFICIAL 2026 TOPPERS SHOWCASE TEASER ─────────────────────── */}
-      <Section variant="default" className="bg-white py-10 sm:py-12 border-b border-stone-texture/30">
-        <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-center md:text-left">
-            <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-              State Board Excellence
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+            Your phone. Your files. <br />
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-emerald-400 bg-clip-text text-transparent">
+              Always recoverable.
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate">
-              Intermediate Board Toppers — 2026
-            </h2>
-            <p className="text-xs sm:text-sm text-academic-slate/75 font-sans max-w-xl">
-              Celebrating our 1st Year &amp; 2nd Year state rankers, centum scorers, and merit list achievers across all four intermediate streams.
-            </p>
-          </div>
-          <div className="shrink-0">
-            <Button asChild variant="gold" size="lg">
-              <Link href="/academics#toppers" className="inline-flex items-center gap-2">
-                <span>View Official 2026 Toppers Posters</span>
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </Section>
+          </h1>
 
-      {/* ─── FOUR INTERMEDIATE STREAMS ─────────────────────────────────── */}
-      <Section variant="default" className="bg-royal-cream/20 border-y border-stone-texture/30 py-12 sm:py-14">
-        <div className="flex items-end justify-between gap-4 mb-6">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">
-              Academics
-            </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-academic-slate mt-1">
-              Four Intermediate Streams
-            </h2>
-          </div>
-          <Link
-            href="/academics"
-            className="hidden sm:inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-montfortian-blue hover:text-heritage-gold-strong transition-colors font-sans"
-          >
-            Curriculum & Details
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
-        </div>
-        <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-          {programs.map((program) => {
-            const Icon = program.icon;
-            return (
-              <Reveal key={program.slug}>
-                <Link
-                  href="/academics"
-                  className="group flex flex-col rounded-xl border border-stone-texture/60 bg-white p-4 sm:p-5 hover:border-heritage-gold/50 transition-all shadow-xs h-full justify-between"
-                >
-                  <div>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-royal-cream text-montfortian-blue border border-stone-texture/60 group-hover:scale-105 transition-transform">
-                      <Icon className="h-5 w-5" aria-hidden="true" />
-                    </div>
-                    <h3 className="mt-3 font-serif text-lg font-bold text-academic-slate">{program.title}</h3>
-                    <p className="text-xs font-bold uppercase tracking-wider text-heritage-gold-strong font-sans">{program.subtitle}</p>
-                    <p className="mt-2 text-xs text-academic-slate/75 font-sans leading-relaxed line-clamp-2">
-                      {program.description}
-                    </p>
-                  </div>
-                  <div className="mt-3 pt-2 border-t border-stone-texture/20 text-[11px] font-bold text-montfortian-blue font-sans inline-flex items-center gap-1">
-                    <span>Explore Stream</span>
-                    <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                  </div>
-                </Link>
-              </Reveal>
-            );
-          })}
-        </div>
-      </Section>
+          <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+            Storage, without owning the data centers. Rent unified encrypted space for pennies,
+            or turn idle hard drive capacity into reliable passive income.
+          </p>
 
-      {/* ─── CAMPUS LIFE TEASER ───────────────────────────────────────── */}
-      <Section variant="feature" fullBleed className="!p-0 !py-0">
-        <div className="relative overflow-hidden bg-deep-navy text-white">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-10 sm:py-14 md:py-16 relative z-10">
-            <div className="grid gap-6 sm:gap-10 lg:grid-cols-12 lg:items-center">
-              <Reveal className="lg:col-span-7 space-y-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-heritage-gold font-sans">
-                  Historic 8-Acre Campus
-                </span>
-                <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
-                  A Vibrant Campus Opposite Survey of India
-                </h2>
-                <p className="text-xs sm:text-sm text-royal-cream/80 font-sans leading-relaxed max-w-xl">
-                  Enclosed by tall boundary walls and lush green trees, Little Flower Junior College Uppal features state-of-the-art science and computer laboratories, the historic Heritage Hall, a well-stocked central library, and spacious grounds for football, basketball, and volleyball.
-                </p>
-                <div className="pt-3 flex flex-wrap gap-3">
-                  <Button asChild variant="gold" size="lg">
-                    <Link href="/campus/campus-life" className="inline-flex items-center gap-2">
-                      Explore Campus & Sports
-                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                    </Link>
-                  </Button>
-                  <Button asChild variant="inverse" size="lg" className="border-white/40 hover:border-white">
-                    <Link href="/about">
-                      Montfortian Heritage
-                    </Link>
-                  </Button>
-                </div>
-              </Reveal>
-              <Reveal delay={0.12} className="lg:col-span-5">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/15 shadow-float">
-                  <Image
-                    src="/images/campus-hero.jpg"
-                    alt="Little Flower Junior College campus grounds in Uppal"
-                    fill
-                    sizes="(min-width: 1024px) 40vw, 90vw"
-                    className="object-cover"
-                  />
-                </div>
-              </Reveal>
+          {/* Real-time Network Pulse Banner */}
+          <div className="inline-grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md max-w-3xl mx-auto mb-14 text-left">
+            <div className="px-3 border-r border-white/5">
+              <div className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+                <HardDrive className="w-3.5 h-3.5 text-cyan-400" /> Total Capacity
+              </div>
+              <div className="text-xl font-bold text-white mt-1">{totalCapacityGb} GB</div>
+              <div className="text-[11px] text-emerald-400">Available across peers</div>
+            </div>
+            <div className="px-3 border-r border-white/5">
+              <div className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+                <Server className="w-3.5 h-3.5 text-emerald-400" /> Active Nodes
+              </div>
+              <div className="text-xl font-bold text-emerald-400 mt-1">{metrics.onlineNodes} Online</div>
+              <div className="text-[11px] text-slate-400">10s heartbeat cadence</div>
+            </div>
+            <div className="px-3 border-r border-white/5">
+              <div className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-blue-400" /> Redundancy
+              </div>
+              <div className="text-xl font-bold text-blue-400 mt-1">2x Replicas</div>
+              <div className="text-[11px] text-slate-400">AES-256-GCM encrypted</div>
+            </div>
+            <div className="px-3">
+              <div className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 text-purple-400" /> Zero Trust
+              </div>
+              <div className="text-xl font-bold text-purple-400 mt-1">Provider-Blind</div>
+              <div className="text-[11px] text-slate-400">Chunks only, zero plaintext</div>
             </div>
           </div>
         </div>
-      </Section>
-    </>
+
+        {/* The Two Hero Paths: GIVE STORAGE vs GET STORAGE */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20">
+          {/* Card 1: 🟢 GIVE STORAGE */}
+          <div className="relative group rounded-3xl p-8 bg-gradient-to-b from-emerald-500/10 via-slate-900/60 to-slate-950 border border-emerald-500/30 hover:border-emerald-400 transition-all duration-300 shadow-xl shadow-emerald-500/5 hover:shadow-emerald-500/15">
+            <div className="flex items-center justify-between mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-lg shadow-emerald-500/20">
+                <HardDrive className="w-7 h-7" />
+              </div>
+              <span className="px-3 py-1 rounded-full text-xs font-mono uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                Storage Provider
+              </span>
+            </div>
+
+            <h2 className="text-2xl font-bold text-white mb-2">
+              🟢 Give Storage
+            </h2>
+            <p className="text-slate-300 text-sm mb-6 leading-relaxed">
+              Have unused hard drive space? Connect a storage node daemon in 30 seconds.
+              Store encrypted chunks and earn recurring monthly payouts in ₹ based on allocated GB-hours.
+            </p>
+
+            <ul className="space-y-2.5 mb-8 text-xs text-slate-300">
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span><strong>1-line daemon</strong> runs seamlessly on Windows, Mac, or Linux</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span><strong>100% Zero Plaintext:</strong> You only hold encrypted 2MB chunks</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span><strong>Real Earnings Ledger:</strong> Live per-minute income tracking</span>
+              </li>
+            </ul>
+
+            <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+              <div>
+                <div className="text-[11px] text-slate-400 uppercase font-mono">Potential Yield</div>
+                <div className="text-lg font-bold text-emerald-400">₹1.50 / GB / month</div>
+              </div>
+              <Link
+                href="/giver"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-semibold text-sm hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20 group-hover:scale-105"
+              >
+                Launch Giver Node
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Card 2: 🔵 GET STORAGE */}
+          <div className="relative group rounded-3xl p-8 bg-gradient-to-b from-blue-500/10 via-slate-900/60 to-slate-950 border border-blue-500/30 hover:border-blue-400 transition-all duration-300 shadow-xl shadow-blue-500/5 hover:shadow-blue-500/15">
+            <div className="flex items-center justify-between mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 shadow-lg shadow-blue-500/20">
+                <Cloud className="w-7 h-7" />
+              </div>
+              <span className="px-3 py-1 rounded-full text-xs font-mono uppercase bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                Unified Cloud
+              </span>
+            </div>
+
+            <h2 className="text-2xl font-bold text-white mb-2">
+              🔵 Get Storage
+            </h2>
+            <p className="text-slate-300 text-sm mb-6 leading-relaxed">
+              Experience one unified, unbreakable cloud drive. Your files, photos, and phone
+              backups are encrypted with AES-256-GCM and replicated across peer nodes with instant failover.
+            </p>
+
+            <ul className="space-y-2.5 mb-8 text-xs text-slate-300">
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" />
+                <span><strong>2x Redundancy:</strong> Files remain downloadable even if a node drops</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" />
+                <span><strong>Phone Companion:</strong> One-tap backup for contacts, photos & state</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" />
+                <span><strong>Starter Tier Free:</strong> 20 GB included instantly on signup</span>
+              </li>
+            </ul>
+
+            <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+              <div>
+                <div className="text-[11px] text-slate-400 uppercase font-mono">Subscription</div>
+                <div className="text-lg font-bold text-blue-400">20 GB Included (Trial)</div>
+              </div>
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-500 text-white font-semibold text-sm hover:bg-blue-400 transition-all shadow-lg shadow-blue-500/20 group-hover:scale-105"
+              >
+                Access My Cloud
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Interactive Earnings & Capacity Calculator */}
+        <div className="max-w-4xl mx-auto rounded-3xl p-8 bg-white/[0.02] border border-white/10 backdrop-blur-xl mb-20">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="w-full md:w-1/2">
+              <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono uppercase mb-2">
+                <Coins className="w-4 h-4" /> Provider Earnings Estimator
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">
+                Calculate your monthly node payout
+              </h3>
+              <p className="text-slate-400 text-xs mb-6">
+                Drag the slider to choose how many gigabytes of unused SSD or HDD storage you want to allocate to the AetherGrid peer network.
+              </p>
+
+              <div>
+                <div className="flex justify-between text-sm font-medium mb-2">
+                  <span className="text-slate-300">Allocated Space:</span>
+                  <span className="text-cyan-400 font-mono font-bold">{spareGb} GB</span>
+                </div>
+                <input
+                  type="range"
+                  min="10"
+                  max="1000"
+                  step="10"
+                  value={spareGb}
+                  onChange={(e) => setSpareGb(parseInt(e.target.value, 10))}
+                  className="w-full accent-cyan-400 cursor-pointer"
+                />
+                <div className="flex justify-between text-[11px] text-slate-500 mt-1 font-mono">
+                  <span>10 GB</span>
+                  <span>500 GB</span>
+                  <span>1 TB</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full md:w-1/2 bg-slate-900/80 rounded-2xl p-6 border border-white/10 text-center flex flex-col items-center justify-center">
+              <div className="text-xs text-slate-400 uppercase font-mono mb-1">Estimated Monthly Income</div>
+              <div className="text-4xl font-extrabold text-emerald-400 mb-2">
+                ₹{estimatedMonthlyEarnings}
+                <span className="text-sm font-normal text-slate-400"> / month</span>
+              </div>
+              <p className="text-[12px] text-slate-400 mb-4 max-w-xs">
+                Zero active work required. Your node runs silently in the background and sends a ping every 10 seconds.
+              </p>
+              <Link
+                href="/giver/setup"
+                className="px-4 py-2 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-semibold hover:bg-emerald-500/30 transition-all"
+              >
+                Set Up Node in 3 Steps →
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Live Failover & Architecture Interactive Proof */}
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono uppercase mb-4">
+            <Smartphone className="w-3.5 h-3.5" /> Live Resilience Playground
+          </div>
+          <h3 className="text-2xl font-bold text-white mb-3">
+            Want to test what happens when a node fails?
+          </h3>
+          <p className="text-slate-400 text-sm max-w-xl mx-auto mb-6">
+            Use our built-in Mobile Simulator to back up phone contacts and simulate dropping Node Alpha.
+            See how the client immediately downloads from surviving Node Beta without losing a single byte.
+          </p>
+          <Link
+            href="/mobile-simulator"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-purple-600 text-white font-semibold text-sm hover:bg-purple-500 transition-all shadow-lg shadow-purple-500/25"
+          >
+            Launch Mobile & Failover Simulator
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }

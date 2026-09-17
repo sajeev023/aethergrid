@@ -1,79 +1,92 @@
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose/jwt/verify";
 
-const COOKIE_NAME = "lfjc_admin_session";
-
-function getJWTSecret(): Uint8Array {
-  const secret = process.env.ADMIN_JWT_SECRET;
-  if (!secret) {
-    if (process.env.NODE_ENV === "production") {
-      throw new Error("CRITICAL SECURITY ERROR: ADMIN_JWT_SECRET environment variable must be set in production.");
-    }
-    return new TextEncoder().encode("lfjc-local-dev-jwt-secret-key-change-in-production-2026");
-  }
-  return new TextEncoder().encode(secret);
-}
+const SESSION_COOKIE_NAME = "aether_session";
+const JWT_SECRET = new TextEncoder().encode(
+  process.env.AETHER_JWT_SECRET || "aethergrid-production-grade-master-secret-key-2026-launch"
+);
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Protect all admin page routes and admin API routes
-  const isAdminPage = pathname === "/admin" || pathname.startsWith("/admin/");
-  const isPublicAdminRoute =
-    pathname.startsWith("/api/admin/auth/login") ||
-    pathname.startsWith("/api/admin/alumni-upload");
-  const isAdminAPI = pathname.startsWith("/api/admin") && !isPublicAdminRoute;
-
-  if (!isAdminPage && !isAdminAPI) {
+  // Let public auth and heartbeat routes pass
+  if (
+    pathname.startsWith("/api/auth") ||
+    pathname.startsWith("/api/nodes/heartbeat") ||
+    pathname.startsWith("/api/payment/webhook") ||
+    pathname === "/" ||
+    pathname.startsWith("/login") ||
+    pathname.startsWith("/signup")
+  ) {
     return NextResponse.next();
   }
 
-  // Check session cookie
-  const token = request.cookies.get(COOKIE_NAME)?.value;
+  // Extract session token
+  let token = request.cookies.get(SESSION_COOKIE_NAME)?.value;
+  const authHeader = request.headers.get("authorization");
+  if (!token && authHeader?.startsWith("Bearer ")) {
+    token = authHeader.slice(7);
+  }
+
+  const isAdminRoute = pathname.startsWith("/admin") || pathname.startsWith("/api/admin");
+  const isDashboardRoute =
+    pathname.startsWith("/dashboard") ||
+    pathname.startsWith("/giver") ||
+    pathname.startsWith("/mobile-simulator");
 
   if (!token) {
-    if (isAdminAPI) {
-      return NextResponse.json({ message: "Unauthorized access" }, { status: 401 });
+    if (isAdminRoute && pathname.startsWith("/api/")) {
+      return NextResponse.json({ error: "Unauthorized: Admin session required." }, { status: 401 });
     }
-    // Redirect unauthenticated /admin traffic to home (302) to prevent public enumeration
-    const homeUrl = new URL("/?auth=admin_required", request.url);
-    return NextResponse.redirect(homeUrl);
+    if (isAdminRoute || isDashboardRoute) {
+      const loginUrl = new URL("/login", request.url);
+      loginUrl.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+    return NextResponse.next();
   }
 
-  // Verify JWT
   try {
-    const { payload } = await jwtVerify(token, getJWTSecret());
+    const { payload } = await jwtVerify(token, JWT_SECRET);
 
-    // If authenticated user hits bare /admin, redirect to dashboard
-    if (pathname === "/admin") {
-      return NextResponse.redirect(new URL("/admin/dashboard", request.url));
+    // Strict Server-Side Admin Authorization
+    if (isAdminRoute) {
+      const roles = String(payload.roles || "");
+      if (!roles.includes("ADMIN")) {
+        if (pathname.startsWith("/api/")) {
+          return NextResponse.json({ error: "Forbidden: Admin privileges required." }, { status: 403 });
+        }
+        return new NextResponse("Forbidden: Access restricted to platform administrators.", { status: 403 });
+      }
     }
-
-    // Forward user info via request headers internally for downstream routes (without leaking to browser)
-    const requestHeaders = new Headers(request.headers);
-    requestHeaders.set("x-admin-user-id", String(payload.userId));
-    requestHeaders.set("x-admin-username", String(payload.username));
-    requestHeaders.set("x-admin-role", String(payload.role));
-    requestHeaders.set("x-admin-display-name", String(payload.displayName));
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
   } catch {
-    if (isAdminAPI) {
-      return NextResponse.json(
-        { message: "Session expired. Please log in again." },
-        { status: 401 }
-      );
+    if (isAdminRoute || isDashboardRoute) {
+      const response = NextResponse.redirect(new URL("/login?expired=1", request.url));
+      response.cookies.delete(SESSION_COOKIE_NAME);
+      return response;
     }
-    const homeUrl = new URL("/?auth=session_expired", request.url);
-    const response = NextResponse.redirect(homeUrl);
-    response.cookies.delete(COOKIE_NAME);
-    return response;
   }
+
+  const response = NextResponse.next();
+
+  // Add security headers to prevent clickjacking, MIME-sniffing, and XSS
+  response.headers.set("X-Content-Type-Options", "nosniff");
+  response.headers.set("X-Frame-Options", "DENY");
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+
+  return response;
 }
 
 export const config = {
-  matcher: ["/admin", "/admin/:path*", "/api/admin/:path*"],
+  matcher: [
+    "/admin/:path*",
+    "/api/admin/:path*",
+    "/dashboard/:path*",
+    "/giver/:path*",
+    "/mobile-simulator/:path*",
+    "/api/taker/:path*",
+    "/api/giver/:path*",
+    "/api/payment/:path*",
+  ],
 };
