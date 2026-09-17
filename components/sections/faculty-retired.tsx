@@ -76,9 +76,11 @@ function Lightbox({
 
 function RetiredStaffCard({
   member,
+  index,
   onPhotoClick,
 }: {
   member: RetiredStaffMember;
+  index: number;
   onPhotoClick: (member: RetiredStaffMember) => void;
 }) {
   if (!member.image) return null;
@@ -88,17 +90,18 @@ function RetiredStaffCard({
       <button
         type="button"
         onClick={() => onPhotoClick(member)}
-        className="relative aspect-[5/6] w-full block overflow-hidden bg-royal-cream/15 cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-heritage-gold p-2 sm:p-2.5"
+        className="faculty-portrait-frame relative aspect-[3/4] w-full block overflow-hidden bg-royal-cream/15 cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-heritage-gold"
         aria-label={`View enlarged portrait of ${member.name}`}
       >
         <Image
           src={member.image}
           alt={member.name}
           fill
+          priority={index < 4}
           sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-contain object-center transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+          className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         />
-        <div className="absolute bottom-2.5 right-2.5 p-1.5 rounded-full bg-deep-navy/80 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-xs">
+        <div className="pointer-events-none absolute bottom-2.5 right-2.5 p-1.5 rounded-full bg-deep-navy/80 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-xs">
           <ZoomIn className="h-3.5 w-3.5 text-heritage-gold" />
         </div>
       </button>
@@ -193,10 +196,11 @@ export function FacultyRetired({ activeInst = "lfjc" }: FacultyRetiredProps) {
         {/* Portrait Cards Grid */}
         {displayStaff.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
-            {displayStaff.map((member) => (
+            {displayStaff.map((member, idx) => (
               <RetiredStaffCard
                 key={`card-${member.order ?? member.sno}`}
                 member={member}
+                index={idx}
                 onPhotoClick={(m) => setLightboxMember(m)}
               />
             ))}

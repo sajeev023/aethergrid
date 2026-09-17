@@ -384,3 +384,19 @@
   }
 }
 
+/* ─── Unified Faculty Portrait Normalization ─────────────────────────── */
+.faculty-portrait-frame {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-royal-cream);
+}
+
+.faculty-portrait-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
