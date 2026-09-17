@@ -48,3 +48,6 @@ public/images/alumni/uploads/
 .env*
 !.env.example
 legacy_college_archive/
+
+.vercel
+.env*
