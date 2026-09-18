@@ -2,22 +2,19 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { 
-  HardDrive, 
-  Cloud, 
-  ShieldCheck, 
-  Zap, 
-  Smartphone, 
-  TrendingUp, 
-  ChevronRight, 
-  Server, 
-  Lock, 
+import {
+  Cloud,
+  HardDrive,
+  ShieldCheck,
+  Lock,
+  ArrowRight,
+  Server,
+  Smartphone,
   RefreshCw,
-  Cpu,
-  Coins,
   CheckCircle2,
-  ArrowRight
+  Layers,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function HomePage() {
   const [metrics, setMetrics] = useState<any>({
@@ -41,245 +38,325 @@ export default function HomePage() {
       .catch(() => {});
   }, []);
 
-  const totalCapacityGb = Math.round(metrics.totalCapacityBytes / (1024 * 1024 * 1024));
-  const estimatedMonthlyEarnings = Math.round(spareGb * 1.5); // ₹1.5 per GB-month
+  const totalCapacityGb = Math.round((metrics.totalCapacityBytes || 0) / (1024 * 1024 * 1024));
+  // Transparent calculation: ₹1.5 per GB per month based on active network allocation
+  const estimatedMonthlyEarnings = Math.round(spareGb * 1.5);
 
   return (
-    <div className="relative min-h-screen bg-slate-950 overflow-hidden text-slate-100">
-      {/* Dynamic Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-gradient-to-b from-cyan-500/15 via-blue-600/10 to-transparent blur-3xl pointer-events-none -z-10" />
+    <div className="relative min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+      {/* ── Signature Interconnected Grid Thread Visual Motif (Subtle, Non-Distracting) ── */}
+      <div className="absolute inset-0 grid-thread-subtle opacity-60 pointer-events-none -z-10" />
 
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Eyebrow badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono uppercase tracking-wider mb-6">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Decentralized Two-Sided Storage Grid • Live MVP
-          </div>
-
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-            Your phone. Your files. <br />
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-emerald-400 bg-clip-text text-transparent">
-              Always recoverable.
-            </span>
-          </h1>
-
-          <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-            Storage, without owning the data centers. Rent unified encrypted space for pennies,
-            or turn idle hard drive capacity into reliable passive income.
-          </p>
-
-          {/* Real-time Network Pulse Banner */}
-          <div className="inline-grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md max-w-3xl mx-auto mb-14 text-left">
-            <div className="px-3 border-r border-white/5">
-              <div className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
-                <HardDrive className="w-3.5 h-3.5 text-cyan-400" /> Total Capacity
-              </div>
-              <div className="text-xl font-bold text-white mt-1">{totalCapacityGb} GB</div>
-              <div className="text-[11px] text-emerald-400">Available across peers</div>
-            </div>
-            <div className="px-3 border-r border-white/5">
-              <div className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
-                <Server className="w-3.5 h-3.5 text-emerald-400" /> Active Nodes
-              </div>
-              <div className="text-xl font-bold text-emerald-400 mt-1">{metrics.onlineNodes} Online</div>
-              <div className="text-[11px] text-slate-400">10s heartbeat cadence</div>
-            </div>
-            <div className="px-3 border-r border-white/5">
-              <div className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-blue-400" /> Redundancy
-              </div>
-              <div className="text-xl font-bold text-blue-400 mt-1">2x Replicas</div>
-              <div className="text-[11px] text-slate-400">AES-256-GCM encrypted</div>
-            </div>
-            <div className="px-3">
-              <div className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
-                <Lock className="w-3.5 h-3.5 text-purple-400" /> Zero Trust
-              </div>
-              <div className="text-xl font-bold text-purple-400 mt-1">Provider-Blind</div>
-              <div className="text-[11px] text-slate-400">Chunks only, zero plaintext</div>
-            </div>
-          </div>
+      {/* ── HERO SECTION ── */}
+      <section className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-16 text-center">
+        {/* Eyebrow */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[var(--surface-subtle)] border border-[var(--border)] text-[12px] font-semibold text-[var(--primary)] uppercase tracking-wider mb-6">
+          <span className="w-2 h-2 rounded-full bg-[var(--primary)] animate-pulse" />
+          <span>A DISTRIBUTED PRIVATE CLOUD • {totalCapacityGb} GB ACTIVE CAPACITY</span>
         </div>
 
-        {/* The Two Hero Paths: GIVE STORAGE vs GET STORAGE */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20">
-          {/* Card 1: 🟢 GIVE STORAGE */}
-          <div className="relative group rounded-3xl p-8 bg-gradient-to-b from-emerald-500/10 via-slate-900/60 to-slate-950 border border-emerald-500/30 hover:border-emerald-400 transition-all duration-300 shadow-xl shadow-emerald-500/5 hover:shadow-emerald-500/15">
-            <div className="flex items-center justify-between mb-6">
-              <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-lg shadow-emerald-500/20">
-                <HardDrive className="w-7 h-7" />
-              </div>
-              <span className="px-3 py-1 rounded-full text-xs font-mono uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                Storage Provider
-              </span>
-            </div>
+        {/* Headline */}
+        <h1 className="type-display text-[var(--foreground)] max-w-3xl mx-auto mb-6">
+          Your files. Your storage. <br className="hidden sm:inline" />
+          <span className="text-[var(--primary)]">Your network.</span>
+        </h1>
 
-            <h2 className="text-2xl font-bold text-white mb-2">
-              🟢 Give Storage
+        {/* Supporting Copy */}
+        <p className="type-body-large text-[var(--foreground-secondary)] max-w-2xl mx-auto mb-12">
+          A private cloud powered by a distributed storage network. Encrypted on your terms, replicated across independent peer nodes with automatic failover.
+        </p>
+
+        {/* ── PRIMARY INTENT SELECTION ("What do you want to do?") ── */}
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="type-h3 font-semibold text-[var(--foreground)]">
+              What do you want to do?
             </h2>
-            <p className="text-slate-300 text-sm mb-6 leading-relaxed">
-              Have unused hard drive space? Connect a storage node daemon in 30 seconds.
-              Store encrypted chunks and earn recurring monthly payouts in ₹ based on allocated GB-hours.
+            <p className="text-[14px] text-[var(--foreground-secondary)] mt-1">
+              Choose your path to begin. You can switch between workspaces at any time.
             </p>
-
-            <ul className="space-y-2.5 mb-8 text-xs text-slate-300">
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span><strong>1-line daemon</strong> runs seamlessly on Windows, Mac, or Linux</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span><strong>100% Zero Plaintext:</strong> You only hold encrypted 2MB chunks</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span><strong>Real Earnings Ledger:</strong> Live per-minute income tracking</span>
-              </li>
-            </ul>
-
-            <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-              <div>
-                <div className="text-[11px] text-slate-400 uppercase font-mono">Potential Yield</div>
-                <div className="text-lg font-bold text-emerald-400">₹1.50 / GB / month</div>
-              </div>
-              <Link
-                href="/giver"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-semibold text-sm hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20 group-hover:scale-105"
-              >
-                Launch Giver Node
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
           </div>
 
-          {/* Card 2: 🔵 GET STORAGE */}
-          <div className="relative group rounded-3xl p-8 bg-gradient-to-b from-blue-500/10 via-slate-900/60 to-slate-950 border border-blue-500/30 hover:border-blue-400 transition-all duration-300 shadow-xl shadow-blue-500/5 hover:shadow-blue-500/15">
-            <div className="flex items-center justify-between mb-6">
-              <div className="w-14 h-14 rounded-2xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 shadow-lg shadow-blue-500/20">
-                <Cloud className="w-7 h-7" />
-              </div>
-              <span className="px-3 py-1 rounded-full text-xs font-mono uppercase bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                Unified Cloud
-              </span>
-            </div>
-
-            <h2 className="text-2xl font-bold text-white mb-2">
-              🔵 Get Storage
-            </h2>
-            <p className="text-slate-300 text-sm mb-6 leading-relaxed">
-              Experience one unified, unbreakable cloud drive. Your files, photos, and phone
-              backups are encrypted with AES-256-GCM and replicated across peer nodes with instant failover.
-            </p>
-
-            <ul className="space-y-2.5 mb-8 text-xs text-slate-300">
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" />
-                <span><strong>2x Redundancy:</strong> Files remain downloadable even if a node drops</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" />
-                <span><strong>Phone Companion:</strong> One-tap backup for contacts, photos & state</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" />
-                <span><strong>Starter Tier Free:</strong> 20 GB included instantly on signup</span>
-              </li>
-            </ul>
-
-            <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+            {/* PATH 1: GET STORAGE (TAKER) */}
+            <div
+              id="get-storage"
+              className="relative p-7 sm:p-8 rounded-[16px] border-2 border-[var(--primary)]/30 bg-[var(--surface)] hover:border-[var(--primary)] transition-all shadow-[var(--shadow-card)] flex flex-col justify-between group"
+            >
               <div>
-                <div className="text-[11px] text-slate-400 uppercase font-mono">Subscription</div>
-                <div className="text-lg font-bold text-blue-400">20 GB Included (Trial)</div>
-              </div>
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-500 text-white font-semibold text-sm hover:bg-blue-400 transition-all shadow-lg shadow-blue-500/20 group-hover:scale-105"
-              >
-                Access My Cloud
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Interactive Earnings & Capacity Calculator */}
-        <div className="max-w-4xl mx-auto rounded-3xl p-8 bg-white/[0.02] border border-white/10 backdrop-blur-xl mb-20">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="w-full md:w-1/2">
-              <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono uppercase mb-2">
-                <Coins className="w-4 h-4" /> Provider Earnings Estimator
-              </div>
-              <h3 className="text-xl font-bold text-white mb-2">
-                Calculate your monthly node payout
-              </h3>
-              <p className="text-slate-400 text-xs mb-6">
-                Drag the slider to choose how many gigabytes of unused SSD or HDD storage you want to allocate to the AetherGrid peer network.
-              </p>
-
-              <div>
-                <div className="flex justify-between text-sm font-medium mb-2">
-                  <span className="text-slate-300">Allocated Space:</span>
-                  <span className="text-cyan-400 font-mono font-bold">{spareGb} GB</span>
+                <div className="w-12 h-12 rounded-[12px] bg-[var(--primary-muted)] flex items-center justify-center text-[var(--primary)] mb-5">
+                  <Cloud className="w-6 h-6" />
                 </div>
-                <input
-                  type="range"
-                  min="10"
-                  max="1000"
-                  step="10"
-                  value={spareGb}
-                  onChange={(e) => setSpareGb(parseInt(e.target.value, 10))}
-                  className="w-full accent-cyan-400 cursor-pointer"
-                />
-                <div className="flex justify-between text-[11px] text-slate-500 mt-1 font-mono">
-                  <span>10 GB</span>
-                  <span>500 GB</span>
-                  <span>1 TB</span>
+                <div className="text-[12px] font-semibold uppercase tracking-wider text-[var(--primary)] mb-1">
+                  For Individuals & Devices
+                </div>
+                <h3 className="type-h2 text-[var(--foreground)] font-bold mb-3">
+                  Get Storage
+                </h3>
+                <p className="text-[15px] text-[var(--foreground-secondary)] leading-relaxed mb-6">
+                  Your private cloud, powered by a distributed storage network. Keep your files and phone backups safe with client-authenticated encryption and seamless redundancy.
+                </p>
+                <ul className="space-y-2.5 mb-8 text-[13px] text-[var(--foreground-secondary)]">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[var(--success)] shrink-0" />
+                    <span>20 GB included free trial space</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[var(--success)] shrink-0" />
+                    <span>Automatic 2x replica distribution</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[var(--success)] shrink-0" />
+                    <span>Fast phone and mobile photo sync</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <Button asChild size="lg" className="w-full justify-between">
+                  <Link href="/signup?role=TAKER">
+                    <span>Get Storage</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+                <div className="text-center mt-2.5 text-[12px] text-[var(--foreground-muted)]">
+                  Instant account setup • No credit card required
                 </div>
               </div>
             </div>
 
-            <div className="w-full md:w-1/2 bg-slate-900/80 rounded-2xl p-6 border border-white/10 text-center flex flex-col items-center justify-center">
-              <div className="text-xs text-slate-400 uppercase font-mono mb-1">Estimated Monthly Income</div>
-              <div className="text-4xl font-extrabold text-emerald-400 mb-2">
-                ₹{estimatedMonthlyEarnings}
-                <span className="text-sm font-normal text-slate-400"> / month</span>
+            {/* PATH 2: GIVE STORAGE (GIVER) */}
+            <div
+              id="give-storage"
+              className="relative p-7 sm:p-8 rounded-[16px] border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--secondary-accent)] transition-all shadow-[var(--shadow-card)] flex flex-col justify-between group"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-[12px] bg-[var(--surface-subtle)] flex items-center justify-center text-[var(--secondary-accent)] mb-5">
+                  <HardDrive className="w-6 h-6" />
+                </div>
+                <div className="text-[12px] font-semibold uppercase tracking-wider text-[var(--secondary-accent)] mb-1">
+                  For Computer Owners
+                </div>
+                <h3 className="type-h2 text-[var(--foreground)] font-bold mb-3">
+                  Give Storage
+                </h3>
+                <p className="text-[15px] text-[var(--foreground-secondary)] leading-relaxed mb-6">
+                  Turn unused storage into a useful resource. Allocate spare hard drive capacity, run a lightweight background daemon, and earn recurring payouts.
+                </p>
+                <ul className="space-y-2.5 mb-8 text-[13px] text-[var(--foreground-secondary)]">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[var(--success)] shrink-0" />
+                    <span>Encrypted chunk blobs only — providers cannot read file content</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[var(--success)] shrink-0" />
+                    <span>Flexible commitment from 20 GB to multi-TB</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[var(--success)] shrink-0" />
+                    <span>Direct INR / bank ledger payout tracking</span>
+                  </li>
+                </ul>
               </div>
-              <p className="text-[12px] text-slate-400 mb-4 max-w-xs">
-                Zero active work required. Your node runs silently in the background and sends a ping every 10 seconds.
-              </p>
-              <Link
-                href="/giver/setup"
-                className="px-4 py-2 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-semibold hover:bg-emerald-500/30 transition-all"
-              >
-                Set Up Node in 3 Steps →
-              </Link>
+
+              <div>
+                <Button asChild variant="secondary" size="lg" className="w-full justify-between hover:border-[var(--secondary-accent)]">
+                  <Link href="/giver/setup">
+                    <span>Give Storage</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+                <div className="text-center mt-2.5 text-[12px] text-[var(--foreground-muted)]">
+                  Setup in about 2 minutes • Mac, Windows, Linux
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Live Failover & Architecture Interactive Proof */}
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono uppercase mb-4">
-            <Smartphone className="w-3.5 h-3.5" /> Live Resilience Playground
+      {/* ── THE INTERCONNECTED GRID THREAD: BENEFIT PILLARS ── */}
+      <section className="border-y border-[var(--border)] bg-[var(--surface)] py-16 sm:py-20">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[var(--primary)] uppercase tracking-wider mb-2">
+              <Layers className="w-4 h-4" /> Core Architecture
+            </div>
+            <h2 className="type-h2 text-[var(--foreground)] font-bold">
+              Infrastructure designed for safety and privacy
+            </h2>
+            <p className="type-body text-[var(--foreground-secondary)] mt-2">
+              Every design decision in AetherGrid is guided by verifiable cryptographic principles, not marketing hype.
+            </p>
           </div>
-          <h3 className="text-2xl font-bold text-white mb-3">
-            Want to test what happens when a node fails?
-          </h3>
-          <p className="text-slate-400 text-sm max-w-xl mx-auto mb-6">
-            Use our built-in Mobile Simulator to back up phone contacts and simulate dropping Node Alpha.
-            See how the client immediately downloads from surviving Node Beta without losing a single byte.
-          </p>
-          <Link
-            href="/mobile-simulator"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-purple-600 text-white font-semibold text-sm hover:bg-purple-500 transition-all shadow-lg shadow-purple-500/25"
-          >
-            Launch Mobile & Failover Simulator
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* PILLAR 1: ENCRYPTED */}
+            <div className="p-6 rounded-[12px] bg-[var(--surface-subtle)] border border-[var(--border-subtle)]">
+              <div className="w-10 h-10 rounded-[10px] bg-[var(--primary-muted)] text-[var(--primary)] flex items-center justify-center mb-4">
+                <Lock className="w-5 h-5" />
+              </div>
+              <h3 className="type-h3 text-[var(--foreground)] font-semibold mb-2">Encrypted</h3>
+              <p className="text-[14px] text-[var(--foreground-secondary)] leading-relaxed">
+                Files are partitioned and encrypted with AES-256-GCM using per-object derived keys before distribution to peer nodes.
+              </p>
+            </div>
+
+            {/* PILLAR 2: DISTRIBUTED */}
+            <div className="p-6 rounded-[12px] bg-[var(--surface-subtle)] border border-[var(--border-subtle)]">
+              <div className="w-10 h-10 rounded-[10px] bg-[var(--primary-muted)] text-[var(--primary)] flex items-center justify-center mb-4">
+                <Server className="w-5 h-5" />
+              </div>
+              <h3 className="type-h3 text-[var(--foreground)] font-semibold mb-2">Distributed</h3>
+              <p className="text-[14px] text-[var(--foreground-secondary)] leading-relaxed">
+                Data is sliced into 2MB chunk blobs and stored across independent peer machines, eliminating single centralized targets.
+              </p>
+            </div>
+
+            {/* PILLAR 3: RESILIENT */}
+            <div className="p-6 rounded-[12px] bg-[var(--surface-subtle)] border border-[var(--border-subtle)]">
+              <div className="w-10 h-10 rounded-[10px] bg-[var(--primary-muted)] text-[var(--primary)] flex items-center justify-center mb-4">
+                <RefreshCw className="w-5 h-5" />
+              </div>
+              <h3 className="type-h3 text-[var(--foreground)] font-semibold mb-2">Resilient</h3>
+              <p className="text-[14px] text-[var(--foreground-secondary)] leading-relaxed">
+                Redundant 2x replica distribution ensures that if any host drops offline, secondary replicas automatically step in without downtime.
+              </p>
+            </div>
+
+            {/* PILLAR 4: PRIVATE */}
+            <div className="p-6 rounded-[12px] bg-[var(--surface-subtle)] border border-[var(--border-subtle)]">
+              <div className="w-10 h-10 rounded-[10px] bg-[var(--primary-muted)] text-[var(--primary)] flex items-center justify-center mb-4">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <h3 className="type-h3 text-[var(--foreground)] font-semibold mb-2">Private</h3>
+              <p className="text-[14px] text-[var(--foreground-secondary)] leading-relaxed">
+                Provider-blind architecture ensures storage hosts only store opaque ciphertext. Hosts cannot view file names, contents, or metadata.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* ── ESTIMATED EARNINGS CALCULATOR (TRANSPARENT & BOUNDED) ── */}
+      <section className="max-w-[1200px] mx-auto px-4 sm:px-6 py-16 sm:py-24">
+        <div className="max-w-3xl mx-auto rounded-[16px] border border-[var(--border)] bg-[var(--surface)] p-8 sm:p-10 shadow-[var(--shadow-card)]">
+          <div className="text-center max-w-xl mx-auto mb-8">
+            <div className="text-[12px] font-semibold text-[var(--secondary-accent)] uppercase tracking-wider mb-1">
+              Provider Economics
+            </div>
+            <h2 className="type-h2 text-[var(--foreground)] font-bold">
+              Estimate your storage contribution
+            </h2>
+            <p className="text-[14px] text-[var(--foreground-secondary)] mt-1">
+              See what you could earn by sharing unused hard drive capacity with the network.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <div className="flex items-center justify-between text-[14px] mb-2 font-medium">
+                <span>Allocated Capacity</span>
+                <span className="type-metric text-[var(--foreground)] text-[22px]">
+                  {spareGb} <span className="text-[14px] text-[var(--foreground-secondary)] font-normal">GB</span>
+                </span>
+              </div>
+              <input
+                type="range"
+                min={20}
+                max={1000}
+                step={20}
+                value={spareGb}
+                onChange={(e) => setSpareGb(Number(e.target.value))}
+                aria-label="Allocated capacity in gigabytes"
+                className="w-full h-2.5 bg-[var(--surface-subtle)] rounded-lg appearance-none cursor-pointer accent-[var(--primary)]"
+              />
+              <div className="flex justify-between text-[12px] text-[var(--foreground-muted)] mt-1.5 tabular-nums">
+                <span>20 GB (Starter)</span>
+                <span>250 GB</span>
+                <span>500 GB</span>
+                <span>1 TB</span>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-[12px] bg-[var(--surface-subtle)] border border-[var(--border-subtle)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <div className="text-[12px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider">
+                  Estimated monthly payout
+                </div>
+                <div className="type-metric text-[var(--foreground)] text-[32px] mt-0.5">
+                  ₹{estimatedMonthlyEarnings} <span className="text-[14px] font-normal text-[var(--foreground-secondary)]">/ month</span>
+                </div>
+                <div className="text-[12px] text-[var(--foreground-muted)] mt-1">
+                  Based on ₹1.50 per GB-month of active allocated storage.
+                </div>
+              </div>
+
+              <Button asChild size="default">
+                <Link href="/giver/setup">
+                  Start Contributing
+                </Link>
+              </Button>
+            </div>
+
+            <p className="text-[12px] text-[var(--foreground-muted)] leading-relaxed italic text-center">
+              Note: Payouts depend on active grid utilization, node uptime, and verified heartbeat reliability. This estimate reflects standard allocation rates and is not a guaranteed return.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAILOVER SIMULATOR CALLOUT ── */}
+      <section className="border-t border-[var(--border)] bg-[var(--surface-subtle)] py-14">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="max-w-xl">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[var(--primary-muted)] text-[var(--primary)] text-[12px] font-medium mb-3">
+              <Smartphone className="w-3.5 h-3.5" /> Interactive Proof
+            </div>
+            <h2 className="type-h3 text-[var(--foreground)] font-bold mb-2">
+              See real-time node failover in action
+            </h2>
+            <p className="text-[14px] text-[var(--foreground-secondary)] leading-relaxed">
+              Test what happens when a storage node unexpectedly drops offline. Run our live simulation to verify how redundant replicas rescue files without data loss.
+            </p>
+          </div>
+
+          <Button asChild variant="secondary" size="lg" className="shrink-0 gap-2">
+            <Link href="/mobile-simulator">
+              <span>Open Failover Simulator</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Button>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer className="border-t border-[var(--border)] bg-[var(--surface)] py-10 text-[13px] text-[var(--foreground-secondary)]">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-[6px] bg-[var(--primary)] flex items-center justify-center text-white text-[10px] font-bold">
+              AG
+            </div>
+            <span className="font-semibold text-[var(--foreground)]">AetherGrid</span>
+            <span>— A Distributed Private Cloud</span>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <Link href="/dashboard" className="hover:text-[var(--foreground)] transition-colors">
+              Personal Cloud
+            </Link>
+            <Link href="/giver" className="hover:text-[var(--foreground)] transition-colors">
+              Storage Provider
+            </Link>
+            <Link href="/mobile-simulator" className="hover:text-[var(--foreground)] transition-colors">
+              Simulator
+            </Link>
+            <Link href="/login" className="hover:text-[var(--foreground)] transition-colors">
+              Sign In
+            </Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

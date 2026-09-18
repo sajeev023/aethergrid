@@ -1,20 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { 
-  Activity, 
-  Server, 
-  HardDrive, 
-  Users, 
-  ShieldCheck, 
-  Clock, 
+import {
+  Activity,
+  Server,
+  HardDrive,
+  Users,
   RefreshCw,
-  Coins,
   Database,
-  ArrowLeft,
-  CheckCircle2
 } from "lucide-react";
+import { StatusBadge } from "@/components/ui/status-badge";
 
 export default function AdminTelemetryPage() {
   const [data, setData] = useState<any>(null);
@@ -39,10 +34,10 @@ export default function AdminTelemetryPage() {
 
   if (loading && !data) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">
-        <div className="flex items-center gap-2">
-          <div className="w-5 h-5 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
-          <span>Loading Grid Telemetry...</span>
+      <div className="min-h-[85vh] bg-[var(--background)] flex items-center justify-center text-[var(--foreground-secondary)]">
+        <div className="flex items-center gap-2.5">
+          <div className="w-5 h-5 border-2 border-[var(--primary)] border-t-transparent rounded-full animate-spin" />
+          <span className="text-[14px]">Loading Grid Telemetry...</span>
         </div>
       </div>
     );
@@ -54,129 +49,151 @@ export default function AdminTelemetryPage() {
 
   const capGb = (metrics.totalCapacityBytes || 0) / (1024 * 1024 * 1024);
   const allocGb = (metrics.allocatedBytes || 0) / (1024 * 1024 * 1024);
-  const usedMb = (metrics.usedBytes || 0) / (1024 * 1024);
+  const usedMb = ((metrics.usedBytes || 0) / (1024 * 1024)).toFixed(1);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-[85vh] bg-[var(--background)] text-[var(--foreground)] py-10 px-4 sm:px-6">
+      <div className="max-w-[1200px] mx-auto space-y-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-[16px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)]">
           <div>
-            <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono uppercase mb-1">
+            <div className="flex items-center gap-2 text-[12px] font-mono uppercase text-[var(--primary)] mb-1">
               <Activity className="w-4 h-4" /> Global Grid Telemetry
             </div>
-            <h1 className="text-3xl font-extrabold text-white">Marketplace Health & Nodes</h1>
-            <p className="text-sm text-slate-400">
-              Live two-sided distributed storage marketplace analytics and heartbeat logs.
+            <h1 className="type-h1 text-[var(--foreground)] font-bold">
+              Marketplace Telemetry & Node Cluster
+            </h1>
+            <p className="text-[14px] text-[var(--foreground-secondary)] mt-1">
+              Real-time two-sided distributed storage marketplace health and heartbeat diagnostics.
             </p>
           </div>
 
           <button
+            type="button"
             onClick={fetchMetrics}
-            className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-white"
+            className="p-2.5 rounded-[8px] border border-[var(--border)] text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)] transition-colors cursor-pointer self-start sm:self-auto"
+            title="Refresh Telemetry"
+            aria-label="Refresh Telemetry"
           >
             <RefreshCw className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Big Metrics Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="p-5 rounded-2xl bg-slate-900 border border-white/10">
-            <div className="text-xs text-slate-400 font-mono flex items-center gap-1.5 mb-1">
-              <HardDrive className="w-3.5 h-3.5 text-cyan-400" /> Total Capacity
+        {/* Metrics Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="p-5 rounded-[12px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)]">
+            <div className="text-[12px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider flex items-center gap-1.5 mb-1">
+              <HardDrive className="w-3.5 h-3.5 text-[var(--primary)]" /> Total Capacity
             </div>
-            <div className="text-3xl font-bold text-white">{capGb.toFixed(0)} GB</div>
-            <div className="text-xs text-slate-500 mt-1">Across all provider nodes</div>
+            <div className="type-metric text-[var(--foreground)] tabular-nums">{capGb.toFixed(0)} GB</div>
+            <div className="text-[12px] text-[var(--foreground-muted)] mt-1">{allocGb.toFixed(0)} GB allocated</div>
           </div>
 
-          <div className="p-5 rounded-2xl bg-slate-900 border border-white/10">
-            <div className="text-xs text-slate-400 font-mono flex items-center gap-1.5 mb-1">
-              <Server className="w-3.5 h-3.5 text-emerald-400" /> Node Health
+          <div className="p-5 rounded-[12px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)]">
+            <div className="text-[12px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider flex items-center gap-1.5 mb-1">
+              <Server className="w-3.5 h-3.5 text-[var(--success)]" /> Node Health
             </div>
-            <div className="text-3xl font-bold text-emerald-400">
-              {metrics.onlineNodes} <span className="text-base font-normal text-slate-400">/ {nodes.length} Online</span>
+            <div className="type-metric text-[var(--success)] tabular-nums">
+              {metrics.onlineNodes}{" "}
+              <span className="text-[14px] font-normal text-[var(--foreground-muted)]">
+                / {nodes.length} Online
+              </span>
             </div>
-            <div className="text-xs text-slate-500 mt-1">10s heartbeat cadence</div>
+            <div className="text-[12px] text-[var(--foreground-muted)] mt-1">10s heartbeat cadence</div>
           </div>
 
-          <div className="p-5 rounded-2xl bg-slate-900 border border-white/10">
-            <div className="text-xs text-slate-400 font-mono flex items-center gap-1.5 mb-1">
-              <Users className="w-3.5 h-3.5 text-purple-400" /> Network Participants
+          <div className="p-5 rounded-[12px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)]">
+            <div className="text-[12px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider flex items-center gap-1.5 mb-1">
+              <Database className="w-3.5 h-3.5 text-[var(--secondary-accent)]" /> Stored Chunks
             </div>
-            <div className="text-3xl font-bold text-white">
-              {metrics.totalUsers} <span className="text-base font-normal text-slate-400">Users</span>
-            </div>
-            <div className="text-xs text-slate-500 mt-1">
-              {metrics.activeGivers} Givers • {metrics.activeTakers} Takers
-            </div>
+            <div className="type-metric text-[var(--foreground)] tabular-nums">{metrics.totalChunks || 0}</div>
+            <div className="text-[12px] text-[var(--foreground-muted)] mt-1">{usedMb} MB chunk data</div>
           </div>
 
-          <div className="p-5 rounded-2xl bg-slate-900 border border-white/10">
-            <div className="text-xs text-slate-400 font-mono flex items-center gap-1.5 mb-1">
-              <Database className="w-3.5 h-3.5 text-blue-400" /> Stored Objects
+          <div className="p-5 rounded-[12px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)]">
+            <div className="text-[12px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider flex items-center gap-1.5 mb-1">
+              <Users className="w-3.5 h-3.5 text-[var(--info)]" /> Total Users
             </div>
-            <div className="text-3xl font-bold text-white">
-              {metrics.totalFiles} <span className="text-base font-normal text-slate-400">Files</span>
+            <div className="type-metric text-[var(--foreground)] tabular-nums">{metrics.totalUsers || 0}</div>
+            <div className="text-[12px] text-[var(--foreground-muted)] mt-1">
+              {metrics.activeGivers || 0} Givers • {metrics.activeTakers || 0} Takers
             </div>
-            <div className="text-xs text-slate-500 mt-1">{metrics.totalChunks} AES-256 Chunks</div>
           </div>
         </div>
 
-        {/* Nodes & Recent Heartbeats Tables */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Storage Nodes List */}
-          <div className="lg:col-span-8 rounded-2xl bg-white/[0.02] border border-white/10 overflow-hidden">
-            <div className="p-5 border-b border-white/10">
-              <h3 className="font-bold text-white text-base">Registered Storage Nodes</h3>
-            </div>
-            <div className="divide-y divide-white/5">
-              {nodes.map((n: any) => {
-                const isOnline = n.status === "ONLINE";
-                return (
-                  <div key={n.id} className="p-4 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <span className={`w-2.5 h-2.5 rounded-full ${isOnline ? "bg-emerald-400 animate-pulse" : "bg-rose-500"}`} />
-                      <div>
-                        <div className="font-bold text-sm text-white">{n.node_name}</div>
-                        <div className="text-xs text-slate-400 font-mono">
-                          Owner: {n.owner_name} • Capacity: {Math.round(n.capacity_bytes / (1024 * 1024 * 1024))} GB
-                        </div>
-                      </div>
-                    </div>
-                    <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase ${
-                      isOnline ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30" : "bg-rose-500/10 text-rose-400 border border-rose-500/30"
-                    }`}>
-                      {n.status}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+        {/* Node Cluster Health Table */}
+        <div className="rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)] overflow-hidden">
+          <div className="p-5 border-b border-[var(--border-subtle)]">
+            <h2 className="type-h3 font-bold text-[var(--foreground)]">Registered Storage Node Cluster</h2>
           </div>
 
-          {/* Heartbeat Pulse Feed */}
-          <div className="lg:col-span-4 rounded-2xl bg-white/[0.02] border border-white/10 overflow-hidden">
-            <div className="p-5 border-b border-white/10">
-              <h3 className="font-bold text-white text-base">Recent Heartbeat Pings</h3>
-            </div>
-            <div className="divide-y divide-white/5 font-mono text-xs">
-              {heartbeats.length === 0 ? (
-                <div className="p-5 text-slate-500 text-xs">Waiting for node daemon pings...</div>
-              ) : (
-                heartbeats.map((h: any) => (
-                  <div key={h.id} className="p-3.5 flex items-center justify-between">
-                    <div>
-                      <div className="text-white font-medium">{h.node_name}</div>
-                      <div className="text-[10px] text-slate-400">{new Date(h.recorded_at).toLocaleTimeString()}</div>
-                    </div>
-                    <span className="text-[10px] text-emerald-400 px-1.5 py-0.5 rounded bg-emerald-500/10">
-                      {h.latency_ms}ms
-                    </span>
-                  </div>
-                ))
-              )}
-            </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-[13px]">
+              <thead className="bg-[var(--surface-subtle)] border-b border-[var(--border-subtle)] text-[11px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider">
+                <tr>
+                  <th className="p-3.5 pl-5">Node</th>
+                  <th className="p-3.5">Status</th>
+                  <th className="p-3.5">Capacity</th>
+                  <th className="p-3.5">Allocated</th>
+                  <th className="p-3.5">Used</th>
+                  <th className="p-3.5 pr-5">Last Heartbeat</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[var(--border-subtle)]">
+                {nodes.map((node: any) => {
+                  const nodeCapGb = Math.round(node.capacity_bytes / (1024 * 1024 * 1024));
+                  const nodeAllocGb = Math.round((node.allocated_bytes || 0) / (1024 * 1024 * 1024));
+                  const nodeUsedMb = ((node.used_bytes || 0) / (1024 * 1024)).toFixed(1);
+
+                  return (
+                    <tr key={node.id} className="hover:bg-[var(--surface-subtle)] transition-colors">
+                      <td className="p-3.5 pl-5 font-semibold text-[var(--foreground)]">
+                        <div>{node.node_name}</div>
+                        <div className="text-[11px] font-mono text-[var(--foreground-muted)] font-normal">{node.id}</div>
+                      </td>
+                      <td className="p-3.5">
+                        <StatusBadge status={node.status} size="sm" />
+                      </td>
+                      <td className="p-3.5 tabular-nums">{nodeCapGb} GB</td>
+                      <td className="p-3.5 tabular-nums">{nodeAllocGb} GB</td>
+                      <td className="p-3.5 tabular-nums">{nodeUsedMb} MB</td>
+                      <td className="p-3.5 pr-5 text-[12px] text-[var(--foreground-muted)]">
+                        {node.last_heartbeat_at ? new Date(node.last_heartbeat_at).toLocaleTimeString() : "N/A"}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
+        </div>
+
+        {/* Heartbeat Event Stream */}
+        <div className="rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)] p-5">
+          <h2 className="type-h3 font-bold text-[var(--foreground)] mb-3">Live Heartbeat Cadence Feed</h2>
+          {heartbeats.length === 0 ? (
+            <div className="text-[13px] text-[var(--foreground-muted)] py-4 text-center">
+              Awaiting node heartbeat signals...
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {heartbeats.slice(0, 5).map((hb: any, idx: number) => (
+                <div
+                  key={idx}
+                  className="flex items-center justify-between p-3 rounded-[8px] bg-[var(--surface-subtle)] text-[12px] font-mono"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[var(--success)]" />
+                    <span className="font-semibold text-[var(--foreground)]">{hb.node_id}</span>
+                    <span className="text-[var(--foreground-muted)]">latency: {hb.latency_ms}ms</span>
+                  </div>
+                  <div className="text-[var(--foreground-muted)]">
+                    {new Date(hb.recorded_at).toLocaleTimeString()}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

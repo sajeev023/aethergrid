@@ -16,7 +16,8 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/api/payment/webhook") ||
     pathname === "/" ||
     pathname.startsWith("/login") ||
-    pathname.startsWith("/signup")
+    pathname.startsWith("/signup") ||
+    pathname === "/admin/access-denied"
   ) {
     return NextResponse.next();
   }
@@ -56,7 +57,7 @@ export async function middleware(request: NextRequest) {
         if (pathname.startsWith("/api/")) {
           return NextResponse.json({ error: "Forbidden: Admin privileges required." }, { status: 403 });
         }
-        return new NextResponse("Forbidden: Access restricted to platform administrators.", { status: 403 });
+        return NextResponse.redirect(new URL("/admin/access-denied", request.url));
       }
     }
   } catch {

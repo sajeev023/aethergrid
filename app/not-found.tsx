@@ -1,49 +1,38 @@
 import Link from "next/link";
-import { ArrowLeft, Home } from "lucide-react";
+import { Home, Cloud } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const metadata = {
-  title: "Page Not Found",
-  description: "The page you are looking for does not exist.",
+  title: "404 — Page Not Found | AetherGrid",
+  description: "The page you are looking for does not exist on AetherGrid.",
 };
 
 export default function NotFound() {
   return (
-    <div className="min-h-[80vh] flex items-center justify-center bg-surface px-5">
-      <div className="max-w-lg w-full text-center">
-        {/* Large 404 with gold accent */}
-        <div className="relative mb-8">
-          <span
-            aria-hidden="true"
-            className="block font-serif text-[7rem] md:text-[9rem] font-bold leading-none text-montfortian-blue/10 select-none"
-          >
-            404
-          </span>
-          <h1 className="absolute inset-0 flex items-center justify-center font-serif text-3xl md:text-4xl font-bold text-academic-slate tracking-tight">
-            Page Not Found
-          </h1>
+    <div className="min-h-[80vh] flex items-center justify-center bg-[var(--background)] px-4 py-16 text-[var(--foreground)]">
+      <div className="max-w-md w-full text-center p-8 rounded-[16px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
+        <div className="text-[64px] font-bold text-[var(--primary)] leading-none mb-2">
+          404
         </div>
 
-        <span className="gold-rule gold-rule-center mb-6" />
-
-        <p className="text-sm md:text-base leading-7 text-academic-slate/70 font-sans max-w-md mx-auto">
-          The page you are looking for does not exist.
+        <h1 className="type-h2 font-bold mb-2">Page Not Found</h1>
+        <p className="text-[14px] text-[var(--foreground-secondary)] mb-6 leading-relaxed">
+          The destination you requested does not exist or has been moved to another location on the grid.
         </p>
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center gap-2 bg-montfortian-blue px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white hover:bg-montfortian-blue-light transition-colors duration-300 rounded-sm font-sans shadow-panel hover:shadow-panel-hover"
-          >
-            <Home className="h-4 w-4" aria-hidden="true" />
-            Back to Homepage
-          </Link>
-          <Link
-            href="/admissions"
-            className="inline-flex items-center justify-center gap-2 border border-heritage-gold/40 bg-heritage-gold/5 px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-heritage-gold-strong hover:bg-heritage-gold hover:text-white hover:border-heritage-gold transition-all duration-300 rounded-sm font-sans"
-          >
-            Admissions Inquiry
-            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          </Link>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button asChild size="default">
+            <Link href="/" className="gap-2">
+              <Home className="w-4 h-4" />
+              <span>Back to Home</span>
+            </Link>
+          </Button>
+          <Button asChild variant="secondary" size="default">
+            <Link href="/dashboard" className="gap-2">
+              <Cloud className="w-4 h-4" />
+              <span>Go to Cloud Drive</span>
+            </Link>
+          </Button>
         </div>
       </div>
     </div>

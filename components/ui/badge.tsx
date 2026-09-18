@@ -1,22 +1,24 @@
 import * as React from "react";
-
 import { cn } from "@/lib/utils";
 
 type BadgeProps = React.ComponentProps<"span"> & {
-  /** Render on a dark surface — uses brighter gold for contrast. */
+  variant?: "default" | "secondary" | "outline" | "success" | "warning" | "error";
   onDark?: boolean;
 };
 
-function Badge({ className, onDark = false, ...props }: BadgeProps) {
+function Badge({ className, variant = "default", onDark, ...props }: BadgeProps) {
   return (
     <span
       data-slot="badge"
       className={cn(
-        "inline-flex items-center gap-1.5 sm:gap-2 rounded-sm border px-2.5 py-1 sm:px-3 sm:py-1 text-xs font-bold uppercase tracking-[0.14em] sm:tracking-[0.18em]",
-        onDark
-          ? "border-heritage-gold/40 bg-white/5 text-heritage-gold-bright backdrop-blur-sm"
-          : "border-heritage-gold/50 bg-royal-cream text-heritage-gold-strong",
-        className,
+        "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[12px] font-medium transition-colors",
+        variant === "default" && "border-transparent bg-[var(--primary)] text-white",
+        variant === "secondary" && "border-transparent bg-[var(--primary-muted)] text-[var(--primary)]",
+        variant === "outline" && "border-[var(--border)] text-[var(--foreground)]",
+        variant === "success" && "border-[var(--success)]/30 bg-[var(--success-muted)] text-[var(--success)]",
+        variant === "warning" && "border-[var(--warning)]/30 bg-[var(--warning-muted)] text-[var(--warning)]",
+        variant === "error" && "border-[var(--error)]/30 bg-[var(--error-muted)] text-[var(--error)]",
+        className
       )}
       {...props}
     />

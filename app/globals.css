@@ -1,402 +1,261 @@
 @import "tailwindcss";
 
-@theme {
-  /* ─── Institutional Color System ─────────────────────────────────────── */
-  /* Deep navy — the primary institutional dark (Oxford/Stanford depth) */
-  --color-deep-navy: #0a1a2f;
-  /* Montfortian blue — the signature institutional blue */
-  --color-montfortian-blue: #0f4c81;
-  --color-montfortian-blue-light: #1a6bb5;
-  /* Heritage gold — warm prestige accent */
-  --color-heritage-gold: #c29b53;
-  --color-heritage-gold-bright: #ebd09b;
-  --color-heritage-gold-strong: #8a6625;
-  /* Academic slate — refined dark neutral for body/headings (darkened for high readability) */
-  --color-academic-slate: #0f1821;
-  --color-academic-slate-soft: #1e2933;
-  /* Ink — deepest text */
-  --color-ink: #080d12;
-  /* Royal cream — warm archival background */
-  --color-royal-cream: #f7f3e9;
-  --color-royal-cream-deefe: #efe8d8;
-  /* Stone texture — warm border neutral */
-  --color-stone-texture: #ded7c8;
-  /* Surface scale — warm whites */
-  --color-surface: #fafaf7;
-  --color-surface-warm: #f5f1e8;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #f9f6f0;
-  --color-surface-container: #f3efe6;
-  --color-surface-container-high: #ece7dc;
-  --color-surface-container-highest: #e5dfd2;
-  --color-on-surface: #0f1821;
-  --color-on-surface-variant: #283540;
-  --color-outline: #687382;
-  --color-outline-variant: #b8c1ce;
-
-  /* ─── Typography ─────────────────────────────────────────────────────── */
-  --font-sans: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
-  --font-editorial: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-
-  /* ─── Enlarged Font Scale for Readability ────────────────────────────── */
-  --text-xs: 0.9375rem;
-  --text-xs--line-height: 1.45rem;
-  --text-sm: 1.0625rem;
-  --text-sm--line-height: 1.65rem;
-  --text-base: 1.125rem;
-  --text-base--line-height: 1.75rem;
-  --text-lg: 1.25rem;
-  --text-lg--line-height: 1.85rem;
-  --text-xl: 1.375rem;
-  --text-xl--line-height: 1.95rem;
-  --text-2xl: 1.625rem;
-  --text-2xl--line-height: 2.1rem;
-  --text-3xl: 1.9375rem;
-  --text-3xl--line-height: 2.35rem;
-  --text-4xl: 2.375rem;
-  --text-4xl--line-height: 2.75rem;
-  --text-5xl: 3rem;
-  --text-5xl--line-height: 3.25rem;
-  --text-6xl: 3.625rem;
-  --text-6xl--line-height: 3.85rem;
-  --text-7xl: 4.375rem;
-  --text-7xl--line-height: 4.5rem;
-  --text-8xl: 5.25rem;
-  --text-8xl--line-height: 5.4rem;
-  --text-9xl: 6.5rem;
-  --text-9xl--line-height: 6.65rem;
-
-  /* ─── Micro Type Scale ───────────────────────────────────────────────── */
-  /* Institutional label sizes — elevated for clear legibility */
-  --text-micro: 0.75rem;  /* 12px */
-  --text-label: 0.8125rem; /* 13px */
-  --text-caption: 0.875rem; /* 14px */
-
-  /* ─── Radius ─────────────────────────────────────────────────────────── */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
-
-  /* ─── Shadows ────────────────────────────────────────────────────────── */
-  --shadow-panel: 0 1px 2px rgba(12, 18, 22, 0.04), 0 4px 12px rgba(12, 18, 22, 0.03);
-  --shadow-panel-hover: 0 2px 4px rgba(12, 18, 22, 0.04), 0 8px 24px rgba(12, 18, 22, 0.06);
-  --shadow-float: 0 4px 8px rgba(12, 18, 22, 0.04), 0 16px 40px rgba(12, 18, 22, 0.08);
-  --shadow-elevation: 0 2px 4px rgba(12, 18, 22, 0.03), 0 12px 32px rgba(12, 18, 22, 0.06);
-}
-
 @layer base {
+  :root {
+    /* ─── AetherGrid Light Palette (Audit Master Specification) ─── */
+    --background: #F7F8FA;
+    --surface: #FFFFFF;
+    --surface-subtle: #F1F4F8;
+    --surface-elevated: #FFFFFF;
+
+    --foreground: #111827;
+    --foreground-secondary: #475569;
+    --foreground-muted: #64748B;
+
+    --border: #D9E0E8;
+    --border-subtle: #E8EDF2;
+
+    --primary: #3157D5;
+    --primary-hover: #2748B8;
+    --primary-muted: #E8EDFF;
+
+    --secondary-accent: #0E9AA7;
+
+    --success: #16845B;
+    --success-muted: #E6F5EE;
+    --warning: #A56500;
+    --warning-muted: #FEF7EA;
+    --error: #C23838;
+    --error-muted: #FDE8E8;
+    --info: #2767B1;
+    --info-muted: #EBF3FC;
+
+    /* Focus & Ring */
+    --ring: rgba(49, 87, 213, 0.4);
+    --ring-offset: #FFFFFF;
+
+    /* Radii */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    /* Shadows */
+    --shadow-subtle: 0 1px 3px rgba(17, 24, 39, 0.04), 0 1px 2px rgba(17, 24, 39, 0.02);
+    --shadow-card: 0 4px 12px rgba(17, 24, 39, 0.05), 0 1px 3px rgba(17, 24, 39, 0.03);
+    --shadow-elevated: 0 12px 28px rgba(17, 24, 39, 0.08), 0 2px 6px rgba(17, 24, 39, 0.04);
+  }
+
+  .dark {
+    /* ─── AetherGrid Dark Palette (Audit Master Specification) ─── */
+    --background: #0B0F17;
+    --surface: #111827;
+    --surface-subtle: #172033;
+    --surface-elevated: #1B2638;
+
+    --foreground: #F8FAFC;
+    --foreground-secondary: #CBD5E1;
+    --foreground-muted: #94A3B8;
+
+    --border: #263449;
+    --border-subtle: #1D293B;
+
+    --primary: #6F8CFF;
+    --primary-hover: #8DA4FF;
+    --primary-muted: #1B2A5A;
+
+    --secondary-accent: #4DD4D8;
+
+    --success: #47D18C;
+    --success-muted: #0F3322;
+    --warning: #F4B94F;
+    --warning-muted: #3B2A0A;
+    --error: #FF7A7A;
+    --error-muted: #3D1414;
+    --info: #75B7FF;
+    --info-muted: #12284C;
+
+    /* Focus & Ring */
+    --ring: rgba(111, 140, 255, 0.5);
+    --ring-offset: #111827;
+
+    /* Shadows */
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-card: 0 4px 14px rgba(0, 0, 0, 0.35);
+    --shadow-elevated: 0 12px 32px rgba(0, 0, 0, 0.5);
+  }
+
+  * {
+    border-color: var(--border);
+    box-sizing: border-box;
+  }
+
   html {
     scroll-behavior: smooth;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter), Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     min-height: 100vh;
-    background: var(--color-surface);
-    color: var(--color-on-surface);
-    font-weight: 450;
+    margin: 0;
+    padding: 0;
+    transition: background-color 220ms ease, color 220ms ease;
     overflow-x: hidden;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  p {
-    color: var(--color-academic-slate);
-    font-size: var(--text-sm);
-    line-height: 1.65;
-  }
-
-  a,
-  button,
-  input,
-  textarea,
-  select {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  /* Prevent iOS automatic viewport zoom on input focus */
-  @media (max-width: 639px) {
-    input,
-    select,
-    textarea {
-      font-size: 16px !important;
-    }
-  }
-
-  ::selection {
-    background: var(--color-montfortian-blue);
-    color: #ffffff;
-  }
-
-  img {
-    font-style: italic;
-    transition: opacity 300ms ease;
-  }
-
+  /* Accessible Focus Rings */
   :focus-visible {
-    outline: 2px solid var(--color-heritage-gold-strong, #8a6625);
+    outline: 2px solid var(--primary);
     outline-offset: 2px;
   }
 
-  /* ─── Heading System ─────────────────────────────────────────────────── */
-  h1, h2, h3, h4, h5 {
-    color: var(--color-academic-slate);
-    font-weight: 700;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  h1 {
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-  }
-
-  h2 {
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-  }
-
-  h3 {
-    letter-spacing: -0.015em;
-    line-height: 1.22;
-  }
-
-  h4 {
-    letter-spacing: -0.01em;
-    line-height: 1.28;
-  }
-
-  /* ─── High Contrast Supporting Text ──────────────────────────────────── */
-  .text-academic-slate\/60 {
-    color: color-mix(in srgb, var(--color-academic-slate) 82%, transparent) !important;
-  }
-  .text-academic-slate\/70 {
-    color: color-mix(in srgb, var(--color-academic-slate) 88%, transparent) !important;
-  }
-  .text-academic-slate\/75 {
-    color: color-mix(in srgb, var(--color-academic-slate) 91%, transparent) !important;
-  }
-  .text-academic-slate\/80 {
-    color: color-mix(in srgb, var(--color-academic-slate) 95%, transparent) !important;
-  }
-  .text-academic-slate\/85 {
-    color: color-mix(in srgb, var(--color-academic-slate) 97%, transparent) !important;
-  }
-  .text-royal-cream\/80 {
-    color: color-mix(in srgb, var(--color-royal-cream) 92%, transparent) !important;
-  }
-
-  /* ─── Gold-accented text refinement ──────────────────────────────────── */
-  [class*="text-heritage-gold"],
-  [class*="text-gold"] {
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    letter-spacing: 0.02em;
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+/* ─── Audit Typography System ─── */
+.type-display {
+  font-size: 48px;
+  font-weight: 650;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
 
-  *,
-  *::before,
-  *::after {
+.type-h1 {
+  font-size: 36px;
+  font-weight: 650;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.type-h2 {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+}
+
+.type-h3 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.type-body-large {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.type-body {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.type-label {
+  font-size: 13px;
+  font-weight: 550;
+  line-height: 1.35;
+}
+
+.type-caption {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.type-metric {
+  font-size: 30px;
+  font-weight: 650;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── AetherGrid Interconnected Grid Thread Motif ─── */
+.grid-thread-subtle {
+  background-image: 
+    linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: center top;
+}
+
+.grid-thread-accent {
+  background-image: 
+    radial-gradient(circle at center, rgba(49, 87, 213, 0.08) 0, transparent 70%),
+    linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+}
+
+.dark .grid-thread-accent {
+  background-image: 
+    radial-gradient(circle at center, rgba(111, 140, 255, 0.09) 0, transparent 70%),
+    linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+}
+
+/* ─── Core Surface Styles ─── */
+.ag-surface {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-subtle);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.ag-surface-elevated {
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.ag-surface-subtle {
+  background-color: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+/* ─── Interactive Micro-transitions ─── */
+.interactive-hover {
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+}
+
+.interactive-hover:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-card);
+}
+
+.interactive-press:active {
+  transform: scale(0.99);
+}
+
+/* ─── Accessible Minimum Touch Target ─── */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* ─── Motion Preferences ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
-
-/* ─── Skip Link ───────────────────────────────────────────────────────── */
-.skip-link {
-  position: fixed;
-  left: 1rem;
-  top: 1rem;
-  z-index: 200;
-  transform: translateY(-150%);
-  background: var(--color-deep-navy);
-  border: 2px solid var(--color-heritage-gold);
-  color: #ffffff;
-  padding: 0.75rem 1.25rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.75rem;
-  transition: transform 200ms ease;
-  border-radius: var(--radius-sm);
-}
-
-.skip-link:focus {
-  transform: translateY(0);
-}
-
-/* ─── Section Texture ─────────────────────────────────────────────────── */
-.section-texture {
-  position: relative;
-  isolation: isolate;
-}
-
-.section-texture::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.35;
-  background-image:
-    linear-gradient(rgba(15, 76, 129, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 76, 129, 0.03) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-}
-
-/* ─── Gold Rule Divider ───────────────────────────────────────────────── */
-.gold-rule {
-  display: block;
-  height: 1.5px;
-  width: 2.25rem;
-  background: var(--color-heritage-gold);
-  margin-top: 0.5rem;
-}
-
-@media (min-width: 768px) {
-  .gold-rule {
-    width: 2.5rem;
-    margin-top: 0.875rem;
-  }
-}
-
-.gold-rule-center {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.gold-rule-left {
-  margin-left: 0;
-}
-
-/* ─── Premium Focus Ring ──────────────────────────────────────────────── */
-.premium-focus {
-  outline: none;
-}
-
-.premium-focus:focus-visible {
-  box-shadow:
-    0 0 0 2px var(--color-surface-container-lowest, #ffffff),
-    0 0 0 5px var(--color-montfortian-blue);
-}
-
-/* ─── Stone Pattern ───────────────────────────────────────────────────── */
-.stone-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23E5E1D8' fill-opacity='0.12'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-
-/* ─── Noise Overlay ──────────────────────────────────────────────────── */
-/* Fixed full-viewport texture. z-index keeps it above the page canvas but
-   below all interactive UI (modals/drawers are z-50). pointer-events: none
-   lets clicks pass through. The ultra-low opacity (0.011) adds a subtle
-   tactile grain without affecting contrast. */
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.011'/%3E%3C/svg%3E");
-}
-
-/* ─── Animations ──────────────────────────────────────────────────────── */
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.3s ease-out both;
-}
-
-@keyframes loading {
-  0% { transform: translateX(-100%); }
-  50% { transform: translateX(200%); }
-  100% { transform: translateX(-100%); }
-}
-
-/* ─── Scrollbar Hide ──────────────────────────────────────────────────── */
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-none {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* ─── Editorial Rule ──────────────────────────────────────────────────── */
-.editorial-rule {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-heritage-gold), transparent);
-  opacity: 0.6;
-}
-
-/* ─── Premium Panel Shadows ───────────────────────────────────────────── */
-.shadow-panel {
-  box-shadow: var(--shadow-panel);
-}
-
-.shadow-panel-hover {
-  box-shadow: var(--shadow-panel-hover);
-}
-
-.shadow-float {
-  box-shadow: var(--shadow-float);
-}
-
-.shadow-elevation {
-  box-shadow: var(--shadow-elevation);
-}
-
-/* ─── Refined Scrollbar (institutional thin gold-accented) ────────────── */
-@media (min-width: 768px) {
-  ::-webkit-scrollbar {
-    width: 9px;
-    height: 9px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: rgba(194, 155, 83, 0.35);
-    border-radius: 9999px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(194, 155, 83, 0.6);
-    background-clip: content-box;
-  }
-}
-
-/* ─── Unified Faculty Portrait Normalization ─────────────────────────── */
-.faculty-portrait-frame {
-  aspect-ratio: 3 / 4;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  background-color: var(--color-royal-cream);
-}
-
-.faculty-portrait-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-

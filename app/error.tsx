@@ -2,7 +2,8 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { AlertTriangle, Home, RotateCcw } from "lucide-react";
+import { AlertCircle, ShieldCheck, RefreshCw, Home } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Error({
   error,
@@ -12,49 +13,46 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log to console for debugging; in production, send to a logging service.
-    console.error("Application error:", error);
+    console.error("AetherGrid application error:", error);
   }, [error]);
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center bg-surface px-5">
-      <div className="max-w-lg w-full text-center">
-        {/* Warning icon */}
-        <div className="mx-auto mb-6 h-16 w-16 rounded-full border-2 border-heritage-gold/30 flex items-center justify-center">
-          <AlertTriangle className="h-8 w-8 text-heritage-gold-strong" aria-hidden="true" />
+    <div className="min-h-[80vh] flex items-center justify-center bg-[var(--background)] px-4 py-16 text-[var(--foreground)]">
+      <div className="max-w-md w-full p-8 rounded-[16px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)] text-center">
+        <div className="w-14 h-14 rounded-full bg-[var(--error-muted)] text-[var(--error)] flex items-center justify-center mx-auto mb-5">
+          <AlertCircle className="w-7 h-7" />
         </div>
 
-        <h1 className="font-serif text-2xl md:text-3xl font-bold text-academic-slate tracking-tight">
-          Something Went Wrong
-        </h1>
-
-        <span className="gold-rule gold-rule-center mt-5 mb-6" />
-
-        <p className="text-sm md:text-base leading-7 text-academic-slate/70 font-sans max-w-md mx-auto">
-          Something went wrong. Please try again.
+        <h1 className="type-h2 font-bold mb-2">Something went wrong</h1>
+        <p className="text-[14px] text-[var(--foreground-secondary)] mb-6">
+          An unexpected interface error occurred while rendering this view.
         </p>
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-          <button
-            onClick={reset}
-            className="inline-flex items-center justify-center gap-2 bg-montfortian-blue px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white hover:bg-montfortian-blue-light transition-colors duration-300 rounded-sm font-sans shadow-panel hover:shadow-panel-hover cursor-pointer"
-          >
-            <RotateCcw className="h-4 w-4" aria-hidden="true" />
-            Try Again
-          </button>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center gap-2 border border-stone-texture/60 bg-white px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-academic-slate hover:border-heritage-gold/40 hover:bg-royal-cream/20 transition-all duration-300 rounded-sm font-sans"
-          >
-            <Home className="h-4 w-4" aria-hidden="true" />
-            Back to Homepage
-          </Link>
+        <div className="p-3.5 rounded-[10px] bg-[var(--surface-subtle)] border border-[var(--border-subtle)] text-[12px] text-left text-[var(--foreground-secondary)] space-y-1.5 mb-6">
+          <div className="flex items-center gap-1.5 font-semibold text-[var(--foreground)]">
+            <ShieldCheck className="w-4 h-4 text-[var(--success)]" />
+            <span>Is my data safe?</span>
+          </div>
+          <div>Yes. Your encrypted files and node allocations are held safely on the distributed storage network.</div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button onClick={reset} size="default" className="gap-2">
+            <RefreshCw className="w-4 h-4" />
+            <span>Try Again</span>
+          </Button>
+          <Button asChild variant="secondary" size="default">
+            <Link href="/" className="gap-2">
+              <Home className="w-4 h-4" />
+              <span>Back to Home</span>
+            </Link>
+          </Button>
         </div>
 
         {error.digest && (
-          <p className="mt-10 text-[10px] font-mono uppercase tracking-wider text-academic-slate/30 font-sans">
-            Reference: {error.digest}
-          </p>
+          <div className="mt-6 text-[11px] font-mono text-[var(--foreground-muted)]">
+            Event Reference: {error.digest}
+          </div>
         )}
       </div>
     </div>

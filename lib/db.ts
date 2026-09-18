@@ -308,7 +308,9 @@ function ensureNode001Provisioned(db: DatabaseSync): void {
   const isServerless = process.env.VERCEL === "1" || !!process.env.AWS_LAMBDA_FUNCTION_NAME || !!process.env.NOW_REGION;
   const defaultStoragePath = isServerless
     ? path.join("/tmp", "aethergrid-storage")
-    : (process.platform === "win32" ? "D:\\AetherGridStorage" : path.resolve(process.cwd(), "data", "storage"));
+    : (process.platform === "win32"
+        ? (fs.existsSync("D:\\") ? "D:\\AetherGridStorage" : (fs.existsSync("E:\\") ? "E:\\AetherGridStorage" : path.resolve(process.cwd(), "data", "storage")))
+        : path.resolve(process.cwd(), "data", "storage"));
   const storagePath = process.env.AETHERGRID_NODE_STORAGE_PATH || defaultStoragePath;
   const capacityGb = parseInt(process.env.AETHERGRID_NODE_CAPACITY_GB || "50", 10);
   const capacityBytes = BigInt(capacityGb) * BigInt(1024) * BigInt(1024) * BigInt(1024);

@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { cn } from "@/lib/utils";
 
 function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
@@ -7,8 +6,8 @@ function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
     <textarea
       data-slot="textarea"
       className={cn(
-        "min-h-28 w-full rounded-sm border border-stone-texture/80 bg-white px-4 py-3 text-sm text-academic-slate outline-none transition-all duration-200 placeholder:text-academic-slate/40 focus:border-montfortian-blue focus:ring-2 focus:ring-montfortian-blue/10 disabled:cursor-not-allowed disabled:opacity-50",
-        className,
+        "min-h-24 w-full rounded-[8px] border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2.5 text-[14px] text-[var(--foreground)] outline-none transition-all duration-150 placeholder:text-[var(--foreground-muted)] focus-visible:border-[var(--primary)] focus-visible:ring-2 focus-visible:ring-[var(--primary-muted)] disabled:cursor-not-allowed disabled:opacity-50",
+        className
       )}
       {...props}
     />

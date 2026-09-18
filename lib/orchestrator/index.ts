@@ -147,7 +147,7 @@ export function getNodeChunksDir(node: { id: string; storage_directory?: string 
   if (!baseDir || baseDir.startsWith("local://") || !path.isAbsolute(baseDir) || (isServerless && !fs.existsSync(baseDir))) {
     baseDir = isServerless
       ? path.join("/tmp", "aethergrid-chunks")
-      : (process.env.AETHERGRID_NODE_STORAGE_PATH || (process.platform === "win32" ? "D:\\AetherGridStorage" : path.resolve(process.cwd(), "data", "storage")));
+      : (process.env.AETHERGRID_NODE_STORAGE_PATH || (process.platform === "win32" ? (fs.existsSync("D:\\") ? "D:\\AetherGridStorage" : (fs.existsSync("E:\\") ? "E:\\AetherGridStorage" : path.resolve(process.cwd(), "data", "storage"))) : path.resolve(process.cwd(), "data", "storage")));
   }
 
   const chunksDir = path.join(baseDir, "chunks");

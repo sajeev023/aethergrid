@@ -1,6 +1,5 @@
 import * as React from "react";
 import { ChevronDown } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 
 function Select({
@@ -9,12 +8,12 @@ function Select({
   ...props
 }: React.ComponentProps<"select">) {
   return (
-    <span className="relative block">
+    <span className="relative block w-full">
       <select
         data-slot="select"
         className={cn(
-          "h-12 w-full appearance-none rounded-sm border border-stone-texture/80 bg-white px-4 py-3 pr-11 text-sm text-academic-slate outline-none transition-all duration-200 focus:border-montfortian-blue focus:ring-2 focus:ring-montfortian-blue/10",
-          className,
+          "h-[44px] w-full appearance-none rounded-[8px] border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2 pr-10 text-[14px] text-[var(--foreground)] outline-none transition-all duration-150 focus-visible:border-[var(--primary)] focus-visible:ring-2 focus-visible:ring-[var(--primary-muted)]",
+          className
         )}
         {...props}
       >
@@ -22,7 +21,7 @@ function Select({
       </select>
       <ChevronDown
         aria-hidden="true"
-        className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-academic-slate/50"
+        className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--foreground-muted)]"
       />
     </span>
   );

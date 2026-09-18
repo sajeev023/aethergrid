@@ -22,6 +22,10 @@ async function runMarketplaceE2ETest() {
   console.log("=======================================================\n");
 
   const db = getDatabase();
+  try {
+    db.prepare("DELETE FROM storage_nodes WHERE id IN ('node_alpha', 'node_beta')").run();
+    setNodeStatus("AETHERGRID-NODE-001", "PAUSED");
+  } catch {}
 
   // 1. Create Provider Alice & Node Alpha
   console.log("[1/7] Provisioning Giver Node Alpha (Alice)...");
@@ -138,6 +142,9 @@ async function runMarketplaceE2ETest() {
   console.log("\n[7/7] Reconnecting Node Alpha & Restoring Redundancy...");
   setNodeStatus("node_alpha", "ONLINE");
   recordNodeHeartbeat("node_alpha", 0, 50 * 1024 * 1024 * 1024, 5);
+  try {
+    setNodeStatus("AETHERGRID-NODE-001", "ONLINE");
+  } catch {}
   evaluateNodeHealth();
 
   const restoredDownload = await retrieveAndDecryptFile(storedFile.id, charlie.id);

@@ -1,38 +1,41 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "premium-focus inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm font-sans font-bold tracking-[0.12em] sm:tracking-[0.14em] uppercase transition-all duration-300 disabled:pointer-events-none disabled:opacity-50 cursor-pointer select-none active:scale-[0.99]",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[8px] font-medium transition-all duration-150 disabled:pointer-events-none disabled:opacity-50 select-none cursor-pointer active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 outline-none",
   {
     variants: {
       variant: {
-        default:
-          "border border-transparent bg-montfortian-blue text-white shadow-panel hover:bg-deep-navy hover:border-heritage-gold/70 hover:shadow-float active:bg-deep-navy",
+        primary:
+          "bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] shadow-sm font-semibold",
         secondary:
-          "border border-heritage-gold/50 bg-transparent text-heritage-gold-strong hover:border-montfortian-blue hover:text-montfortian-blue hover:bg-white hover:shadow-panel active:bg-royal-cream/60",
-        ghost:
-          "border border-transparent bg-transparent text-academic-slate hover:bg-surface-container-low hover:text-montfortian-blue active:bg-surface-container",
-        inverse:
-          "border border-white/30 bg-white/5 text-white backdrop-blur-sm hover:bg-white hover:text-deep-navy hover:border-white active:bg-white/90",
+          "border border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:bg-[var(--surface-subtle)] hover:border-[var(--border-subtle)]",
+        tertiary:
+          "text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)]",
+        destructive:
+          "bg-[var(--error)] text-white hover:opacity-90 shadow-sm",
         outline:
-          "border border-stone-texture bg-white text-academic-slate hover:border-montfortian-blue hover:text-montfortian-blue hover:shadow-panel active:bg-royal-cream/50",
-        gold: "border border-heritage-gold bg-heritage-gold text-white hover:bg-heritage-gold-strong hover:border-heritage-gold-strong shadow-panel active:bg-heritage-gold-strong",
+          "border border-[var(--border)] bg-transparent text-[var(--foreground)] hover:bg-[var(--surface-subtle)]",
+        subtle:
+          "bg-[var(--primary-muted)] text-[var(--primary)] hover:opacity-90",
+        inverse:
+          "bg-white text-[var(--foreground)] hover:bg-white/90 shadow-sm font-semibold",
       },
       size: {
-        default: "min-h-[44px] h-11 sm:h-12 px-5 sm:px-7 text-xs",
-        sm: "min-h-[38px] h-9 sm:h-10 px-3.5 sm:px-5 text-xs sm:text-[11px]",
-        lg: "min-h-[48px] h-12 sm:h-14 px-6 sm:px-9 text-xs sm:text-sm",
-        icon: "min-h-[44px] min-w-[44px] h-11 w-11",
+        default: "h-[40px] px-4 text-[14px]",
+        sm: "h-[36px] px-3 text-[13px] rounded-[6px]",
+        lg: "h-[48px] px-6 text-[15px] font-semibold",
+        touch: "min-h-[44px] min-w-[44px] px-4 text-[14px]",
+        icon: "h-[40px] w-[40px] p-0",
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "primary",
       size: "default",
     },
-  },
+  }
 );
 
 export interface ButtonProps
@@ -41,22 +44,19 @@ export interface ButtonProps
   asChild?: boolean;
 }
 
-function Button({
-  className,
-  variant,
-  size,
-  asChild = false,
-  ...props
-}: ButtonProps) {
-  const Comp = asChild ? Slot : "button";
-
-  return (
-    <Comp
-      data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
-    />
-  );
-}
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    return (
+      <Comp
+        ref={ref}
+        data-slot="button"
+        className={cn(buttonVariants({ variant, size, className }))}
+        {...props}
+      />
+    );
+  }
+);
+Button.displayName = "Button";
 
 export { Button, buttonVariants };

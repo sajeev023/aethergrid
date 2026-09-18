@@ -27,8 +27,8 @@ async function runProductionTestSuite() {
   const db = getDatabase();
 
   // ─── TEST 1: Dedicated Disk Verification (Non-C:) ───────────────────────
-  console.log("[1/8] Verifying Dedicated Physical Storage Node (Drive D:)...");
-  const storagePath = process.env.AETHERGRID_NODE_STORAGE_PATH || "D:\\AetherGridStorage";
+  console.log("[1/8] Verifying Dedicated Physical Storage Node...");
+  const storagePath = process.env.AETHERGRID_NODE_STORAGE_PATH || (fs.existsSync("D:\\AetherGridStorage") ? "D:\\AetherGridStorage" : (fs.existsSync("E:\\AetherGridStorage") ? "E:\\AetherGridStorage" : (fs.existsSync("D:\\") ? "D:\\AetherGridStorage" : "E:\\AetherGridStorage")));
   
   if (storagePath.toUpperCase().startsWith("C:")) {
     throw new Error("VIOLATION: Storage path must NOT be located on Windows C: drive!");
@@ -76,12 +76,12 @@ async function runProductionTestSuite() {
   // Test sandbox root assertion
   let rootEscapeBlocked = false;
   try {
-    assertPathInsideStorageRoot("D:\\Downloads\\test.txt", "D:\\AetherGridStorage\\chunks");
+    assertPathInsideStorageRoot("C:\\Windows\\System32\\test.txt", path.join(storagePath, "chunks"));
   } catch {
     rootEscapeBlocked = true;
   }
   if (!rootEscapeBlocked) throw new Error("SECURITY VULNERABILITY: Path outside storage root was not rejected!");
-  console.log("  ✅ Sandbox Boundary Defense: Escaping D:\\AetherGridStorage\\chunks was strictly rejected!");
+  console.log(`  ✅ Sandbox Boundary Defense: Escaping ${storagePath}\\chunks was strictly rejected!`);
 
   // ─── TEST 3: Multi-Tenant Authorization & IDOR Protection ────────────────
   console.log("\n[3/8] Testing Multi-Tenant Isolation & IDOR Protection...");
@@ -264,7 +264,7 @@ async function runProductionTestSuite() {
   console.log("\n[8/8] Verifying Storage Node Physical Disk Cleanup...");
   await deleteFileDistributed(aliceFile.id, alice.id);
   const remainingChunks = fs.readdirSync(path.join(storagePath, "chunks"));
-  console.log(`  Remaining Physical Chunks on D:\\AetherGridStorage\\chunks: ${remainingChunks.length}`);
+  console.log(`  Remaining Physical Chunks on ${storagePath}\\chunks: ${remainingChunks.length}`);
   console.log("  ✅ Physical Shredding: Deleted chunks safely wiped from physical disk.");
 
   console.log("\n=======================================================");

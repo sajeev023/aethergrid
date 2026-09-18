@@ -3,38 +3,53 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { 
-  Cloud, 
-  HardDrive, 
-  Server, 
-  Smartphone, 
-  Activity, 
-  LogOut, 
-  LogIn, 
-  Layers, 
+import {
+  Cloud,
+  HardDrive,
+  Activity,
+  LogOut,
+  Layers,
+  Smartphone,
+  Menu,
+  X,
+  Sun,
+  Moon,
   ShieldCheck,
-  Zap,
-  ArrowRightLeft
 } from "lucide-react";
+import { WorkspaceSwitcher } from "./workspace-switcher";
+import { useTheme } from "./theme-provider";
+import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 export function AetherNav() {
   const pathname = usePathname();
   const router = useRouter();
+  const { theme, toggleTheme } = useTheme();
+
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     fetch("/api/auth/me")
-      .then((res) => {
-        if (res.ok) return res.json();
-        return { user: null };
-      })
+      .then((res) => (res.ok ? res.json() : { user: null }))
       .then((data) => {
         setUser(data.user);
         setLoading(false);
       })
       .catch(() => setLoading(false));
+    setMobileMenuOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setMobileMenuOpen(false);
+    }
+    if (mobileMenuOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+      return () => document.removeEventListener("keydown", handleKeyDown);
+    }
+  }, [mobileMenuOpen]);
 
   const handleLogout = async () => {
     await fetch("/api/auth/logout", { method: "POST" });
@@ -42,148 +57,186 @@ export function AetherNav() {
     router.push("/login");
   };
 
-  const handleSwitchRole = async (targetRole: "GIVER" | "TAKER") => {
-    try {
-      const res = await fetch("/api/auth/switch-role", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ targetRole }),
-      });
-      if (res.ok) {
-        if (targetRole === "GIVER") router.push("/giver");
-        else router.push("/dashboard");
-      }
-    } catch {}
-  };
-
-  const isGiver = pathname.startsWith("/giver");
-  const isTaker = pathname.startsWith("/dashboard");
+  const isGiver = pathname.startsWith("/giver") || user?.activeRole === "GIVER";
+  const isSimulator = pathname.startsWith("/mobile-simulator");
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Brand Logo */}
-        <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-500 to-emerald-400 p-[1.5px] shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-all">
-              <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                <Layers className="w-5 h-5 text-cyan-400" />
-              </div>
+    <header className="sticky top-0 z-50 w-full border-b border-[var(--border)] bg-[var(--surface)]/90 backdrop-blur-md transition-colors">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+        {/* Left: Brand Lockup + Workspace Switcher */}
+        <div className="flex items-center gap-4 sm:gap-6">
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 group focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded-[8px] p-1 -m-1"
+            aria-label="AetherGrid Home"
+          >
+            <div className="w-8 h-8 rounded-[8px] bg-[var(--primary)] flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
+              <Layers className="w-4.5 h-4.5" />
             </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-bold text-lg tracking-tight text-white group-hover:text-cyan-300 transition-colors">
-                  AetherGrid
-                </span>
-                <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
-                  P2P Grid
-                </span>
-              </div>
-            </div>
+            <span className="type-h3 text-[var(--foreground)] font-bold tracking-tight">
+              AetherGrid
+            </span>
           </Link>
 
-          {/* Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1">
-            <Link
-              href="/"
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                pathname === "/"
-                  ? "bg-white/10 text-white"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              Marketplace
-            </Link>
-
-            <Link
-              href="/dashboard"
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                isTaker
-                  ? "bg-blue-500/20 text-blue-300 border border-blue-500/30"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              <Cloud className="w-4 h-4 text-blue-400" />
-              My Cloud
-            </Link>
-
-            <Link
-              href="/giver"
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                isGiver
-                  ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              <HardDrive className="w-4 h-4 text-emerald-400" />
-              Giver Hub
-            </Link>
-
-            <Link
-              href="/mobile-simulator"
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                pathname.startsWith("/mobile-simulator")
-                  ? "bg-purple-500/20 text-purple-300 border border-purple-500/30"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              <Smartphone className="w-4 h-4 text-purple-400" />
-              Phone Sync
-            </Link>
-
-            <Link
-              href="/admin"
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                pathname.startsWith("/admin")
-                  ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              <Activity className="w-4 h-4 text-cyan-400" />
-              Telemetry
-            </Link>
-          </nav>
+          {/* Role-Aware Workspace Switcher when authenticated */}
+          {user && (
+            <div className="hidden sm:block">
+              <WorkspaceSwitcher
+                currentRole={isGiver ? "GIVER" : "TAKER"}
+                userEmail={user.email}
+              />
+            </div>
+          )}
         </div>
 
-        {/* Right CTA / User State */}
-        <div className="flex items-center gap-3">
-          {loading ? (
-            <div className="w-20 h-8 rounded-lg bg-white/5 animate-pulse" />
-          ) : user ? (
-            <div className="flex items-center gap-3">
-              {/* Quick Role Toggle */}
-              {isGiver ? (
-                <button
-                  onClick={() => handleSwitchRole("TAKER")}
-                  className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/30 hover:bg-blue-500/20 transition-all cursor-pointer"
-                  title="Switch to Taker Mode"
+        {/* Center: Desktop Navigation Links */}
+        <nav
+          className="hidden md:flex items-center gap-1 text-[14px]"
+          aria-label="Primary Navigation"
+        >
+          {user ? (
+            isGiver ? (
+              // ── GIVER WORKSPACE NAVIGATION ──
+              <>
+                <Link
+                  href="/giver"
+                  className={cn(
+                    "px-3 py-1.5 rounded-[8px] font-medium transition-colors",
+                    pathname === "/giver"
+                      ? "bg-[var(--surface-subtle)] text-[var(--primary)] font-semibold"
+                      : "text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+                  )}
                 >
-                  <ArrowRightLeft className="w-3.5 h-3.5" />
-                  Switch to My Cloud
-                </button>
-              ) : (
-                <button
-                  onClick={() => handleSwitchRole("GIVER")}
-                  className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all cursor-pointer"
-                  title="Switch to Giver Mode"
+                  My Nodes
+                </Link>
+                <Link
+                  href="/giver/setup"
+                  className={cn(
+                    "px-3 py-1.5 rounded-[8px] font-medium transition-colors",
+                    pathname.startsWith("/giver/setup")
+                      ? "bg-[var(--surface-subtle)] text-[var(--primary)] font-semibold"
+                      : "text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+                  )}
                 >
-                  <ArrowRightLeft className="w-3.5 h-3.5" />
-                  Switch to Giver Hub
-                </button>
-              )}
+                  Connect Storage
+                </Link>
+                <Link
+                  href="/mobile-simulator"
+                  className={cn(
+                    "flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] font-medium transition-colors",
+                    isSimulator
+                      ? "bg-[var(--surface-subtle)] text-[var(--primary)] font-semibold"
+                      : "text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+                  )}
+                >
+                  <Smartphone className="w-3.5 h-3.5 text-[var(--secondary-accent)]" />
+                  Simulator
+                </Link>
+              </>
+            ) : (
+              // ── TAKER WORKSPACE NAVIGATION ──
+              <>
+                <Link
+                  href="/dashboard"
+                  className={cn(
+                    "px-3 py-1.5 rounded-[8px] font-medium transition-colors",
+                    pathname === "/dashboard"
+                      ? "bg-[var(--surface-subtle)] text-[var(--primary)] font-semibold"
+                      : "text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+                  )}
+                >
+                  Files
+                </Link>
+                <Link
+                  href="/dashboard?tab=backups"
+                  className={cn(
+                    "px-3 py-1.5 rounded-[8px] font-medium transition-colors",
+                    pathname.includes("tab=backups")
+                      ? "bg-[var(--surface-subtle)] text-[var(--primary)] font-semibold"
+                      : "text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+                  )}
+                >
+                  Backups
+                </Link>
+                <Link
+                  href="/dashboard?tab=health"
+                  className={cn(
+                    "px-3 py-1.5 rounded-[8px] font-medium transition-colors",
+                    pathname.includes("tab=health")
+                      ? "bg-[var(--surface-subtle)] text-[var(--primary)] font-semibold"
+                      : "text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+                  )}
+                >
+                  Storage Health
+                </Link>
+                <Link
+                  href="/mobile-simulator"
+                  className={cn(
+                    "flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] font-medium transition-colors",
+                    isSimulator
+                      ? "bg-[var(--surface-subtle)] text-[var(--primary)] font-semibold"
+                      : "text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+                  )}
+                >
+                  <Smartphone className="w-3.5 h-3.5 text-[var(--secondary-accent)]" />
+                  Simulator
+                </Link>
+              </>
+            )
+          ) : (
+            // ── PUBLIC UNINITIALIZED NAVIGATION ──
+            <>
+              <Link
+                href="/#get-storage"
+                className="px-3 py-1.5 rounded-[8px] font-medium text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)] transition-colors"
+              >
+                Get Storage
+              </Link>
+              <Link
+                href="/#give-storage"
+                className="px-3 py-1.5 rounded-[8px] font-medium text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)] transition-colors"
+              >
+                Give Storage
+              </Link>
+              <Link
+                href="/mobile-simulator"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] font-medium text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)] transition-colors"
+              >
+                <Smartphone className="w-3.5 h-3.5 text-[var(--secondary-accent)]" />
+                Failover Simulator
+              </Link>
+            </>
+          )}
+        </nav>
 
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span className="text-white font-medium">{user.name}</span>
-                <span className="text-slate-400 text-[10px] uppercase font-mono px-1 py-0.5 rounded bg-white/5">
-                  {user.activeRole || "TAKER"}
-                </span>
+        {/* Right: Actions, Theme Toggle, Auth */}
+        <div className="flex items-center gap-2">
+          {/* Theme Toggle Button */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="p-2 rounded-[8px] border border-[var(--border)] text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)] transition-colors cursor-pointer"
+            aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+            title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+          >
+            {theme === "light" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+          </button>
+
+          {loading ? (
+            <div className="w-20 h-9 rounded-[8px] bg-[var(--surface-subtle)] animate-pulse" />
+          ) : user ? (
+            <div className="flex items-center gap-2">
+              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-[8px] bg-[var(--surface-subtle)] border border-[var(--border-subtle)] text-[12px] text-[var(--foreground-secondary)]">
+                <span className="w-2 h-2 rounded-full bg-[var(--success)]" />
+                <span className="font-medium truncate max-w-[120px]">{user.name}</span>
               </div>
 
               <button
+                type="button"
                 onClick={handleLogout}
-                className="p-2 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
-                title="Logout"
+                className="p-2 rounded-[8px] border border-[var(--border)] text-[var(--foreground-secondary)] hover:text-[var(--error)] hover:bg-[var(--error-muted)] transition-colors cursor-pointer"
+                title="Log out"
+                aria-label="Log out"
               >
                 <LogOut className="w-4 h-4" />
               </button>
@@ -192,21 +245,136 @@ export function AetherNav() {
             <div className="flex items-center gap-2">
               <Link
                 href="/login"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+                className="px-3 py-1.5 rounded-[8px] text-[13px] font-medium text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)] transition-colors"
               >
-                <LogIn className="w-4 h-4" />
                 Sign In
               </Link>
-              <Link
-                href="/signup"
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold bg-cyan-500 text-slate-950 hover:bg-cyan-400 transition-colors shadow-lg shadow-cyan-500/20"
-              >
-                Get Started
-              </Link>
+              <Button asChild size="sm">
+                <Link href="/signup">Get Started</Link>
+              </Button>
+            </div>
+          )}
+
+          {/* Mobile Menu Button */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded-[8px] border border-[var(--border)] text-[var(--foreground-secondary)] hover:text-[var(--foreground)] cursor-pointer"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Drawer Navigation */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t border-[var(--border)] bg-[var(--surface)] px-4 py-4 space-y-3 animate-in slide-in-from-top-2 duration-150">
+          {user && (
+            <div className="pb-3 border-b border-[var(--border-subtle)]">
+              <WorkspaceSwitcher
+                currentRole={isGiver ? "GIVER" : "TAKER"}
+                userEmail={user.email}
+                className="w-full"
+              />
+            </div>
+          )}
+
+          <div className="flex flex-col space-y-1">
+            {user ? (
+              isGiver ? (
+                <>
+                  <Link
+                    href="/giver"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-2 px-3 py-2.5 rounded-[8px] text-[14px] text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+                  >
+                    <HardDrive className="w-4 h-4 text-[var(--secondary-accent)]" />
+                    My Nodes
+                  </Link>
+                  <Link
+                    href="/giver/setup"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-2 px-3 py-2.5 rounded-[8px] text-[14px] text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+                  >
+                    <Activity className="w-4 h-4 text-[var(--primary)]" />
+                    Connect Storage
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-2 px-3 py-2.5 rounded-[8px] text-[14px] text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+                  >
+                    <Cloud className="w-4 h-4 text-[var(--primary)]" />
+                    My Cloud Files
+                  </Link>
+                  <Link
+                    href="/dashboard?tab=backups"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-2 px-3 py-2.5 rounded-[8px] text-[14px] text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+                  >
+                    <Smartphone className="w-4 h-4 text-[var(--secondary-accent)]" />
+                    Mobile Backups
+                  </Link>
+                  <Link
+                    href="/dashboard?tab=health"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-2 px-3 py-2.5 rounded-[8px] text-[14px] text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+                  >
+                    <ShieldCheck className="w-4 h-4 text-[var(--success)]" />
+                    Storage Health
+                  </Link>
+                </>
+              )
+            ) : (
+              <>
+                <Link
+                  href="/#get-storage"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-3 py-2.5 rounded-[8px] text-[14px] text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+                >
+                  Get Storage
+                </Link>
+                <Link
+                  href="/#give-storage"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-3 py-2.5 rounded-[8px] text-[14px] text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+                >
+                  Give Storage
+                </Link>
+              </>
+            )}
+
+            <Link
+              href="/mobile-simulator"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 px-3 py-2.5 rounded-[8px] text-[14px] text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
+            >
+              <Smartphone className="w-4 h-4 text-[var(--secondary-accent)]" />
+              Failover Simulator
+            </Link>
+          </div>
+
+          {!user && (
+            <div className="pt-3 border-t border-[var(--border-subtle)] flex items-center gap-2">
+              <Button asChild variant="outline" className="w-full">
+                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                  Sign In
+                </Link>
+              </Button>
+              <Button asChild className="w-full">
+                <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
+                  Get Started
+                </Link>
+              </Button>
             </div>
           )}
         </div>
-      </div>
+      )}
     </header>
   );
 }

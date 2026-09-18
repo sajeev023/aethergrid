@@ -2,30 +2,33 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { 
-  HardDrive, 
-  Server, 
-  TrendingUp, 
-  Plus, 
-  Activity, 
-  Copy, 
-  Check, 
-  Play, 
-  Pause, 
-  PowerOff, 
-  Power, 
-  Clock, 
-  Database,
+import {
+  HardDrive,
+  Server,
+  Plus,
+  ChevronDown,
+  ChevronRight,
+  Copy,
+  Check,
+  Power,
+  RefreshCw,
   Coins,
-  ShieldCheck,
-  AlertTriangle
+  Info,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { EmptyState } from "@/components/ui/empty-state";
+import { NodeCardSkeleton } from "@/components/ui/skeleton";
+import { StorageMeter } from "@/components/ui/storage-meter";
+import { cn } from "@/lib/utils";
 
 export default function GiverPage() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [showAdvanced, setShowAdvanced] = useState<Record<string, boolean>>({});
+  const [utilizationModel, setUtilizationModel] = useState<"projected" | "maximum">("projected");
 
   const fetchDashboard = async () => {
     try {
@@ -41,7 +44,7 @@ export default function GiverPage() {
 
   useEffect(() => {
     fetchDashboard();
-    const interval = setInterval(fetchDashboard, 5000); // 5s refresh
+    const interval = setInterval(fetchDashboard, 6000);
     return () => clearInterval(interval);
   }, []);
 
@@ -67,278 +70,417 @@ export default function GiverPage() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  if (loading && !data) {
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">
-        <div className="flex items-center gap-2">
-          <div className="w-5 h-5 border-2 border-emerald-400 border-t-transparent rounded-full animate-spin" />
-          <span>Connecting to Provider Grid...</span>
-        </div>
-      </div>
-    );
-  }
+  const toggleAdvanced = (nodeId: string) => {
+    setShowAdvanced((prev) => ({ ...prev, [nodeId]: !prev[nodeId] }));
+  };
 
   const nodes = data?.nodes || [];
   const summary = data?.summary || {};
   const earnings = data?.earnings || {};
 
-  const totalCapGb = (summary.totalCapacityBytes || 0) / (1024 * 1024 * 1024);
-  const totalAllocGb = (summary.totalAllocatedBytes || 0) / (1024 * 1024 * 1024);
-  const totalUsedMb = (summary.totalUsedBytes || 0) / (1024 * 1024);
+  const totalCapGb = Math.round((summary.totalCapacityBytes || 0) / (1024 * 1024 * 1024));
+  const totalAllocGb = Math.round((summary.totalAllocatedBytes || 0) / (1024 * 1024 * 1024));
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Top Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-          <div>
-            <div className="flex items-center gap-2 text-emerald-400 text-xs font-mono uppercase mb-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              🟢 Storage Provider Command Center
+    <div className="min-h-[85vh] bg-[var(--background)] text-[var(--foreground)] py-8 px-4 sm:px-6">
+      <div className="max-w-[1200px] mx-auto space-y-8">
+        {/* ── HEADER ── */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-[16px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)]">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="text-[12px] font-semibold uppercase tracking-wider text-[var(--secondary-accent)] flex items-center gap-1.5">
+                <HardDrive className="w-3.5 h-3.5" /> Storage Provider Workspace
+              </span>
+              <StatusBadge status="ACTIVE" size="sm" />
             </div>
-            <h1 className="text-3xl font-extrabold text-white">My Storage Nodes</h1>
-            <p className="text-sm text-slate-400">
-              Manage spare storage capacity, inspect real-time heartbeats, and track live payouts.
+            <h1 className="type-h1 text-[var(--foreground)] font-bold">My Storage</h1>
+            <p className="text-[14px] text-[var(--foreground-secondary)]">
+              Manage your connected disk space, track health, and review estimated earnings.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
-            <Link
-              href="/giver/setup"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-sm transition-all shadow-lg shadow-emerald-500/20"
-            >
-              <Plus className="w-4 h-4" />
-              Connect New Node
-            </Link>
-          </div>
-        </div>
-
-        {/* Live Earnings & Metrics Ribbon */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {/* Earnings Card */}
-          <div className="rounded-2xl bg-gradient-to-br from-emerald-500/10 via-slate-900/60 to-slate-900 border border-emerald-500/30 p-5">
-            <div className="flex items-center justify-between text-xs text-slate-400 font-mono mb-2">
-              <span className="flex items-center gap-1.5 text-emerald-400">
-                <Coins className="w-4 h-4" /> Earnings (This Month)
-              </span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Live</span>
-            </div>
-            <div className="text-3xl font-extrabold text-white">
-              ₹{earnings.thisMonth?.toFixed(2) || "0.00"}
-            </div>
-            <div className="text-xs text-slate-400 mt-1">
-              Pending: <span className="text-emerald-400 font-medium">₹{earnings.pending?.toFixed(2) || "0.00"}</span>
-            </div>
-          </div>
-
-          {/* Active Nodes Card */}
-          <div className="rounded-2xl bg-slate-900/60 border border-white/10 p-5">
-            <div className="flex items-center justify-between text-xs text-slate-400 font-mono mb-2">
-              <span className="flex items-center gap-1.5 text-cyan-400">
-                <Server className="w-4 h-4" /> Online Nodes
-              </span>
-              <span className="text-xs text-white font-bold font-mono">
-                {summary.onlineNodes || 0} / {summary.totalNodes || 0}
-              </span>
-            </div>
-            <div className="text-3xl font-extrabold text-cyan-400">
-              {summary.onlineNodes || 0} Online
-            </div>
-            <div className="text-xs text-slate-400 mt-1">
-              {summary.offlineNodes > 0 ? (
-                <span className="text-rose-400 font-medium">{summary.offlineNodes} offline node(s)</span>
-              ) : (
-                <span className="text-emerald-400">All nodes healthy</span>
-              )}
-            </div>
-          </div>
-
-          {/* Capacity Committed Card */}
-          <div className="rounded-2xl bg-slate-900/60 border border-white/10 p-5">
-            <div className="flex items-center justify-between text-xs text-slate-400 font-mono mb-2">
-              <span className="flex items-center gap-1.5 text-blue-400">
-                <HardDrive className="w-4 h-4" /> Committed Space
-              </span>
-            </div>
-            <div className="text-3xl font-extrabold text-white">
-              {totalCapGb.toFixed(0)} <span className="text-sm font-normal text-slate-400">GB</span>
-            </div>
-            <div className="text-xs text-slate-400 mt-1">
-              Allocated: <span className="text-blue-400 font-medium">{totalAllocGb.toFixed(1)} GB</span>
-            </div>
-          </div>
-
-          {/* Stored Chunks / Used Card */}
-          <div className="rounded-2xl bg-slate-900/60 border border-white/10 p-5">
-            <div className="flex items-center justify-between text-xs text-slate-400 font-mono mb-2">
-              <span className="flex items-center gap-1.5 text-purple-400">
-                <Database className="w-4 h-4" /> Chunks Stored
-              </span>
-            </div>
-            <div className="text-3xl font-extrabold text-white">
-              {totalUsedMb.toFixed(1)} <span className="text-sm font-normal text-slate-400">MB</span>
-            </div>
-            <div className="text-xs text-slate-400 mt-1">
-              AES-256 encrypted peer chunks
-            </div>
-          </div>
-        </div>
-
-        {/* Storage Nodes List */}
-        <div className="rounded-2xl bg-white/[0.02] border border-white/10 overflow-hidden backdrop-blur-xl mb-8">
-          <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
-            <h2 className="text-lg font-bold text-white flex items-center gap-2">
-              <Server className="w-5 h-5 text-emerald-400" />
-              Connected Storage Daemons
-            </h2>
-            <span className="text-xs text-slate-400 font-mono">
-              Auto-refreshes every 5s
-            </span>
-          </div>
-
-          {nodes.length === 0 ? (
-            <div className="p-12 text-center">
-              <HardDrive className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-              <h3 className="text-lg font-bold text-white mb-1">No Storage Nodes Registered Yet</h3>
-              <p className="text-sm text-slate-400 max-w-md mx-auto mb-6">
-                You haven't connected any storage nodes. Connect your computer or server to start earning payouts for your idle space.
-              </p>
-              <Link
-                href="/giver/setup"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-semibold text-sm hover:bg-emerald-400 transition-all"
-              >
+            <Button asChild size="default" className="gap-2 bg-[var(--secondary-accent)] text-slate-950 hover:opacity-90">
+              <Link href="/giver/setup">
                 <Plus className="w-4 h-4" />
-                Connect Your First Node
+                <span>Connect Storage</span>
               </Link>
+            </Button>
+
+            <button
+              type="button"
+              onClick={fetchDashboard}
+              className="p-2.5 rounded-[8px] border border-[var(--border)] text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)] transition-colors cursor-pointer"
+              title="Refresh provider workspace"
+              aria-label="Refresh provider workspace"
+            >
+              <RefreshCw className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* ── EMPTY STATE (WHEN NO NODES REGISTERED) ── */}
+        {loading ? (
+          <div className="space-y-4">
+            <NodeCardSkeleton />
+            <NodeCardSkeleton />
+          </div>
+        ) : nodes.length === 0 ? (
+          <EmptyState
+            icon={HardDrive}
+            title="Connect your storage"
+            description="Turn unused hard drive capacity into a useful resource for the network. Allocate spare space and start receiving monthly payouts."
+            checklist={[
+              "Choose capacity (starting at 20 GB)",
+              "Connect your computer",
+              "Verify storage connection",
+              "Start contributing to the network",
+            ]}
+            estimatedTime="about 2 minutes"
+            actionLabel="Connect Storage"
+            actionHref="/giver/setup"
+          />
+        ) : (
+          <>
+            {/* ── METRICS SUMMARY (PRIMARY INFORMATION: STORAGE, EARNINGS, HEALTH, NEXT ACTION) ── */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* 1. YOUR STORAGE */}
+              <div className="p-5 rounded-[12px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)]">
+                <div className="text-[12px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider">
+                  Your Storage
+                </div>
+                <div className="type-metric text-[var(--foreground)] mt-1">
+                  {totalCapGb} <span className="text-[14px] font-normal text-[var(--foreground-secondary)]">GB total</span>
+                </div>
+                <div className="text-[12px] text-[var(--foreground-muted)] mt-1">
+                  {totalAllocGb} GB allocated by network
+                </div>
+              </div>
+
+              {/* 2. YOUR EARNINGS */}
+              <div className="p-5 rounded-[12px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)]">
+                <div className="text-[12px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider">
+                  Estimated Earnings
+                </div>
+                <div className="type-metric text-[var(--foreground)] mt-1">
+                  ₹{Math.round(earnings.projectedMonthlyInr || totalCapGb * 1.5)}{" "}
+                  <span className="text-[14px] font-normal text-[var(--foreground-secondary)]">/ month</span>
+                </div>
+                <div className="text-[12px] text-[var(--foreground-muted)] mt-1">
+                  ₹{Math.round(earnings.pendingPayoutInr || 0)} pending payout
+                </div>
+              </div>
+
+              {/* 3. NODE HEALTH */}
+              <div className="p-5 rounded-[12px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)]">
+                <div className="text-[12px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider">
+                  Node Health
+                </div>
+                <div className="type-metric text-[var(--success)] mt-1">
+                  {summary.onlineCount || nodes.filter((n: any) => n.status === "ONLINE").length}{" "}
+                  <span className="text-[14px] font-normal text-[var(--foreground-secondary)]">/ {nodes.length} online</span>
+                </div>
+                <div className="text-[12px] text-[var(--foreground-muted)] mt-1">
+                  Continuous 10s heartbeat cadence
+                </div>
+              </div>
+
+              {/* 4. NEXT ACTION */}
+              <div className="p-5 rounded-[12px] border border-[var(--border)] bg-[var(--surface-subtle)]">
+                <div className="text-[12px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider">
+                  Next Action
+                </div>
+                <div className="text-[13px] font-semibold text-[var(--foreground)] mt-1">
+                  Keep computer online
+                </div>
+                <div className="text-[12px] text-[var(--foreground-secondary)] mt-1">
+                  Maintains high uptime and maximizes your monthly allocation score.
+                </div>
+              </div>
             </div>
-          ) : (
-            <div className="divide-y divide-white/5">
-              {nodes.map((node: any) => {
-                const isOnline = node.status === "ONLINE";
-                const capGb = Number(node.capacity_bytes) / (1024 * 1024 * 1024);
-                const usedMb = Number(node.used_bytes) / (1024 * 1024);
-                const percentUsed = Math.min(100, Math.round((Number(node.used_bytes) / Number(node.capacity_bytes)) * 100));
 
-                const lastHb = new Date(node.last_heartbeat_at).toLocaleTimeString();
+            {/* ── PROVIDER ECONOMICS & PAYOUT MODEL (PHASE 5 REQUIREMENT) ── */}
+            <div className="p-6 rounded-[16px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)] space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <h3 className="type-h3 font-bold text-[var(--foreground)] flex items-center gap-2">
+                    <Coins className="w-5 h-5 text-[var(--secondary-accent)]" />
+                    <span>Provider Economics & Realized Payout Model</span>
+                  </h3>
+                  <p className="text-[13px] text-[var(--foreground-secondary)] mt-0.5">
+                    Transparent cost and earnings breakdown based on network storage allocation and hardware operating costs.
+                  </p>
+                </div>
 
-                return (
-                  <div key={node.id} className="p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6 hover:bg-white/[0.01] transition-colors">
-                    {/* Node Info */}
-                    <div className="space-y-1.5">
-                      <div className="flex items-center gap-3">
-                        <span className={`w-3 h-3 rounded-full shrink-0 ${isOnline ? "bg-emerald-400 shadow-md shadow-emerald-400/50 animate-pulse" : "bg-rose-500"}`} />
-                        <span className="font-bold text-white text-base">{node.node_name}</span>
-                        <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-400">
-                          {node.id}
-                        </span>
-                        <span className={`text-[10px] uppercase font-mono px-2 py-0.5 rounded font-bold ${
-                          isOnline
-                            ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30"
-                            : "bg-rose-500/10 text-rose-400 border border-rose-500/30"
-                        }`}>
-                          {node.status}
-                        </span>
-                      </div>
-                      <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400 font-mono pt-1">
-                        <span className="flex items-center gap-1">
-                          <HardDrive className="w-3.5 h-3.5 text-slate-400" />
-                          Capacity: {capGb} GB
-                        </span>
-                        <span>•</span>
-                        <span>Used: {usedMb.toFixed(2)} MB ({percentUsed}%)</span>
-                        <span>•</span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5 text-slate-400" />
-                          Last Heartbeat: {lastHb}
-                        </span>
-                        <span>•</span>
-                        <span>Uptime: {Math.round(node.uptime_seconds / 60)} mins</span>
-                      </div>
+                <div className="flex items-center gap-1 bg-[var(--surface-subtle)] p-1 rounded-[8px] text-[12px]">
+                  <button
+                    type="button"
+                    onClick={() => setUtilizationModel("projected")}
+                    className={cn(
+                      "px-3 py-1 rounded-[6px] font-medium transition-colors cursor-pointer",
+                      utilizationModel === "projected"
+                        ? "bg-[var(--surface)] text-[var(--foreground)] shadow-xs font-semibold"
+                        : "text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
+                    )}
+                  >
+                    Projected (60% Allocation)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setUtilizationModel("maximum")}
+                    className={cn(
+                      "px-3 py-1 rounded-[6px] font-medium transition-colors cursor-pointer",
+                      utilizationModel === "maximum"
+                        ? "bg-[var(--surface)] text-[var(--foreground)] shadow-xs font-semibold"
+                        : "text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
+                    )}
+                  >
+                    Maximum Theoretical (100%)
+                  </button>
+                </div>
+              </div>
+
+              {/* Distinguish Payout States */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                <div className="p-3.5 rounded-[10px] bg-[var(--surface-subtle)] border border-[var(--border-subtle)]">
+                  <div className="text-[11px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider">
+                    Estimated Monthly
+                  </div>
+                  <div className="type-metric text-[var(--foreground)] text-[22px] mt-0.5">
+                    ₹{utilizationModel === "projected" ? Math.round(totalCapGb * 0.6 * 1.62) : Math.round(totalCapGb * 1.62)}
+                  </div>
+                  <div className="text-[11px] text-[var(--foreground-muted)]">
+                    Net after operational costs
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-[10px] bg-[var(--surface-subtle)] border border-[var(--border-subtle)]">
+                  <div className="text-[11px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider">
+                    Maximum Potential
+                  </div>
+                  <div className="type-metric text-[var(--secondary-accent)] text-[22px] mt-0.5">
+                    ₹{Math.round(totalCapGb * 2.12)}
+                  </div>
+                  <div className="text-[11px] text-[var(--foreground-muted)]">
+                    At 100% capacity 24/7
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-[10px] bg-[var(--surface-subtle)] border border-[var(--border-subtle)]">
+                  <div className="text-[11px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider">
+                    Pending Cycle Payout
+                  </div>
+                  <div className="type-metric text-[var(--foreground)] text-[22px] mt-0.5">
+                    ₹{Math.round(earnings.pendingPayoutInr || 0)}
+                  </div>
+                  <div className="text-[11px] text-[var(--foreground-muted)]">
+                    Accrued chunk holding
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-[10px] bg-[var(--surface-subtle)] border border-[var(--border-subtle)]">
+                  <div className="text-[11px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider">
+                    Lifetime Paid
+                  </div>
+                  <div className="type-metric text-[var(--success)] text-[22px] mt-0.5">
+                    ₹{Math.round(earnings.totalPaidOutInr || 0)}
+                  </div>
+                  <div className="text-[11px] text-[var(--foreground-muted)]">
+                    Direct bank ledger
+                  </div>
+                </div>
+              </div>
+
+              {/* Detailed Economics Table */}
+              <div className="rounded-[12px] border border-[var(--border-subtle)] overflow-hidden text-[13px]">
+                <div className="grid grid-cols-12 bg-[var(--surface-subtle)] px-4 py-2.5 font-semibold text-[11px] text-[var(--foreground-muted)] uppercase tracking-wider border-b border-[var(--border-subtle)]">
+                  <div className="col-span-6">Component / Factor</div>
+                  <div className="col-span-3 text-right">Unit Rate</div>
+                  <div className="col-span-3 text-right">Monthly Impact</div>
+                </div>
+
+                <div className="divide-y divide-[var(--border-subtle)] px-4">
+                  <div className="grid grid-cols-12 py-2.5 items-center">
+                    <div className="col-span-6 text-[var(--foreground)]">
+                      Gross Storage Contribution (₹2.50 / GB allocated)
                     </div>
-
-                    {/* Progress Bar & Capacity */}
-                    <div className="w-full lg:w-64">
-                      <div className="flex justify-between text-xs text-slate-400 mb-1 font-mono">
-                        <span>Utilization</span>
-                        <span>{percentUsed}%</span>
-                      </div>
-                      <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
-                        <div
-                          className="h-full bg-gradient-to-r from-emerald-500 to-cyan-400 rounded-full transition-all duration-500"
-                          style={{ width: `${Math.max(4, percentUsed)}%` }}
-                        />
-                      </div>
+                    <div className="col-span-3 text-right tabular-nums text-[var(--foreground-secondary)]">
+                      +₹2.50 / GB
                     </div>
-
-                    {/* Action Controls & Resilience Tester */}
-                    <div className="flex items-center gap-2 shrink-0">
-                      {/* Failover Simulator Toggle */}
-                      <button
-                        onClick={() => toggleNodeStatus(node.id, node.status)}
-                        disabled={actionLoading === node.id}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 border transition-all cursor-pointer ${
-                          isOnline
-                            ? "bg-rose-500/10 text-rose-400 border-rose-500/30 hover:bg-rose-500/20"
-                            : "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20"
-                        }`}
-                        title="Simulate node drop to test grid failover"
-                      >
-                        {isOnline ? (
-                          <>
-                            <PowerOff className="w-3.5 h-3.5" />
-                            Simulate Drop (Offline)
-                          </>
-                        ) : (
-                          <>
-                            <Power className="w-3.5 h-3.5" />
-                            Bring Online
-                          </>
-                        )}
-                      </button>
-
-                      {/* Copy CLI Daemon Command */}
-                      <button
-                        onClick={() => copyCommand(node.id, node.id, capGb)}
-                        className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-medium border border-white/10 flex items-center gap-1.5 transition-colors cursor-pointer"
-                        title="Copy launch command for terminal"
-                      >
-                        {copiedId === node.id ? (
-                          <>
-                            <Check className="w-3.5 h-3.5 text-emerald-400" />
-                            Copied!
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-3.5 h-3.5" />
-                            Daemon Command
-                          </>
-                        )}
-                      </button>
+                    <div className="col-span-3 text-right tabular-nums font-semibold text-[var(--success)]">
+                      +₹{Math.round(totalCapGb * (utilizationModel === "projected" ? 0.6 : 1.0) * 2.50)}
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
 
-        {/* Quick CLI Daemon Quickstart Panel */}
-        <div className="rounded-2xl bg-slate-900/60 border border-white/10 p-6">
-          <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono uppercase mb-2">
-            <Activity className="w-4 h-4" /> Live Node Daemon Guide
-          </div>
-          <h3 className="text-base font-bold text-white mb-2">
-            How to keep your storage node running
-          </h3>
-          <p className="text-xs text-slate-400 mb-4 max-w-3xl">
-            You can run the storage daemon in any terminal, background service (systemd / PM2), or scheduled task.
-            The daemon only accepts encrypted 2MB chunk blobs and sends a lightweight heartbeat ping every 10 seconds.
-          </p>
-          <div className="bg-slate-950 p-3.5 rounded-xl border border-white/10 font-mono text-xs text-emerald-400 flex items-center justify-between overflow-x-auto">
-            <code>node node-client/node-daemon.mjs --token "&lt;YOUR_NODE_TOKEN&gt;" --capacity 20</code>
-            <span className="text-[11px] text-slate-500 shrink-0 ml-4">Runs natively in Node.js</span>
-          </div>
-        </div>
+                  <div className="grid grid-cols-12 py-2.5 items-center">
+                    <div className="col-span-6 text-[var(--foreground)]">
+                      Estimated Electricity (~18W incremental PC idle)
+                    </div>
+                    <div className="col-span-3 text-right tabular-nums text-[var(--foreground-secondary)]">
+                      -₹0.20 / GB
+                    </div>
+                    <div className="col-span-3 text-right tabular-nums text-[var(--error)]">
+                      -₹{Math.round(totalCapGb * (utilizationModel === "projected" ? 0.6 : 1.0) * 0.20)}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-12 py-2.5 items-center">
+                    <div className="col-span-6 text-[var(--foreground)]">
+                      Hardware Depreciation & Drive Wear (~5-year life)
+                    </div>
+                    <div className="col-span-3 text-right tabular-nums text-[var(--foreground-secondary)]">
+                      -₹0.30 / GB
+                    </div>
+                    <div className="col-span-3 text-right tabular-nums text-[var(--error)]">
+                      -₹{Math.round(totalCapGb * (utilizationModel === "projected" ? 0.6 : 1.0) * 0.30)}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-12 py-2.5 items-center">
+                    <div className="col-span-6 text-[var(--foreground)]">
+                      AetherGrid Platform Coordination & Insurance Fee (15%)
+                    </div>
+                    <div className="col-span-3 text-right tabular-nums text-[var(--foreground-secondary)]">
+                      -15% gross
+                    </div>
+                    <div className="col-span-3 text-right tabular-nums text-[var(--error)]">
+                      -₹{Math.round(totalCapGb * (utilizationModel === "projected" ? 0.6 : 1.0) * 2.50 * 0.15)}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-12 py-3 items-center font-bold bg-[var(--surface-subtle)] -mx-4 px-4 border-t border-[var(--border)]">
+                    <div className="col-span-6 text-[var(--foreground)]">
+                      Net Estimated Provider Payout
+                    </div>
+                    <div className="col-span-3 text-right tabular-nums text-[var(--secondary-accent)]">
+                      ~₹1.62 / GB net
+                    </div>
+                    <div className="col-span-3 text-right tabular-nums text-[15px] text-[var(--foreground)]">
+                      ₹{utilizationModel === "projected" ? Math.round(totalCapGb * 0.6 * 1.62) : Math.round(totalCapGb * 1.62)} / mo
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2 text-[12px] text-[var(--foreground-muted)] pt-1">
+                <Info className="w-4 h-4 text-[var(--primary)] shrink-0 mt-0.5" />
+                <span>
+                  <strong>Assumptions:</strong> Calculations assume continuous 99.5% network availability and unmetered broadband connection. Actual payouts are calculated hourly based on cryptographically verified chunk retention audits.
+                </span>
+              </div>
+            </div>
+
+            {/* ── CONNECTED NODES LIST ── */}
+            <div className="space-y-4">
+              <h2 className="type-h3 text-[var(--foreground)] font-bold">Connected Nodes</h2>
+
+              <div className="space-y-4">
+                {nodes.map((node: any) => {
+                  const capGb = Math.round(node.capacity_bytes / (1024 * 1024 * 1024));
+                  const isOnline = node.status === "ONLINE";
+                  const isPendingAction = actionLoading === node.id;
+                  const isAdvOpen = showAdvanced[node.id];
+
+                  return (
+                    <div
+                      key={node.id}
+                      className="rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)] p-6 space-y-4"
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-[10px] bg-[var(--surface-subtle)] border border-[var(--border-subtle)] flex items-center justify-center text-[var(--secondary-accent)] shrink-0">
+                            <Server className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <div className="font-bold text-[15px] text-[var(--foreground)] flex items-center gap-2">
+                              <span>{node.node_name}</span>
+                              <span className="text-[11px] font-mono text-[var(--foreground-muted)] bg-[var(--surface-subtle)] px-2 py-0.5 rounded">
+                                {node.id}
+                              </span>
+                            </div>
+                            <div className="text-[12px] text-[var(--foreground-muted)] mt-0.5">
+                              Heartbeat: {node.last_heartbeat_at ? new Date(node.last_heartbeat_at).toLocaleTimeString() : "Just now"}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                          <StatusBadge status={isOnline ? "HEALTHY" : "OFFLINE"} />
+                          <Button
+                            variant={isOnline ? "outline" : "primary"}
+                            size="sm"
+                            disabled={isPendingAction}
+                            onClick={() => toggleNodeStatus(node.id, node.status)}
+                            className="gap-1.5"
+                          >
+                            <Power className="w-3.5 h-3.5" />
+                            <span>{isOnline ? "Pause Node" : "Resume Node"}</span>
+                          </Button>
+                        </div>
+                      </div>
+
+                      {/* Capacity Meter */}
+                      <StorageMeter
+                        usedBytes={node.used_bytes || 0}
+                        totalBytes={node.capacity_bytes}
+                        label="Node Space Used"
+                      />
+
+                      {/* Collapsible Advanced Connection Details (Audit requirement 13: hide daemon implementation details) */}
+                      <div className="pt-2 border-t border-[var(--border-subtle)]">
+                        <button
+                          type="button"
+                          onClick={() => toggleAdvanced(node.id)}
+                          className="flex items-center gap-1.5 text-[12px] text-[var(--foreground-secondary)] hover:text-[var(--foreground)] font-medium cursor-pointer"
+                        >
+                          {isAdvOpen ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
+                          <span>Advanced connection details</span>
+                        </button>
+
+                        {isAdvOpen && (
+                          <div className="mt-3 p-4 rounded-[10px] bg-[var(--surface-subtle)] border border-[var(--border-subtle)] space-y-3 animate-in fade-in-50 duration-150">
+                            <div>
+                              <div className="text-[11px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider mb-1">
+                                Background Daemon Command
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <code className="flex-1 text-[12px] font-mono bg-[var(--surface)] p-2.5 rounded-[6px] border border-[var(--border)] text-[var(--foreground)] overflow-x-auto">
+                                  node node-client/node-daemon.mjs --capacity {capGb}
+                                </code>
+                                <Button
+                                  variant="secondary"
+                                  size="sm"
+                                  onClick={() => copyCommand(node.id, node.node_token_hash, capGb)}
+                                  className="gap-1 shrink-0"
+                                >
+                                  {copiedId === node.id ? <Check className="w-3.5 h-3.5 text-[var(--success)]" /> : <Copy className="w-3.5 h-3.5" />}
+                                  <span>{copiedId === node.id ? "Copied" : "Copy"}</span>
+                                </Button>
+                              </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[12px] text-[var(--foreground-secondary)] pt-1">
+                              <div>
+                                <span className="font-semibold text-[var(--foreground)]">Storage Root: </span>
+                                <span className="font-mono text-[11px] truncate block mt-0.5">
+                                  {node.storage_directory || "Default Data Directory"}
+                                </span>
+                              </div>
+                              <div>
+                                <span className="font-semibold text-[var(--foreground)]">Encryption Guarantee: </span>
+                                <span className="block mt-0.5">Provider stores encrypted 2MB chunk blobs only.</span>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
