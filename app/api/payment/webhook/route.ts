@@ -8,7 +8,41 @@ export async function POST(request: NextRequest) {
     const rawBody = await request.text();
     const signature = request.headers.get("x-aether-signature") || request.headers.get("x-razorpay-signature");
 
+    if (process.env.NODE_ENV === "production" && !process.env.PAYMENT_WEBHOOK_SECRET) {
+      logger.error("PAYMENT_WEBHOOK_SECRET is not configured in production environment!");
+      return NextResponse.json({ error: "Internal Configuration Error" }, { status: 500 });
+    }
     const webhookSecret = process.env.PAYMENT_WEBHOOK_SECRET || "whsec_aethergrid_live_prod_secret_2026";
+
+    // 1. Enforce Webhook Replay Protection via Timestamp Header (5-minute tolerance)
+    const timestampHeader =
+      request.headers.get("x-aether-timestamp") ||
+      request.headers.get("x-razorpay-event-timestamp") ||
+      request.headers.get("x-webhook-timestamp");
+
+    if (timestampHeader) {
+      const timestampNum = parseInt(timestampHeader, 10);
+      if (isNaN(timestampNum)) {
+        logger.security("Payment Webhook Rejected: Malformed timestamp header", { timestampHeader });
+        return NextResponse.json({ error: "Forbidden: Malformed timestamp header." }, { status: 400 });
+      }
+
+      const nowSec = Math.floor(Date.now() / 1000);
+      const eventSec = timestampNum > 1e11 ? Math.floor(timestampNum / 1000) : timestampNum;
+      const MAX_TOLERANCE_SECONDS = 300; // 5 minutes
+
+      if (Math.abs(nowSec - eventSec) > MAX_TOLERANCE_SECONDS) {
+        logger.security("Payment Webhook Rejected: Timestamp outside tolerance window (replay protection)", {
+          nowSec,
+          eventSec,
+          drift: Math.abs(nowSec - eventSec),
+        });
+        return NextResponse.json(
+          { error: "Forbidden: Webhook event timestamp outside valid tolerance window (replay protection)." },
+          { status: 403 }
+        );
+      }
+    }
 
     if (!signature) {
       logger.security("Payment Webhook Rejected: Missing signature header");

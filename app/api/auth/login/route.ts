@@ -17,11 +17,17 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { email, password } = body;
 
-    if (!email || !password) {
+    if (!email || !password || typeof email !== "string" || typeof password !== "string") {
       return NextResponse.json({ error: "Email and password are required." }, { status: 400 });
     }
 
-    const user = findUserByEmail(email);
+    if (password.length > 128) {
+      logger.security("Login rejected: password exceeds 128 chars (DoS defense)", { clientIp });
+      return NextResponse.json({ error: "Invalid email or password." }, { status: 401 });
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+    const user = findUserByEmail(normalizedEmail);
     if (!user) {
       logger.security("Failed login attempt: user not found", { clientIp });
       return NextResponse.json({ error: "Invalid email or password." }, { status: 401 });
@@ -45,16 +51,7 @@ export async function POST(request: NextRequest) {
       activeRole: primaryRole,
     });
 
-    const cookieStore = await cookies();
-    cookieStore.set(SESSION_COOKIE_NAME, token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 30 * 24 * 60 * 60,
-      path: "/",
-    });
-
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       user: {
         id: user.id,
@@ -65,6 +62,27 @@ export async function POST(request: NextRequest) {
       },
       token,
     });
+
+    try {
+      const cookieStore = await cookies();
+      cookieStore.set(SESSION_COOKIE_NAME, token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 30 * 24 * 60 * 60,
+        path: "/",
+      });
+    } catch {
+      response.cookies.set(SESSION_COOKIE_NAME, token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 30 * 24 * 60 * 60,
+        path: "/",
+      });
+    }
+
+    return response;
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Login failed" }, { status: 500 });
   }

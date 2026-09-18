@@ -58,9 +58,35 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized: Node token unrecognized or revoked." }, { status: 401 });
     }
 
-    const usedBytes = typeof body.usedBytes === "number" ? body.usedBytes : 0;
-    const availableBytes = typeof body.availableBytes === "number" ? body.availableBytes : node.capacity_bytes - usedBytes;
-    const latencyMs = typeof body.latencyMs === "number" ? body.latencyMs : 5;
+    // 3. Strict telemetry validation: protect against metric injection, NaN, Infinity, negative values, and capacity overflow
+    if (body.usedBytes !== undefined) {
+      if (typeof body.usedBytes !== "number" || !Number.isFinite(body.usedBytes) || body.usedBytes < 0) {
+        logger.security("Heartbeat rejected: Malformed or negative usedBytes telemetry", { nodeId: node.id, usedBytes: body.usedBytes });
+        return NextResponse.json({ error: "Invalid telemetry metrics: usedBytes must be a non-negative finite number." }, { status: 400 });
+      }
+      if (body.usedBytes > node.capacity_bytes) {
+        logger.security("Heartbeat rejected: usedBytes exceeds registered node capacity", { nodeId: node.id, usedBytes: body.usedBytes, capacity: node.capacity_bytes });
+        return NextResponse.json({ error: "Invalid telemetry metrics: usedBytes exceeds node capacity bounds." }, { status: 400 });
+      }
+    }
+
+    if (body.availableBytes !== undefined) {
+      if (typeof body.availableBytes !== "number" || !Number.isFinite(body.availableBytes) || body.availableBytes < 0) {
+        logger.security("Heartbeat rejected: Malformed or negative availableBytes telemetry", { nodeId: node.id, availableBytes: body.availableBytes });
+        return NextResponse.json({ error: "Invalid telemetry metrics: availableBytes must be a non-negative finite number." }, { status: 400 });
+      }
+    }
+
+    if (body.latencyMs !== undefined) {
+      if (typeof body.latencyMs !== "number" || !Number.isFinite(body.latencyMs) || body.latencyMs < 0 || body.latencyMs > 60000) {
+        logger.security("Heartbeat rejected: Out of range latencyMs telemetry", { nodeId: node.id, latencyMs: body.latencyMs });
+        return NextResponse.json({ error: "Invalid telemetry metrics: latencyMs must be a finite number between 0 and 60000 ms." }, { status: 400 });
+      }
+    }
+
+    const usedBytes = typeof body.usedBytes === "number" ? Math.floor(body.usedBytes) : 0;
+    const availableBytes = typeof body.availableBytes === "number" ? Math.floor(body.availableBytes) : Math.max(0, node.capacity_bytes - usedBytes);
+    const latencyMs = typeof body.latencyMs === "number" ? Math.round(body.latencyMs) : 5;
 
     recordNodeHeartbeat(node.id, usedBytes, availableBytes, latencyMs);
 

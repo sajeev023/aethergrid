@@ -22,11 +22,27 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Name, email, and password are required." }, { status: 400 });
     }
 
-    if (password.length < 6) {
+    const normalizedEmail = typeof email === "string" ? email.trim().toLowerCase() : "";
+    const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+    if (!EMAIL_REGEX.test(normalizedEmail) || normalizedEmail.length > 254) {
+      return NextResponse.json({ error: "Invalid email format." }, { status: 400 });
+    }
+
+    if (typeof password !== "string" || password.length < 6) {
       return NextResponse.json({ error: "Password must be at least 6 characters." }, { status: 400 });
     }
 
-    const existing = findUserByEmail(email);
+    if (password.length > 128) {
+      logger.security("Registration rejected: password exceeds 128 chars (DoS defense)", { clientIp });
+      return NextResponse.json({ error: "Password exceeds maximum allowed length of 128 characters." }, { status: 400 });
+    }
+
+    const normalizedName = typeof name === "string" ? name.trim() : "";
+    if (!normalizedName || normalizedName.length > 100) {
+      return NextResponse.json({ error: "Name is required and must not exceed 100 characters." }, { status: 400 });
+    }
+
+    const existing = findUserByEmail(normalizedEmail);
     if (existing) {
       logger.security("Registration attempt with existing email", { clientIp });
       return NextResponse.json({ error: "An account with this email already exists." }, { status: 409 });
@@ -38,9 +54,9 @@ export async function POST(request: NextRequest) {
 
     const user = createUser({
       id: userId,
-      email,
+      email: normalizedEmail,
       passwordHash,
-      name,
+      name: normalizedName,
       roles: initialRole,
     });
 
@@ -52,16 +68,7 @@ export async function POST(request: NextRequest) {
       activeRole: initialRole,
     });
 
-    const cookieStore = await cookies();
-    cookieStore.set(SESSION_COOKIE_NAME, token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 30 * 24 * 60 * 60,
-      path: "/",
-    });
-
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       user: {
         id: user.id,
@@ -72,6 +79,27 @@ export async function POST(request: NextRequest) {
       },
       token,
     });
+
+    try {
+      const cookieStore = await cookies();
+      cookieStore.set(SESSION_COOKIE_NAME, token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 30 * 24 * 60 * 60,
+        path: "/",
+      });
+    } catch {
+      response.cookies.set(SESSION_COOKIE_NAME, token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 30 * 24 * 60 * 60,
+        path: "/",
+      });
+    }
+
+    return response;
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Registration failed" }, { status: 500 });
   }

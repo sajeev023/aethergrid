@@ -2,8 +2,14 @@ import { SignJWT, jwtVerify } from "jose";
 import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
+import crypto from "crypto";
 
 export const SESSION_COOKIE_NAME = "aether_session";
+
+if (process.env.NODE_ENV === "production" && !process.env.AETHER_JWT_SECRET) {
+  console.warn("[SECURITY WARNING] AETHER_JWT_SECRET is not configured in production environment. A strong secret is required.");
+}
+
 const JWT_SECRET = new TextEncoder().encode(
   process.env.AETHER_JWT_SECRET || "aethergrid-production-grade-master-secret-key-2026-launch"
 );
@@ -41,12 +47,25 @@ export async function verifySessionToken(token: string): Promise<SessionPayload 
   }
 }
 
+// Store consumed JTI IDs mapped to their expiration timestamp in ms to enforce single-use replay protection
+const consumedDownloadTokens = new Map<string, number>();
+
+function cleanExpiredDownloadTokens() {
+  const now = Date.now();
+  for (const [jti, exp] of consumedDownloadTokens.entries()) {
+    if (exp <= now) {
+      consumedDownloadTokens.delete(jti);
+    }
+  }
+}
+
 /**
  * Creates an ephemeral, cryptographically signed single-use download token.
- * Valid strictly for 60 seconds and tied to a specific userId and fileId.
+ * Valid strictly for 60 seconds and tied to a specific userId, fileId, and unique JTI.
  */
 export async function createDownloadToken(userId: string, fileId: string, expiresInSeconds = 60): Promise<string> {
-  return new SignJWT({ scope: "download", fileId })
+  const jti = `jti_${crypto.randomUUID()}`;
+  return new SignJWT({ scope: "download", fileId, jti })
     .setSubject(userId)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
@@ -55,17 +74,31 @@ export async function createDownloadToken(userId: string, fileId: string, expire
 }
 
 /**
- * Verifies that an ephemeral download token is valid, unexpired, and issued for the requested file.
+ * Verifies that an ephemeral download token is valid, unexpired, issued for the requested file,
+ * and has not been previously consumed (enforcing strict single-use replay resistance).
  */
 export async function verifyDownloadToken(
   token: string,
-  expectedFileId: string
+  expectedFileId: string,
+  consume = true
 ): Promise<{ userId: string; fileId: string } | null> {
   try {
+    cleanExpiredDownloadTokens();
     const { payload } = await jwtVerify(token, JWT_SECRET);
     if (payload.scope !== "download") return null;
     if (payload.fileId !== expectedFileId) return null;
     if (!payload.sub) return null;
+
+    const jti = payload.jti as string | undefined;
+    if (jti && consumedDownloadTokens.has(jti)) {
+      // Replay attempt detected: token has already been consumed
+      return null;
+    }
+
+    if (consume && jti) {
+      const expMs = (typeof payload.exp === "number" ? payload.exp : Math.floor(Date.now() / 1000) + 60) * 1000;
+      consumedDownloadTokens.set(jti, expMs);
+    }
 
     return {
       userId: String(payload.sub),
@@ -75,6 +108,11 @@ export async function verifyDownloadToken(
     return null;
   }
 }
+
+export function resetConsumedDownloadTokensForTests(): void {
+  consumedDownloadTokens.clear();
+}
+
 
 export async function getCurrentUser(request?: NextRequest): Promise<SessionPayload | null> {
   let token: string | undefined;
