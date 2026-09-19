@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser, verifyDownloadToken } from "@/lib/auth";
 import { retrieveAndDecryptFile, deleteFileDistributed } from "@/lib/orchestrator";
+import { renameUserFile } from "@/lib/db";
 import { logger } from "@/lib/logger";
 
 export async function GET(
@@ -58,6 +59,32 @@ export async function GET(
   }
 }
 
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const session = await getCurrentUser(request);
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized: Authentication required." }, { status: 401 });
+    }
+
+    const { id } = await params;
+    const body = await request.json();
+    const newName = typeof body.name === "string" ? body.name.trim() : "";
+
+    if (!newName) {
+      return NextResponse.json({ error: "A valid file name is required." }, { status: 400 });
+    }
+
+    const result = renameUserFile(id, session.userId, newName);
+    return NextResponse.json(result);
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : "Failed to rename file";
+    return NextResponse.json({ error: msg }, { status: 500 });
+  }
+}
+
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -77,3 +104,4 @@ export async function DELETE(
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
+

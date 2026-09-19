@@ -244,10 +244,10 @@ async function runProductionTestSuite() {
   // Verify Referrer received the 55 GB bonus!
   const finalSub = getTakerSubscription(referrer.id);
   const finalQuotaGb = Number(finalSub.quota_bytes) / (1024 * 1024 * 1024);
-  console.log(`  Final Referrer Quota: ${finalQuotaGb} GB (20 GB Initial + 55 GB Bonus)`);
+  console.log(`  Final Referrer Quota: ${finalQuotaGb} GB (3 GB Initial Beta + 55 GB Bonus)`);
 
-  if (finalQuotaGb !== 75) {
-    throw new Error(`Referral bonus not applied properly! Expected 75 GB, got ${finalQuotaGb} GB`);
+  if (finalQuotaGb !== 58) {
+    throw new Error(`Referral bonus not applied properly! Expected 58 GB, got ${finalQuotaGb} GB`);
   }
   console.log("  ✅ Referral Engine: 4 qualified paying customers unlocked 55 GB bonus quota automatically!");
 

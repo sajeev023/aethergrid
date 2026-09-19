@@ -29,6 +29,33 @@ export default function GiverPage() {
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [showAdvanced, setShowAdvanced] = useState<Record<string, boolean>>({});
   const [utilizationModel, setUtilizationModel] = useState<"projected" | "maximum">("projected");
+  const [serviceInfo, setServiceInfo] = useState<{ running: boolean; pid?: number; logs?: string[] } | null>(null);
+  const [serviceToggling, setServiceToggling] = useState(false);
+
+  const fetchServiceStatus = async () => {
+    try {
+      const res = await fetch("/api/nodes/service");
+      if (res.ok) {
+        const json = await res.json();
+        setServiceInfo(json);
+      }
+    } catch {}
+  };
+
+  const toggleNodeService = async () => {
+    setServiceToggling(true);
+    try {
+      if (serviceInfo?.running) {
+        await fetch("/api/nodes/service", { method: "DELETE" });
+      } else {
+        await fetch("/api/nodes/service", { method: "POST" });
+      }
+      await fetchServiceStatus();
+      await fetchDashboard();
+    } catch {} finally {
+      setServiceToggling(false);
+    }
+  };
 
   const fetchDashboard = async () => {
     try {
@@ -44,7 +71,11 @@ export default function GiverPage() {
 
   useEffect(() => {
     fetchDashboard();
-    const interval = setInterval(fetchDashboard, 6000);
+    fetchServiceStatus();
+    const interval = setInterval(() => {
+      fetchDashboard();
+      fetchServiceStatus();
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -370,9 +401,60 @@ export default function GiverPage() {
               </div>
             </div>
 
+            {/* ── NATIVE NODE SERVICE CONTROL (NODE #001) ── */}
+            <div className="p-5 rounded-[14px] border border-[var(--primary)]/30 bg-[var(--surface)] shadow-[var(--shadow-subtle)] space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--primary)] bg-[var(--primary)]/10 px-2 py-0.5 rounded">
+                      Host PC Physical Node #001
+                    </span>
+                    <span className={cn(
+                      "text-[12px] font-semibold flex items-center gap-1.5",
+                      serviceInfo?.running ? "text-[var(--success)]" : "text-[var(--foreground-muted)]"
+                    )}>
+                      <span className={cn(
+                        "w-2 h-2 rounded-full",
+                        serviceInfo?.running ? "bg-[var(--success)] animate-pulse" : "bg-[var(--border)]"
+                      )} />
+                      {serviceInfo?.running ? `Service Online (PID: ${serviceInfo.pid})` : "Service Stopped"}
+                    </span>
+                  </div>
+                  <h3 className="text-[16px] font-bold text-[var(--foreground)]">
+                    Local Node Runtime Service
+                  </h3>
+                  <p className="text-[13px] text-[var(--foreground-secondary)]">
+                    Operates inside dedicated sandbox <code className="text-[12px] font-mono bg-[var(--surface-subtle)] px-1.5 py-0.5 rounded">D:\AetherGridStorage</code> (100 GB allocation with drive safety buffer).
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <Button
+                    variant={serviceInfo?.running ? "outline" : "primary"}
+                    size="sm"
+                    disabled={serviceToggling}
+                    onClick={toggleNodeService}
+                    className="gap-2 min-h-[44px] px-4 font-semibold"
+                  >
+                    <Power className={cn("w-4 h-4", serviceInfo?.running ? "text-[var(--error)]" : "text-[var(--success)]")} />
+                    <span>{serviceToggling ? "Processing..." : serviceInfo?.running ? "Stop Node Service" : "1-Click Start Node #001"}</span>
+                  </Button>
+                </div>
+              </div>
+
+              {serviceInfo?.logs && serviceInfo.logs.length > 0 && (
+                <div className="mt-2 p-3 rounded-[8px] bg-slate-950 text-slate-300 font-mono text-[11px] max-h-28 overflow-y-auto space-y-1 border border-slate-800">
+                  <div className="text-[10px] uppercase font-semibold text-slate-500 mb-1">Live Service Telemetry:</div>
+                  {serviceInfo.logs.slice(-4).map((log, i) => (
+                    <div key={i} className="truncate">{log}</div>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {/* ── CONNECTED NODES LIST ── */}
             <div className="space-y-4">
-              <h2 className="type-h3 text-[var(--foreground)] font-bold">Connected Nodes</h2>
+              <h2 className="type-h3 text-[var(--foreground)] font-bold">Registered Nodes</h2>
 
               <div className="space-y-4">
                 {nodes.map((node: any) => {

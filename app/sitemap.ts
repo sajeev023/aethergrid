@@ -1,38 +1,39 @@
 import type { MetadataRoute } from "next";
-import { getInstitutionData } from "@/lib/site-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const rootData = getInstitutionData("lfjc");
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? rootData.siteUrl;
+  const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://aethergrid.io";
+  const now = new Date();
 
-  const reviewed = new Date("2026-08-16");
-
-  type Route = { path: string; priority: number; changeFrequency: "monthly" | "weekly" | "yearly" };
-
-  const routes: Route[] = [
-    { path: "", priority: 1.0, changeFrequency: "weekly" },
-    { path: "/about", priority: 0.9, changeFrequency: "monthly" },
-    { path: "/academics", priority: 0.9, changeFrequency: "monthly" },
-    { path: "/faculty", priority: 0.85, changeFrequency: "monthly" },
-    { path: "/campus", priority: 0.8, changeFrequency: "monthly" },
-    { path: "/campus/silver-jubilee", priority: 0.85, changeFrequency: "monthly" },
-    { path: "/campus/golden-jubilee", priority: 0.85, changeFrequency: "monthly" },
-    { path: "/campus/campus-life", priority: 0.85, changeFrequency: "monthly" },
-    { path: "/admissions", priority: 0.95, changeFrequency: "monthly" },
-    { path: "/alumni", priority: 0.8, changeFrequency: "monthly" },
-    { path: "/contact", priority: 0.75, changeFrequency: "yearly" },
-    { path: "/parent-login", priority: 0.5, changeFrequency: "yearly" },
-    { path: "/legal/anti-ragging", priority: 0.4, changeFrequency: "yearly" },
-    { path: "/legal/privacy", priority: 0.4, changeFrequency: "yearly" },
-    { path: "/legal/terms", priority: 0.4, changeFrequency: "yearly" },
-    { path: "/legal/disclosures", priority: 0.5, changeFrequency: "monthly" },
-    { path: "/legal/refund-cancellation", priority: 0.4, changeFrequency: "yearly" },
+  return [
+    {
+      url: `${siteUrl}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 1.0,
+    },
+    {
+      url: `${siteUrl}/login`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/signup`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${siteUrl}/dashboard`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
+      url: `${siteUrl}/giver`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
   ];
-
-  return routes.map(({ path, priority, changeFrequency }) => ({
-    url: `${siteUrl}${path}`,
-    lastModified: reviewed,
-    changeFrequency,
-    priority,
-  }));
 }

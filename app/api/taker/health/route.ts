@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     const usage = calculateTakerStorageUsage(session.userId);
     const subscription = getTakerSubscription(session.userId);
 
-    const quotaBytes = subscription ? Number(subscription.quota_bytes) : 20 * 1024 * 1024 * 1024;
+    const quotaBytes = subscription ? Number(subscription.quota_bytes) : 3 * 1024 * 1024 * 1024;
     const usedBytes = usage.totalUsedBytes;
     const percentUsed = Math.min(100, Math.round((usedBytes / quotaBytes) * 100));
 

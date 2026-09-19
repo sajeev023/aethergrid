@@ -1,14 +1,13 @@
 import type { MetadataRoute } from "next";
-import { getInstitutionData } from "@/lib/site-data";
 
 export default function robots(): MetadataRoute.Robots {
-  const rootData = getInstitutionData("lfjc");
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? rootData.siteUrl;
+  const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://aethergrid.io";
 
   return {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/api/", "/admin/"],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   };

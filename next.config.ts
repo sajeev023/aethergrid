@@ -44,23 +44,6 @@ const nextConfig: NextConfig = {
     }
     return config;
   },
-  // The full college landing lives at the root (/).
-  // /lfjc permanently redirects to avoid duplicate content (SEO)
-  // and to give visitors a single canonical entry point.
-  async redirects() {
-    return [
-      {
-        source: "/lfjc",
-        destination: "/",
-        permanent: true,
-      },
-      {
-        source: "/heritage.php",
-        destination: "/heritage",
-        permanent: true,
-      },
-    ];
-  },
   async headers() {
     return [
       {

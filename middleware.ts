@@ -30,11 +30,13 @@ function applySecurityHeaders(response: NextResponse): NextResponse {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Let public auth, heartbeat, webhook, and public landing/login routes pass with security headers
+  // Let public auth, heartbeat, webhook, waitlist, feedback, and public landing/login routes pass with security headers
   if (
     pathname.startsWith("/api/auth") ||
     pathname.startsWith("/api/nodes/heartbeat") ||
     pathname.startsWith("/api/payment/webhook") ||
+    pathname.startsWith("/api/waitlist") ||
+    pathname.startsWith("/api/feedback") ||
     pathname === "/" ||
     pathname.startsWith("/login") ||
     pathname.startsWith("/signup") ||

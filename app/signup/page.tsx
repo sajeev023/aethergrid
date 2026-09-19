@@ -127,7 +127,7 @@ export default function SignupPage() {
                     </span>
                   </div>
                   <div className="text-[11px] text-[var(--foreground-secondary)] leading-snug">
-                    Includes 20 GB free quota, AES-256 encryption, and phone sync.
+                    Includes 3 GB beta storage quota, AES-256 encryption, and private personal cloud.
                   </div>
                 </button>
 

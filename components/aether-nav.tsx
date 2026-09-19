@@ -199,11 +199,10 @@ export function AetherNav() {
                 Give Storage
               </Link>
               <Link
-                href="/mobile-simulator"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] font-medium text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)] transition-colors"
+                href="/#waitlist"
+                className="px-3 py-1.5 rounded-[8px] font-medium text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)] transition-colors"
               >
-                <Smartphone className="w-3.5 h-3.5 text-[var(--secondary-accent)]" />
-                Failover Simulator
+                Join Waitlist
               </Link>
             </>
           )}
@@ -340,23 +339,14 @@ export function AetherNav() {
                   Get Storage
                 </Link>
                 <Link
-                  href="/#give-storage"
+                  href="/#waitlist"
                   onClick={() => setMobileMenuOpen(false)}
                   className="px-3 py-2.5 rounded-[8px] text-[14px] text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
                 >
-                  Give Storage
+                  Join Waitlist
                 </Link>
               </>
             )}
-
-            <Link
-              href="/mobile-simulator"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-2 px-3 py-2.5 rounded-[8px] text-[14px] text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
-            >
-              <Smartphone className="w-4 h-4 text-[var(--secondary-accent)]" />
-              Failover Simulator
-            </Link>
           </div>
 
           {!user && (

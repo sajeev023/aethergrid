@@ -6,6 +6,8 @@ import { logger } from "../logger";
 
 // Standard 2MB chunk size for peer distribution
 export const CHUNK_SIZE_BYTES = 2 * 1024 * 1024;
+// Maximum 3 GB quota allocated for beta accounts
+export const MAX_BETA_USER_QUOTA_BYTES = 3 * 1024 * 1024 * 1024;
 const PLATFORM_MASTER_SECRET = process.env.AETHER_STORAGE_SECRET || "aethergrid-aes-256-master-storage-key-2026-production";
 
 /**
@@ -75,7 +77,11 @@ export function assertPathInsideStorageRoot(targetPath: string, allowedRoot: str
   const normalizedTarget = path.resolve(targetPath);
   const normalizedRoot = path.resolve(allowedRoot);
 
-  if (!normalizedTarget.startsWith(normalizedRoot + path.sep)) {
+  const isWin = process.platform === "win32";
+  const cmpTarget = isWin ? normalizedTarget.toLowerCase() : normalizedTarget;
+  const cmpRoot = isWin ? (normalizedRoot + path.sep).toLowerCase() : (normalizedRoot + path.sep);
+
+  if (!cmpTarget.startsWith(cmpRoot)) {
     logger.security("Sandbox escape attempt intercepted", { targetPath, allowedRoot });
     throw new Error("Security Violation: Storage access outside configured node sandbox is forbidden.");
   }
@@ -131,7 +137,7 @@ export function decryptChunk(encryptedBuffer: Buffer, userId: string, fileId: st
     const decipher = crypto.createDecipheriv("aes-256-gcm", objectKey, iv);
     decipher.setAuthTag(authTag);
     return Buffer.concat([decipher.update(ciphertext), decipher.final()]);
-  } catch (err: unknown) {
+  } catch {
     logger.security("Tamper Alert: GCM authentication tag verification failed. Chunk corrupted or modified on provider disk!", { fileId });
     throw new Error("DataTamperedError: Chunk authentication tag mismatch. Data has been tampered with or corrupted.");
   }
@@ -169,9 +175,8 @@ export function selectReplicaNodes(requiredBytes: number): { primary: Record<str
   const nodes = db.prepare(`
     SELECT * FROM storage_nodes 
     WHERE status = 'ONLINE' 
-      AND (capacity_bytes - used_bytes) >= ?
     ORDER BY (capacity_bytes - used_bytes) DESC
-  `).all(requiredBytes) as Array<{
+  `).all() as Array<{
     id: string;
     storage_directory: string;
     capacity_bytes: number;
@@ -179,20 +184,26 @@ export function selectReplicaNodes(requiredBytes: number): { primary: Record<str
     status: string;
   }>;
 
-  // Filter against physical disk threshold
+  if (nodes.length === 0) {
+    throw new Error("Storage node offline: Storage Node #001 is currently unreachable. Uploads are temporarily paused until the storage node reconnects.");
+  }
+
+  // Filter against physical disk threshold and capacity
   const validNodes = nodes.filter((n) => {
+    const hasCapacity = (n.capacity_bytes - n.used_bytes) >= requiredBytes;
     const physicalFree = inspectPhysicalDiskFreeBytes(n.storage_directory);
-    return physicalFree - BigInt(requiredBytes) > reservedReserveBytes;
+    const hasPhysicalSpace = physicalFree - BigInt(requiredBytes) > reservedReserveBytes;
+    return hasCapacity && hasPhysicalSpace;
   });
 
   if (validNodes.length === 0) {
-    throw new Error("Storage capacity exhausted: No storage node has sufficient free capacity while respecting physical disk safety margins.");
+    throw new Error("Storage capacity exhausted: Storage node has reached configured capacity or physical disk safety margin.");
   }
 
   const primary = validNodes[0] as unknown as Record<string, unknown>;
 
   // In Single-Node Beta mode with only 1 physical node available, honest 1x allocation
-  if (isSingleNodeBeta && validNodes.length === 1) {
+  if (isSingleNodeBeta || validNodes.length === 1) {
     return { primary, replica: null };
   }
 
@@ -226,28 +237,31 @@ export async function distributeAndStoreFile(params: {
   const now = new Date().toISOString();
   const originalChecksum = crypto.createHash("sha256").update(params.fileBuffer).digest("hex");
 
-  // Server-side Quota Verification
-  const sub = db.prepare("SELECT quota_bytes, status FROM taker_subscriptions WHERE user_id = ?").get(params.userId) as {
-    quota_bytes?: number;
-    status?: string;
-  } | undefined;
+  // Atomic write lock to avoid concurrent upload quota race conditions
+  db.exec("BEGIN IMMEDIATE;");
 
-  const quota = sub ? Number(sub.quota_bytes) : 20 * 1024 * 1024 * 1024;
-  if (sub && sub.status !== "ACTIVE" && sub.status !== "TRIAL") {
-    throw new Error("Your storage subscription is not active. Please renew to continue uploading.");
-  }
-
-  const used = db.prepare("SELECT COALESCE(SUM(size), 0) as total FROM files WHERE user_id = ? AND is_trashed = 0").get(params.userId) as { total: number };
-  if (Number(used.total) + params.fileBuffer.length > quota) {
-    throw new Error(`Storage quota exceeded. Available: ${Math.max(0, quota - Number(used.total))} bytes.`);
-  }
-
-  // Split into chunks
-  const totalChunks = Math.ceil(params.fileBuffer.length / CHUNK_SIZE_BYTES) || 1;
   const chunkRecords: Array<{ id: string; index: number; hash: string; primaryNode: string; replicaNode: string | null }> = [];
   const writtenChunkPaths: string[] = [];
 
   try {
+    // Server-side Quota Verification
+    const sub = db.prepare("SELECT quota_bytes, status FROM taker_subscriptions WHERE user_id = ?").get(params.userId) as {
+      quota_bytes?: number;
+      status?: string;
+    } | undefined;
+
+    const quota = sub ? Number(sub.quota_bytes) : 3 * 1024 * 1024 * 1024;
+    if (sub && sub.status !== "ACTIVE" && sub.status !== "TRIAL") {
+      throw new Error("Your storage subscription is not active. Please renew to continue uploading.");
+    }
+
+    const used = db.prepare("SELECT COALESCE(SUM(size), 0) as total FROM files WHERE user_id = ? AND is_trashed = 0").get(params.userId) as { total: number };
+    if (Number(used.total) + params.fileBuffer.length > quota) {
+      throw new Error("Storage limit reached: You've used all 3 GB of your beta storage. Delete files to upload more.");
+    }
+
+    // Split into chunks
+    const totalChunks = Math.ceil(params.fileBuffer.length / CHUNK_SIZE_BYTES) || 1;
     // Record logical file
     db.prepare(`
       INSERT INTO files (id, user_id, folder_id, name, original_name, size, mime_type, encryption_iv, checksum, status, is_favorite, is_trashed, created_at, updated_at)
@@ -339,6 +353,9 @@ export async function distributeAndStoreFile(params: {
 
     logger.info(`File stored: ${fileId} (${params.fileBuffer.length} bytes, ${totalChunks} chunks)`);
 
+    // Commit atomic transaction
+    db.exec("COMMIT;");
+
     return {
       id: fileId,
       name: path.basename(params.originalName),
@@ -349,6 +366,7 @@ export async function distributeAndStoreFile(params: {
       chunks: chunkRecords,
     };
   } catch (err: unknown) {
+    try { db.exec("ROLLBACK;"); } catch {}
     // Atomic Rollback
     for (const chunkPath of writtenChunkPaths) {
       try {
@@ -446,20 +464,10 @@ export async function retrieveAndDecryptFile(fileId: string, userId?: string): P
       }
     }
 
-    // Fallback: If primary disk file exists despite temporary status
-    if (!decrypted && primaryNode && primaryNode.status !== "REVOKED") {
-      const primaryDir = getNodeChunksDir(primaryNode);
-      const primaryFile = path.join(primaryDir, `${chunk.chunk_hash}.chunk`);
-      assertPathInsideStorageRoot(primaryFile, primaryDir);
-      if (fs.existsSync(primaryFile)) {
-        chunkBuffer = fs.readFileSync(primaryFile);
-        try {
-          decrypted = decryptChunk(chunkBuffer, effectiveUserId, fileId);
-        } catch {}
-      }
-    }
-
     if (!decrypted) {
+      if ((!primaryNode || primaryNode.status !== "ONLINE") && (!replicaNode || replicaNode.status !== "ONLINE")) {
+        throw new Error("Storage node offline: Storage Node #001 is currently unreachable. File cannot be downloaded until the storage node reconnects.");
+      }
       throw new Error(`Critical Distributed Storage Error: Chunk ${chunk.chunk_index} could not be retrieved or authenticated from any online node replica.`);
     }
 
@@ -582,6 +590,18 @@ export function evaluateNodeHealth(): {
         SELECT file_id FROM storage_chunks WHERE primary_node_id IN (${placeholders})
       )
     `).run(new Date().toISOString(), ...offline);
+  }
+
+  // Auto-reconcile files to HEALTHY when primary nodes are ONLINE
+  const onlineNodes = db.prepare("SELECT id FROM storage_nodes WHERE status = 'ONLINE'").all() as Array<{ id: string }>;
+  if (onlineNodes.length > 0) {
+    const placeholders = onlineNodes.map(() => "?").join(",");
+    db.prepare(`
+      UPDATE files SET status = 'HEALTHY', updated_at = ?
+      WHERE status = 'DEGRADED' AND id IN (
+        SELECT file_id FROM storage_chunks WHERE primary_node_id IN (${placeholders})
+      )
+    `).run(new Date().toISOString(), ...onlineNodes.map((n) => n.id));
   }
 
   return { suspectedOffline, offline };

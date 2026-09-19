@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   FileText,
   Image as ImageIcon,
@@ -11,7 +11,10 @@ import {
   File,
   Download,
   Trash2,
-  ShieldCheck,
+  Pencil,
+  Check,
+  X,
+  Server,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -30,6 +33,7 @@ interface FileRowProps {
   file: FileItem;
   onDownload: (file: FileItem) => void;
   onDelete: (fileId: string) => void;
+  onRename?: (fileId: string, newName: string) => Promise<void>;
   isDeleting?: boolean;
 }
 
@@ -37,8 +41,13 @@ export function FileRow({
   file,
   onDownload,
   onDelete,
+  onRename,
   isDeleting = false,
 }: FileRowProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editName, setEditName] = useState(file.original_name);
+  const [isSaving, setIsSaving] = useState(false);
+
   const getFileIcon = (mime: string, name: string) => {
     const ext = name.split(".").pop()?.toLowerCase() || "";
     if (mime.startsWith("image/") || ["jpg", "jpeg", "png", "webp", "svg", "gif"].includes(ext)) {
@@ -82,6 +91,24 @@ export function FileRow({
     }
   };
 
+  const handleSaveRename = async () => {
+    if (!editName.trim() || editName.trim() === file.original_name) {
+      setIsEditing(false);
+      return;
+    }
+    if (onRename) {
+      setIsSaving(true);
+      try {
+        await onRename(file.id, editName.trim());
+        setIsEditing(false);
+      } catch {
+        alert("Could not rename file.");
+      } finally {
+        setIsSaving(false);
+      }
+    }
+  };
+
   return (
     <div
       className={cn(
@@ -95,9 +122,47 @@ export function FileRow({
           {getFileIcon(file.mime_type, file.original_name)}
         </div>
         <div className="min-w-0 flex-1">
-          <div className="font-medium text-[14px] text-[var(--foreground)] truncate group-hover:text-[var(--primary)] transition-colors">
-            {file.original_name}
-          </div>
+          {isEditing ? (
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={editName}
+                onChange={(e) => setEditName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleSaveRename();
+                  if (e.key === "Escape") setIsEditing(false);
+                }}
+                className="h-[36px] px-2.5 rounded-[6px] border border-[var(--primary)] bg-[var(--surface)] text-[13px] text-[var(--foreground)] outline-none focus:ring-1 focus:ring-[var(--primary)] w-full max-w-xs"
+                autoFocus
+                disabled={isSaving}
+              />
+              <button
+                type="button"
+                onClick={handleSaveRename}
+                disabled={isSaving}
+                className="p-1.5 min-h-[36px] min-w-[36px] flex items-center justify-center rounded-[6px] bg-[var(--primary)] text-white hover:opacity-90"
+                aria-label="Save new name"
+              >
+                <Check className="w-3.5 h-3.5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setEditName(file.original_name);
+                  setIsEditing(false);
+                }}
+                disabled={isSaving}
+                className="p-1.5 min-h-[36px] min-w-[36px] flex items-center justify-center rounded-[6px] border border-[var(--border)] text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
+                aria-label="Cancel rename"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          ) : (
+            <div className="font-medium text-[14px] text-[var(--foreground)] truncate group-hover:text-[var(--primary)] transition-colors">
+              {file.original_name}
+            </div>
+          )}
           <div className="flex items-center gap-2 text-[12px] text-[var(--foreground-muted)] sm:hidden mt-0.5">
             <span className="tabular-nums">{formatBytes(file.size_bytes)}</span>
             <span>•</span>
@@ -114,20 +179,32 @@ export function FileRow({
         <div className="w-24 text-right text-[12px] text-[var(--foreground-muted)]">
           {formatDate(file.created_at)}
         </div>
-        <div className="w-24 text-center">
-          <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[var(--success)] bg-[var(--success-muted)] px-2 py-0.5 rounded-full border border-[var(--success)]/20">
-            <ShieldCheck className="w-3 h-3" />
-            2x Replicas
+        <div className="w-32 text-center">
+          <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[var(--primary)] bg-[var(--primary-muted)] px-2.5 py-0.5 rounded-full border border-[var(--primary)]/20">
+            <Server className="w-3 h-3" />
+            Single-Node Beta
           </span>
         </div>
       </div>
 
-      {/* Action Buttons */}
+      {/* Action Buttons (with min 44px mobile touch targets) */}
       <div className="flex items-center gap-1 shrink-0">
+        {onRename && !isEditing && (
+          <button
+            type="button"
+            onClick={() => setIsEditing(true)}
+            className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-[8px] text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface)] transition-colors cursor-pointer"
+            title="Rename file"
+            aria-label={`Rename ${file.original_name}`}
+          >
+            <Pencil className="w-4 h-4" />
+          </button>
+        )}
+
         <button
           type="button"
           onClick={() => onDownload(file)}
-          className="p-2 rounded-[6px] text-[var(--foreground-secondary)] hover:text-[var(--primary)] hover:bg-[var(--surface)] transition-colors cursor-pointer"
+          className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-[8px] text-[var(--foreground-secondary)] hover:text-[var(--primary)] hover:bg-[var(--surface)] transition-colors cursor-pointer"
           title="Download file"
           aria-label={`Download ${file.original_name}`}
         >
@@ -137,7 +214,7 @@ export function FileRow({
         <button
           type="button"
           onClick={() => onDelete(file.id)}
-          className="p-2 rounded-[6px] text-[var(--foreground-secondary)] hover:text-[var(--error)] hover:bg-[var(--error-muted)] transition-colors cursor-pointer"
+          className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-[8px] text-[var(--foreground-secondary)] hover:text-[var(--error)] hover:bg-[var(--error-muted)] transition-colors cursor-pointer"
           title="Delete file"
           aria-label={`Delete ${file.original_name}`}
         >

@@ -3,10 +3,9 @@ import { cn } from "@/lib/utils";
 
 type BadgeProps = React.ComponentProps<"span"> & {
   variant?: "default" | "secondary" | "outline" | "success" | "warning" | "error";
-  onDark?: boolean;
 };
 
-function Badge({ className, variant = "default", onDark, ...props }: BadgeProps) {
+function Badge({ className, variant = "default", ...props }: BadgeProps) {
   return (
     <span
       data-slot="badge"

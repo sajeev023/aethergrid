@@ -200,6 +200,19 @@ export default function DashboardPage() {
     } catch {}
   };
 
+  const handleRename = async (fileId: string, newName: string) => {
+    const res = await fetch(`/api/taker/files/${fileId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: newName }),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || "Failed to rename file");
+    }
+    await fetchData();
+  };
+
   const filteredFiles = useMemo(() => {
     let list = [...files];
 
@@ -265,12 +278,40 @@ export default function DashboardPage() {
   };
 
   const usedBytes = health?.usedBytes || 0;
-  const quotaBytes = health?.quotaBytes || 20 * 1024 * 1024 * 1024;
-  const isDegraded = health?.healthStatus === "DEGRADED";
+  const quotaBytes = health?.quotaBytes || 3 * 1024 * 1024 * 1024;
+  const isOffline = health?.healthStatus === "NODE_OFFLINE";
+  const isDegraded = health?.healthStatus === "DEGRADED" || isOffline;
+  const isQuotaFull = usedBytes >= quotaBytes;
 
   return (
     <div className="min-h-[85vh] bg-[var(--background)] text-[var(--foreground)] py-8 px-4 sm:px-6">
       <div className="max-w-[1200px] mx-auto space-y-6">
+        {/* ── QUOTA WARNING BANNER IF FULL ── */}
+        {isQuotaFull && (
+          <div className="p-4 rounded-[12px] bg-[var(--error-muted)] border border-[var(--error)]/30 text-[var(--error)] flex items-start gap-3">
+            <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" />
+            <div>
+              <div className="font-bold text-[14px]">Storage limit reached</div>
+              <div className="text-[13px] mt-0.5">
+                You've used all 3 GB of your beta storage. Delete files to upload more.
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── HONEST OFFLINE BANNER IF NODE DOWN ── */}
+        {isOffline && (
+          <div className="p-4 rounded-[12px] bg-[var(--warning-muted)] border border-[var(--warning)]/40 text-[var(--warning)] flex items-start gap-3">
+            <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" />
+            <div>
+              <div className="font-bold text-[14px]">Storage Node Offline</div>
+              <div className="text-[13px] mt-0.5">
+                Your primary storage node is currently offline. File operations may be temporarily unavailable until the node reconnects.
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* ── TOP HEADER: TITLE & STORAGE METER & ACTIONS ── */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 rounded-[16px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)]">
           <div className="space-y-1">
@@ -278,11 +319,11 @@ export default function DashboardPage() {
               <span className="text-[12px] font-semibold uppercase tracking-wider text-[var(--primary)] flex items-center gap-1.5">
                 <Cloud className="w-3.5 h-3.5" /> Personal Cloud
               </span>
-              <StatusBadge status={isDegraded ? "DEGRADED" : "HEALTHY"} size="sm" />
+              <StatusBadge status={isOffline ? "OFFLINE" : isDegraded ? "DEGRADED" : "HEALTHY"} size="sm" />
             </div>
             <h1 className="type-h1 text-[var(--foreground)] font-bold">My Cloud Drive</h1>
             <p className="text-[14px] text-[var(--foreground-secondary)]">
-              Your files, encrypted with AES-256-GCM and replicated across peer storage nodes.
+              Your files, encrypted with AES-256-GCM on dedicated Node #001 storage.
             </p>
           </div>
 
@@ -290,7 +331,7 @@ export default function DashboardPage() {
             <StorageMeter
               usedBytes={usedBytes}
               totalBytes={quotaBytes}
-              label="Storage Allocation"
+              label={`Storage (${(usedBytes / (1024 * 1024 * 1024)).toFixed(2)} GB / 3 GB)`}
             />
             <div className="flex items-center gap-2">
               <Button
@@ -564,6 +605,7 @@ export default function DashboardPage() {
                       file={file}
                       onDownload={handleDownload}
                       onDelete={handleDelete}
+                      onRename={handleRename}
                       isDeleting={deletingId === file.id}
                     />
                   ))}
@@ -635,55 +677,63 @@ export default function DashboardPage() {
             <div
               className={cn(
                 "p-5 rounded-[14px] border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4",
-                isDegraded
+                isOffline
+                  ? "bg-[var(--error-muted)] border-[var(--error)]/30 text-[var(--error)]"
+                  : isDegraded
                   ? "bg-[var(--warning-muted)] border-[var(--warning)]/30 text-[var(--warning)]"
                   : "bg-[var(--success-muted)] border-[var(--success)]/30 text-[var(--success)]"
               )}
             >
               <div className="flex items-center gap-3">
-                {isDegraded ? (
-                  <AlertTriangle className="w-6 h-6 text-[var(--warning)] shrink-0" />
+                {isOffline || isDegraded ? (
+                  <AlertTriangle className="w-6 h-6 shrink-0" />
                 ) : (
-                  <ShieldCheck className="w-6 h-6 text-[var(--success)] shrink-0" />
+                  <ShieldCheck className="w-6 h-6 shrink-0" />
                 )}
                 <div>
                   <div className="font-bold text-[15px]">
-                    {isDegraded ? "Failover Active — Primary Node Offline" : "Peer Storage Grid Healthy"}
+                    {isOffline
+                      ? "Storage Node Offline"
+                      : isDegraded
+                      ? "Storage Node In Degraded State"
+                      : "Single-Node Beta Storage Online"}
                   </div>
                   <div className="text-[13px] opacity-90">
-                    {isDegraded
-                      ? "A storage node is temporarily unreachable. Files remain safe and accessible via secondary replicas."
-                      : "All chunks are verified and replicated 2x across independent peer nodes."}
+                    {isOffline
+                      ? "Storage Node #001 is currently offline. File operations are temporarily paused until the node reconnects."
+                      : isDegraded
+                      ? "Storage node replica is currently unreachable."
+                      : "Data is encrypted with AES-256-GCM and stored on Node #001 (Dedicated D: Drive)."}
                   </div>
                 </div>
               </div>
 
-              <StatusBadge status={isDegraded ? "DEGRADED" : "HEALTHY"} />
+              <StatusBadge status={isOffline ? "OFFLINE" : isDegraded ? "DEGRADED" : "HEALTHY"} />
             </div>
 
             {/* Topology Details */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="p-5 rounded-[12px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)]">
                 <div className="text-[12px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider">
-                  Active Nodes
+                  Active Storage Node
                 </div>
                 <div className="type-metric text-[var(--foreground)] mt-1">
-                  {health?.activeNodesCount || 2} <span className="text-[14px] text-[var(--foreground-secondary)] font-normal">peer nodes</span>
+                  Node #001 <span className="text-[14px] text-[var(--foreground-secondary)] font-normal">Dedicated PC</span>
                 </div>
                 <div className="text-[12px] text-[var(--foreground-muted)] mt-1">
-                  Continuous 10s heartbeat cadence
+                  D:\AetherGridStorage sandbox
                 </div>
               </div>
 
               <div className="p-5 rounded-[12px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)]">
                 <div className="text-[12px] font-semibold text-[var(--foreground-muted)] uppercase tracking-wider">
-                  Redundancy Level
+                  Redundancy Model
                 </div>
                 <div className="type-metric text-[var(--primary)] mt-1">
-                  2x <span className="text-[14px] text-[var(--foreground-secondary)] font-normal">Replicas</span>
+                  Single-Node <span className="text-[14px] text-[var(--foreground-secondary)] font-normal">Beta</span>
                 </div>
                 <div className="text-[12px] text-[var(--foreground-muted)] mt-1">
-                  Independent chunk storage
+                  No verified secondary replica
                 </div>
               </div>
 

@@ -277,6 +277,23 @@ function initSchema(db: DatabaseSync): void {
       created_at TEXT NOT NULL
     );
 
+    CREATE TABLE IF NOT EXISTS waitlist (
+      id TEXT PRIMARY KEY,
+      email TEXT UNIQUE NOT NULL,
+      name TEXT,
+      ip_address TEXT,
+      created_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS feedback (
+      id TEXT PRIMARY KEY,
+      user_id TEXT,
+      user_email TEXT,
+      category TEXT DEFAULT 'GENERAL' NOT NULL,
+      message TEXT NOT NULL,
+      created_at TEXT NOT NULL
+    );
+
     -- Indices for high performance
     CREATE INDEX IF NOT EXISTS idx_nodes_owner ON storage_nodes(owner_id);
     CREATE INDEX IF NOT EXISTS idx_nodes_status ON storage_nodes(status);
@@ -286,6 +303,7 @@ function initSchema(db: DatabaseSync): void {
     CREATE INDEX IF NOT EXISTS idx_files_trashed ON files(is_trashed);
     CREATE INDEX IF NOT EXISTS idx_allocations_taker ON storage_allocations(taker_id);
     CREATE INDEX IF NOT EXISTS idx_referrals_referrer ON referrals(referrer_user_id);
+    CREATE INDEX IF NOT EXISTS idx_waitlist_email ON waitlist(email);
   `);
 
   // Migration helper for new user columns if database was pre-existing
@@ -312,7 +330,7 @@ function ensureNode001Provisioned(db: DatabaseSync): void {
         ? (fs.existsSync("D:\\") ? "D:\\AetherGridStorage" : (fs.existsSync("E:\\") ? "E:\\AetherGridStorage" : path.resolve(process.cwd(), "data", "storage")))
         : path.resolve(process.cwd(), "data", "storage"));
   const storagePath = process.env.AETHERGRID_NODE_STORAGE_PATH || defaultStoragePath;
-  const capacityGb = parseInt(process.env.AETHERGRID_NODE_CAPACITY_GB || "50", 10);
+  const capacityGb = parseInt(process.env.AETHERGRID_NODE_CAPACITY_GB || "100", 10);
   const capacityBytes = BigInt(capacityGb) * BigInt(1024) * BigInt(1024) * BigInt(1024);
   const rawToken = process.env.AETHER_NODE_TOKEN || "aeth_prod_node_001_secret_token_live";
   const tokenHash = crypto.createHash("sha256").update(rawToken).digest("hex");
@@ -334,7 +352,7 @@ function ensureNode001Provisioned(db: DatabaseSync): void {
     if (!fs.existsSync(chunksDir)) {
       fs.mkdirSync(chunksDir, { recursive: true });
     }
-  } catch (err: unknown) {
+  } catch {
     logger.warn(`Could not verify dedicated node storage directory on disk: ${storagePath}`);
   }
 
@@ -391,13 +409,13 @@ export function createUser(user: {
     }
   }
 
-  // Provision initial 20 GB Taker trial subscription
+  // Provision initial 3 GB Taker beta quota
   initTakerSubscription(
     user.id,
-    "PLAN_20GB",
-    "Starter Cloud (20 GB)",
-    BigInt(20) * BigInt(1024) * BigInt(1024) * BigInt(1024),
-    20
+    "PLAN_3GB_BETA",
+    "Beta Cloud (3 GB)",
+    BigInt(3) * BigInt(1024) * BigInt(1024) * BigInt(1024),
+    0
   );
 
   return findUserById(user.id)!;
@@ -574,6 +592,14 @@ export function recordNodeHeartbeat(nodeId: string, usedBytes: number, available
     WHERE id = ?
   `).run(usedBytes, now, now, nodeId);
 
+  // Reconcile degraded files back to HEALTHY upon node reconnect
+  db.prepare(`
+    UPDATE files SET status = 'HEALTHY', updated_at = ?
+    WHERE status = 'DEGRADED' AND id IN (
+      SELECT file_id FROM storage_chunks WHERE primary_node_id = ?
+    )
+  `).run(now, nodeId);
+
   // Deterministic earnings accounting (₹1 per GB-month = ₹0.00138 per GB-hour)
   const node = getStorageNodeById(nodeId) as { allocated_bytes?: number } | undefined;
   if (node && Number(node.allocated_bytes || 0) > 0) {
@@ -639,20 +665,24 @@ export function calculateTakerStorageUsage(userId: string) {
   for (const t of trashedFiles) trash += Number(t.size);
 
   const totalUsed = photos + videos + docs + other + trash;
-  const isSingleNodeBeta = process.env.BETA_SINGLE_NODE_MODE === "true";
+  const node001 = db.prepare("SELECT status FROM storage_nodes WHERE id = 'AETHERGRID-NODE-001'").get() as { status?: string } | undefined;
+  const anyNodeOnline = node001 ? node001.status === "ONLINE" : false;
 
   const hasDegraded = activeFiles.some((f) => f.status === "DEGRADED");
 
-  let healthStatus = "HEALTHY";
-  let healthMessage = "All redundant storage replicas are online and healthy across the peer network.";
+  let healthStatus = "SINGLE_NODE_BETA";
+  let healthMessage = "Single-Node Beta: Data is encrypted with AES-256-GCM and stored on Node #001 (Dedicated D: Drive).";
 
-  if (isSingleNodeBeta) {
-    healthStatus = "BETA_SINGLE_NODE";
-    healthMessage = "Single-Node Beta Mode: Data is encrypted with AES-256-GCM and stored on Node #001 (Dedicated D: Drive). Redundant multi-node replication will activate as additional community providers join.";
+  if (!anyNodeOnline) {
+    healthStatus = "NODE_OFFLINE";
+    healthMessage = "Storage Node Offline: Storage Node #001 is currently unreachable. Uploads and downloads are temporarily paused until the node reconnects.";
   } else if (hasDegraded) {
     healthStatus = "DEGRADED";
-    healthMessage = "One storage node is temporarily unreachable. Your files remain accessible via redundant replicas while our orchestrator repairs full redundancy.";
+    healthMessage = "Storage node replica is currently unreachable. Some files may be in degraded state.";
   }
+
+  const sub = getTakerSubscription(userId);
+  const quotaBytes = sub ? Number(sub.quota_bytes) : 3 * 1024 * 1024 * 1024;
 
   return {
     photosBytes: photos,
@@ -661,7 +691,12 @@ export function calculateTakerStorageUsage(userId: string) {
     otherBytes: other,
     trashBytes: trash,
     totalUsedBytes: totalUsed,
+    usedBytes: totalUsed,
+    maxQuotaBytes: quotaBytes,
+    maxQuotaGb: Math.round(quotaBytes / (1024 * 1024 * 1024)),
+    storageNodeOffline: !anyNodeOnline,
     healthStatus,
+    status: healthStatus,
     healthMessage,
   };
 }
@@ -840,6 +875,66 @@ export function getMarketplaceMetrics() {
     offlineNodes,
     totalFiles: filesCount,
     totalChunks: chunksCount,
-    isSingleNodeBeta: process.env.BETA_SINGLE_NODE_MODE === "true",
+    isSingleNodeBeta: true,
   };
 }
+
+// ─── Waitlist, Feedback & File Rename ────────────────────────────────────────
+
+export function addToWaitlist(entry: { email: string; name?: string; ipAddress?: string }) {
+  const db = getDatabase();
+  const id = `wait_${Date.now()}_${crypto.randomBytes(3).toString("hex")}`;
+  const now = new Date().toISOString();
+  db.prepare(`
+    INSERT INTO waitlist (id, email, name, ip_address, created_at)
+    VALUES (?, ?, ?, ?, ?)
+    ON CONFLICT(email) DO UPDATE SET
+      name = COALESCE(excluded.name, waitlist.name)
+  `).run(id, entry.email.toLowerCase().trim(), entry.name?.trim() || null, entry.ipAddress || null, now);
+  return { success: true, id, email: entry.email.toLowerCase().trim() };
+}
+
+export function addFeedback(entry: { userId?: string; userEmail?: string; category?: string; message: string }) {
+  const db = getDatabase();
+  const id = `fb_${Date.now()}_${crypto.randomBytes(3).toString("hex")}`;
+  const now = new Date().toISOString();
+  db.prepare(`
+    INSERT INTO feedback (id, user_id, user_email, category, message, created_at)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `).run(id, entry.userId || null, entry.userEmail || null, entry.category || "GENERAL", entry.message.trim(), now);
+  return { success: true, id };
+}
+
+export function renameUserFile(fileId: string, userId: string, newName: string) {
+  const db = getDatabase();
+  const now = new Date().toISOString();
+  const sanitized = path.basename(newName.trim());
+  if (!sanitized) throw new Error("Invalid filename provided.");
+
+  const result = db.prepare(`
+    UPDATE files 
+    SET name = ?, original_name = ?, updated_at = ?
+    WHERE id = ? AND user_id = ?
+  `).run(sanitized, sanitized, now, fileId, userId);
+
+  if (result.changes === 0) {
+    throw new Error("File not found or unauthorized to rename this object.");
+  }
+  return { success: true, fileId, newName: sanitized };
+}
+
+export function getUserFiles(userId: string): any[] {
+  const db = getDatabase();
+  return db.prepare(`
+    SELECT 
+      f.*,
+      (SELECT COUNT(*) FROM storage_chunks WHERE file_id = f.id) as chunk_count,
+      (SELECT COUNT(*) FROM storage_chunks sc 
+        JOIN storage_nodes sn ON sc.primary_node_id = sn.id 
+        WHERE sc.file_id = f.id AND sn.status = 'ONLINE') as online_replicas
+    FROM files f
+    WHERE f.user_id = ? AND f.is_trashed = 0
+    ORDER BY f.created_at DESC
+  `).all(userId);
+}
+
