@@ -92,8 +92,13 @@ export function assertPathInsideStorageRoot(targetPath: string, allowedRoot: str
  */
 export function inspectPhysicalDiskFreeBytes(storageDirectory: string): bigint {
   try {
-    if (fs.existsSync(storageDirectory)) {
-      const stats = fs.statfsSync(storageDirectory);
+    const isServerless = process.env.VERCEL === "1" || !!process.env.AWS_LAMBDA_FUNCTION_NAME || !!process.env.NOW_REGION;
+    let target = storageDirectory;
+    if (isServerless || !fs.existsSync(target)) {
+      target = isServerless ? "/tmp" : process.cwd();
+    }
+    if (fs.existsSync(target)) {
+      const stats = fs.statfsSync(target);
       return BigInt(stats.bfree) * BigInt(stats.bsize);
     }
   } catch {
@@ -168,7 +173,9 @@ export function getNodeChunksDir(node: { id: string; storage_directory?: string 
  */
 export function selectReplicaNodes(requiredBytes: number): { primary: Record<string, unknown>; replica: Record<string, unknown> | null } {
   const db = getDatabase();
-  const reservedReserveBytes = BigInt(parseInt(process.env.AETHERGRID_RESERVED_FREE_SPACE_GB || "10", 10)) * BigInt(1024) * BigInt(1024) * BigInt(1024);
+  const isServerless = process.env.VERCEL === "1" || !!process.env.AWS_LAMBDA_FUNCTION_NAME || !!process.env.NOW_REGION;
+  const defaultSafetyGb = isServerless ? "0" : "10";
+  const reservedReserveBytes = BigInt(parseInt(process.env.AETHERGRID_RESERVED_FREE_SPACE_GB || defaultSafetyGb, 10)) * BigInt(1024) * BigInt(1024) * BigInt(1024);
   const isSingleNodeBeta = process.env.BETA_SINGLE_NODE_MODE === "true";
 
   // Query online nodes that are NOT revoked or paused
@@ -203,7 +210,9 @@ export function selectReplicaNodes(requiredBytes: number): { primary: Record<str
   const validNodes = nodes.filter((n) => {
     const hasCapacity = (n.capacity_bytes - n.used_bytes) >= requiredBytes;
     const physicalFree = inspectPhysicalDiskFreeBytes(n.storage_directory);
-    const hasPhysicalSpace = physicalFree - BigInt(requiredBytes) > reservedReserveBytes;
+    const hasPhysicalSpace = isServerless
+      ? physicalFree >= BigInt(requiredBytes)
+      : (physicalFree - BigInt(requiredBytes) > reservedReserveBytes);
     return hasCapacity && hasPhysicalSpace;
   });
 
