@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 import crypto from "crypto";
+import { ensureUserRecord } from "./db";
 
 export const SESSION_COOKIE_NAME = "aether_session";
 
@@ -138,5 +139,14 @@ export async function getCurrentUser(request?: NextRequest): Promise<SessionPayl
   }
 
   if (!token) return null;
-  return verifySessionToken(token);
+  const payload = await verifySessionToken(token);
+  if (!payload || !payload.userId) return null;
+
+  try {
+    ensureUserRecord(payload.userId, payload.email, payload.name, payload.roles);
+  } catch {
+    // Non-fatal if DB is locked or transient
+  }
+
+  return payload;
 }

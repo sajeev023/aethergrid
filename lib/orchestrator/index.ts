@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import fs from "fs";
 import path from "path";
-import { getDatabase, getStorageNodeById } from "../db";
+import { getDatabase, getStorageNodeById, ensureUserRecord, ensureNode001Provisioned } from "../db";
 import { logger } from "../logger";
 
 // Standard 2MB chunk size for peer distribution
@@ -172,7 +172,7 @@ export function selectReplicaNodes(requiredBytes: number): { primary: Record<str
   const isSingleNodeBeta = process.env.BETA_SINGLE_NODE_MODE === "true";
 
   // Query online nodes that are NOT revoked or paused
-  const nodes = db.prepare(`
+  let nodes = db.prepare(`
     SELECT * FROM storage_nodes 
     WHERE status = 'ONLINE' 
     ORDER BY (capacity_bytes - used_bytes) DESC
@@ -183,6 +183,17 @@ export function selectReplicaNodes(requiredBytes: number): { primary: Record<str
     used_bytes: number;
     status: string;
   }>;
+
+  if (nodes.length === 0) {
+    try {
+      ensureNode001Provisioned(db);
+      nodes = db.prepare(`
+        SELECT * FROM storage_nodes 
+        WHERE status = 'ONLINE' 
+        ORDER BY (capacity_bytes - used_bytes) DESC
+      `).all() as any[];
+    } catch {}
+  }
 
   if (nodes.length === 0) {
     throw new Error("Storage node offline: Storage Node #001 is currently unreachable. Uploads are temporarily paused until the storage node reconnects.");
@@ -236,6 +247,9 @@ export async function distributeAndStoreFile(params: {
   const fileId = `file_${Date.now()}_${crypto.randomBytes(4).toString("hex")}`;
   const now = new Date().toISOString();
   const originalChecksum = crypto.createHash("sha256").update(params.fileBuffer).digest("hex");
+
+  // Ensure user and active 3 GB beta subscription exist to guarantee foreign key integrity
+  ensureUserRecord(params.userId);
 
   // Atomic write lock to avoid concurrent upload quota race conditions
   db.exec("BEGIN IMMEDIATE;");
@@ -344,11 +358,15 @@ export async function distributeAndStoreFile(params: {
 
     // Index photo if image
     if (params.mimeType && params.mimeType.startsWith("image/")) {
-      const photoId = `pho_${fileId}`;
-      db.prepare(`
-        INSERT OR REPLACE INTO photos (id, user_id, file_id, taken_at, created_at)
-        VALUES (?, ?, ?, ?, ?)
-      `).run(photoId, params.userId, fileId, now, now);
+      try {
+        const photoId = `pho_${fileId}`;
+        db.prepare(`
+          INSERT OR REPLACE INTO photos (id, user_id, file_id, taken_at, created_at)
+          VALUES (?, ?, ?, ?, ?)
+        `).run(photoId, params.userId, fileId, now, now);
+      } catch (photoErr) {
+        logger.warn(`Non-critical photo index warning for ${fileId}: ${(photoErr as any)?.message}`);
+      }
     }
 
     logger.info(`File stored: ${fileId} (${params.fileBuffer.length} bytes, ${totalChunks} chunks)`);

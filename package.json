@@ -12,7 +12,8 @@
     "test:zero-trust": "npx tsx scripts/test-zero-trust-suite.mjs",
     "test:security": "npx tsx scripts/test-security-remediation.mjs",
     "test:mvp": "npx tsx scripts/test-mvp-e2e-suite.mjs",
-    "test:all": "npx tsx scripts/test-production-suite.mjs && npx tsx scripts/test-zero-trust-suite.mjs && npx tsx scripts/test-security-remediation.mjs && npx tsx scripts/test-mvp-e2e-suite.mjs"
+    "test:rehydrate": "npx tsx scripts/test-rehydrate-upload-suite.mjs",
+    "test:all": "npx tsx scripts/test-production-suite.mjs && npx tsx scripts/test-zero-trust-suite.mjs && npx tsx scripts/test-security-remediation.mjs && npx tsx scripts/test-mvp-e2e-suite.mjs && npx tsx scripts/test-rehydrate-upload-suite.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",

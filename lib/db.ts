@@ -321,7 +321,7 @@ function initSchema(db: DatabaseSync): void {
 /**
  * Ensures Node #001 on the dedicated physical disk (e.g. D:\AetherGridStorage) is provisioned
  */
-function ensureNode001Provisioned(db: DatabaseSync): void {
+export function ensureNode001Provisioned(db: DatabaseSync): void {
   const nodeId = process.env.AETHERGRID_NODE_ID || "AETHERGRID-NODE-001";
   const isServerless = process.env.VERCEL === "1" || !!process.env.AWS_LAMBDA_FUNCTION_NAME || !!process.env.NOW_REGION;
   const defaultStoragePath = isServerless
@@ -419,6 +419,66 @@ export function createUser(user: {
   );
 
   return findUserById(user.id)!;
+}
+
+/**
+ * Ensures a user record and active 3 GB beta subscription exist in SQLite.
+ * Critical for serverless environments (Vercel) where stateless JWT sessions may land
+ * on fresh ephemeral container databases where foreign keys reference users(id).
+ */
+export function ensureUserRecord(
+  userId: string,
+  email?: string,
+  name?: string,
+  roles?: string
+): UserRecord {
+  const db = getDatabase();
+  const existing = db.prepare("SELECT * FROM users WHERE id = ?").get(userId) as UserRecord | undefined;
+  if (existing) {
+    const sub = db.prepare("SELECT id FROM taker_subscriptions WHERE user_id = ?").get(userId);
+    if (!sub) {
+      initTakerSubscription(
+        userId,
+        "PLAN_3GB_BETA",
+        "Beta Cloud (3 GB)",
+        BigInt(3) * BigInt(1024) * BigInt(1024) * BigInt(1024),
+        0
+      );
+    }
+    return existing;
+  }
+
+  const now = new Date().toISOString();
+  const cleanEmail = (email || `${userId}@user.aethergrid.io`).toLowerCase().trim();
+  const conflict = db.prepare("SELECT id FROM users WHERE email = ?").get(cleanEmail);
+  const finalEmail = conflict ? `${userId}_${cleanEmail}` : cleanEmail;
+  const cleanName = name || "AetherGrid User";
+  const cleanRoles = roles || "TAKER";
+  const referralCode = `AETH_${crypto.randomBytes(3).toString("hex").toUpperCase()}`;
+
+  db.prepare(`
+    INSERT OR IGNORE INTO users (id, email, password_hash, name, roles, referral_code, created_at, updated_at)
+    VALUES (?, ?, 'session_active', ?, ?, ?, ?, ?)
+  `).run(userId, finalEmail, cleanName, cleanRoles, referralCode, now, now);
+
+  initTakerSubscription(
+    userId,
+    "PLAN_3GB_BETA",
+    "Beta Cloud (3 GB)",
+    BigInt(3) * BigInt(1024) * BigInt(1024) * BigInt(1024),
+    0
+  );
+
+  return (findUserById(userId) || {
+    id: userId,
+    email: finalEmail,
+    password_hash: "session_active",
+    name: cleanName,
+    roles: cleanRoles,
+    referral_code: referralCode,
+    created_at: now,
+    updated_at: now,
+  }) as UserRecord;
 }
 
 export interface UserRecord {
