@@ -15,7 +15,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "AetherGrid — A Distributed Private Cloud",
   description:
-    "Your files. Your storage. Your network. A private cloud powered by a distributed storage network with end-to-end encryption and automatic replica failover.",
+    "Your files. Your storage. Your network. A private cloud powered by distributed storage architecture with AES-256-GCM authenticated encryption.",
   keywords: [
     "Distributed Cloud Storage",
     "Private cloud",

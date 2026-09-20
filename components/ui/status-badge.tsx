@@ -4,13 +4,16 @@ import { cn } from "@/lib/utils";
 
 export type HealthStatus = 
   | "HEALTHY" 
+  | "ONLINE"
   | "DEGRADED" 
   | "OFFLINE" 
+  | "SUSPECTED_OFFLINE"
   | "RECOVERING" 
   | "SYNCHRONIZING" 
   | "VERIFIED" 
   | "ACTIVE" 
   | "PAUSED" 
+  | "SINGLE_NODE"
   | "SIMULATION";
 
 interface StatusBadgeProps {
@@ -38,20 +41,28 @@ export function StatusBadge({
 
   switch (normStatus) {
     case "HEALTHY":
+    case "ONLINE":
     case "ACTIVE":
     case "VERIFIED":
       bg = "bg-[var(--success-muted)]";
       border = "border-[var(--success)]/30";
       text = "text-[var(--success)]";
       Icon = CheckCircle2;
-      defaultLabel = normStatus === "HEALTHY" ? "Healthy — 2x Replicas" : "Active";
+      defaultLabel = normStatus === "HEALTHY" ? "Healthy" : normStatus === "ONLINE" ? "Online" : "Active";
       break;
     case "DEGRADED":
       bg = "bg-[var(--warning-muted)]";
       border = "border-[var(--warning)]/30";
       text = "text-[var(--warning)]";
       Icon = AlertTriangle;
-      defaultLabel = "Degraded — Failover Active";
+      defaultLabel = "Degraded";
+      break;
+    case "SUSPECTED_OFFLINE":
+      bg = "bg-[var(--warning-muted)]";
+      border = "border-[var(--warning)]/30";
+      text = "text-[var(--warning)]";
+      Icon = AlertTriangle;
+      defaultLabel = "Reconnecting";
       break;
     case "OFFLINE":
       bg = "bg-[var(--error-muted)]";
@@ -65,7 +76,7 @@ export function StatusBadge({
       border = "border-[var(--info)]/30";
       text = "text-[var(--info)]";
       Icon = RefreshCw;
-      defaultLabel = "Recovering Replicas";
+      defaultLabel = "Recovering";
       break;
     case "SYNCHRONIZING":
       bg = "bg-[var(--info-muted)]";
@@ -81,12 +92,19 @@ export function StatusBadge({
       Icon = Clock;
       defaultLabel = "Paused";
       break;
+    case "SINGLE_NODE":
+      bg = "bg-[var(--primary-muted)]";
+      border = "border-[var(--primary)]/30";
+      text = "text-[var(--primary)]";
+      Icon = CheckCircle2;
+      defaultLabel = "Single-Node Beta";
+      break;
     case "SIMULATION":
       bg = "bg-[var(--primary-muted)]";
       border = "border-[var(--primary)]/30";
       text = "text-[var(--primary)]";
       Icon = ShieldAlert;
-      defaultLabel = "Simulation Mode";
+      defaultLabel = "Simulation";
       break;
   }
 

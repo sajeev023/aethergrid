@@ -16,7 +16,7 @@ interface ErrorStateProps {
 export function ErrorState({
   title = "Action could not be completed",
   whatHappened,
-  isDataSafe = "Your encrypted files and existing replicas are safe and unaffected.",
+  isDataSafe = "Your encrypted data stored on the node is preserved and safe.",
   whatCanIDo = "Please try again in a few moments or verify your connection.",
   onRetry,
   onBack,

@@ -358,7 +358,7 @@ export default function GiverSetupPage() {
             <div className="p-5 rounded-[12px] bg-[var(--surface-subtle)] border border-[var(--border-subtle)] max-w-md mx-auto text-left space-y-2">
               <div className="flex items-center justify-between text-[13px]">
                 <span className="text-[var(--foreground-secondary)]">Status:</span>
-                <StatusBadge status={nodeOnline ? "HEALTHY" : "ACTIVE"} size="sm" />
+                <StatusBadge status={nodeOnline ? "ONLINE" : "OFFLINE"} size="sm" />
               </div>
               <div className="flex items-center justify-between text-[13px]">
                 <span className="text-[var(--foreground-secondary)]">Allocated Capacity:</span>

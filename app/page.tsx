@@ -140,7 +140,7 @@ export default function HomePage() {
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[var(--success)] shrink-0" />
-                  <span>Client-side AES-256-GCM encryption</span>
+                  <span>AES-256-GCM authenticated encryption</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[var(--success)] shrink-0" />

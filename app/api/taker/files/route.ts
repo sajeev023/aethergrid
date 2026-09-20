@@ -18,8 +18,11 @@ export async function GET(request: NextRequest) {
         f.*,
         (SELECT COUNT(*) FROM storage_chunks WHERE file_id = f.id) as chunk_count,
         (SELECT COUNT(*) FROM storage_chunks sc 
+          JOIN storage_nodes sn ON sc.replica_node_id = sn.id 
+          WHERE sc.file_id = f.id AND sn.status = 'ONLINE') as online_replicas,
+        (SELECT COUNT(*) FROM storage_chunks sc 
           JOIN storage_nodes sn ON sc.primary_node_id = sn.id 
-          WHERE sc.file_id = f.id AND sn.status = 'ONLINE') as online_replicas
+          WHERE sc.file_id = f.id AND sn.status = 'ONLINE') as online_primary_chunks
       FROM files f
       WHERE f.user_id = ? AND f.is_trashed = 0
       ORDER BY f.created_at DESC

@@ -55,7 +55,17 @@ export async function GET(
   } catch (error: unknown) {
     const msg = error instanceof Error ? error.message : "File download failed";
     logger.warn("Download request failed", { error: msg });
-    return NextResponse.json({ error: msg }, { status: 404 });
+
+    if (msg.includes("Storage node offline") || msg.includes("unreachable")) {
+      return NextResponse.json({ error: msg }, { status: 503 });
+    }
+    if (msg.includes("Access Denied") || msg.includes("authorization")) {
+      return NextResponse.json({ error: msg }, { status: 403 });
+    }
+    if (msg.includes("File not found")) {
+      return NextResponse.json({ error: msg }, { status: 404 });
+    }
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
 

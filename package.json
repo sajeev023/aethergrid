@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:integrity": "npx tsx scripts/test-state-integrity.mjs",
     "test:production": "npx tsx scripts/test-production-suite.mjs",
     "test:zero-trust": "npx tsx scripts/test-zero-trust-suite.mjs",
     "test:security": "npx tsx scripts/test-security-remediation.mjs",

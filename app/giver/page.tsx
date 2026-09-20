@@ -112,6 +112,10 @@ export default function GiverPage() {
   const totalCapGb = Math.round((summary.totalCapacityBytes || 0) / (1024 * 1024 * 1024));
   const totalAllocGb = Math.round((summary.totalAllocatedBytes || 0) / (1024 * 1024 * 1024));
 
+  const hasOnlineNode = nodes.some((n: any) => n.status === "ONLINE");
+  const providerStatus = loading ? "SYNCHRONIZING" : (hasOnlineNode ? "ONLINE" : (nodes.length ? "OFFLINE" : "ACTIVE"));
+  const providerLabel = loading ? "Connecting..." : (hasOnlineNode ? "Provider Online" : (nodes.length ? "Node Offline" : "Ready to Connect"));
+
   return (
     <div className="min-h-[85vh] bg-[var(--background)] text-[var(--foreground)] py-8 px-4 sm:px-6">
       <div className="max-w-[1200px] mx-auto space-y-8">
@@ -122,7 +126,7 @@ export default function GiverPage() {
               <span className="text-[12px] font-semibold uppercase tracking-wider text-[var(--secondary-accent)] flex items-center gap-1.5">
                 <HardDrive className="w-3.5 h-3.5" /> Storage Provider Workspace
               </span>
-              <StatusBadge status="ACTIVE" size="sm" />
+              <StatusBadge status={providerStatus} label={providerLabel} size="sm" />
             </div>
             <h1 className="type-h1 text-[var(--foreground)] font-bold">My Storage</h1>
             <p className="text-[14px] text-[var(--foreground-secondary)]">
@@ -487,7 +491,7 @@ export default function GiverPage() {
                         </div>
 
                         <div className="flex items-center gap-3">
-                          <StatusBadge status={isOnline ? "HEALTHY" : "OFFLINE"} />
+                          <StatusBadge status={isOnline ? "ONLINE" : "OFFLINE"} />
                           <Button
                             variant={isOnline ? "outline" : "primary"}
                             size="sm"

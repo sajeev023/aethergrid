@@ -87,7 +87,7 @@ export function UploadPanel({
                   {isComplete ? (
                     <span className="text-[var(--success)] font-medium flex items-center gap-1">
                       <CheckCircle2 className="w-3.5 h-3.5" />
-                      Encrypted & replicated (2x)
+                      Encrypted & stored on Node #001
                     </span>
                   ) : isFailed ? (
                     <span className="text-[var(--error)] font-medium flex items-center gap-1">
@@ -97,7 +97,7 @@ export function UploadPanel({
                   ) : isVerifying ? (
                     <span className="text-[var(--info)] font-medium flex items-center gap-1">
                       <ShieldCheck className="w-3.5 h-3.5 animate-pulse" />
-                      Verifying peer replicas...
+                      Verifying checksum & integrity...
                     </span>
                   ) : (
                     <span className="text-[var(--foreground-secondary)]">

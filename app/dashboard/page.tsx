@@ -94,6 +94,12 @@ export default function DashboardPage() {
   }, []);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (isOffline) {
+      alert("Storage Node Offline: Storage Node #001 is currently unreachable. Uploads are paused until the node reconnects.");
+      if (fileInputRef.current) fileInputRef.current.value = "";
+      return;
+    }
+
     const selectedFiles = e.target.files;
     if (!selectedFiles || selectedFiles.length === 0) return;
 
@@ -156,6 +162,10 @@ export default function DashboardPage() {
   };
 
   const handleDownload = (file: FileItem) => {
+    if (isOffline) {
+      alert("Storage Node Offline: Storage Node #001 is currently unreachable. Files cannot be downloaded until the node reconnects.");
+      return;
+    }
     const link = document.createElement("a");
     link.href = `/api/taker/files/${file.id}`;
     link.download = file.original_name;
@@ -165,7 +175,7 @@ export default function DashboardPage() {
   };
 
   const handleDelete = async (fileId: string) => {
-    if (!confirm("Are you sure you want to delete this file across all peer replica nodes?")) return;
+    if (!confirm("Are you sure you want to delete this file?")) return;
     setDeletingId(fileId);
     try {
       const res = await fetch(`/api/taker/files/${fileId}`, { method: "DELETE" });
@@ -279,9 +289,15 @@ export default function DashboardPage() {
 
   const usedBytes = health?.usedBytes || 0;
   const quotaBytes = health?.quotaBytes || 3 * 1024 * 1024 * 1024;
-  const isOffline = health?.healthStatus === "NODE_OFFLINE";
-  const isDegraded = health?.healthStatus === "DEGRADED" || isOffline;
+  const nodeStatus = health?.nodeStatus || (loading ? "CONNECTING" : "OFFLINE");
+  const isOnline = nodeStatus === "ONLINE";
+  const isOffline = nodeStatus === "OFFLINE";
+  const isSuspectedOffline = nodeStatus === "SUSPECTED_OFFLINE";
+  const isDegraded = isSuspectedOffline || health?.healthStatus === "DEGRADED";
   const isQuotaFull = usedBytes >= quotaBytes;
+  const isWritable = health?.isWritable ?? (isOnline && !isQuotaFull);
+  const canUpload = health?.uploadAvailability?.available ?? (isOnline && !isQuotaFull);
+  const uploadBlockReason = health?.uploadAvailability?.reason || (isOffline ? "Storage node is offline" : isQuotaFull ? "Storage quota full" : "");
 
   return (
     <div className="min-h-[85vh] bg-[var(--background)] text-[var(--foreground)] py-8 px-4 sm:px-6">
@@ -301,12 +317,35 @@ export default function DashboardPage() {
 
         {/* ── HONEST OFFLINE BANNER IF NODE DOWN ── */}
         {isOffline && (
-          <div className="p-4 rounded-[12px] bg-[var(--warning-muted)] border border-[var(--warning)]/40 text-[var(--warning)] flex items-start gap-3">
+          <div className="p-4 rounded-[12px] bg-[var(--error-muted)] border border-[var(--error)]/30 text-[var(--error)] flex items-start gap-3">
+            <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" />
+            <div className="space-y-1">
+              <div className="font-bold text-[14px]">Storage Node Offline</div>
+              <div className="text-[13px] leading-relaxed">
+                Storage Node #001 (your dedicated storage host) is currently unreachable. Uploads and downloads are temporarily paused until the storage node reconnects.
+              </div>
+              <div className="text-[12px] opacity-90">
+                What you can do: Ensure your storage computer is turned on and connected, or check the{" "}
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("health")}
+                  className="underline font-semibold hover:opacity-100 cursor-pointer"
+                >
+                  Storage Health tab
+                </button>{" "}
+                for live diagnostic details.
+              </div>
+            </div>
+          </div>
+        )}
+
+        {isSuspectedOffline && (
+          <div className="p-4 rounded-[12px] bg-[var(--warning-muted)] border border-[var(--warning)]/30 text-[var(--warning)] flex items-start gap-3">
             <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" />
             <div>
-              <div className="font-bold text-[14px]">Storage Node Offline</div>
+              <div className="font-bold text-[14px]">Node #001 Reconnecting</div>
               <div className="text-[13px] mt-0.5">
-                Your primary storage node is currently offline. File operations may be temporarily unavailable until the node reconnects.
+                Storage node heartbeat delayed. Reconnecting to host computer...
               </div>
             </div>
           </div>
@@ -319,7 +358,19 @@ export default function DashboardPage() {
               <span className="text-[12px] font-semibold uppercase tracking-wider text-[var(--primary)] flex items-center gap-1.5">
                 <Cloud className="w-3.5 h-3.5" /> Personal Cloud
               </span>
-              <StatusBadge status={isOffline ? "OFFLINE" : isDegraded ? "DEGRADED" : "HEALTHY"} size="sm" />
+              {loading ? (
+                <span className="inline-flex items-center gap-1 text-[11px] text-[var(--foreground-muted)] bg-[var(--surface-subtle)] px-2.5 py-0.5 rounded-full border border-[var(--border)] animate-pulse">
+                  Connecting...
+                </span>
+              ) : isOffline ? (
+                <StatusBadge status="OFFLINE" label="Storage Node Offline" size="sm" />
+              ) : isSuspectedOffline ? (
+                <StatusBadge status="SUSPECTED_OFFLINE" label="Node #001 Reconnecting" size="sm" />
+              ) : isDegraded ? (
+                <StatusBadge status="DEGRADED" label={health?.healthBadgeLabel || "Degraded"} size="sm" />
+              ) : (
+                <StatusBadge status="ONLINE" label="Node #001 Online (Single-Node Beta)" size="sm" />
+              )}
             </div>
             <h1 className="type-h1 text-[var(--foreground)] font-bold">My Cloud Drive</h1>
             <p className="text-[14px] text-[var(--foreground-secondary)]">
@@ -332,15 +383,30 @@ export default function DashboardPage() {
               usedBytes={usedBytes}
               totalBytes={quotaBytes}
               label={`Storage (${(usedBytes / (1024 * 1024 * 1024)).toFixed(2)} GB / 3 GB)`}
+              isWritable={isWritable}
+              statusMessage={isOffline ? "Storage node offline — writes paused" : isSuspectedOffline ? "Reconnecting — writes paused" : undefined}
             />
             <div className="flex items-center gap-2">
               <Button
-                onClick={() => fileInputRef.current?.click()}
+                onClick={() => {
+                  if (!canUpload) {
+                    alert(uploadBlockReason || "Uploads are temporarily unavailable.");
+                    return;
+                  }
+                  fileInputRef.current?.click();
+                }}
                 size="default"
-                className="flex-1 gap-2 cursor-pointer"
+                disabled={!canUpload}
+                className={cn(
+                  "flex-1 gap-2 cursor-pointer transition-all",
+                  !canUpload
+                    ? "opacity-50 cursor-not-allowed bg-[var(--surface-subtle)] text-[var(--foreground-muted)] border border-[var(--border)]"
+                    : ""
+                )}
+                title={uploadBlockReason || "Upload files to Node #001"}
               >
                 <Upload className="w-4 h-4" />
-                <span>Upload</span>
+                <span>{isOffline ? "Node Offline" : "Upload"}</span>
               </Button>
               <Button
                 onClick={() => setIsNewFolderOpen(true)}
@@ -472,7 +538,13 @@ export default function DashboardPage() {
                   : "text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--surface-subtle)]"
               )}
             >
-              <ShieldCheck className="w-3.5 h-3.5 text-[var(--success)]" />
+              {isOffline ? (
+                <AlertTriangle className="w-3.5 h-3.5 text-[var(--error)]" />
+              ) : isDegraded ? (
+                <AlertTriangle className="w-3.5 h-3.5 text-[var(--warning)]" />
+              ) : (
+                <ShieldCheck className="w-3.5 h-3.5 text-[var(--success)]" />
+              )}
               <span>Storage Health</span>
             </button>
           </div>
@@ -575,11 +647,15 @@ export default function DashboardPage() {
             ) : files.length === 0 ? (
               <EmptyState
                 icon={Cloud}
-                title="Your cloud drive is ready"
-                description="Upload documents, photos, or media archives. Every file is encrypted before distribution and protected with redundant peer replicas."
-                reassurance="Encrypted using AES-256-GCM before peer distribution"
-                actionLabel="Upload First File"
-                onAction={() => fileInputRef.current?.click()}
+                title={isOffline ? "Storage node is offline" : "Your cloud drive is ready"}
+                description={
+                  isOffline
+                    ? "Storage Node #001 is currently unreachable. Uploads and downloads are temporarily paused until the storage node reconnects."
+                    : "Upload documents, photos, or media archives. Every file is encrypted with AES-256-GCM and stored on dedicated Node #001 storage."
+                }
+                reassurance="Encrypted using AES-256-GCM with derived per-object HKDF keys"
+                actionLabel={isOffline ? "Check Storage Health" : "Upload First File"}
+                onAction={isOffline ? () => setActiveTab("health") : () => fileInputRef.current?.click()}
               />
             ) : filteredFiles.length === 0 ? (
               <div className="p-12 text-center text-[var(--foreground-secondary)] bg-[var(--surface)] rounded-[12px] border border-[var(--border)]">
@@ -593,7 +669,7 @@ export default function DashboardPage() {
                   <div className="flex items-center gap-6 mr-14">
                     <div className="w-20 text-right">Size</div>
                     <div className="w-24 text-right">Added</div>
-                    <div className="w-24 text-center">Replicas</div>
+                    <div className="w-32 text-center">Storage</div>
                   </div>
                 </div>
 
@@ -607,6 +683,7 @@ export default function DashboardPage() {
                       onDelete={handleDelete}
                       onRename={handleRename}
                       isDeleting={deletingId === file.id}
+                      isNodeOffline={isOffline}
                     />
                   ))}
                 </div>
@@ -670,7 +747,7 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* ── TAB 3: STORAGE HEALTH (SECONDARY INFRASTRUCTURE DESTINATION) ── */}
+        {/* ── TAB 3: STORAGE HEALTH (AUTHORITATIVE INFRASTRUCTURE STATE) ── */}
         {activeTab === "health" && (
           <div className="space-y-6">
             {/* Status Summary Banner */}
@@ -702,13 +779,16 @@ export default function DashboardPage() {
                     {isOffline
                       ? "Storage Node #001 is currently offline. File operations are temporarily paused until the node reconnects."
                       : isDegraded
-                      ? "Storage node replica is currently unreachable."
+                      ? (health?.healthMessage || "Storage node is experiencing telemetry delays.")
                       : "Data is encrypted with AES-256-GCM and stored on Node #001 (Dedicated D: Drive)."}
                   </div>
                 </div>
               </div>
 
-              <StatusBadge status={isOffline ? "OFFLINE" : isDegraded ? "DEGRADED" : "HEALTHY"} />
+              <StatusBadge
+                status={isOffline ? "OFFLINE" : isDegraded ? "DEGRADED" : "ONLINE"}
+                label={isOffline ? "Storage Node Offline" : isDegraded ? "Degraded" : "Node #001 Online (Single-Node Beta)"}
+              />
             </div>
 
             {/* Topology Details */}
@@ -721,7 +801,7 @@ export default function DashboardPage() {
                   Node #001 <span className="text-[14px] text-[var(--foreground-secondary)] font-normal">Dedicated PC</span>
                 </div>
                 <div className="text-[12px] text-[var(--foreground-muted)] mt-1">
-                  D:\AetherGridStorage sandbox
+                  Status: <span className={cn("font-medium", isOnline ? "text-[var(--success)]" : "text-[var(--error)]")}>{isOnline ? "Online" : isOffline ? "Offline" : "Reconnecting"}</span>
                 </div>
               </div>
 
@@ -733,7 +813,7 @@ export default function DashboardPage() {
                   Single-Node <span className="text-[14px] text-[var(--foreground-secondary)] font-normal">Beta</span>
                 </div>
                 <div className="text-[12px] text-[var(--foreground-muted)] mt-1">
-                  No verified secondary replica
+                  0 verified secondary replicas
                 </div>
               </div>
 
@@ -750,13 +830,16 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* ── INTERACTIVE HEALTH & FAILOVER DIAGNOSTICS (PHASE 3 / 4 REQUIREMENT) ── */}
+            {/* ── ARCHITECTURAL SIMULATION LAB (QUARANTINED FUTURE PREVIEW) ── */}
             <div className="p-6 rounded-[16px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-subtle)] space-y-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                  <h3 className="type-h3 font-bold text-[var(--foreground)]">Grid Diagnostic States & Recovery</h3>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[var(--primary-muted)] text-[var(--primary)] text-[11px] font-semibold uppercase tracking-wider mb-1">
+                    Simulation Lab • Architectural Preview
+                  </div>
+                  <h3 className="type-h3 font-bold text-[var(--foreground)]">Grid Diagnostic States & Recovery Preview</h3>
                   <p className="text-[13px] text-[var(--foreground-secondary)]">
-                    Transparent guidance explaining what happens during storage node transitions.
+                    Interactive simulation demonstrating how multi-node peer failover and healing will operate when secondary replica nodes are provisioned. Current MVP operates on verified single-node storage.
                   </p>
                 </div>
                 <div className="flex items-center gap-1 bg-[var(--surface-subtle)] p-1 rounded-[8px] text-[12px]">
@@ -786,21 +869,14 @@ export default function DashboardPage() {
                     {simulatedHealthTab === "syncing" && <RefreshCw className="w-4 h-4 text-[var(--info)] animate-spin" />}
                     {simulatedHealthTab === "failover" && <AlertTriangle className="w-4 h-4 text-[var(--warning)]" />}
                     {simulatedHealthTab === "recovering" && <Clock className="w-4 h-4 text-[var(--primary)]" />}
-                    {simulatedHealthTab === "healthy" && "State: Healthy Grid (Normal Operations)"}
-                    {simulatedHealthTab === "syncing" && "State: Synchronizing (Replication In Flight)"}
-                    {simulatedHealthTab === "failover" && "State: Failover Active (Serving from Replica)"}
-                    {simulatedHealthTab === "recovering" && "State: Recovering (Restoring Primary Node)"}
+                    {simulatedHealthTab === "healthy" && "Simulation: Multi-Node Healthy Grid"}
+                    {simulatedHealthTab === "syncing" && "Simulation: Synchronizing (Replication In Flight)"}
+                    {simulatedHealthTab === "failover" && "Simulation: Failover Active (Serving from Replica)"}
+                    {simulatedHealthTab === "recovering" && "Simulation: Recovering (Restoring Primary Node)"}
                   </span>
                   <StatusBadge
-                    status={
-                      simulatedHealthTab === "healthy"
-                        ? "HEALTHY"
-                        : simulatedHealthTab === "syncing"
-                        ? "SYNCHRONIZING"
-                        : simulatedHealthTab === "failover"
-                        ? "DEGRADED"
-                        : "RECOVERING"
-                    }
+                    status="SIMULATION"
+                    label={`Simulation: ${simulatedHealthTab.toUpperCase()}`}
                     size="sm"
                   />
                 </div>
@@ -851,7 +927,7 @@ export default function DashboardPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[var(--success)] shrink-0 mt-0.5" />
-                  <span><strong>Tamper Detection:</strong> Any byte modification on provider disks triggers GCM authentication tag mismatch and automatically invokes replica failover.</span>
+                  <span><strong>Tamper Detection:</strong> Any byte modification on provider disks triggers GCM authentication tag mismatch and immediately halts retrieval.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[var(--success)] shrink-0 mt-0.5" />

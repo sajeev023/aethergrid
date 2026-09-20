@@ -15,6 +15,7 @@ import {
   Check,
   X,
   Server,
+  AlertTriangle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -35,6 +36,7 @@ interface FileRowProps {
   onDelete: (fileId: string) => void;
   onRename?: (fileId: string, newName: string) => Promise<void>;
   isDeleting?: boolean;
+  isNodeOffline?: boolean;
 }
 
 export function FileRow({
@@ -43,6 +45,7 @@ export function FileRow({
   onDelete,
   onRename,
   isDeleting = false,
+  isNodeOffline = false,
 }: FileRowProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(file.original_name);
@@ -180,10 +183,17 @@ export function FileRow({
           {formatDate(file.created_at)}
         </div>
         <div className="w-32 text-center">
-          <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[var(--primary)] bg-[var(--primary-muted)] px-2.5 py-0.5 rounded-full border border-[var(--primary)]/20">
-            <Server className="w-3 h-3" />
-            Single-Node Beta
-          </span>
+          {isNodeOffline ? (
+            <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[var(--warning)] bg-[var(--warning-muted)] px-2.5 py-0.5 rounded-full border border-[var(--warning)]/30">
+              <AlertTriangle className="w-3 h-3" />
+              Node Offline
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[var(--primary)] bg-[var(--primary-muted)] px-2.5 py-0.5 rounded-full border border-[var(--primary)]/20">
+              <Server className="w-3 h-3" />
+              Single-Node Beta
+            </span>
+          )}
         </div>
       </div>
 
@@ -203,9 +213,20 @@ export function FileRow({
 
         <button
           type="button"
-          onClick={() => onDownload(file)}
-          className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-[8px] text-[var(--foreground-secondary)] hover:text-[var(--primary)] hover:bg-[var(--surface)] transition-colors cursor-pointer"
-          title="Download file"
+          onClick={() => {
+            if (isNodeOffline) {
+              alert("Storage Node Offline: Node #001 is currently unreachable. Files cannot be downloaded until the storage node reconnects.");
+              return;
+            }
+            onDownload(file);
+          }}
+          className={cn(
+            "p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-[8px] transition-colors cursor-pointer",
+            isNodeOffline
+              ? "text-[var(--foreground-muted)] opacity-60 hover:text-[var(--warning)]"
+              : "text-[var(--foreground-secondary)] hover:text-[var(--primary)] hover:bg-[var(--surface)]"
+          )}
+          title={isNodeOffline ? "Storage node offline — file temporarily unavailable" : "Download file"}
           aria-label={`Download ${file.original_name}`}
         >
           <Download className="w-4 h-4" />

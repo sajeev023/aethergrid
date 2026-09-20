@@ -6,6 +6,8 @@ interface StorageMeterProps {
   totalBytes: number;
   label?: string;
   showDetails?: boolean;
+  isWritable?: boolean;
+  statusMessage?: string;
   className?: string;
 }
 
@@ -14,6 +16,8 @@ export function StorageMeter({
   totalBytes,
   label = "Storage used",
   showDetails = true,
+  isWritable = true,
+  statusMessage,
   className,
 }: StorageMeterProps) {
   const safeTotal = totalBytes > 0 ? totalBytes : 1;
@@ -33,8 +37,13 @@ export function StorageMeter({
   const isDanger = percent > 95;
 
   let barColor = "bg-[var(--primary)]";
-  if (isDanger) barColor = "bg-[var(--error)]";
-  else if (isWarning) barColor = "bg-[var(--warning)]";
+  if (!isWritable) {
+    barColor = "bg-[var(--warning)]/60";
+  } else if (isDanger) {
+    barColor = "bg-[var(--error)]";
+  } else if (isWarning) {
+    barColor = "bg-[var(--warning)]";
+  }
 
   return (
     <div className={cn("w-full space-y-2", className)}>
@@ -61,8 +70,16 @@ export function StorageMeter({
 
       {showDetails && (
         <div className="flex items-center justify-between text-[12px] text-[var(--foreground-muted)]">
-          <span className="tabular-nums">{percent.toFixed(1)}% consumed</span>
-          <span>{formatBytes(Math.max(0, totalBytes - usedBytes))} remaining</span>
+          {statusMessage ? (
+            <span className={cn("font-medium", !isWritable ? "text-[var(--warning)]" : "")}>
+              {statusMessage}
+            </span>
+          ) : (
+            <>
+              <span className="tabular-nums">{percent.toFixed(1)}% consumed</span>
+              <span>{formatBytes(Math.max(0, totalBytes - usedBytes))} remaining</span>
+            </>
+          )}
         </div>
       )}
     </div>
