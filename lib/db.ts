@@ -988,6 +988,8 @@ export function getUserFiles(userId: string): any[] {
   return db.prepare(`
     SELECT 
       f.*,
+      f.size as size_bytes,
+      f.size as size,
       (SELECT COUNT(*) FROM storage_chunks WHERE file_id = f.id) as chunk_count,
       (SELECT COUNT(*) FROM storage_chunks sc 
         JOIN storage_nodes sn ON sc.replica_node_id = sn.id 

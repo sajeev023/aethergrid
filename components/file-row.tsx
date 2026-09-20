@@ -167,7 +167,7 @@ export function FileRow({
             </div>
           )}
           <div className="flex items-center gap-2 text-[12px] text-[var(--foreground-muted)] sm:hidden mt-0.5">
-            <span className="tabular-nums">{formatBytes(file.size_bytes)}</span>
+            <span className="tabular-nums">{formatBytes(file.size_bytes ?? (file as any).size ?? 0)}</span>
             <span>•</span>
             <span>{formatDate(file.created_at)}</span>
           </div>
@@ -177,7 +177,7 @@ export function FileRow({
       {/* Desktop Metadata: Size & Date */}
       <div className="hidden sm:flex items-center gap-6 text-[13px] text-[var(--foreground-secondary)] mr-4 shrink-0">
         <div className="w-20 text-right tabular-nums">
-          {formatBytes(file.size_bytes)}
+          {formatBytes(file.size_bytes ?? (file as any).size ?? 0)}
         </div>
         <div className="w-24 text-right text-[12px] text-[var(--foreground-muted)]">
           {formatDate(file.created_at)}

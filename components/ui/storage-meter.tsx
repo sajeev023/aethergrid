@@ -30,7 +30,10 @@ export function StorageMeter({
     if (bytes >= 1024 * 1024) {
       return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
     }
-    return `${(bytes / 1024).toFixed(0)} KB`;
+    if (bytes >= 1024) {
+      return `${(bytes / 1024).toFixed(0)} KB`;
+    }
+    return `${bytes} B`;
   };
 
   const isWarning = percent > 80 && percent <= 95;

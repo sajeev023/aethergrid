@@ -3,6 +3,9 @@ import { getCurrentUser } from "@/lib/auth";
 import { getDatabase } from "@/lib/db";
 import { distributeAndStoreFile, evaluateNodeHealth } from "@/lib/orchestrator";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(request: NextRequest) {
   try {
     const session = await getCurrentUser(request);
@@ -16,6 +19,8 @@ export async function GET(request: NextRequest) {
     const files = db.prepare(`
       SELECT 
         f.*,
+        f.size as size_bytes,
+        f.size as size,
         (SELECT COUNT(*) FROM storage_chunks WHERE file_id = f.id) as chunk_count,
         (SELECT COUNT(*) FROM storage_chunks sc 
           JOIN storage_nodes sn ON sc.replica_node_id = sn.id 
@@ -28,7 +33,16 @@ export async function GET(request: NextRequest) {
       ORDER BY f.created_at DESC
     `).all(session.userId) as any[];
 
-    return NextResponse.json({ files });
+    return NextResponse.json(
+      { files },
+      {
+        headers: {
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }
+    );
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Failed to list files" }, { status: 500 });
   }
@@ -58,10 +72,19 @@ export async function POST(request: NextRequest) {
       fileBuffer,
     });
 
-    return NextResponse.json({
-      success: true,
-      file: stored,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        file: stored,
+      },
+      {
+        headers: {
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }
+    );
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "File upload and distribution failed" }, { status: 500 });
   }

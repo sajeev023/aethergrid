@@ -26,6 +26,23 @@ import { FileRowSkeleton } from "@/components/ui/skeleton";
 import { ErrorState } from "@/components/ui/error-state";
 import { cn } from "@/lib/utils";
 
+function formatStorageLabel(usedBytes: number, quotaBytes: number = 3 * 1024 * 1024 * 1024): string {
+  const quotaGB = (quotaBytes / (1024 * 1024 * 1024)).toFixed(0);
+  if (usedBytes === 0) {
+    return `Storage (0 B / ${quotaGB} GB)`;
+  }
+  if (usedBytes < 1024) {
+    return `Storage (${usedBytes} B / ${quotaGB} GB)`;
+  }
+  if (usedBytes < 1024 * 1024) {
+    return `Storage (${(usedBytes / 1024).toFixed(1)} KB / ${quotaGB} GB)`;
+  }
+  if (usedBytes < 1024 * 1024 * 1024) {
+    return `Storage (${(usedBytes / (1024 * 1024)).toFixed(1)} MB / ${quotaGB} GB)`;
+  }
+  return `Storage (${(usedBytes / (1024 * 1024 * 1024)).toFixed(2)} GB / ${quotaGB} GB)`;
+}
+
 export default function DashboardPage() {
   const searchParams = useSearchParams();
   const initialTab = searchParams.get("tab") === "health" 
@@ -64,23 +81,34 @@ export default function DashboardPage() {
   const fetchData = async () => {
     setRefreshing(true);
     try {
+      const timestamp = Date.now();
       const [healthRes, filesRes, backupsRes] = await Promise.all([
-        fetch("/api/taker/health"),
-        fetch("/api/taker/files"),
-        fetch("/api/taker/backup"),
+        fetch(`/api/taker/health?_t=${timestamp}`, { cache: "no-store" }),
+        fetch(`/api/taker/files?_t=${timestamp}`, { cache: "no-store" }),
+        fetch(`/api/taker/backup?_t=${timestamp}`, { cache: "no-store" }),
       ]);
 
-      if (healthRes.ok) setHealth(await healthRes.json());
+      let fetchedFiles: FileItem[] = [];
+      if (healthRes.ok) {
+        const hData = await healthRes.json();
+        setHealth(hData);
+      }
       if (filesRes.ok) {
         const fData = await filesRes.json();
-        setFiles(fData.files || []);
+        fetchedFiles = (fData.files || []).map((f: any) => ({
+          ...f,
+          size_bytes: f.size_bytes ?? f.size ?? 0,
+        }));
+        setFiles(fetchedFiles);
       }
       if (backupsRes.ok) {
         const bData = await backupsRes.json();
         setBackups(bData.backups || []);
       }
+      return fetchedFiles;
     } catch {
       setErrorMessage("Could not refresh cloud files. Please check network connection.");
+      return [];
     } finally {
       setRefreshing(false);
       setLoading(false);
@@ -112,7 +140,7 @@ export default function DashboardPage() {
           id: uploadId,
           name: file.name,
           size: file.size,
-          progress: 10,
+          progress: 15,
           status: "preparing",
         },
         ...prev,
@@ -123,7 +151,7 @@ export default function DashboardPage() {
 
       try {
         setUploads((prev) =>
-          prev.map((u) => (u.id === uploadId ? { ...u, progress: 40, status: "uploading" } : u))
+          prev.map((u) => (u.id === uploadId ? { ...u, progress: 45, status: "uploading" } : u))
         );
 
         const res = await fetch("/api/taker/files", {
@@ -132,21 +160,34 @@ export default function DashboardPage() {
         });
 
         if (!res.ok) {
-          const errData = await res.json();
+          const errData = await res.json().catch(() => ({}));
           throw new Error(errData.error || "Upload failed");
         }
 
+        const resData = await res.json();
+        const uploadedFileId = resData?.file?.id;
+
+        // Transition to verifying persistence and listing
         setUploads((prev) =>
           prev.map((u) => (u.id === uploadId ? { ...u, progress: 85, status: "verifying" } : u))
         );
 
-        await new Promise((r) => setTimeout(r, 400));
+        // Revalidate cloud drive state from authoritative backend
+        const refreshedFiles = await fetchData();
 
+        // Authoritative verification: check newly uploaded file exists in refreshed list
+        const isPersistedAndListed = uploadedFileId
+          ? refreshedFiles.some((f) => f.id === uploadedFileId)
+          : refreshedFiles.some((f) => f.original_name === file.name);
+
+        if (!isPersistedAndListed) {
+          throw new Error("Persistence verification failed: Upload accepted by server but could not be verified in your cloud drive.");
+        }
+
+        // ONLY NOW report upload success: "Encrypted & stored on Node #001"
         setUploads((prev) =>
           prev.map((u) => (u.id === uploadId ? { ...u, progress: 100, status: "complete" } : u))
         );
-
-        await fetchData();
       } catch (err: any) {
         setUploads((prev) =>
           prev.map((u) =>
@@ -228,7 +269,11 @@ export default function DashboardPage() {
 
     // Filter by selected folder if any
     if (selectedFolder) {
-      list = list.filter((f) => f.original_name.toLowerCase().includes(selectedFolder.toLowerCase()));
+      list = list.filter((f) => {
+        const folderId = (f as any).folder_id;
+        const folderName = (f as any).folder;
+        return folderId === selectedFolder || folderName === selectedFolder || f.original_name.startsWith(`${selectedFolder}/`);
+      });
     }
 
     // Filter by type
@@ -268,7 +313,9 @@ export default function DashboardPage() {
         return a.original_name.localeCompare(b.original_name);
       }
       if (sortBy === "size_desc") {
-        return b.size_bytes - a.size_bytes;
+        const sizeA = a.size_bytes ?? (a as any).size ?? 0;
+        const sizeB = b.size_bytes ?? (b as any).size ?? 0;
+        return sizeB - sizeA;
       }
       return 0;
     });
@@ -382,7 +429,7 @@ export default function DashboardPage() {
             <StorageMeter
               usedBytes={usedBytes}
               totalBytes={quotaBytes}
-              label={`Storage (${(usedBytes / (1024 * 1024 * 1024)).toFixed(2)} GB / 3 GB)`}
+              label={formatStorageLabel(usedBytes, quotaBytes)}
               isWritable={isWritable}
               statusMessage={isOffline ? "Storage node offline — writes paused" : isSuspectedOffline ? "Reconnecting — writes paused" : undefined}
             />

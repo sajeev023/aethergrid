@@ -3,6 +3,9 @@ import { getCurrentUser } from "@/lib/auth";
 import { getTakerSubscription } from "@/lib/db";
 import { getAuthoritativeSystemState } from "@/lib/system-state";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(request: NextRequest) {
   try {
     const session = await getCurrentUser(request);
@@ -13,12 +16,21 @@ export async function GET(request: NextRequest) {
     const state = getAuthoritativeSystemState(session.userId);
     const subscription = getTakerSubscription(session.userId);
 
-    return NextResponse.json({
-      subscription,
-      ...state,
-      // Backwards-compatibility aliases
-      storageNodeOffline: state.nodeStatus !== "ONLINE",
-    });
+    return NextResponse.json(
+      {
+        subscription,
+        ...state,
+        // Backwards-compatibility aliases
+        storageNodeOffline: state.nodeStatus !== "ONLINE",
+      },
+      {
+        headers: {
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }
+    );
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Failed to fetch storage health" }, { status: 500 });
   }
